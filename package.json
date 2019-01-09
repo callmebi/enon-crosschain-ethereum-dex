@@ -1,0 +1,31 @@
+{
+  "name": "dex",
+  "version": "0.0.1",
+  "homepage": "https://github.com/akru/dex",
+  "description": "Collateral based decentralized exchange",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "compile": "truffle compile",
+    "migrate": "truffle migrate",
+    "console": "truffle console",
+    "testrpc": "ganache-cli -p 9545 -i 420123 -b 1",
+    "release": "truffle migrate --network mainnet"
+  },
+  "dependencies": {
+    "bn-chai": "^1.0.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eth-ens-namehash": "^2.0.8",
+    "eth-gas-reporter": "^0.1.12",
+    "ganache-cli": "^6.2.4",
+    "openzeppelin-solidity": "^2.1.1",
+    "truffle": "5.0.1",
+    "truffle-flattener": "^1.2.9"
+  },
+  "author": "Alexander Krupenkin <akru@aira.life>",
+  "license": "BSD-3-Clause"
+}
