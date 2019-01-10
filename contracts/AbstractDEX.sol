@@ -1,6 +1,6 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-contract IDEX {
+contract AbstractDEX {
     /**
      * @dev Event emitted for every registered order in a contract.
      */
