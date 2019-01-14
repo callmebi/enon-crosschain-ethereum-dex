@@ -6,15 +6,16 @@ contract SingletonHash {
     /**
      * @dev Used hash accounting
      */
-    mapping(bytes32 => bool) public is_hash_consumed;
+    mapping(bytes32 => bool) public isHashConsumed;
 
     /**
      * @dev Parameter can be used only once
      * @param _hash Single usage hash
      */
-    function singleton_hash(bytes32 _hash) internal {
-        require(!is_hash_consumed[_hash]);
-        is_hash_consumed[_hash] = true;
+    function singleton(bytes32 _hash) internal returns (bytes32) {
+        require(!isHashConsumed[_hash]);
+        isHashConsumed[_hash] = true;
         emit HashConsumed(_hash);
+        return _hash;
     }
 }

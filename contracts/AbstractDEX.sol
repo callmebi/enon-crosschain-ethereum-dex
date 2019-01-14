@@ -4,11 +4,7 @@ contract AbstractDEX {
     /**
      * @dev Event emitted for every registered order in a contract.
      */
-    event TradeOpened(
-        uint256 indexed trade_id,
-        bytes maker_data,
-        bytes taker_data
-    );
+    event TradeOpened(uint256 indexed trade_id);
 
     /**
      * @dev Event emitted for every closed trade in a contract.
@@ -17,58 +13,50 @@ contract AbstractDEX {
 
     /**
      * @dev Open trade by matching two orders.
-     * @param _maker_data off-chain offer params(external account, value, nonce, etc.)
-     * @param _maker_deadline maker message deadline block
-     * @param _maker_signature EC signature of maker message*
-     * @param _taker_data off-chain demand params (external account, value, nonce, etc.)
-     * @param _taker_deadline taker message deadline block
-     * @param _taker_signature EC signature of taker message*
-     * @param _collateral_value value of collateral token that will be send as refund
+     * @param _makerData off-chain offer params(external account, value, nonce, etc.)
+     * @param _makerDeadline maker message deadline block
+     * @param _makerSignature EC signature of maker message*
+     * @param _takerData off-chain demand params (external account, value, nonce, etc.)
+     * @param _takerDeadline taker message deadline block
+     * @param _takerSignature EC signature of taker message*
+     * @param _collateralValue value of collateral token that will be send as refund
      * @param _oracles list of approved oracle accounts
-     * @param _min_transfer_confirmations count of oracles signatures required for transfer confirmation
+     * @param _minTransferConfirmations count of oracles signatures required for transfer confirmation
      * @return positive number corresponds to trade id
      */
-    function open_trade(
-        bytes calldata _maker_data,
-        uint256 _maker_deadline,
-        bytes calldata _maker_signature,
-        bytes calldata _taker_data,
-        uint256 _taker_deadline,
-        bytes calldata _taker_signature,
-        uint256 _collateral_value,
+    function openTrade(
+        bytes calldata _makerData,
+        uint256 _makerDeadline,
+        bytes calldata _makerSignature,
+        bytes calldata _takerData,
+        uint256 _takerDeadline,
+        bytes calldata _takerSignature,
+        uint256 _collateralValue,
         address[] calldata _oracles,
-        uint256 _min_transfer_confirmations
+        uint256 _minTransferConfirmations
     ) external returns (
-        uint256 trade_id
+        uint256 tradeId
     );
 
     /**
      * @dev Close trade and pay refund when transfer isn't confirmed.
-     * @param _trade_id trade identifier
+     * @param _tradeId trade identifier
      * @return true when success closed
      */
-    function close_trade(
-        uint256 _trade_id
+    function closeTrade(
+        uint256 _tradeId
     ) external returns (
         bool success
     );
 
     /**
-     * @dev Get trade by id
-     * @param _trade_id trade identifier
-     */
-    function trade_of(
-        uint256 _trade_id
-    ) external view returns (
-        bool
-    );
-
-    /**
-     * @dev Confirm transfer by hash.
-     * @param _data_hash transaction descriptor hash
+     * @dev Confirm trade transfers.
+     * @param _tradeId trade identifier 
+     * @param _trader trade party whom makes transfers
      * @notice oracles call only
      */
-    function confirm_transfer(
-        bytes32 _data_hash
+    function confirmTransfer(
+        uint256 _tradeId,
+        address _trader
     ) external returns (bool);
 }
