@@ -12,7 +12,7 @@
     "compile": "truffle compile",
     "migrate": "truffle migrate",
     "console": "truffle console",
-    "testrpc": "ganache-cli -p 9545 -i 420123 -b 1",
+    "testrpc": "ganache-cli",
     "release": "truffle migrate --network mainnet"
   },
   "dependencies": {

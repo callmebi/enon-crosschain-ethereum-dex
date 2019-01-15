@@ -20,20 +20,16 @@ contract AbstractDEX {
      * @param _takerDeadline taker message deadline block
      * @param _takerSignature EC signature of taker message*
      * @param _collateralValue value of collateral token that will be send as refund
-     * @param _oracles list of approved oracle accounts
-     * @param _minTransferConfirmations count of oracles signatures required for transfer confirmation
      * @return positive number corresponds to trade id
      */
     function openTrade(
         bytes calldata _makerData,
-        uint256 _makerDeadline,
+        uint256        _makerDeadline,
         bytes calldata _makerSignature,
         bytes calldata _takerData,
-        uint256 _takerDeadline,
+        uint256        _takerDeadline,
         bytes calldata _takerSignature,
-        uint256 _collateralValue,
-        address[] calldata _oracles,
-        uint256 _minTransferConfirmations
+        uint256        _collateralValue
     ) external returns (
         uint256 tradeId
     );
