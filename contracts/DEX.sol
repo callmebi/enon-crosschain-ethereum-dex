@@ -9,11 +9,16 @@ import './AbstractDEX.sol';
 
 contract DEX is AbstractDEX, SingletonHash {
     constructor(
-        address _collateral,
-        uint256 _tradingBlocks
+        address          _collateral,
+        uint256          _tradingBlocks,
+        uint256          _minConfirmations,
+        address[] memory _oracles
     ) public {
         collateral = ERC20(_collateral);
         tradingBlocks = _tradingBlocks;
+        minTransferConfirmations = _minConfirmations;
+        for (uint256 i = 0; i < _oracles.length; ++i)
+            isTradeOracle[_oracles[i]] = true;
     }
 
     using SafeERC20 for ERC20;
@@ -42,11 +47,13 @@ contract DEX is AbstractDEX, SingletonHash {
 
     uint256 public tradingBlocks;
 
-    uint256 public minTransferConfirmation = 1;
+    // TODO: keep in mind that it could be user params
+    mapping(address => bool) public isTradeOracle;
+    uint256 public minTransferConfirmations;
 
     modifier oraclesOnly(uint256 _tradeId) {
         // Check that sender is trade oracle
-        //require(isTradeOracle[_tradeId][msg.sender]);
+        require(isTradeOracle[msg.sender]);
         _;
     }
 
@@ -114,11 +121,11 @@ contract DEX is AbstractDEX, SingletonHash {
             && trades[_tradeId].openBlock + tradingBlocks < block.number);
 
         uint256 takerConfirmations = transferConfirmations[_tradeId][trade.taker].length;
-        address takerRefund = takerConfirmations >= minTransferConfirmation ? trade.taker : trade.maker;
+        address takerRefund = takerConfirmations >= minTransferConfirmations ? trade.taker : trade.maker;
         collateral.safeTransfer(takerRefund, trade.collateralValue);
 
         uint256 makerConfirmations = transferConfirmations[_tradeId][trade.maker].length;
-        address makerRefund = makerConfirmations >= minTransferConfirmation ? trade.maker : trade.taker;
+        address makerRefund = makerConfirmations >= minTransferConfirmations ? trade.maker : trade.taker;
         collateral.safeTransfer(makerRefund, trade.collateralValue);
 
         trade.closeBlock = block.number;
