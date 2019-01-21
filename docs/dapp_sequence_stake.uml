@@ -1,0 +1,12 @@
+@startuml
+
+actor User
+participant DApp
+database TBA
+
+User -> DApp : Place stake
+activate DApp
+DApp -> TBA : ???
+deactivate DApp
+
+@enduml

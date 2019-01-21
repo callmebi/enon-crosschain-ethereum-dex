@@ -1,0 +1,22 @@
+@startuml
+title <b>Maker<b> \n provides limit orders to orderbook
+left to right direction
+
+actor Maker
+
+rectangle DApp {
+  usecase "Update orderbook" as update
+  usecase "Place stake" as stake
+  usecase "Send an order" as send
+  usecase "Setup order" as setup
+  usecase "Sign order" as sign
+}
+
+Maker -down-> update
+Maker -down-> stake
+Maker -right-> send
+
+send .down.> setup : <<include>>
+send .down.> sign : <<include>>
+
+@enduml

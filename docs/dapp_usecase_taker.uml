@@ -1,0 +1,20 @@
+@startuml
+title <b>Taker<b> \n provides market orders filling ones from orderbook
+left to right direction
+
+actor Taker
+
+rectangle DApp {
+  usecase "Update orderbook" as update
+  usecase "Place stake" as stake
+  usecase "Fill order" as fill
+  usecase "Sign order" as sign
+}
+
+Taker -down-> update
+Taker -down-> stake
+Taker -right-> fill 
+
+fill .down.> sign : <<include>>
+
+@enduml

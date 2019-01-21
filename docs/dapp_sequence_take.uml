@@ -1,0 +1,21 @@
+@startuml
+
+actor User
+participant DApp
+database TBA
+
+User -> DApp : Fill order
+activate DApp
+DApp -> TBA : Check stake
+alt enough stake
+  DApp <- TBA : Stake enough
+  User <- DApp : Sign
+  User -> DApp : Signature
+  DApp -> TBA : Order
+else insufficient stake
+  DApp <- TBA : Insufficient stake
+  User <- DApp : Error
+  deactivate DApp
+end
+
+@enduml

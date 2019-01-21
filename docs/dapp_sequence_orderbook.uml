@@ -1,0 +1,18 @@
+@startuml
+
+actor User
+participant DApp
+database TBA
+
+User -> DApp : Open
+User <- DApp : Metamask?
+|||
+User -> DApp : Update orderbook
+activate DApp
+DApp -> TBA : Get orderbook
+DApp <- TBA : Orderbook
+DApp -> DApp : Update view
+User <- DApp : Orderbook
+deactivate DApp
+
+@enduml
