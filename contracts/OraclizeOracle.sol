@@ -28,7 +28,9 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
     function __callback(bytes32 myid, string memory result) public {
         if (msg.sender != oraclize_cbAddress()) revert();
         Trade storage trade = queries[myid];
-        trade.dex.confirmTransfer(trade.id, parseAddr(result));
+        address trader = parseAddr(result);
+        if (trader != address(0))
+            trade.dex.confirmTransfer(trade.id, trader);
     }
 
     function checkTrade(address _dex, uint256 _tradeId) external returns(bool success) {
