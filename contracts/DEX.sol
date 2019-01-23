@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.0;
+pragma solidity >=0.5.0 <0.6.0;
 
 import 'openzeppelin-solidity/contracts/cryptography/ECDSA.sol';
 import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
@@ -110,7 +110,7 @@ contract DEX is AbstractDEX, SingletonHash {
         tradeDataOf[tradeId][maker] = _makerData;
 
         for (uint256 i = 0; i < oracles.length; ++i)
-            AbstractOracle(oracles[i]).checkTrade(this, tradeId);
+            AbstractOracle(oracles[i]).checkTrade(address(this), tradeId);
 
         emit TradeOpened(tradeId);
     }
