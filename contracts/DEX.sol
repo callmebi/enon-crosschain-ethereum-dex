@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.0;
+pragma solidity >=0.5.0 <0.6.0;
 
 import 'openzeppelin-solidity/contracts/cryptography/ECDSA.sol';
 import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
@@ -6,6 +6,7 @@ import 'openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol';
 
 import './SingletonHash.sol';
 import './AbstractDEX.sol';
+import './AbstractOracle.sol';
 
 contract DEX is AbstractDEX, SingletonHash {
     constructor(
@@ -17,8 +18,10 @@ contract DEX is AbstractDEX, SingletonHash {
         collateral = ERC20(_collateral);
         tradingBlocks = _tradingBlocks;
         minTransferConfirmations = _minConfirmations;
-        for (uint256 i = 0; i < _oracles.length; ++i)
+        for (uint256 i = 0; i < _oracles.length; ++i) {
             isTradeOracle[_oracles[i]] = true;
+            oracles[i] = _oracles[i];
+        }
     }
 
     using SafeERC20 for ERC20;
@@ -48,6 +51,7 @@ contract DEX is AbstractDEX, SingletonHash {
     uint256 public tradingBlocks;
 
     // TODO: keep in mind that it could be user params
+    address[] public oracles;
     mapping(address => bool) public isTradeOracle;
     uint256 public minTransferConfirmations;
 
@@ -104,6 +108,9 @@ contract DEX is AbstractDEX, SingletonHash {
         // Store traders data on chain for oracles requests
         tradeDataOf[tradeId][taker] = _takerData;
         tradeDataOf[tradeId][maker] = _makerData;
+
+        for (uint256 i = 0; i < oracles.length; ++i)
+            AbstractOracle(oracles[i]).checkTrade(address(this), tradeId);
 
         emit TradeOpened(tradeId);
     }
