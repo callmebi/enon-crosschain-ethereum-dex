@@ -1,12 +1,12 @@
 pragma solidity >=0.5.0 <0.6.0;
 
 import './oraclizeAPI.sol';
-import './AbstractDEX.sol';
+import './DEX.sol';
 import './AbstractOracle.sol';
 
 contract OraclizeOracle is AbstractOracle, usingOraclize {
     struct Trade {
-        AbstractDEX dex;
+        DEX dex;
         uint256 id;
     }
     mapping(bytes32 => Trade) public queries;
@@ -15,13 +15,6 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
         bytes memory b = new bytes(20);
         for (uint i = 0; i < 20; i++)
             b[i] = byte(uint8(uint(x) / (2**(8*(19 - i)))));
-        return string(b);
-    }
-
-    function toString(uint256 x) internal pure returns (string memory) {
-        bytes memory b = new bytes(32);
-        for (uint i = 0; i < 32; i++)
-            b[i] = byte(uint8(uint(x) / (2**(8*(31 - i)))));
         return string(b);
     }
 
@@ -34,8 +27,16 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
     }
 
     function checkTrade(address _dex, uint256 _tradeId) external returns(bool success) {
-        bytes32 qid = oraclize_query("computation", ["QmaMFiHXSqCFKkGPbWZh5zKmM827GWNpk9Y1EYhoLfwdHq", toString(_dex), toString(_tradeId)]);
-        queries[qid] = Trade(AbstractDEX(_dex), _tradeId);
+        DEX dex = DEX(_dex);
+        (address maker, address taker,,,) = dex.trades(_tradeId);
+        bytes32 qid = oraclize_query("computation", [
+            "QmaMFiHXSqCFKkGPbWZh5zKmM827GWNpk9Y1EYhoLfwdHq",
+            toString(maker),
+            string(dex.tradeDataOf(_tradeId, maker)),
+            toString(taker),
+            string(dex.tradeDataOf(_tradeId, taker))
+        ]);
+        queries[qid] = Trade(dex, _tradeId);
         return success;
     }
 
