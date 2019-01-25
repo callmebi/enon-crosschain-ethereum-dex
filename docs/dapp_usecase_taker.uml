@@ -1,20 +1,30 @@
 @startuml
-title <b>Taker<b> \n provides market orders filling ones from orderbook
+title <b>Taker<b> \n takes offers from orderbook for market exchange
 left to right direction
 
 actor Taker
 
 rectangle DApp {
   usecase "Update orderbook" as update
-  usecase "Place stake" as stake
-  usecase "Fill order" as fill
-  usecase "Sign order" as sign
+  usecase "Pick offer" as pick
+  usecase "Open exchange" as open
+  usecase "Approve collateral" as approve
+  usecase "Sign open" as sign
+  usecase "Send crypto" as crypto
+  usecase "Send collateral" as collateral
+  usecase "Close exchange" as close
+  usecase "Wait" as wait
 }
 
 Taker -down-> update
-Taker -down-> stake
-Taker -right-> fill 
+Taker -down-> pick
+Taker -down-> open
+Taker -down-> crypto
+Taker -down-> close
 
-fill .down.> sign : <<include>>
+open .down.> approve : <<include>>
+open .down.> sign : <<include>>
+crypto .down.> collateral : <<alternative>>
+close .down.> wait : <<include>>
 
 @enduml
