@@ -9,6 +9,7 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
         DEX dex;
         uint256 id;
     }
+
     mapping(bytes32 => Trade) public queries;
 
     function toString(address x) internal pure returns (string memory) {
@@ -37,7 +38,7 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
             string(dex.tradeDataOf(_tradeId, taker))
         ]);
         queries[qid] = Trade(dex, _tradeId);
-        return success;
+        success = true;
     }
 
     function() external payable {}

@@ -1,10 +1,13 @@
-var Collateral = artifacts.require("./Collateral.sol");
-var DEX = artifacts.require("./DEX.sol");
+const OwnedOracle = artifacts.require('OwnedOracle');
+const Collateral = artifacts.require('Collateral');
+const DEX = artifacts.require('DEX');
 
 module.exports = function(deployer, networks, accounts) {
   const tradingBlocks = 2;
   const minConfirmations = 1;
-  const oracle = accounts[4];
+  const oracleAccount = accounts[4];
 
-  deployer.deploy(DEX, Collateral.address, tradingBlocks, minConfirmations, [oracle]);
+  deployer.deploy(OwnedOracle, oracleAccount).then(oracle =>
+    deployer.deploy(DEX, Collateral.address, tradingBlocks, minConfirmations, [oracle.address])
+  );
 };

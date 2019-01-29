@@ -18,10 +18,9 @@ contract DEX is AbstractDEX, SingletonHash {
         collateral = ERC20(_collateral);
         tradingBlocks = _tradingBlocks;
         minTransferConfirmations = _minConfirmations;
-        for (uint256 i = 0; i < _oracles.length; ++i) {
+        oracles = _oracles;
+        for (uint256 i = 0; i < _oracles.length; ++i)
             isTradeOracle[_oracles[i]] = true;
-            oracles[i] = _oracles[i];
-        }
     }
 
     using SafeERC20 for ERC20;
