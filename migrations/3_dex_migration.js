@@ -1,3 +1,4 @@
+const OraclizeOracle = artifacts.require('OraclizeOracle');
 const OwnedOracle = artifacts.require('OwnedOracle');
 const Collateral = artifacts.require('Collateral');
 const DEX = artifacts.require('DEX');
@@ -7,7 +8,13 @@ module.exports = function(deployer, networks, accounts) {
   const minConfirmations = 1;
   const oracleAccount = accounts[4];
 
-  deployer.deploy(OwnedOracle, oracleAccount).then(oracle =>
-    deployer.deploy(DEX, Collateral.address, tradingBlocks, minConfirmations, [oracle.address])
-  );
+  if (networks == 'development') {
+    deployer.deploy(OwnedOracle, oracleAccount).then(oracle =>
+      deployer.deploy(DEX, Collateral.address, tradingBlocks, minConfirmations, [oracle.address])
+    );
+  } else {
+    deployer.deploy(OraclizeOracle).then(oracle =>
+      deployer.deploy(DEX, Collateral.address, tradingBlocks, minConfirmations, [oracle.address])
+    );
+  }
 };
