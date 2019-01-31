@@ -31,7 +31,7 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
         DEX dex = DEX(_dex);
         (address maker, address taker,,,) = dex.trades(_tradeId);
         bytes32 qid = oraclize_query("computation", [
-            "QmaMFiHXSqCFKkGPbWZh5zKmM827GWNpk9Y1EYhoLfwdHq",
+            "QmTrMDmkrsdmPNnQKQMJbycmhJCKCC19y6bsCAVhb8gu1U",
             toString(maker),
             string(dex.tradeDataOf(_tradeId, maker)),
             toString(taker),

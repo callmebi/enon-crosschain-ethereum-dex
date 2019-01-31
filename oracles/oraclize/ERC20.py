@@ -5,7 +5,7 @@
 from json import loads
 from web3 import Web3, HTTPProvider
 
-ABI = loads('
+ABI = loads('''
 [
     {
       "anonymous": false,
@@ -180,7 +180,7 @@ ABI = loads('
       "stateMutability": "view",
       "type": "function"
     }
-]')
+]''')
 
 WEB3_PROVIDER = 'https://kovan.infura.io/v3/4023cac5af2548e682ffe03d06c5dfef' 
 

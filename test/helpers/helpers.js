@@ -7,8 +7,8 @@ function randomHex(length) {
 
 async function generateOrder(web3, deadline, value, signer) {
     const data = web3.utils.toHex(JSON.stringify({
-        address: randomHex(20),
-        tx:      randomHex(32),
+        account: randomHex(20),
+        token:   randomHex(20),
     }));
 
     const hash = web3.utils.soliditySha3(

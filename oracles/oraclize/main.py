@@ -2,26 +2,23 @@
 ##
 #  Oraclize oracle main
 ##
-from json import loads
 from ERC20 import token
+from json import loads
+from os import environ
 
 def main():
-    maker = {}
-    maker.account = os.environ['ARG0']
-    maker.data = loads(os.environ['ARG1'])
-    maker.token = token(maker.data.token_address)
-    
-    taker = {}
-    taker.account = os.environ['ARG2']
-    taker.data = loads(os.environ['ARG3'])
-    taker.token = token(taker.data.token_address)
+    maker = { 'id': environ['ARG0'], **loads(environ['ARG1']) }
+    taker = { 'id': environ['ARG2'], **loads(environ['ARG3']) }
 
-    if maker.token.functions.balanceOf(maker.data.account_address).call() > 0:
-        print(taker.account)
+    maker_token = token(maker['token'])
+    taker_token = token(taker['token'])
+
+    if maker_token.functions.balanceOf(maker['account']).call() > 0:
+        print(taker['id'])
         return
 
-    if taker.token.functions.balanceOf(taker.data.account_address).call() > 0:
-        print(maker.account)
+    if taker_token.functions.balanceOf(taker['account']).call() > 0:
+        print(maker['id'])
         return
 
 if __name__ == '__main__':
