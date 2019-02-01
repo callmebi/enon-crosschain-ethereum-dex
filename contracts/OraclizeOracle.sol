@@ -24,12 +24,12 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
         Request storage req = requestOf[myid];
         (address maker, address taker,,uint256 open,) = dex.trades(req.tradeId);
 
-        if (parseInt(result) == dex.valueToBuy(req.tradeId, req.trader)) {
+        if (parseInt(result) >= dex.valueToBuy(req.tradeId, req.trader)) {
             if (req.trader == maker)
                 dex.confirmTransfer(req.tradeId, taker);
             else if (req.trader == taker)
                 dex.confirmTransfer(req.tradeId, maker);
-        } else if (open + dex.tradingBlocks() < block.number) {
+        } else if (open + dex.tradingBlocks() > block.number) {
             checkBalance(req.tradeId, req.trader, 60);
         }
     }
@@ -48,10 +48,18 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
     }
 
     function checkBalance(uint256 _tradeId, address _trader, uint256 _wait) internal {
-        bytes32 qid = oraclize_query("computation", [
-            "QmdSoNtqVG2oD2bSqbQq1Pe3dZCDQjUDSw692o6cxz2f9o",
-            string(dex.extraData(_tradeId, _trader))
-        ], _wait);
+        bytes32 qid;
+        if (_wait > 0) {
+            qid = oraclize_query(_wait, "computation", [
+                "QmdSoNtqVG2oD2bSqbQq1Pe3dZCDQjUDSw692o6cxz2f9o",
+                string(dex.extraData(_tradeId, _trader))
+            ]);
+        } else {
+            qid = oraclize_query("computation", [
+                "QmdSoNtqVG2oD2bSqbQq1Pe3dZCDQjUDSw692o6cxz2f9o",
+                string(dex.extraData(_tradeId, _trader))
+            ]);
+        }
         requestOf[qid] = Request(_tradeId, _trader);
     }
 
