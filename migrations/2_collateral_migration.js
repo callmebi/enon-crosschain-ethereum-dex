@@ -1,9 +1,9 @@
 const Collateral = artifacts.require('Collateral');
 
-module.exports = function(deployer, networks, accounts) {
+module.exports = (deployer, network, accounts) => {
   const collateralSupply = '1000000000000000000';
   deployer.deploy(Collateral, collateralSupply).then(async token => {
-    if (networks == 'development') {
+    if (network.startsWith('development')) {
       await token.transfer(accounts[1], '1000');
       await token.transfer(accounts[2], '1000');
     }

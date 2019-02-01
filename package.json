@@ -24,7 +24,7 @@
     "ganache-cli": "^6.2.4",
     "openzeppelin-solidity": "^2.1.1",
     "truffle": "5.0.1",
-    "truffle-flattener": "^1.2.9"
+    "truffle-flattener": "^1.2.12"
   },
   "author": "Alexander Krupenkin <akru@aira.life>",
   "license": "BSD-3-Clause"

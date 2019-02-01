@@ -1,35 +1,69 @@
-pragma solidity >=0.5.0 <0.6.0;
+/*
+    Interface of DEX contract.
+*/
+
+pragma solidity >= 0.5.0;
+
+import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
 
 contract AbstractDEX {
     /**
-     * @dev Event emitted for every registered order in a contract.
+     * @dev Notification for opened trades. 
      */
-    event TradeOpened(uint256 indexed trade_id);
+    event TradeOpened(uint256 indexed id);
 
     /**
-     * @dev Event emitted for every closed trade in a contract.
+     * @dev Notification for finalized trades. 
      */
-    event TradeClosed(uint256 indexed trade_id);
+    event TradeClosed(uint256 indexed id);
+
+    /**
+     * @dev Notify for every confirmed transfers. 
+     */
+    event TransferConfirmed(
+        uint256 indexed id,
+        address indexed trader,
+        address indexed oracle
+    );
+
+    struct Trade {
+        // Trade params
+        address maker;
+        address taker;
+        uint256 collateralValue;
+        // Trade state
+        uint256 openBlock;
+        uint256 closeBlock;
+    }
+
+    // Trade list 
+    Trade[] public trades;
+
+    // Value of transfer for trader
+    mapping(uint256 => mapping(address => uint256)) public valueToSell;
+    mapping(uint256 => mapping(address => uint256)) public valueToBuy;
+    // Transfer extra params for trader
+    mapping(uint256 => mapping(address => bytes)) public extraData;
+    
+    /**
+     * @dev Collateral token address.
+     */
+    ERC20 public collateral;
+
+    uint256 public tradingBlocks;
 
     /**
      * @dev Open trade by matching two orders.
-     * @param _makerData off-chain offer params(external account, value, nonce, etc.)
-     * @param _makerDeadline maker message deadline block
-     * @param _makerSignature EC signature of maker message*
-     * @param _takerData off-chain demand params (external account, value, nonce, etc.)
-     * @param _takerDeadline taker message deadline block
-     * @param _takerSignature EC signature of taker message*
-     * @param _collateralValue value of collateral token that will be send as refund
-     * @return positive number corresponds to trade id
+     * @param makerOrder ABI-encoded maker order
+     * @param takerOrder ABI-encoded taker order
+     * @return unique trade identifier
+     * @notice orders should not be used befor
      */
     function openTrade(
-        bytes calldata _makerData,
-        uint256        _makerDeadline,
-        bytes calldata _makerSignature,
-        bytes calldata _takerData,
-        uint256        _takerDeadline,
-        bytes calldata _takerSignature,
-        uint256        _collateralValue
+        bytes calldata makerOrder,
+        bytes calldata makerSignature,
+        bytes calldata takerOrder,
+        bytes calldata takerSignature
     ) external returns (
         uint256 tradeId
     );
@@ -46,13 +80,15 @@ contract AbstractDEX {
     );
 
     /**
-     * @dev Confirm trade transfers.
+     * @dev Confirm transfer for trade.
      * @param _tradeId trade identifier 
-     * @param _trader trade party whom makes transfers
+     * @param _trader trader address
      * @notice oracles call only
      */
     function confirmTransfer(
         uint256 _tradeId,
         address _trader
-    ) external returns (bool);
+    ) external returns (
+        bool success
+    );
 }

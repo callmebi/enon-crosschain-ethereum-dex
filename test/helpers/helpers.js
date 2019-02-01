@@ -6,18 +6,17 @@ function randomHex(length) {
 }
 
 async function generateOrder(web3, deadline, value, signer) {
-    const data = web3.utils.toHex(JSON.stringify({
+    const extra = web3.utils.toHex(JSON.stringify({
         account: randomHex(20),
         token:   randomHex(20),
     }));
 
-    const hash = web3.utils.soliditySha3(
-        {t: 'bytes',   v: data},
-        {t: 'uint256', v: deadline},
-        {t: 'uint256', v: value}
+    const order = web3.eth.abi.encodeParameters(
+        ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
+        [extra, '5', '5', value, deadline]
     );
-
-    return {data: data, signature: await web3.eth.sign(hash, signer)};
+    const hash = web3.utils.sha3(order);
+    return {order: order, signature: await web3.eth.sign(hash, signer)};
 }
 
 module.exports = {

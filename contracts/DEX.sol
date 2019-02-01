@@ -1,56 +1,41 @@
-pragma solidity >=0.5.0 <0.6.0;
+/*
+    DEX core contract.
+*/
+
+pragma solidity >= 0.5.0;
 
 import 'openzeppelin-solidity/contracts/cryptography/ECDSA.sol';
-import 'openzeppelin-solidity/contracts/token/ERC20/ERC20.sol';
 import 'openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol';
 
-import './SingletonHash.sol';
 import './AbstractDEX.sol';
+import './SingletonHash.sol';
 import './AbstractOracle.sol';
 
 contract DEX is AbstractDEX, SingletonHash {
     constructor(
-        address          _collateral,
-        uint256          _tradingBlocks,
-        uint256          _minConfirmations,
-        address[] memory _oracles
+        ERC20   _collateral,
+        uint256 _tradingBlocks,
+        uint256 _minConfirmations
     ) public {
-        collateral = ERC20(_collateral);
+        collateral = _collateral;
         tradingBlocks = _tradingBlocks;
         minTransferConfirmations = _minConfirmations;
-        oracles = _oracles;
-        for (uint256 i = 0; i < _oracles.length; ++i)
-            isTradeOracle[_oracles[i]] = true;
     }
 
     using SafeERC20 for ERC20;
     using ECDSA for bytes32;
 
-    struct Trade {
-        // Trade params
-        address      maker;
-        address      taker;
-        uint256      collateralValue;
-        // Trade state
-        uint256      openBlock;
-        uint256      closeBlock;
-    }
-
-    /// Transacton data of a trader
-    mapping(uint256 => mapping(address => bytes)) public tradeDataOf;
-
     // TODO: restrict visibility
     mapping(uint256 => mapping(address => address[])) public transferConfirmations;
 
-    // TODO: restrict visibility
-    Trade[] public trades;
-
-    ERC20 public collateral;
-
-    uint256 public tradingBlocks;
-
     // TODO: keep in mind that it could be user params
-    address[] public oracles;
+    function setOracles(AbstractOracle[] calldata _oracles) external {
+        require(oracles.length == 0);
+        oracles = _oracles;
+        for (uint256 i = 0; i < _oracles.length; ++i)
+            isTradeOracle[address(_oracles[i])] = true;
+    }
+    AbstractOracle[] public oracles;
     mapping(address => bool) public isTradeOracle;
     uint256 public minTransferConfirmations;
 
@@ -60,56 +45,50 @@ contract DEX is AbstractDEX, SingletonHash {
         _;
     }
 
+    modifier openTradeOnly(uint256 _tradeId) {
+        // Check that trade isn't closed before
+        require(trades[_tradeId].closeBlock == 0);
+        _;
+    }
+
     function openTrade(
-        bytes     calldata _makerData,
-        uint256            _makerDeadline,
-        bytes     calldata _makerSignature,
-        bytes     calldata _takerData,
-        uint256            _takerDeadline,
-        bytes     calldata _takerSignature,
-        uint256            _collateralValue
+        bytes calldata makerOrder,
+        bytes calldata makerSignature,
+        bytes calldata takerOrder,
+        bytes calldata takerSignature
     ) external returns (
         uint256 tradeId
     ) {
-        // Params safety check
-        require(_makerData.length > 0);
-        require(_takerData.length > 0);
+        // Instantiate new trade
+        tradeId = trades.length++;
+        Trade storage trade = trades[tradeId];
 
-        // Message deadline check
-        require(_makerDeadline > block.number);
-        require(_takerDeadline > block.number);
+        // Recover trader addresses
+        singleton(keccak256(makerOrder));
+        trade.maker = keccak256(makerOrder)
+            .toEthSignedMessageHash()
+            .recover(makerSignature);
 
-        address maker = tradeSecurity(
-            _makerData,
-            _makerDeadline,
-            _makerSignature,
-            _collateralValue
-        );
+        singleton(keccak256(takerOrder));
+        trade.taker = keccak256(takerOrder)
+            .toEthSignedMessageHash()
+            .recover(takerSignature);
 
-        address taker = tradeSecurity(
-            _takerData,
-            _takerDeadline,
-            _takerSignature,
-            _collateralValue
-        );
+        // Open order at current block
+        trade.openBlock = block.number;
 
-        tradeId = trades.length;
+        // Process orders
+        trade.collateralValue = processOrder(tradeId, trade.maker, makerOrder);
+        require(trade.collateralValue > 0);
+        require(trade.collateralValue == processOrder(tradeId, trade.taker, takerOrder));
 
-        // Push trade state on chain
-        trades.push(Trade(
-            maker,
-            taker,
-            _collateralValue,
-            block.number,
-            0
-        ));
+        // Order matching validation
+        require(valueToSell[tradeId][trade.maker] == valueToBuy[tradeId][trade.taker]);
+        require(valueToBuy[tradeId][trade.maker] == valueToSell[tradeId][trade.taker]);
 
-        // Store traders data on chain for oracles requests
-        tradeDataOf[tradeId][taker] = _takerData;
-        tradeDataOf[tradeId][maker] = _makerData;
-
+        // Notify oracles to start transfer checking
         for (uint256 i = 0; i < oracles.length; ++i)
-            AbstractOracle(oracles[i]).checkTrade(address(this), tradeId);
+            oracles[i].checkTrade(tradeId);
 
         emit TradeOpened(tradeId);
     }
@@ -142,38 +121,48 @@ contract DEX is AbstractDEX, SingletonHash {
     function confirmTransfer(
         uint256 _tradeId,
         address _trader
-    ) external
+    ) external 
       oraclesOnly(_tradeId)
+      openTradeOnly(_tradeId)
       returns (
         bool success
     ) {
-        // Check that trade isn't closed before
-        require(trades[_tradeId].closeBlock == 0);
-
         address[] storage transfer_confirmations
             = transferConfirmations[_tradeId][_trader];
         for (uint256 i = 0; i < transfer_confirmations.length; ++i)
             require(transfer_confirmations[i] != msg.sender);
         transfer_confirmations.push(msg.sender);
-        success = true;
+
+        if (transfer_confirmations.length >= minTransferConfirmations)
+            emit TransferConfirmed(_tradeId, _trader, msg.sender);
+
+        return true;
     }
 
-    function tradeSecurity(
-        bytes     memory _data,
-        uint256         _deadline,
-        bytes     memory _signature,
-        uint256         _collateralValue
+    function processOrder(
+        uint256 _tradeId,
+        address _trader,
+        bytes memory _order
     ) internal returns (
-        address trader
+        uint256 collateralValue
     ) {
-        trader = singleton(keccak256(abi.encodePacked(
-            _data,
-            _deadline,
-            _collateralValue
-        )))
-            .toEthSignedMessageHash()
-            .recover(_signature);
+        bytes memory extra;
+        uint256 deadline;
 
-        collateral.safeTransferFrom(trader, address(this), _collateralValue);
+        (extra,
+         valueToBuy[_tradeId][_trader],
+         valueToSell[_tradeId][_trader],
+         collateralValue,
+         deadline)
+            = abi.decode(_order, (bytes, uint256, uint256, uint256, uint256));
+
+        // Order deadline check
+        require(deadline > block.number);
+
+        // Collateral transfer
+        collateral.safeTransferFrom(_trader, address(this), collateralValue);
+
+        // Store trader extra data
+        extraData[_tradeId][_trader] = extra;
     }
 }

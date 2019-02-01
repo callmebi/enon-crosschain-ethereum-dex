@@ -63,17 +63,14 @@ contract('DEX', accounts => {
             const taker = await helper.generateOrder(web3, deadline, collateralValue, takerAccount);
 
             const openTx = await dex.openTrade(
-                maker.data,
-                deadline,
+                maker.order,
                 maker.signature,
-                taker.data,
-                deadline,
-                taker.signature,
-                collateralValue
+                taker.order,
+                taker.signature
             ).should.be.fulfilled;
 
             openTx.logs[2].event.should.equal('TradeOpened');
-            const tradeId = openTx.logs[2].args.trade_id;
+            const tradeId = openTx.logs[2].args.id;
 
             chai.expect(await collateral.balanceOf(dex.address)).to.eq.BN('200');
 
@@ -100,7 +97,7 @@ contract('DEX', accounts => {
             ).should.be.fulfilled;
 
             closeTx.logs[0].event.should.equal('TradeClosed');
-            chai.expect(closeTx.logs[0].args.trade_id).to.eq.BN(tradeId);
+            chai.expect(closeTx.logs[0].args.id).to.eq.BN(tradeId);
 
             trade = await dex.trades(tradeId);
             chai.expect(trade.closeBlock).to.eq.BN(closeTx.receipt.blockNumber);
@@ -131,17 +128,14 @@ contract('DEX', accounts => {
             const taker = await helper.generateOrder(web3, deadline, collateralValue, takerAccount);
 
             const openTx = await dex.openTrade(
-                maker.data,
-                deadline,
+                maker.order,
                 maker.signature,
-                taker.data,
-                deadline,
-                taker.signature,
-                collateralValue
+                taker.order,
+                taker.signature
             ).should.be.fulfilled;
 
             openTx.logs[2].event.should.equal('TradeOpened');
-            const tradeId = openTx.logs[2].args.trade_id;
+            const tradeId = openTx.logs[2].args.id;
 
             chai.expect(await collateral.balanceOf(dex.address)).to.eq.BN('200');
 
@@ -166,7 +160,7 @@ contract('DEX', accounts => {
             ).should.be.fulfilled;
 
             closeTx.logs[0].event.should.equal('TradeClosed');
-            chai.expect(closeTx.logs[0].args.trade_id).to.eq.BN(tradeId);
+            chai.expect(closeTx.logs[0].args.id).to.eq.BN(tradeId);
 
             trade = await dex.trades(tradeId);
             chai.expect(trade.closeBlock).to.eq.BN(closeTx.receipt.blockNumber);
@@ -197,17 +191,14 @@ contract('DEX', accounts => {
             const taker = await helper.generateOrder(web3, deadline, collateralValue, takerAccount);
 
             const openTx = await dex.openTrade(
-                maker.data,
-                deadline,
+                maker.order,
                 maker.signature,
-                taker.data,
-                deadline,
-                taker.signature,
-                collateralValue
+                taker.order,
+                taker.signature
             ).should.be.fulfilled;
 
             openTx.logs[2].event.should.equal('TradeOpened');
-            const tradeId = openTx.logs[2].args.trade_id;
+            const tradeId = openTx.logs[2].args.id;
 
             chai.expect(await collateral.balanceOf(dex.address)).to.eq.BN('200');
 
@@ -232,7 +223,7 @@ contract('DEX', accounts => {
             ).should.be.fulfilled;
 
             closeTx.logs[0].event.should.equal('TradeClosed');
-            chai.expect(closeTx.logs[0].args.trade_id).to.eq.BN(tradeId);
+            chai.expect(closeTx.logs[0].args.id).to.eq.BN(tradeId);
 
             trade = await dex.trades(tradeId);
             chai.expect(trade.closeBlock).to.eq.BN(closeTx.receipt.blockNumber);
@@ -262,17 +253,14 @@ contract('DEX', accounts => {
             const taker = await helper.generateOrder(web3, deadline, collateralValue, takerAccount);
 
             const openTx = await dex.openTrade(
-                maker.data,
-                deadline,
+                maker.order,
                 maker.signature,
-                taker.data,
-                deadline,
-                taker.signature,
-                collateralValue
+                taker.order,
+                taker.signature
             ).should.be.fulfilled;
 
             openTx.logs[2].event.should.equal('TradeOpened');
-            const tradeId = openTx.logs[2].args.trade_id;
+            const tradeId = openTx.logs[2].args.id;
 
             chai.expect(await collateral.balanceOf(dex.address)).to.eq.BN('200');
 
@@ -295,7 +283,7 @@ contract('DEX', accounts => {
             ).should.be.fulfilled;
 
             closeTx.logs[0].event.should.equal('TradeClosed');
-            chai.expect(closeTx.logs[0].args.trade_id).to.eq.BN(tradeId);
+            chai.expect(closeTx.logs[0].args.id).to.eq.BN(tradeId);
 
             trade = await dex.trades(tradeId);
             chai.expect(trade.closeBlock).to.eq.BN(closeTx.receipt.blockNumber);
@@ -327,17 +315,14 @@ contract('DEX', accounts => {
             const taker = await helper.generateOrder(web3, deadline, collateralValue, takerAccount);
 
             const openTx = await dex.openTrade(
-                maker.data,
-                deadline,
+                maker.order,
                 maker.signature,
-                taker.data,
-                deadline,
-                taker.signature,
-                collateralValue
+                taker.order,
+                taker.signature
             ).should.be.fulfilled;
 
             openTx.logs[2].event.should.equal('TradeOpened');
-            const tradeId = openTx.logs[2].args.trade_id;
+            const tradeId = openTx.logs[2].args.id;
 
             chai.expect(await collateral.balanceOf(dex.address)).to.eq.BN('200');
 
@@ -382,24 +367,18 @@ contract('DEX', accounts => {
             const taker = await helper.generateOrder(web3, deadline, collateralValue, takerAccount);
 
             const openTx = await dex.openTrade(
-                maker.data,
-                deadline,
+                maker.order,
                 maker.signature,
-                taker.data,
-                deadline,
+                taker.order,
                 taker.signature,
-                collateralValue
             ).should.be.fulfilled;
 
             const maker2 = await helper.generateOrder(web3, deadline, collateralValue, makerAccount);
             const openTx2 = await dex.openTrade(
-                maker2.data,
-                deadline,
+                maker2.order,
                 maker2.signature,
-                taker.data,
-                deadline,
+                taker.order,
                 taker.signature,
-                collateralValue
             ).should.be.rejected;
         });
     });

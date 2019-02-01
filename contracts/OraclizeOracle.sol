@@ -1,44 +1,58 @@
-pragma solidity >=0.5.0 <0.6.0;
+/*
+    Oraclize based oracle contract.
+*/
+
+pragma solidity >= 0.5.0;
 
 import './oraclizeAPI.sol';
 import './DEX.sol';
 import './AbstractOracle.sol';
 
 contract OraclizeOracle is AbstractOracle, usingOraclize {
-    struct Trade {
-        DEX dex;
-        uint256 id;
+    struct Request {
+        uint256 tradeId;
+        address trader;
     }
+    mapping(bytes32 => Request) public requestOf;
 
-    mapping(bytes32 => Trade) public queries;
-
-    function toString(address x) internal pure returns (string memory) {
-        bytes memory b = new bytes(20);
-        for (uint i = 0; i < 20; i++)
-            b[i] = byte(uint8(uint(x) / (2**(8*(19 - i)))));
-        return string(b);
+    constructor(AbstractDEX _dex) public {
+        dex = _dex;
     }
 
     function __callback(bytes32 myid, string memory result) public {
         if (msg.sender != oraclize_cbAddress()) revert();
-        Trade storage trade = queries[myid];
-        address trader = parseAddr(result);
-        if (trader != address(0))
-            trade.dex.confirmTransfer(trade.id, trader);
+        Request storage req = requestOf[myid];
+        (address maker, address taker,,uint256 open,) = dex.trades(req.tradeId);
+
+        if (parseInt(result) == dex.valueToBuy(req.tradeId, req.trader)) {
+            if (req.trader == maker)
+                dex.confirmTransfer(req.tradeId, taker);
+            else if (req.trader == taker)
+                dex.confirmTransfer(req.tradeId, maker);
+        } else if (open + dex.tradingBlocks() < block.number) {
+            checkBalance(req.tradeId, req.trader, 60);
+        }
     }
 
-    function checkTrade(address _dex, uint256 _tradeId) external returns(bool success) {
-        DEX dex = DEX(_dex);
+    function checkTrade(uint256 _tradeId) external returns(bool success) {
+        require(msg.sender == address(dex));
         (address maker, address taker,,,) = dex.trades(_tradeId);
-        bytes32 qid = oraclize_query("computation", [
-            "QmTrMDmkrsdmPNnQKQMJbycmhJCKCC19y6bsCAVhb8gu1U",
-            toString(maker),
-            string(dex.tradeDataOf(_tradeId, maker)),
-            toString(taker),
-            string(dex.tradeDataOf(_tradeId, taker))
-        ]);
-        queries[qid] = Trade(dex, _tradeId);
+
+        // Request maker balance
+        checkBalance(_tradeId, maker, 0);
+
+        // Request taker balance
+        checkBalance(_tradeId, taker, 0);
+
         success = true;
+    }
+
+    function checkBalance(uint256 _tradeId, address _trader, uint256 _wait) internal {
+        bytes32 qid = oraclize_query("computation", [
+            "QmdSoNtqVG2oD2bSqbQq1Pe3dZCDQjUDSw692o6cxz2f9o",
+            string(dex.extraData(_tradeId, _trader))
+        ], _wait);
+        requestOf[qid] = Request(_tradeId, _trader);
     }
 
     function() external payable {}

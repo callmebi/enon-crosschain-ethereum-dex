@@ -1,25 +1,27 @@
-pragma solidity >=0.5.0 <0.6.0;
+/*
+    EOA based oracle contract.
+*/
 
-import './DEX.sol';
+pragma solidity >= 0.5.0;
+
+import './AbstractDEX.sol';
 import './AbstractOracle.sol';
 
 contract OwnedOracle is AbstractOracle {
-    constructor(address _onwer) public {
+    address public owner;
+    uint256 public tradeId;
+
+    constructor(AbstractDEX _dex, address _onwer) public {
+        dex = _dex;
         owner = _onwer;
     }
-
-    address public owner;
-
-    DEX     public dex;
-    uint256 public tradeId;
 
     function confirmTransfer(address _trader) public returns (bool) {
         require(msg.sender == owner);
         return dex.confirmTransfer(tradeId, _trader);
     }
 
-    function checkTrade(address _dex, uint256 _tradeId) external returns(bool success) {
-        dex = DEX(_dex);
+    function checkTrade(uint256 _tradeId) external returns(bool success) {
         tradeId = _tradeId;
         success = true;
     }

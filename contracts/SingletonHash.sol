@@ -1,4 +1,8 @@
-pragma solidity >=0.5.0 <0.6.0;
+/*
+    Hash consumtion accounting.
+*/
+
+pragma solidity >= 0.5.0;
 
 contract SingletonHash {
     event HashConsumed(bytes32 indexed hash);
