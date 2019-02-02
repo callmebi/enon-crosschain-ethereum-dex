@@ -1,5 +1,5 @@
 import React from 'react';
-import Approve from './Approve.js';
+import Trade from './Trade.js';
 import { Form } from 'react-bootstrap';
 
 class App extends React.Component {
@@ -34,7 +34,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Form.Label>Account: {account}</Form.Label>
-        <Approve
+        <Trade
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />
