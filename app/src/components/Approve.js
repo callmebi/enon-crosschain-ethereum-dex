@@ -13,7 +13,7 @@ class ApproveBox extends React.Component {
 
   handleKeyDown = (e) => {
     this.setState({ value: e.target.value }); // update input value
-    if (e.keyCode == 13) { // Enter
+    if (e.keyCode === 13) { // Enter
       this.sendApprove();
     }
   }
@@ -31,8 +31,8 @@ class ApproveBox extends React.Component {
     console.log('Sending approve. Value: ', this.state.value,
               ', Recv DEX: ', dex.address,
               ', Sender: ', drizzleState.accounts[0]);
-    collateral.methods['approve'].
-      cacheSend(dex.address, this.state.value, {from: drizzleState.accounts[0]});
+    collateral.methods['approve'].cacheSend(
+      dex.address, this.state.value, {from: drizzleState.accounts[0]});
   }
   
   render() {
