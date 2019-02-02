@@ -1,6 +1,5 @@
 import React from 'react';
 import { InputGroup, Form, Button} from 'react-bootstrap';
-
 import './Approve.css';
 
 class ApproveBox extends React.Component {
@@ -12,7 +11,7 @@ class ApproveBox extends React.Component {
   }
 
   handleKeyDown = (e) => {
-    this.setState({ value: e.target.value }); // update input value
+    this.setState({ value: e.target.value }); // update input value, #TODO: filter wrong input
     if (e.keyCode === 13) { // Enter
       this.sendApprove();
     }
@@ -22,17 +21,19 @@ class ApproveBox extends React.Component {
     this.sendApprove();
   }
 
-  sendApprove = () => { // approve from account to DEX
-    if (!this.state.value)
+  sendApprove = async () => { // approve from account to DEX
+    if (!this.state.value) // filter without value provided
       return;
     const { drizzle, drizzleState } = this.props;
     const collateral = drizzle.contracts.Collateral;
     const dex = drizzle.contracts.DEX;
-    console.log('Sending approve. Value: ', this.state.value,
+    const decimals = await collateral.methods['decimals']().call();
+    const approveValue = this.state.value * Math.pow(10, decimals); // float input to uint for tx
+    console.log('Sending approve. Value: ', approveValue,
               ', Recv DEX: ', dex.address,
               ', Sender: ', drizzleState.accounts[0]);
-    collateral.methods['approve'].cacheSend(
-      dex.address, this.state.value, {from: drizzleState.accounts[0]});
+    await collateral.methods['approve'].cacheSend(
+      dex.address, approveValue, {from: drizzleState.accounts[0]});
   }
   
   render() {
