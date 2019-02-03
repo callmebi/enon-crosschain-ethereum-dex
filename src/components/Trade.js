@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, Form, Button} from 'react-bootstrap';
+import { Form, Button} from 'react-bootstrap';
 
 import './Trade.css';
 
