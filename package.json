@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "truffle test",
-    "build": "truffle compile && react-scripts build",
+    "build": "react-scripts build",
     "start": "react-scripts start",
     "eject": "react-scripts eject",
     "migrate": "truffle migrate",
