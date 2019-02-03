@@ -1,7 +1,8 @@
 {
   "name": "dex",
-  "version": "0.0.1",
-  "homepage": "https://github.com/akru/dex",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://github.com/akru/cdex",
   "description": "Collateral based decentralized exchange",
   "main": "truffle.js",
   "directories": {
@@ -9,6 +10,7 @@
   },
   "scripts": {
     "test": "truffle test",
+    "start": "cd app && npm start",
     "compile": "truffle compile",
     "migrate": "truffle migrate",
     "console": "truffle console",
@@ -16,15 +18,14 @@
     "release": "truffle migrate --network mainnet"
   },
   "dependencies": {
-    "bn-chai": "^1.0.1",
     "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "eth-ens-namehash": "^2.0.8",
-    "eth-gas-reporter": "^0.1.12",
+    "truffle": "5.0.3",
+    "bn-chai": "^1.0.1",
     "ganache-cli": "^6.2.4",
-    "openzeppelin-solidity": "^2.1.1",
-    "truffle": "5.0.1",
-    "truffle-flattener": "^1.2.12"
+    "chai-as-promised": "^7.1.1",
+    "eth-gas-reporter": "^0.1.12",
+    "truffle-flattener": "^1.2.12",
+    "openzeppelin-solidity": "^2.1.1"
   },
   "author": "Alexander Krupenkin <akru@aira.life>",
   "license": "BSD-3-Clause"
