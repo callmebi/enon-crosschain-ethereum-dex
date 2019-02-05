@@ -19,12 +19,17 @@
  */
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
-const infuraKey = "8e4bd72dbcec4955bf08e61f5bb75d19";
+const infuraKey = '8e4bd72dbcec4955bf08e61f5bb75d19';
 
 const fs = require('fs');
-const mnemonic = fs.readFileSync(".secret").toString().trim();
+const mnemonicPath = '.secret';
+const mnemonic = fs.existsSync(mnemonicPath)
+               ? fs.readFileSync(mnemonicPath).toString().trim()
+               : '';
 
 module.exports = {
+  // Change default contract build directory to use ABIs in React app
+  contracts_build_directory: 'src/contracts',
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -43,9 +48,9 @@ module.exports = {
     // options below to some value.
     //
     development: {
-      host: "127.0.0.1",     // Localhost (default: none)
+      host: '127.0.0.1',     // Localhost (default: none)
       port: 8545,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
+      network_id: '*',       // Any network (default: none)
     },
 
     // Useful for deploying to a public network.
@@ -72,13 +77,13 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.5.3",
+      version: '0.5.3',
       settings: {
         optimizer: {
           enabled: true,
           runs: 200
         },
-        evmVersion: "byzantium"
+        evmVersion: 'byzantium'
       }
     }
   }
