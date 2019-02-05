@@ -10,7 +10,7 @@ class ApproveBox extends React.Component {
     };
   }
 
-  handleKeyDown = (e) => {
+  handleKeyUp = (e) => {
     this.setState({ value: e.target.value }); // update input value, #TODO: filter wrong input
     if (e.keyCode === 13) { // Enter
       this.sendApprove();
@@ -40,7 +40,7 @@ class ApproveBox extends React.Component {
     return (
       <div>
         <InputGroup className="mb-3">
-          <Form.Control type="number" step="any" min="0" onKeyUp={this.handleKeyDown}/>
+          <Form.Control type="number" step="any" min="0" onKeyUp={this.handleKeyUp}/>
           <InputGroup.Append>
             <Button variant="outline-secondary" onClick={this.handleClick}>Approve</Button>
           </InputGroup.Append>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, Form, Button} from 'react-bootstrap';
+import { Form, Button} from 'react-bootstrap';
 
 import './Trade.css';
 
@@ -70,7 +70,7 @@ class TradeBox extends React.Component {
       <Form>
         <Form.Group controlId="tradeFrom.pair">
           <Form.Label>Trading pair</Form.Label>
-          <Form.Control as="select" onChange={e => this.state.pair = e.target.value}>
+          <Form.Control as="select" onChange={e => this.setState({ pair: e.target.value })}>
             <option>TokenA / TokenB</option>
             <option>TokenB / TokenA</option>
             <option>ETH / BTC</option>
@@ -79,28 +79,32 @@ class TradeBox extends React.Component {
         </Form.Group>
         <Form.Group controlId="tradeForm.buy">
           <Form.Label>Buy</Form.Label>
-          <Form.Control type="number" placeholder="42" onChange={e => this.state.buy = e.target.value}/>
+          <Form.Control type="number" placeholder="42"
+            onChange={e => this.setState({ buy: e.target.value })}/>
           <Form.Text className="text-muted">
             How much you want to buy.
           </Form.Text>
         </Form.Group>
         <Form.Group controlId="tradeForm.price">
           <Form.Label>Price</Form.Label>
-          <Form.Control type="number" placeholder="1" onChange={e => this.state.price = e.target.value}/>
+          <Form.Control type="number" placeholder="1"
+            onChange={e => this.setState({ price: e.target.value })}/>
           <Form.Text className="text-muted">
             What is a price of your order.
           </Form.Text>
         </Form.Group>
         <Form.Group controlId="tradeForm.collateral">
           <Form.Label>Collateral</Form.Label>
-          <Form.Control type="number" placeholder="1" onChange={e => this.state.collateral = e.target.value}/>
+          <Form.Control type="number" placeholder="1"
+            onChange={e => this.setState({ collateral: e.target.value })}/>
           <Form.Text className="text-muted">
             Collateral value to lock on DEX contract.
           </Form.Text>
         </Form.Group>
         <Form.Group controlId="tradeForm.account">
           <Form.Label>Receive to</Form.Label>
-          <Form.Control type="text" placeholder="0x..." onChange={e => this.state.account = e.target.value}/>
+          <Form.Control type="text" placeholder="0x..."
+            onChange={e => this.setState({ account: e.target.value })}/>
           <Form.Text className="text-muted">
             Recipient account address.
           </Form.Text>

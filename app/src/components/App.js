@@ -6,7 +6,6 @@ class App extends React.Component {
   state = {
     loading: true,      // web3, contracts, accounts
     drizzleState: null, // drizzle props and state instead of Redux
-    user: null
   };
 
   componentDidMount() {
@@ -17,7 +16,6 @@ class App extends React.Component {
         this.setState( { loading: false, drizzleState });
       }
     });
-    window.drizzle = drizzle; // #TODO 1
   }
 
   componentWillUnmount() {
@@ -30,10 +28,9 @@ class App extends React.Component {
       return "Connecting to network. Please unlock MetaMask.";
 
     // 2. Connected
-    const account = this.state.drizzleState.accounts[0];
     return (
       <div className="App">
-        <Form.Label>Account: {account}</Form.Label>
+        <Form.Label>Account: {this.state.drizzleState.accounts[0]}</Form.Label>
         <Trade
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
