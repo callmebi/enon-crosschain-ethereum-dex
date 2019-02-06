@@ -56,9 +56,9 @@ class TradeBox extends React.Component {
       .then(orders => this.setState({orders}));
   }
 
-  makeOrder = async () => {
-    const { drizzle, drizzleState } = this.props;
-
+  openTrade = async () => {
+    const { drizzle } = this.props;
+    const drizzleState = drizzle.store.getState();
     const collateral = drizzle.contracts.Collateral;
     const dex = drizzle.contracts.DEX;
     const allowance = await collateral.methods.allowance(drizzleState.accounts[0], dex.address).call();

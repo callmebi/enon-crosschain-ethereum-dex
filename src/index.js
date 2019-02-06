@@ -6,8 +6,6 @@ import App from './components/App';
 import Collateral from './contracts/Collateral.json'; // token
 import DEX from './contracts/DEX.json';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 const options = {
   web3: {
     fallback: { // if there is no web3 provider in browser, fallback to local
