@@ -1,116 +1,197 @@
 import React from 'react';
-import { Form, Button} from 'react-bootstrap';
+import { Form, Col, Button, Table, Tabs, Tab } from 'react-bootstrap';
 
 import './Trade.css';
 
 const TokenA = '0x7F6f1F236D748D3c8E07eC00a663E4F1474a2e04'
 const TokenB = '0x70fD8ed25a2d9c9C98e1e48a50bd3592491F8c77'
 
-async function makeParams(web3, accounts, buy, sell, collateral) {
-    let makerData = web3.utils.toHex(JSON.stringify({
+async function makeOrder(web3, account, buy, sell, collateral) {
+    const data = web3.utils.toHex(JSON.stringify({
         token: TokenA,
-        account: accounts[0],
-        nonce: 1
+        account: account,
+        nonce: Math.random()
     }));
 
-    let takerData = web3.utils.toHex(JSON.stringify({
-        token: TokenB,
-        account: '0x4af013AfBAdb22D8A88c92D68Fc96B033b9Ebb8a',
-        nonce: 1
-    }));
+    const blockNumber = await web3.eth.getBlockNumber();
+    const deadline = blockNumber + 100;
 
-    let blockNumber = await web3.eth.getBlockNumber();
-    let deadline = blockNumber + 100;
-
-    let makerOrder = web3.eth.abi.encodeParameters(
+    const params = web3.eth.abi.encodeParameters(
         ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
-        [makerData, buy, sell, collateral, deadline]
+        [data, buy, sell, collateral, deadline]
     );
 
-    let takerOrder = web3.eth.abi.encodeParameters(
-        ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
-        [takerData, sell, buy, collateral, deadline]
-    );
-
-    let makerSignature = await web3.eth.sign(web3.utils.sha3(makerOrder), accounts[0]);
-    let takerSignature = "0xc471469f31b790c4fa809539d0e5cf8fb4dce4ca3e24fcc58f8c6798b9fe6271291e3119ddd64b4d707cd08941cd93abcff2973b94c38225be6b4f8edf473b091b";
-
-    return [makerOrder, makerSignature, takerOrder, takerSignature];
+    const signature = await web3.eth.sign(web3.utils.sha3(params), account);
+    return {params, signature};
 }
 
 class TradeBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      orders: [],
       collateral: null,
       buy: null,
       price: null,
       account: null,
-      pair: null,
+      pair: null
     };
   }
 
-  handleClick = () => {
-    this.openTrade();
+  componentDidMount = () => {
+    const { drizzle } = this.props;
+    function decode(order) {
+        const params = drizzle.web3.eth.abi.decodeParameters(
+          ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
+          order.params
+        );
+        order.amount = params[1];
+        order.price = params[2] / params[1];
+        order.collateral = params[3];
+        return order;
+    }
+    fetch('http://cdex-relay.herokuapp.com/')
+      .then(res => res.json())
+      .then(orders => orders.map(order => decode(order)))
+      .then(orders => this.setState({orders}));
   }
 
-  openTrade = async () => {
+  makeOrder = async () => {
+    const { drizzle, drizzleState } = this.props;
+
+    const collateral = drizzle.contracts.Collateral;
+    const dex = drizzle.contracts.DEX;
+    const allowance = await collateral.methods.allowance(drizzleState.accounts[0], dex.address).call();
+    console.log(allowance);
+    if (allowance < this.state.collateral)
+      collateral.methods.approve.cacheSend(
+        dex.address, this.state.collateral, {from: drizzleState.accounts[0]});
+
+    const sell = this.state.buy * this.state.price;
+    const order = await makeOrder(
+        drizzle.web3,
+        drizzleState.accounts[0],
+        this.state.buy.toString(),
+        sell.toString(),
+        this.state.collateral.toString()
+    );
+    fetch('http://cdex-relay.herokuapp.com/', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order)
+    });
+  }
+
+  openTrade = async (maker) => {
     const { drizzle, drizzleState } = this.props;
     const collateral = drizzle.contracts.Collateral;
     const dex = drizzle.contracts.DEX;
-    collateral.methods.approve.cacheSend(
-      dex.address, this.state.collateral, {from: drizzleState.accounts[0]});
-    const sell = this.state.buy * this.state.price;
-    const params = await makeParams(drizzle.web3, drizzleState.accounts, this.state.buy.toString(), sell.toString(), this.state.collateral.toString());
-    dex.methods.openTrade.cacheSend(params[0], params[1], params[2], params[3], {from: drizzleState.accounts[0]}) 
+
+    // Approve when need
+    const collateralBalance = await collateral.methods.balanceOf(drizzleState.accounts[0]).call();
+    console.log('collateral balance: '+collateralBalance);
+    const allowance = await collateral.methods.allowance(drizzleState.accounts[0], dex.address).call();
+    console.log('collateral allowance: '+collateralBalance+' required: '+maker.collateral);
+    if (allowance < maker.collateral)
+      collateral.methods.approve.cacheSend(dex.address, maker.collateral, {from: drizzleState.accounts[0]});
+
+    const taker = await makeOrder(
+        drizzle.web3,
+        drizzleState.accounts[0],
+        (maker.amount / maker.price).toString(),
+        maker.amount.toString(),
+        maker.collateral.toString()
+    );
+    dex.methods.openTrade.cacheSend(
+        maker.params,
+        maker.signature,
+        taker.params,
+        taker.signature,
+        {from: drizzleState.accounts[0]}
+    );
   }
 
   render() {
     return (
-      <Form>
-        <Form.Group controlId="tradeFrom.pair">
-          <Form.Label>Trading pair</Form.Label>
-          <Form.Control as="select" onChange={e => this.setState({ pair: e.target.value })}>
-            <option>TokenA / TokenB</option>
-            <option>TokenB / TokenA</option>
-            <option>ETH / BTC</option>
-            <option>BTC / ETH</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="tradeForm.buy">
-          <Form.Label>Buy</Form.Label>
-          <Form.Control type="number" placeholder="42"
-            onChange={e => this.setState({ buy: e.target.value })}/>
-          <Form.Text className="text-muted">
-            How much you want to buy.
-          </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="tradeForm.price">
-          <Form.Label>Price</Form.Label>
-          <Form.Control type="number" placeholder="1"
-            onChange={e => this.setState({ price: e.target.value })}/>
-          <Form.Text className="text-muted">
-            What is a price of your order.
-          </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="tradeForm.collateral">
-          <Form.Label>Collateral</Form.Label>
-          <Form.Control type="number" placeholder="1"
-            onChange={e => this.setState({ collateral: e.target.value })}/>
-          <Form.Text className="text-muted">
-            Collateral value to lock on DEX contract.
-          </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="tradeForm.account">
-          <Form.Label>Receive to</Form.Label>
-          <Form.Control type="text" placeholder="0x..."
-            onChange={e => this.setState({ account: e.target.value })}/>
-          <Form.Text className="text-muted">
-            Recipient account address.
-          </Form.Text>
-        </Form.Group>
-        <Button variant="primary" onClick={this.handleClick}>Trade</Button>
-      </Form>
+      <Tabs defaultActiveKey='orders'>
+        <Tab eventKey='orders' title='OrderBook'>
+          <Table striped bordered hover>
+            <thead>
+              <th>#</th>
+              <th>Amount</th>
+              <th>Price</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              {this.state.orders.map(order =>
+              <tr>
+                <td>0</td>
+                <td>{order.amount}</td>
+                <td>{order.price}</td>
+                <td><Button onClick={() => this.openTrade(order)}>Buy</Button></td>
+              </tr>
+              )}
+            </tbody>
+          </Table>
+        </Tab>
+        <Tab eventKey='new' title='NewOrder'>
+          <Form>
+            <Form.Row>
+              <Form.Group as={Col} md='3'>
+                <Form.Control as='select' onChange={e => this.setState({ pair: e.target.value })}>
+                  <option>TokenA / TokenB</option>
+                  <option>TokenB / TokenA</option>
+                  <option>ETH / BTC</option>
+                  <option>BTC / ETH</option>
+                </Form.Control>
+                <Form.Text className='text-muted'>
+                  Trading pair.
+                </Form.Text>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Control type='number' placeholder='How much'
+                  value={this.state.buy}
+                  onChange={e => this.setState({ buy: e.target.value })}/>
+                <Form.Text className='text-muted'>
+                  Total amount of trade.
+                </Form.Text>
+              </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Control type='number' placeholder='Price'
+                  value={this.state.price}
+                  onChange={e => this.setState({ price: e.target.value })}/>
+                <Form.Text className='text-muted'>
+                  Price of one traded unit.
+                </Form.Text>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col}>
+                <Form.Control type='text' placeholder='0x...'
+                  value={this.state.account}
+                  onChange={e => this.setState({ account: e.target.value })}/>
+                <Form.Text className='text-muted'>
+                  Recipient account address.
+                </Form.Text>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group as={Col}>
+                <Form.Control type='number' placeholder='Collateral amount'
+                  value={this.state.collateral}
+                  onChange={e => this.setState({ collateral: e.target.value })}/>
+                <Form.Text className='text-muted'>
+                  Value of collateral token to lock on DEX contract.
+                </Form.Text>
+              </Form.Group>
+            </Form.Row>
+            <Button onClick={this.makeOrder}>Sell</Button>
+          </Form>
+        </Tab>
+      </Tabs>
     );
   }
 }

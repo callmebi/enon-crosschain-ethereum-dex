@@ -1,6 +1,6 @@
 import React from 'react';
 import Trade from './Trade.js';
-import { Form } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 
 class App extends React.Component {
   state = {
@@ -25,16 +25,28 @@ class App extends React.Component {
   render() {
     // 1. Connecting
     if (this.state.loading)
-      return "Connecting to network. Please unlock MetaMask.";
+      return (
+        <div className="App">
+          <Container>
+            <Alert variant="danger">
+              Unable to loading, try to install MetaMask or unlock it.
+            </Alert>
+          </Container>
+        </div>
+      );
 
     // 2. Connected
     return (
       <div className="App">
-        <Form.Label>Account: {this.state.drizzleState.accounts[0]}</Form.Label>
-        <Trade
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
-        />
+        <Container>
+          <Alert variant="success">
+            Connected as {this.state.drizzleState.accounts[0]}
+          </Alert>
+          <Trade
+            drizzle={this.props.drizzle}
+            drizzleState={this.state.drizzleState}
+          />
+        </Container>
       </div>
     );
   }
