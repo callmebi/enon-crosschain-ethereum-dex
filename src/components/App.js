@@ -1,11 +1,11 @@
 import React from 'react';
+import Header from './Header.js';
 import Trade from './Trade.js';
-import { Form } from 'react-bootstrap';
+import { Alert, Form } from 'react-bootstrap';
 
-class App extends React.Component {
+class MetaMaskUnlocked extends React.Component {
   state = {
-    loading: true,      // web3, contracts, accounts
-    drizzleState: null, // drizzle props and state instead of Redux
+    drizzleState: this.props.drizzle.store.getState()
   };
 
   componentDidMount() {
@@ -13,7 +13,7 @@ class App extends React.Component {
     this.unsubscribe = drizzle.store.subscribe( () => { // subs to changes in store
       const drizzleState = drizzle.store.getState(); // sync state updates with store
       if (drizzleState.drizzleStatus.initialized) {
-        this.setState( { loading: false, drizzleState });
+        this.setState({ loading: false, drizzleState });
       }
     });
   }
@@ -23,18 +23,87 @@ class App extends React.Component {
   }
 
   render() {
-    // 1. Connecting
-    if (this.state.loading)
-      return "Connecting to network. Please unlock MetaMask.";
-
-    // 2. Connected
     return (
-      <div className="App">
+      <div>
         <Form.Label>Account: {this.state.drizzleState.accounts[0]}</Form.Label>
         <Trade
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
+          drizzle = {this.props.drizzle}
         />
+      </div>
+    );
+  }
+}
+
+const loadingInformerStyle = {
+  margin: '0px',
+};
+
+class MetaMaskLocked extends React.Component {
+  render() {
+    return (
+      <div style={loadingInformerStyle}>
+        <Alert variant="info">
+          <p>Connecting to network. Please unlock MetaMask.</p>
+        </Alert>
+      </div>
+    );
+  }
+}
+
+class ContentContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      visibleComponent: MetaMaskLocked,
+    };
+  }
+
+  componentDidMount() {
+    this.unsubscribe = this.props.drizzle.store.subscribe( () => { // subs to changes in store
+      if (this.props.drizzle.store.getState().drizzleStatus.initialized)
+        this.setState({ loading: false, visibleComponent: MetaMaskUnlocked });
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  changeVisibleComponent() {
+    this.setState({ visibleComponent: MetaMaskUnlocked });
+  }
+
+  render() {
+    const VisibleComponent = this.state.visibleComponent;
+    return (
+      <div>
+        <VisibleComponent
+          changeEventHandler={this.changeVisibleComponent}
+          drizzle={this.props.drizzle}
+        />
+      </div>
+    );
+  }
+}
+
+const contentContainerStyle = {
+  margin: '40px',
+  marginTop: '88px',
+};
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
+        <div>
+          <Header appName="CDEX"/>
+        </div>
+        <div style={contentContainerStyle}>
+          <ContentContainer
+            drizzle = {this.props.drizzle}
+          />
+        </div>
       </div>
     );
   }

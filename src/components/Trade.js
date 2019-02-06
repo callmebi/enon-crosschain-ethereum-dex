@@ -55,7 +55,8 @@ class TradeBox extends React.Component {
   }
 
   openTrade = async () => {
-    const { drizzle, drizzleState } = this.props;
+    const { drizzle } = this.props;
+    const drizzleState = drizzle.store.getState();
     const collateral = drizzle.contracts.Collateral;
     const dex = drizzle.contracts.DEX;
     collateral.methods.approve.cacheSend(
