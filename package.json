@@ -18,7 +18,7 @@
     "testrpc": "ganache-cli"
   },
   "dependencies": {
-    "web3": "^1.0.0-beta.37",
+    "web3": "^1.0.0-beta.43",
     "truffle": "^5.0.3",
     "drizzle": "^1.2.4",
     "bootstrap": "^4.2.1",

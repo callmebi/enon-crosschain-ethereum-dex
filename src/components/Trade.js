@@ -6,40 +6,32 @@ import './Trade.css';
 const TokenA = '0x7F6f1F236D748D3c8E07eC00a663E4F1474a2e04'
 const TokenB = '0x70fD8ed25a2d9c9C98e1e48a50bd3592491F8c77'
 
-async function makeOrder(web3, account, token, buy, sell, collateral) {
-    const data = web3.utils.toHex(JSON.stringify({
-        token: token,
-        account: account,
-        nonce: Math.random()
-    }));
-
-    const blockNumber = await web3.eth.getBlockNumber();
-    const deadline = blockNumber + 100;
-
-    const params = web3.eth.abi.encodeParameters(
-        ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
-        [data, buy, sell, collateral, deadline]
-    );
-
-    const signature = await web3.eth.sign(web3.utils.sha3(params), account);
-    return {params, signature};
-}
-
 class TradeBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       orders: [],
-      collateral: null,
+      pair: 0,
       buy: null,
       price: null,
-      account: null,
-      pair: null
+      account: "",
+      collateral: "",
     };
+    this.signOrder = this.signOrder.bind(this);
+    this.makeOrder = this.makeOrder.bind(this);
+    this.openTrade = this.openTrade.bind(this);
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const web3 = this.props.drizzle.web3;
+    this.interval = setInterval(() => this.fetchOrders(web3), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  fetchOrders(web3) {
     function decode(order) {
         const params = web3.eth.abi.decodeParameters(
           ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
@@ -53,24 +45,46 @@ class TradeBox extends React.Component {
     fetch('http://cdex-relay.herokuapp.com/')
       .then(res => res.json())
       .then(orders => orders.map(order => decode(order)))
-      .then(orders => this.setState({orders}));
+      .then(orders => this.setState({orders}))
+      .catch(console.log);
   }
 
-  makeOrder = async () => {
-    const { drizzle } = this.props;
-    const collateral = drizzle.contracts.Collateral;
-    const dex = drizzle.contracts.DEX;
+  async signOrder(token, buy, sell, collateral) {
+    const web3 = this.props.drizzle.web3;
+    const account = this.props.account;
 
-    const allowance = await collateral.methods.allowance(this.props.account, dex.address).call();
-    console.log(allowance);
+    const data = web3.utils.toHex(JSON.stringify({
+        token: token,
+        account: account,
+        nonce: web3.utils.randomHex(4)
+    }));
+
+    const blockNumber = await web3.eth.getBlockNumber();
+    const deadline = blockNumber + 1000;
+
+    const params = web3.eth.abi.encodeParameters(
+        ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
+        [data, buy, sell, collateral, deadline]
+    );
+    console.log('order params: '+[data, buy, sell, collateral, deadline]);
+    const paramsHash = web3.utils.sha3(params);
+    console.log('order hash: '+paramsHash);
+    const signature = await web3.eth.personal.sign(paramsHash, account);
+    console.log('order signature: '+signature);
+    return {params, signature};
+  }
+
+  async makeOrder() {
+    const { DEX, Collateral } = this.props.drizzle.contracts;
+    const account = this.props.account;
+
+    const allowance = Collateral.methods.allowance(account, DEX.address).call();
     if (allowance < this.state.collateral)
-      collateral.methods.approve.cacheSend(
-        dex.address, this.state.collateral, {from: this.props.account});
+      Collateral.methods.approve.cacheSend(
+        DEX.address, this.state.collateral, {from: account});
 
     const sell = this.state.buy * this.state.price;
-    const order = await makeOrder(
-        drizzle.web3,
-        this.props.account,
+    const signed = await this.signOrder(
         TokenA,
         this.state.buy.toString(),
         sell.toString(),
@@ -82,37 +96,32 @@ class TradeBox extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(order)
+      body: JSON.stringify(signed)
     });
   }
 
-  openTrade = async (maker) => {
-    const { drizzle } = this.props;
-    const collateral = drizzle.contracts.Collateral;
-    const dex = drizzle.contracts.DEX;
+  async openTrade(maker) {
+    const { DEX, Collateral } = this.props.drizzle.contracts;
+    const account = this.props.account;
 
     // Approve when need
-    const collateralBalance = await collateral.methods.balanceOf(this.props.account).call();
-    console.log('collateral balance: '+collateralBalance);
-    const allowance = await collateral.methods.allowance(this.props.account, dex.address).call();
-    console.log('collateral allowance: '+collateralBalance+' required: '+maker.collateral);
+    const allowance = Collateral.methods.allowance(account, DEX.address).call();
     if (allowance < maker.collateral)
-      collateral.methods.approve.cacheSend(dex.address, maker.collateral, {from: this.props.account});
+      Collateral.methods.approve.cacheSend(DEX.address, maker.collateral, {from: account});
 
-    const taker = await makeOrder(
-        drizzle.web3,
-        this.props.account,
+    console.log('maker params: '+maker.amount+' '+maker.price+' '+maker.collateral);
+    const taker = await this.signOrder(
         TokenB,
         (maker.amount / maker.price).toString(),
         maker.amount.toString(),
         maker.collateral.toString()
     );
-    dex.methods.openTrade.cacheSend(
+    DEX.methods.openTrade.cacheSend(
         maker.params,
         maker.signature,
         taker.params,
         taker.signature,
-        {from: this.props.account}
+        {from: account}
     );
   }
 
@@ -122,17 +131,21 @@ class TradeBox extends React.Component {
         <Tab eventKey='orders' title='OrderBook'>
           <Table striped bordered hover>
             <thead>
-              <th>#</th>
-              <th>Amount</th>
-              <th>Price</th>
-              <th>Action</th>
+              <tr>
+                <th>#</th>
+                <th>Amount</th>
+                <th>Price</th>
+                <th>Collateral</th>
+                <th>Action</th>
+              </tr>
             </thead>
             <tbody>
-              {this.state.orders.map(order =>
-              <tr>
-                <td>0</td>
+              {this.state.orders.map((order, index) =>
+              <tr key={index}>
+                <td>{index}</td>
                 <td>{order.amount}</td>
                 <td>{order.price}</td>
+                <td>{order.collateral}</td>
                 <td><Button onClick={() => this.openTrade(order)}>Buy</Button></td>
               </tr>
               )}
