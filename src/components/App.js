@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header.js';
 import Trade from './Trade.js';
-import { Alert, Container } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 
 class MetaMaskUnlocked extends React.Component {
   state = {
@@ -30,6 +30,7 @@ class MetaMaskUnlocked extends React.Component {
         </Alert>
         <Trade
           drizzle = {this.props.drizzle}
+          account = {this.state.drizzleState.accounts[0]}
         />
       </div>
     );

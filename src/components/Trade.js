@@ -6,9 +6,9 @@ import './Trade.css';
 const TokenA = '0x7F6f1F236D748D3c8E07eC00a663E4F1474a2e04'
 const TokenB = '0x70fD8ed25a2d9c9C98e1e48a50bd3592491F8c77'
 
-async function makeOrder(web3, account, buy, sell, collateral) {
+async function makeOrder(web3, account, token, buy, sell, collateral) {
     const data = web3.utils.toHex(JSON.stringify({
-        token: TokenA,
+        token: token,
         account: account,
         nonce: Math.random()
     }));
@@ -39,9 +39,9 @@ class TradeBox extends React.Component {
   }
 
   componentDidMount = () => {
-    const { drizzle } = this.props;
+    const web3 = this.props.drizzle.web3;
     function decode(order) {
-        const params = drizzle.web3.eth.abi.decodeParameters(
+        const params = web3.eth.abi.decodeParameters(
           ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
           order.params
         );
@@ -56,21 +56,22 @@ class TradeBox extends React.Component {
       .then(orders => this.setState({orders}));
   }
 
-  openTrade = async () => {
+  makeOrder = async () => {
     const { drizzle } = this.props;
-    const drizzleState = drizzle.store.getState();
     const collateral = drizzle.contracts.Collateral;
     const dex = drizzle.contracts.DEX;
-    const allowance = await collateral.methods.allowance(drizzleState.accounts[0], dex.address).call();
+
+    const allowance = await collateral.methods.allowance(this.props.account, dex.address).call();
     console.log(allowance);
     if (allowance < this.state.collateral)
       collateral.methods.approve.cacheSend(
-        dex.address, this.state.collateral, {from: drizzleState.accounts[0]});
+        dex.address, this.state.collateral, {from: this.props.account});
 
     const sell = this.state.buy * this.state.price;
     const order = await makeOrder(
         drizzle.web3,
-        drizzleState.accounts[0],
+        this.props.account,
+        TokenA,
         this.state.buy.toString(),
         sell.toString(),
         this.state.collateral.toString()
@@ -86,21 +87,22 @@ class TradeBox extends React.Component {
   }
 
   openTrade = async (maker) => {
-    const { drizzle, drizzleState } = this.props;
+    const { drizzle } = this.props;
     const collateral = drizzle.contracts.Collateral;
     const dex = drizzle.contracts.DEX;
 
     // Approve when need
-    const collateralBalance = await collateral.methods.balanceOf(drizzleState.accounts[0]).call();
+    const collateralBalance = await collateral.methods.balanceOf(this.props.account).call();
     console.log('collateral balance: '+collateralBalance);
-    const allowance = await collateral.methods.allowance(drizzleState.accounts[0], dex.address).call();
+    const allowance = await collateral.methods.allowance(this.props.account, dex.address).call();
     console.log('collateral allowance: '+collateralBalance+' required: '+maker.collateral);
     if (allowance < maker.collateral)
-      collateral.methods.approve.cacheSend(dex.address, maker.collateral, {from: drizzleState.accounts[0]});
+      collateral.methods.approve.cacheSend(dex.address, maker.collateral, {from: this.props.account});
 
     const taker = await makeOrder(
         drizzle.web3,
-        drizzleState.accounts[0],
+        this.props.account,
+        TokenB,
         (maker.amount / maker.price).toString(),
         maker.amount.toString(),
         maker.collateral.toString()
@@ -110,7 +112,7 @@ class TradeBox extends React.Component {
         maker.signature,
         taker.params,
         taker.signature,
-        {from: drizzleState.accounts[0]}
+        {from: this.props.account}
     );
   }
 
