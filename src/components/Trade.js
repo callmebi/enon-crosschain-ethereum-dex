@@ -1,4 +1,5 @@
 import React from 'react';
+import { NotificationManager } from 'react-notifications';
 import { Form, Col, Button, Table, Tabs, Tab } from 'react-bootstrap';
 
 import './Trade.css';
@@ -17,9 +18,24 @@ class TradeBox extends React.Component {
       account: "",
       collateral: "",
     };
+
     this.signOrder = this.signOrder.bind(this);
     this.makeOrder = this.makeOrder.bind(this);
     this.openTrade = this.openTrade.bind(this);
+
+    const DEX = this.props.drizzle.contracts.DEX;
+    DEX.events
+      .TradeOpened()
+      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Success opened'); })
+      .on('error', (error) => console.log(error));
+    DEX.events
+      .TradeClosed()
+      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Success closed'); })
+      .on('error', (error) => console.log(error));
+    DEX.events
+      .TransferConfirmed()
+      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Transfer confirmed'); })
+      .on('error', (error) => console.log(error));
   }
 
   componentDidMount() {
@@ -54,17 +70,17 @@ class TradeBox extends React.Component {
     const account = this.props.account;
 
     const data = web3.utils.toHex(JSON.stringify({
-        token: token,
-        account: account,
-        nonce: web3.utils.randomHex(4)
+      token: token,
+      account: account,
+      nonce: web3.utils.randomHex(4)
     }));
 
     const blockNumber = await web3.eth.getBlockNumber();
     const deadline = blockNumber + 1000;
 
     const params = web3.eth.abi.encodeParameters(
-        ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
-        [data, buy, sell, collateral, deadline]
+      ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
+      [data, buy, sell, collateral, deadline]
     );
     console.log('order params: '+[data, buy, sell, collateral, deadline]);
     const paramsHash = web3.utils.sha3(params);
@@ -78,17 +94,16 @@ class TradeBox extends React.Component {
     const { DEX, Collateral } = this.props.drizzle.contracts;
     const account = this.props.account;
 
-    const allowance = Collateral.methods.allowance(account, DEX.address).call();
+    const allowance = await Collateral.methods.allowance(account, DEX.address).call();
     if (allowance < this.state.collateral)
-      Collateral.methods.approve.cacheSend(
-        DEX.address, this.state.collateral, {from: account});
+      await Collateral.methods.approve.cacheSend(DEX.address, this.state.collateral, {from: account});
 
     const sell = this.state.buy * this.state.price;
     const signed = await this.signOrder(
-        TokenA,
-        this.state.buy.toString(),
-        sell.toString(),
-        this.state.collateral.toString()
+      TokenA,
+      this.state.buy.toString(),
+      sell.toString(),
+      this.state.collateral.toString()
     );
     fetch('http://cdex-relay.herokuapp.com/', {
       method: 'PUT',
@@ -105,23 +120,23 @@ class TradeBox extends React.Component {
     const account = this.props.account;
 
     // Approve when need
-    const allowance = Collateral.methods.allowance(account, DEX.address).call();
+    const allowance = await Collateral.methods.allowance(account, DEX.address).call();
     if (allowance < maker.collateral)
-      Collateral.methods.approve.cacheSend(DEX.address, maker.collateral, {from: account});
+      await Collateral.methods.approve.cacheSend(DEX.address, maker.collateral, {from: account});
 
     console.log('maker params: '+maker.amount+' '+maker.price+' '+maker.collateral);
     const taker = await this.signOrder(
-        TokenB,
-        (maker.amount / maker.price).toString(),
-        maker.amount.toString(),
-        maker.collateral.toString()
+      TokenB,
+      (maker.amount / maker.price).toString(),
+      maker.amount.toString(),
+      maker.collateral.toString()
     );
     DEX.methods.openTrade.cacheSend(
-        maker.params,
-        maker.signature,
-        taker.params,
-        taker.signature,
-        {from: account}
+      maker.params,
+      maker.signature,
+      taker.params,
+      taker.signature,
+      {from: account}
     );
   }
 

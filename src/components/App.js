@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header.js';
 import Trade from './Trade.js';
 import { Alert } from 'react-bootstrap';
+import { NotificationContainer } from 'react-notifications';
 
 class MetaMaskUnlocked extends React.Component {
   state = {
@@ -107,6 +108,7 @@ class App extends React.Component {
             drizzle = {this.props.drizzle}
           />
         </div>
+        <NotificationContainer/>
       </div>
     );
   }
