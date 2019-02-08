@@ -50,8 +50,10 @@ class TradeBox extends React.Component {
           ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
           order.params
         );
-        order.amount = params[1];
-        order.price = params[2] / params[1];
+        order.buy = params[1];
+        order.sell = params[2];
+        order.amount = order.buy / 10**8;
+        order.price = order.sell / 10**18 / order.amount;
         order.collateral = params[3];
         return order;
     }
@@ -62,13 +64,13 @@ class TradeBox extends React.Component {
       .catch(console.log);
   }
 
-  async signOrder(mode, buy, sell, collateral) {
+  async signOrder(mode, recipient, buy, sell, collateral) {
     const web3 = this.props.drizzle.web3;
     const account = this.props.account;
 
     const data = web3.utils.toHex(JSON.stringify({
       mode: mode,
-      account: account,
+      account: recipient,
       nonce: web3.utils.randomHex(4)
     }));
 
@@ -90,17 +92,19 @@ class TradeBox extends React.Component {
   async makeOrder() {
     const { DEX, Collateral } = this.props.drizzle.contracts;
     const account = this.props.account;
+    const collateral = this.state.collateral * 10**18;
 
     const allowance = await Collateral.methods.allowance(account, DEX.address).call();
-    if (allowance < this.state.collateral)
-      await Collateral.methods.approve.cacheSend(DEX.address, this.state.collateral, {from: account});
+    if (allowance < collateral)
+      await Collateral.methods.approve.cacheSend(DEX.address, collateral, {from: account});
 
     const sell = this.state.buy * this.state.price;
     const signed = await this.signOrder(
       "BTC",
-      this.state.buy.toString(),
-      sell.toString(),
-      this.state.collateral.toString(),
+      this.state.account,
+      (this.state.buy * 10**8).toString(),
+      (sell * 10**18).toString(),
+      collateral.toString()
     );
     fetch('http://cdex-relay.herokuapp.com/', {
       method: 'PUT',
@@ -124,8 +128,9 @@ class TradeBox extends React.Component {
     console.log('maker params: '+maker.amount+' '+maker.price+' '+maker.collateral);
     const taker = await this.signOrder(
       "ETH",
-      (maker.amount / maker.price).toString(),
-      maker.amount.toString(),
+      account,
+      maker.sell.toString(),
+      maker.buy.toString(),
       maker.collateral.toString()
     );
     DEX.methods.openTrade.cacheSend(
@@ -157,8 +162,8 @@ class TradeBox extends React.Component {
                 <td>{index}</td>
                 <td>{order.amount}</td>
                 <td>{order.price}</td>
-                <td>{order.collateral}</td>
-                <td><Button onClick={() => this.openTrade(order)}>Buy</Button></td>
+                <td>{order.collateral / 10**18}</td>
+                <td><Button onClick={() => this.openTrade(order)}>Sell</Button></td>
               </tr>
               )}
             </tbody>
@@ -194,7 +199,7 @@ class TradeBox extends React.Component {
             </Form.Row>
             <Form.Row>
               <Form.Group as={Col}>
-                <Form.Control type='text' placeholder='0x...'
+                <Form.Control type='text' placeholder='38yZJPKtAFG8kr3ErvwmSMSTZWeTnbj5E7'
                   value={this.state.account}
                   onChange={e => this.setState({ account: e.target.value })}/>
                 <Form.Text className='text-muted'>
@@ -212,7 +217,7 @@ class TradeBox extends React.Component {
                 </Form.Text>
               </Form.Group>
             </Form.Row>
-            <Button onClick={this.makeOrder}>Sell</Button>
+            <Button onClick={this.makeOrder}>Buy</Button>
           </Form>
         </Tab>
       </Tabs>
