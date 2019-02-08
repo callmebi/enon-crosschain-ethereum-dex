@@ -30,7 +30,7 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
             else if (req.trader == taker)
                 dex.confirmTransfer(req.tradeId, maker);
         } else if (open + dex.tradingBlocks() > block.number) {
-            checkBalance(req.tradeId, req.trader, 60);
+            checkBalance(req.tradeId, req.trader, 300);
         }
     }
 

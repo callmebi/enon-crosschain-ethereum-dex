@@ -4,7 +4,7 @@ const Collateral = artifacts.require('Collateral');
 const DEX = artifacts.require('DEX');
 
 module.exports = (deployer, network, accounts) => {
-  const tradingBlocks = 2;
+  const tradingBlocks = 1000;
   const minConfirmations = 1;
   const oracleAccount = accounts[4];
 
