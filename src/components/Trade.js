@@ -4,9 +4,6 @@ import { Form, Col, Button, Table, Tabs, Tab } from 'react-bootstrap';
 
 import './Trade.css';
 
-const TokenA = '0x7F6f1F236D748D3c8E07eC00a663E4F1474a2e04'
-const TokenB = '0x70fD8ed25a2d9c9C98e1e48a50bd3592491F8c77'
-
 class TradeBox extends React.Component {
   constructor(props) {
     super(props);
@@ -65,12 +62,12 @@ class TradeBox extends React.Component {
       .catch(console.log);
   }
 
-  async signOrder(token, buy, sell, collateral) {
+  async signOrder(mode, buy, sell, collateral) {
     const web3 = this.props.drizzle.web3;
     const account = this.props.account;
 
     const data = web3.utils.toHex(JSON.stringify({
-      token: token,
+      mode: mode,
       account: account,
       nonce: web3.utils.randomHex(4)
     }));
@@ -100,10 +97,10 @@ class TradeBox extends React.Component {
 
     const sell = this.state.buy * this.state.price;
     const signed = await this.signOrder(
-      TokenA,
+      "BTC",
       this.state.buy.toString(),
       sell.toString(),
-      this.state.collateral.toString()
+      this.state.collateral.toString(),
     );
     fetch('http://cdex-relay.herokuapp.com/', {
       method: 'PUT',
@@ -126,7 +123,7 @@ class TradeBox extends React.Component {
 
     console.log('maker params: '+maker.amount+' '+maker.price+' '+maker.collateral);
     const taker = await this.signOrder(
-      TokenB,
+      "ETH",
       (maker.amount / maker.price).toString(),
       maker.amount.toString(),
       maker.collateral.toString()
@@ -172,9 +169,6 @@ class TradeBox extends React.Component {
             <Form.Row>
               <Form.Group as={Col} md='3'>
                 <Form.Control as='select' onChange={e => this.setState({ pair: e.target.value })}>
-                  <option>TokenA / TokenB</option>
-                  <option>TokenB / TokenA</option>
-                  <option>ETH / BTC</option>
                   <option>BTC / ETH</option>
                 </Form.Control>
                 <Form.Text className='text-muted'>
