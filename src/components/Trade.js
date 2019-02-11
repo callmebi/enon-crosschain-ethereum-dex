@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-responsive-modal';
 import { NotificationManager } from 'react-notifications';
 import { Form, Col, Button, Table, Tabs, Tab } from 'react-bootstrap';
 
@@ -14,6 +15,8 @@ class TradeBox extends React.Component {
       price: null,
       account: "",
       collateral: "",
+      tradeId: null,
+      trade: {},
     };
 
     this.signOrder = this.signOrder.bind(this);
@@ -23,7 +26,10 @@ class TradeBox extends React.Component {
     const DEX = this.props.drizzle.contracts.DEX;
     DEX.events
       .TradeOpened()
-      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Success opened'); })
+      .on('data', (e) => {
+          NotificationManager.success('Trade', 'Success opened');
+          this.loadTrade(e.returnValues.id);
+      })
       .on('error', (error) => console.log(error));
     DEX.events
       .TradeClosed()
@@ -31,7 +37,11 @@ class TradeBox extends React.Component {
       .on('error', (error) => console.log(error));
     DEX.events
       .TransferConfirmed()
-      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Transfer confirmed'); })
+      .on('data', (event) => {
+          const tradeId = event.returnValues.id;
+          const oracle = event.returnValues.oracle;
+          NotificationManager.success('Trade ' + tradeId, 'Transfer confirmed by ' + oracle);
+      })
       .on('error', (error) => console.log(error));
   }
 
@@ -133,7 +143,7 @@ class TradeBox extends React.Component {
       maker.buy.toString(),
       maker.collateral.toString()
     );
-    DEX.methods.openTrade.cacheSend(
+    const stackId = DEX.methods.openTrade.cacheSend(
       maker.params,
       maker.signature,
       taker.params,
@@ -142,10 +152,56 @@ class TradeBox extends React.Component {
     );
   }
 
+  loadTrade(tradeId) {
+    if (!tradeId) return null;
+    const account = this.props.account;
+
+    const { DEX } = this.props.drizzle.contracts;
+    let state = this.state;
+    DEX.methods.trades(tradeId).call().then(trade => {
+      if (account == trade.maker) {
+        DEX.methods.valueToBuy(tradeId, trade.taker).call().then(sell =>
+          DEX.methods.extraData(tradeId, trade.taker).call().then(data => {
+            state.trade = trade;
+            state.trade.valueToSell = sell;
+            state.trade.recipient = JSON.parse(new Buffer(data.substr(2), 'hex'))['account'];
+            state.tradeId = tradeId;
+          })
+        )
+      } else if (account == trade.taker) {
+        DEX.methods.valueToBuy(tradeId, trade.maker).call().then(sell =>
+          DEX.methods.extraData(tradeId, trade.maker).call().then(data => {
+            state.trade = trade;
+            state.trade.valueToSell = sell;
+            state.trade.recipient = JSON.parse(new Buffer(data.substr(2), 'hex'))['account'];
+            state.tradeId = tradeId;
+          })
+        )
+      }
+    });
+  }
+
+  closeTrade(tradeId) {
+    const { DEX } = this.props.drizzle.contracts;
+    const account = this.props.account;
+    DEX.methods.closeTrade.cacheSend(tradeId, {from: account});
+  }
+
   render() {
     return (
       <Tabs defaultActiveKey='orders'>
         <Tab eventKey='orders' title='OrderBook'>
+          <Modal open={this.state.tradeId != null} onClose={() => this.setState({tradeId: null})} center>
+            <div>
+              <h2>Trade {this.state.tradeId}</h2>
+              <p>Maker: {this.state.trade.maker}</p>
+              <p>Taker: {this.state.trade.taker}</p>
+              <p>Collateral: {this.state.trade.collateralValue / 10**18}</p>
+              <hr/>
+              <p>Send <b>{this.state.trade.valueToSell}</b> to <b>{this.state.trade.recipient}</b></p>
+              <Button onClick={() => this.closeTrade(this.state.tradeId)}>Close</Button>
+            </div>
+          </Modal>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -224,5 +280,6 @@ class TradeBox extends React.Component {
     );
   }
 }
+
 
 export default TradeBox;
