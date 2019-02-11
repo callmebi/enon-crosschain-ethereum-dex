@@ -51,12 +51,12 @@ contract OraclizeOracle is AbstractOracle, usingOraclize {
         bytes32 qid;
         if (_wait > 0) {
             qid = oraclize_query(_wait, "computation", [
-                "Qmd74LG8ApsCuYZribR4VUpZNN4ZXaW8247mowyHRCmtEy",
+                "QmfNoScMZnRWZP7Zhk587qYTgc4dJ5F21uz5353gvg7Vxz",
                 string(dex.extraData(_tradeId, _trader))
             ]);
         } else {
             qid = oraclize_query("computation", [
-                "Qmd74LG8ApsCuYZribR4VUpZNN4ZXaW8247mowyHRCmtEy",
+                "QmfNoScMZnRWZP7Zhk587qYTgc4dJ5F21uz5353gvg7Vxz",
                 string(dex.extraData(_tradeId, _trader))
             ]);
         }

@@ -1232,12 +1232,12 @@
         }
       },
       "links": {},
-      "address": "0x3d3FA9b4EA6032872117ade7bDE679C2f61BBD0A",
-      "transactionHash": "0xc32444584c827cc80b676657f98cab21d4daec65e29fed7930bc8e6e932e7993"
+      "address": "0x748dE33EC56C310dF57FdbF00a2B6E745d212f6D",
+      "transactionHash": "0x50c14635dad45673b54213cfad8742176bb2fda3363ef178463e58a503e9e81c"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-08T07:49:09.392Z",
+  "updatedAt": "2019-02-11T22:40:09.613Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {
