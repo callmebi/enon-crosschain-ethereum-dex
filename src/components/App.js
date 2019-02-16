@@ -38,14 +38,10 @@ class MetaMaskUnlocked extends React.Component {
   }
 }
 
-const loadingInformerStyle = {
-  margin: '0px',
-};
-
 class MetaMaskLocked extends React.Component {
   render() {
     return (
-      <div style={loadingInformerStyle}>
+      <div style={{margin: '0px'}}>
         <Alert variant="info">
           <p>Connecting to network. Please unlock MetaMask.</p>
         </Alert>
@@ -91,11 +87,6 @@ class ContentContainer extends React.Component {
   }
 }
 
-const contentContainerStyle = {
-  margin: '40px',
-  marginTop: '88px',
-};
-
 class App extends React.Component {
   render() {
     return (
@@ -103,7 +94,7 @@ class App extends React.Component {
         <div>
           <Header appName="CDEX"/>
         </div>
-        <div style={contentContainerStyle}>
+        <div style={{margin: '40px', marginTop: '88px'}}>
           <ContentContainer
             drizzle = {this.props.drizzle}
           />
