@@ -1,0 +1,4447 @@
+{
+  "contractName": "IExchange",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "TradeStart",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "TradePartial",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "TradeFinish",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "name": "oracle",
+          "type": "address"
+        }
+      ],
+      "name": "TakerTransferConfirmation",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "TakerTransferConfirmed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "name": "oracle",
+          "type": "address"
+        }
+      ],
+      "name": "MakerTransferConfirmation",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "MakerTransferConfirmed",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "uint256"
+        }
+      ],
+      "name": "getTrade",
+      "outputs": [
+        {
+          "name": "market",
+          "type": "bytes32"
+        },
+        {
+          "name": "deal",
+          "type": "bytes32"
+        },
+        {
+          "name": "maker",
+          "type": "address"
+        },
+        {
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "name": "collateral",
+          "type": "uint256"
+        },
+        {
+          "name": "makerTransferConfirmations",
+          "type": "uint256"
+        },
+        {
+          "name": "takerTransferConfirmations",
+          "type": "uint256"
+        },
+        {
+          "name": "startBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "partialBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "finishBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "makerExtra",
+          "type": "bytes"
+        },
+        {
+          "name": "takerExtra",
+          "type": "bytes"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getMarket",
+      "outputs": [
+        {
+          "name": "makerTimeout",
+          "type": "uint256"
+        },
+        {
+          "name": "takerTimeout",
+          "type": "uint256"
+        },
+        {
+          "name": "oracles",
+          "type": "address[]"
+        },
+        {
+          "name": "minimalConfirmations",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_makerTimeout",
+          "type": "uint256"
+        },
+        {
+          "name": "_takerTimeout",
+          "type": "uint256"
+        },
+        {
+          "name": "_oracles",
+          "type": "address[]"
+        },
+        {
+          "name": "_minimalConfirmations",
+          "type": "uint256"
+        }
+      ],
+      "name": "addMarket",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "makerOrder",
+          "type": "bytes"
+        },
+        {
+          "name": "makerSignature",
+          "type": "bytes"
+        },
+        {
+          "name": "takerOrder",
+          "type": "bytes"
+        },
+        {
+          "name": "takerSignature",
+          "type": "bytes"
+        }
+      ],
+      "name": "startTrade",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "uint256"
+        }
+      ],
+      "name": "confirmTakerTransfer",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "uint256"
+        }
+      ],
+      "name": "confirmMakerTransfer",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "uint256"
+        }
+      ],
+      "name": "finishTrade",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/**\n * @title Interface of exchange smart contract.\n */\n\npragma solidity >= 0.5.0;\n\nimport '../misc/Set.sol';\n\ninterface IExchange {\n    /**\n     * @dev Trade open state notification. \n     */\n    event TradeStart(uint256 indexed id);\n\n    /**\n     * @dev Trade partial state notification. \n     */\n    event TradePartial(uint256 indexed id);\n\n    /**\n     * @dev Trade finish state notification. \n     */\n    event TradeFinish(uint256 indexed id);\n\n    /**\n     * @dev Notify for every transfer taker confirmation from oracle. \n     */\n    event TakerTransferConfirmation(\n        uint256 indexed id,\n        address indexed oracle\n    );\n\n    /**\n     * @dev Notify for every confirmed taker transfers. \n     */\n    event TakerTransferConfirmed(uint256 indexed id);\n\n    /**\n     * @dev Notify for every maker transfer confirmation from oracle. \n     */\n    event MakerTransferConfirmation(\n        uint256 indexed id,\n        address indexed oracle\n    );\n\n    /**\n     * @dev Notify for every confirmed maker transfers. \n     */\n    event MakerTransferConfirmed(uint256 indexed id);\n\n    enum TradeState {\n        Start,\n        Partial,\n        Release,\n        Penalty,\n        Finish\n    }\n\n    struct Trade {\n        // Market id: sha3(timeouts, oracles, min confirmations) \n        bytes32 market;\n\n        // Deal id: sha3(makret id, sell value, buy value)\n        bytes32 deal;\n\n        // Collateral params\n        address maker;\n        address taker;\n        uint256 collateral;\n\n        // Trade oracles\n        Set.Address makerTransferConfirmations;\n        Set.Address takerTransferConfirmations;\n\n        // Trade state\n        TradeState state;\n        uint256 startBlock;\n        uint256 partialBlock;\n        uint256 finishBlock;\n\n        // Trade extra params (used by oracle to check trade off-chain)\n        bytes makerExtra;\n        bytes takerExtra;\n    }\n\n    struct Market {\n        // Timeout params\n        uint256 makerTimeout;\n        uint256 takerTimeout;\n\n        // Trade oracles\n        Set.Address oracles;\n        uint256 minimalConfirmations;\n    }\n\n    /**\n     * @dev Get trade summary.\n     * @param _id Trade identifier.\n     * @return Trade params.\n     */\n    function getTrade(\n        uint256 _id\n    ) external view returns (\n        bytes32 market,\n        bytes32 deal,\n        address maker,\n        address taker,\n        uint256 collateral,\n        uint256 makerTransferConfirmations,\n        uint256 takerTransferConfirmations,\n        uint256 startBlock,\n        uint256 partialBlock,\n        uint256 finishBlock,\n        bytes memory makerExtra,\n        bytes memory takerExtra\n    );\n\n    /**\n     * @dev Get market summary.\n     * @param _id Market identifier.\n     * @return Market params.\n     */\n    function getMarket(\n        bytes32 _id\n    ) external view returns (\n        uint256 makerTimeout,\n        uint256 takerTimeout,\n        address[] memory oracles,\n        uint256 minimalConfirmations\n    );\n\n    /**\n     * @dev Add new market descriptor.\n     * @param _makerTimeout Maker timeout in blocks.\n     * @param _takerTimeout Taker timeout in blocks.\n     * @param _oracles Trade oracle list.\n     * @param _minimalConfirmations Minimal confirmation for trade.\n     * @return Market id.\n     */\n    function addMarket(\n        uint256 _makerTimeout,\n        uint256 _takerTimeout,\n        address[] calldata _oracles,\n        uint256 _minimalConfirmations\n    ) external returns (\n        bytes32 id\n    );\n\n    /**\n     * @dev Start trade by matching two orders.\n     * @param makerOrder ABI-encoded maker order\n     * @param makerSignature Ethereum signature of maker order\n     * @param takerOrder ABI-encoded taker order\n     * @param takerSignature Ethereum signature of taker order\n     * @return started trade identifier\n     * @notice orders should not be used befor\n     */\n    function startTrade(\n        bytes calldata makerOrder,\n        bytes calldata makerSignature,\n        bytes calldata takerOrder,\n        bytes calldata takerSignature\n    ) external returns (\n        uint256 id\n    );\n\n    /**\n     * @dev Confirm taker transfer for trade.\n     * @param _id trade identifier \n     * @notice for trade oracles call only\n     */\n    function confirmTakerTransfer(\n        uint256 _id\n    ) external returns (\n        bool success\n    );\n\n    /**\n     * @dev Confirm maker transfer for trade.\n     * @param _id trade identifier \n     * @notice for trade oracles call only\n     */\n    function confirmMakerTransfer(\n        uint256 _id\n    ) external returns (\n        bool success\n    );\n\n    /**\n     * @dev Finish trade and pay refund when transfer isn't confirmed.\n     * @param _id trade identifier\n     * @return true when success closed\n     */\n    function finishTrade(\n        uint256 _id\n    ) external returns (\n        bool success\n    );\n}\n",
+  "sourcePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+  "ast": {
+    "absolutePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+    "exportedSymbols": {
+      "IExchange": [
+        1179
+      ]
+    },
+    "id": 1180,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1012,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "57:25:3"
+      },
+      {
+        "absolutePath": "/home/akru/devel/cdex/contracts/misc/Set.sol",
+        "file": "../misc/Set.sol",
+        "id": 1013,
+        "nodeType": "ImportDirective",
+        "scope": 1180,
+        "sourceUnit": 1290,
+        "src": "84:25:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1179,
+        "linearizedBaseContracts": [
+          1179
+        ],
+        "name": "IExchange",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": "@dev Trade open state notification. ",
+            "id": 1017,
+            "name": "TradeStart",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1016,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1015,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1017,
+                  "src": "214:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1014,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "214:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "213:20:3"
+            },
+            "src": "197:37:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Trade partial state notification. ",
+            "id": 1021,
+            "name": "TradePartial",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1020,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1019,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1021,
+                  "src": "322:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1018,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "322:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "321:20:3"
+            },
+            "src": "303:39:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Trade finish state notification. ",
+            "id": 1025,
+            "name": "TradeFinish",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1024,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1023,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "428:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1022,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "428:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "427:20:3"
+            },
+            "src": "410:38:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every transfer taker confirmation from oracle. ",
+            "id": 1031,
+            "name": "TakerTransferConfirmation",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1030,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1027,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1031,
+                  "src": "582:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1026,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "582:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1029,
+                  "indexed": true,
+                  "name": "oracle",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1031,
+                  "src": "610:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1028,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "610:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "572:66:3"
+            },
+            "src": "541:98:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every confirmed taker transfers. ",
+            "id": 1035,
+            "name": "TakerTransferConfirmed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1034,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1033,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "747:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1032,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "747:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "746:20:3"
+            },
+            "src": "718:49:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every maker transfer confirmation from oracle. ",
+            "id": 1041,
+            "name": "MakerTransferConfirmation",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1040,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1037,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1041,
+                  "src": "901:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1036,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "901:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1039,
+                  "indexed": true,
+                  "name": "oracle",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1041,
+                  "src": "929:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1038,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "929:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "891:66:3"
+            },
+            "src": "860:98:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every confirmed maker transfers. ",
+            "id": 1045,
+            "name": "MakerTransferConfirmed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1044,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1043,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1045,
+                  "src": "1066:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1042,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1066:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1065:20:3"
+            },
+            "src": "1037:49:3"
+          },
+          {
+            "canonicalName": "IExchange.TradeState",
+            "id": 1051,
+            "members": [
+              {
+                "id": 1046,
+                "name": "Start",
+                "nodeType": "EnumValue",
+                "src": "1118:5:3"
+              },
+              {
+                "id": 1047,
+                "name": "Partial",
+                "nodeType": "EnumValue",
+                "src": "1133:7:3"
+              },
+              {
+                "id": 1048,
+                "name": "Release",
+                "nodeType": "EnumValue",
+                "src": "1150:7:3"
+              },
+              {
+                "id": 1049,
+                "name": "Penalty",
+                "nodeType": "EnumValue",
+                "src": "1167:7:3"
+              },
+              {
+                "id": 1050,
+                "name": "Finish",
+                "nodeType": "EnumValue",
+                "src": "1184:6:3"
+              }
+            ],
+            "name": "TradeState",
+            "nodeType": "EnumDefinition",
+            "src": "1092:104:3"
+          },
+          {
+            "canonicalName": "IExchange.Trade",
+            "id": 1078,
+            "members": [
+              {
+                "constant": false,
+                "id": 1053,
+                "name": "market",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1291:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 1052,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1291:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1055,
+                "name": "deal",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1375:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 1054,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1375:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1057,
+                "name": "maker",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1427:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1056,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1427:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1059,
+                "name": "taker",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1450:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1058,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1450:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1061,
+                "name": "collateral",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1473:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1060,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1473:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1063,
+                "name": "makerTransferConfirmations",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1527:38:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                  "typeString": "struct Set.Address"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1062,
+                  "name": "Set.Address",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1201,
+                  "src": "1527:11:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                    "typeString": "struct Set.Address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1065,
+                "name": "takerTransferConfirmations",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1575:38:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                  "typeString": "struct Set.Address"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1064,
+                  "name": "Set.Address",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1201,
+                  "src": "1575:11:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                    "typeString": "struct Set.Address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1067,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1647:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_TradeState_$1051",
+                  "typeString": "enum IExchange.TradeState"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1066,
+                  "name": "TradeState",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1051,
+                  "src": "1647:10:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_TradeState_$1051",
+                    "typeString": "enum IExchange.TradeState"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1069,
+                "name": "startBlock",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1673:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1068,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1673:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1071,
+                "name": "partialBlock",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1701:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1070,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1701:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1073,
+                "name": "finishBlock",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1731:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1072,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1731:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1075,
+                "name": "makerExtra",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1833:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1074,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1833:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1077,
+                "name": "takerExtra",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1859:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1076,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1859:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Trade",
+            "nodeType": "StructDefinition",
+            "scope": 1179,
+            "src": "1202:680:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IExchange.Market",
+            "id": 1087,
+            "members": [
+              {
+                "constant": false,
+                "id": 1080,
+                "name": "makerTimeout",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "1938:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1079,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1938:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1082,
+                "name": "takerTimeout",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "1968:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1081,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1968:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1084,
+                "name": "oracles",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "2024:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                  "typeString": "struct Set.Address"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1083,
+                  "name": "Set.Address",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1201,
+                  "src": "2024:11:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                    "typeString": "struct Set.Address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1086,
+                "name": "minimalConfirmations",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "2053:28:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1085,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2053:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Market",
+            "nodeType": "StructDefinition",
+            "scope": 1179,
+            "src": "1888:200:3",
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Get trade summary.\n@param _id Trade identifier.\n@return Trade params.",
+            "id": 1116,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1090,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1089,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2233:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1088,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2233:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2223:27:3"
+            },
+            "returnParameters": {
+              "id": 1115,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1092,
+                  "name": "market",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2283:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1091,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2283:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1094,
+                  "name": "deal",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2307:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1093,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2307:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1096,
+                  "name": "maker",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2329:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1095,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2329:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1098,
+                  "name": "taker",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2352:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1097,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2352:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1100,
+                  "name": "collateral",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2375:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1099,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2375:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1102,
+                  "name": "makerTransferConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2403:34:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1101,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2403:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1104,
+                  "name": "takerTransferConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2447:34:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1103,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2447:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1106,
+                  "name": "startBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2491:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1105,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2491:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1108,
+                  "name": "partialBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2519:20:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1107,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2519:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1110,
+                  "name": "finishBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2549:19:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1109,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2549:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1112,
+                  "name": "makerExtra",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2578:23:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1111,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2578:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1114,
+                  "name": "takerExtra",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2611:23:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1113,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2611:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2273:367:3"
+            },
+            "scope": 1179,
+            "src": "2206:435:3",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Get market summary.\n@param _id Market identifier.\n@return Market params.",
+            "id": 1130,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getMarket",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1119,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1118,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2790:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1117,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2790:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2780:27:3"
+            },
+            "returnParameters": {
+              "id": 1129,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1121,
+                  "name": "makerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2840:20:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1120,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2840:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1123,
+                  "name": "takerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2870:20:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1122,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2870:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1126,
+                  "name": "oracles",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2900:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1124,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2900:7:3",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 1125,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2900:9:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1128,
+                  "name": "minimalConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2934:28:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1127,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2934:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2830:138:3"
+            },
+            "scope": 1179,
+            "src": "2762:207:3",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Add new market descriptor.\n@param _makerTimeout Maker timeout in blocks.\n@param _takerTimeout Taker timeout in blocks.\n@param _oracles Trade oracle list.\n@param _minimalConfirmations Minimal confirmation for trade.\n@return Market id.",
+            "id": 1144,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addMarket",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1140,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1132,
+                  "name": "_makerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3300:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1131,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3300:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1134,
+                  "name": "_takerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3331:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1133,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3331:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1137,
+                  "name": "_oracles",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3362:27:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1135,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3362:7:3",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 1136,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3362:9:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1139,
+                  "name": "_minimalConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3399:29:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1138,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3399:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3290:144:3"
+            },
+            "returnParameters": {
+              "id": 1143,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1142,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3462:10:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1141,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3462:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3452:26:3"
+            },
+            "scope": 1179,
+            "src": "3272:207:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Start trade by matching two orders.\n@param makerOrder ABI-encoded maker order\n@param makerSignature Ethereum signature of maker order\n@param takerOrder ABI-encoded taker order\n@param takerSignature Ethereum signature of taker order\n@return started trade identifier\n@notice orders should not be used befor",
+            "id": 1157,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "startTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1153,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1146,
+                  "name": "makerOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3889:25:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1145,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3889:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1148,
+                  "name": "makerSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3924:29:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1147,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3924:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1150,
+                  "name": "takerOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3963:25:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1149,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3963:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1152,
+                  "name": "takerSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3998:29:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1151,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3998:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3879:154:3"
+            },
+            "returnParameters": {
+              "id": 1156,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1155,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "4061:10:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1154,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4061:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4051:26:3"
+            },
+            "scope": 1179,
+            "src": "3860:218:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Confirm taker transfer for trade.\n@param _id trade identifier \n@notice for trade oracles call only",
+            "id": 1164,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "confirmTakerTransfer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1160,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1159,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1164,
+                  "src": "4264:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1158,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4264:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4254:27:3"
+            },
+            "returnParameters": {
+              "id": 1163,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1162,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1164,
+                  "src": "4309:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1161,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4309:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4299:28:3"
+            },
+            "scope": 1179,
+            "src": "4225:103:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Confirm maker transfer for trade.\n@param _id trade identifier \n@notice for trade oracles call only",
+            "id": 1171,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "confirmMakerTransfer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1167,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1166,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1171,
+                  "src": "4514:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1165,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4514:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4504:27:3"
+            },
+            "returnParameters": {
+              "id": 1170,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1169,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1171,
+                  "src": "4559:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1168,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4559:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4549:28:3"
+            },
+            "scope": 1179,
+            "src": "4475:103:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Finish trade and pay refund when transfer isn't confirmed.\n@param _id trade identifier\n@return true when success closed",
+            "id": 1178,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "finishTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1174,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1173,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1178,
+                  "src": "4776:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1172,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4776:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4766:27:3"
+            },
+            "returnParameters": {
+              "id": 1177,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1176,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1178,
+                  "src": "4821:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1175,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4821:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4811:28:3"
+            },
+            "scope": 1179,
+            "src": "4746:94:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1180,
+        "src": "111:4731:3"
+      }
+    ],
+    "src": "57:4786:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+    "exportedSymbols": {
+      "IExchange": [
+        1179
+      ]
+    },
+    "id": 1180,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1012,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "57:25:3"
+      },
+      {
+        "absolutePath": "/home/akru/devel/cdex/contracts/misc/Set.sol",
+        "file": "../misc/Set.sol",
+        "id": 1013,
+        "nodeType": "ImportDirective",
+        "scope": 1180,
+        "sourceUnit": 1290,
+        "src": "84:25:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1179,
+        "linearizedBaseContracts": [
+          1179
+        ],
+        "name": "IExchange",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": "@dev Trade open state notification. ",
+            "id": 1017,
+            "name": "TradeStart",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1016,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1015,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1017,
+                  "src": "214:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1014,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "214:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "213:20:3"
+            },
+            "src": "197:37:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Trade partial state notification. ",
+            "id": 1021,
+            "name": "TradePartial",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1020,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1019,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1021,
+                  "src": "322:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1018,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "322:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "321:20:3"
+            },
+            "src": "303:39:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Trade finish state notification. ",
+            "id": 1025,
+            "name": "TradeFinish",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1024,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1023,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "428:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1022,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "428:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "427:20:3"
+            },
+            "src": "410:38:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every transfer taker confirmation from oracle. ",
+            "id": 1031,
+            "name": "TakerTransferConfirmation",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1030,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1027,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1031,
+                  "src": "582:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1026,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "582:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1029,
+                  "indexed": true,
+                  "name": "oracle",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1031,
+                  "src": "610:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1028,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "610:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "572:66:3"
+            },
+            "src": "541:98:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every confirmed taker transfers. ",
+            "id": 1035,
+            "name": "TakerTransferConfirmed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1034,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1033,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1035,
+                  "src": "747:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1032,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "747:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "746:20:3"
+            },
+            "src": "718:49:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every maker transfer confirmation from oracle. ",
+            "id": 1041,
+            "name": "MakerTransferConfirmation",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1040,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1037,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1041,
+                  "src": "901:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1036,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "901:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1039,
+                  "indexed": true,
+                  "name": "oracle",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1041,
+                  "src": "929:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1038,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "929:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "891:66:3"
+            },
+            "src": "860:98:3"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev Notify for every confirmed maker transfers. ",
+            "id": 1045,
+            "name": "MakerTransferConfirmed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1044,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1043,
+                  "indexed": true,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1045,
+                  "src": "1066:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1042,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1066:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1065:20:3"
+            },
+            "src": "1037:49:3"
+          },
+          {
+            "canonicalName": "IExchange.TradeState",
+            "id": 1051,
+            "members": [
+              {
+                "id": 1046,
+                "name": "Start",
+                "nodeType": "EnumValue",
+                "src": "1118:5:3"
+              },
+              {
+                "id": 1047,
+                "name": "Partial",
+                "nodeType": "EnumValue",
+                "src": "1133:7:3"
+              },
+              {
+                "id": 1048,
+                "name": "Release",
+                "nodeType": "EnumValue",
+                "src": "1150:7:3"
+              },
+              {
+                "id": 1049,
+                "name": "Penalty",
+                "nodeType": "EnumValue",
+                "src": "1167:7:3"
+              },
+              {
+                "id": 1050,
+                "name": "Finish",
+                "nodeType": "EnumValue",
+                "src": "1184:6:3"
+              }
+            ],
+            "name": "TradeState",
+            "nodeType": "EnumDefinition",
+            "src": "1092:104:3"
+          },
+          {
+            "canonicalName": "IExchange.Trade",
+            "id": 1078,
+            "members": [
+              {
+                "constant": false,
+                "id": 1053,
+                "name": "market",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1291:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 1052,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1291:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1055,
+                "name": "deal",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1375:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 1054,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1375:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1057,
+                "name": "maker",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1427:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1056,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1427:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1059,
+                "name": "taker",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1450:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 1058,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1450:7:3",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1061,
+                "name": "collateral",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1473:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1060,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1473:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1063,
+                "name": "makerTransferConfirmations",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1527:38:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                  "typeString": "struct Set.Address"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1062,
+                  "name": "Set.Address",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1201,
+                  "src": "1527:11:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                    "typeString": "struct Set.Address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1065,
+                "name": "takerTransferConfirmations",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1575:38:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                  "typeString": "struct Set.Address"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1064,
+                  "name": "Set.Address",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1201,
+                  "src": "1575:11:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                    "typeString": "struct Set.Address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1067,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1647:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_TradeState_$1051",
+                  "typeString": "enum IExchange.TradeState"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1066,
+                  "name": "TradeState",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1051,
+                  "src": "1647:10:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_TradeState_$1051",
+                    "typeString": "enum IExchange.TradeState"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1069,
+                "name": "startBlock",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1673:18:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1068,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1673:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1071,
+                "name": "partialBlock",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1701:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1070,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1701:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1073,
+                "name": "finishBlock",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1731:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1072,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1731:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1075,
+                "name": "makerExtra",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1833:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1074,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1833:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1077,
+                "name": "takerExtra",
+                "nodeType": "VariableDeclaration",
+                "scope": 1078,
+                "src": "1859:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 1076,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1859:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Trade",
+            "nodeType": "StructDefinition",
+            "scope": 1179,
+            "src": "1202:680:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IExchange.Market",
+            "id": 1087,
+            "members": [
+              {
+                "constant": false,
+                "id": 1080,
+                "name": "makerTimeout",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "1938:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1079,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1938:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1082,
+                "name": "takerTimeout",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "1968:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1081,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1968:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1084,
+                "name": "oracles",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "2024:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                  "typeString": "struct Set.Address"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 1083,
+                  "name": "Set.Address",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 1201,
+                  "src": "2024:11:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Address_$1201_storage_ptr",
+                    "typeString": "struct Set.Address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1086,
+                "name": "minimalConfirmations",
+                "nodeType": "VariableDeclaration",
+                "scope": 1087,
+                "src": "2053:28:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1085,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2053:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Market",
+            "nodeType": "StructDefinition",
+            "scope": 1179,
+            "src": "1888:200:3",
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Get trade summary.\n@param _id Trade identifier.\n@return Trade params.",
+            "id": 1116,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1090,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1089,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2233:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1088,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2233:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2223:27:3"
+            },
+            "returnParameters": {
+              "id": 1115,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1092,
+                  "name": "market",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2283:14:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1091,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2283:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1094,
+                  "name": "deal",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2307:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1093,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2307:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1096,
+                  "name": "maker",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2329:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1095,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2329:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1098,
+                  "name": "taker",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2352:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1097,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2352:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1100,
+                  "name": "collateral",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2375:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1099,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2375:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1102,
+                  "name": "makerTransferConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2403:34:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1101,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2403:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1104,
+                  "name": "takerTransferConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2447:34:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1103,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2447:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1106,
+                  "name": "startBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2491:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1105,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2491:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1108,
+                  "name": "partialBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2519:20:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1107,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2519:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1110,
+                  "name": "finishBlock",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2549:19:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1109,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2549:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1112,
+                  "name": "makerExtra",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2578:23:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1111,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2578:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1114,
+                  "name": "takerExtra",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1116,
+                  "src": "2611:23:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1113,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2611:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2273:367:3"
+            },
+            "scope": 1179,
+            "src": "2206:435:3",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Get market summary.\n@param _id Market identifier.\n@return Market params.",
+            "id": 1130,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getMarket",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1119,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1118,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2790:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1117,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2790:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2780:27:3"
+            },
+            "returnParameters": {
+              "id": 1129,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1121,
+                  "name": "makerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2840:20:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1120,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2840:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1123,
+                  "name": "takerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2870:20:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1122,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2870:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1126,
+                  "name": "oracles",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2900:24:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1124,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2900:7:3",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 1125,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2900:9:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1128,
+                  "name": "minimalConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1130,
+                  "src": "2934:28:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1127,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2934:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2830:138:3"
+            },
+            "scope": 1179,
+            "src": "2762:207:3",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Add new market descriptor.\n@param _makerTimeout Maker timeout in blocks.\n@param _takerTimeout Taker timeout in blocks.\n@param _oracles Trade oracle list.\n@param _minimalConfirmations Minimal confirmation for trade.\n@return Market id.",
+            "id": 1144,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addMarket",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1140,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1132,
+                  "name": "_makerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3300:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1131,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3300:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1134,
+                  "name": "_takerTimeout",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3331:21:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1133,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3331:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1137,
+                  "name": "_oracles",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3362:27:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1135,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3362:7:3",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 1136,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3362:9:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1139,
+                  "name": "_minimalConfirmations",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3399:29:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1138,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3399:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3290:144:3"
+            },
+            "returnParameters": {
+              "id": 1143,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1142,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1144,
+                  "src": "3462:10:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 1141,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3462:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3452:26:3"
+            },
+            "scope": 1179,
+            "src": "3272:207:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Start trade by matching two orders.\n@param makerOrder ABI-encoded maker order\n@param makerSignature Ethereum signature of maker order\n@param takerOrder ABI-encoded taker order\n@param takerSignature Ethereum signature of taker order\n@return started trade identifier\n@notice orders should not be used befor",
+            "id": 1157,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "startTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1153,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1146,
+                  "name": "makerOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3889:25:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1145,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3889:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1148,
+                  "name": "makerSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3924:29:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1147,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3924:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1150,
+                  "name": "takerOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3963:25:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1149,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3963:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1152,
+                  "name": "takerSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "3998:29:3",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1151,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3998:5:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3879:154:3"
+            },
+            "returnParameters": {
+              "id": 1156,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1155,
+                  "name": "id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1157,
+                  "src": "4061:10:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1154,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4061:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4051:26:3"
+            },
+            "scope": 1179,
+            "src": "3860:218:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Confirm taker transfer for trade.\n@param _id trade identifier \n@notice for trade oracles call only",
+            "id": 1164,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "confirmTakerTransfer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1160,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1159,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1164,
+                  "src": "4264:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1158,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4264:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4254:27:3"
+            },
+            "returnParameters": {
+              "id": 1163,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1162,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1164,
+                  "src": "4309:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1161,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4309:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4299:28:3"
+            },
+            "scope": 1179,
+            "src": "4225:103:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Confirm maker transfer for trade.\n@param _id trade identifier \n@notice for trade oracles call only",
+            "id": 1171,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "confirmMakerTransfer",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1167,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1166,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1171,
+                  "src": "4514:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1165,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4514:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4504:27:3"
+            },
+            "returnParameters": {
+              "id": 1170,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1169,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1171,
+                  "src": "4559:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1168,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4559:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4549:28:3"
+            },
+            "scope": 1179,
+            "src": "4475:103:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Finish trade and pay refund when transfer isn't confirmed.\n@param _id trade identifier\n@return true when success closed",
+            "id": 1178,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "finishTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1174,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1173,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1178,
+                  "src": "4776:11:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1172,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4776:7:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4766:27:3"
+            },
+            "returnParameters": {
+              "id": 1177,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1176,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1178,
+                  "src": "4821:12:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1175,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4821:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4811:28:3"
+            },
+            "scope": 1179,
+            "src": "4746:94:3",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1180,
+        "src": "111:4731:3"
+      }
+    ],
+    "src": "57:4786:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.2",
+  "updatedAt": "2019-02-18T15:18:35.652Z",
+  "devdoc": {
+    "methods": {
+      "addMarket(uint256,uint256,address[],uint256)": {
+        "details": "Add new market descriptor.",
+        "params": {
+          "_makerTimeout": "Maker timeout in blocks.",
+          "_minimalConfirmations": "Minimal confirmation for trade.",
+          "_oracles": "Trade oracle list.",
+          "_takerTimeout": "Taker timeout in blocks."
+        },
+        "return": "Market id."
+      },
+      "confirmMakerTransfer(uint256)": {
+        "details": "Confirm maker transfer for trade.",
+        "params": {
+          "_id": "trade identifier "
+        }
+      },
+      "confirmTakerTransfer(uint256)": {
+        "details": "Confirm taker transfer for trade.",
+        "params": {
+          "_id": "trade identifier "
+        }
+      },
+      "finishTrade(uint256)": {
+        "details": "Finish trade and pay refund when transfer isn't confirmed.",
+        "params": {
+          "_id": "trade identifier"
+        },
+        "return": "true when success closed"
+      },
+      "getMarket(bytes32)": {
+        "details": "Get market summary.",
+        "params": {
+          "_id": "Market identifier."
+        },
+        "return": "Market params."
+      },
+      "getTrade(uint256)": {
+        "details": "Get trade summary.",
+        "params": {
+          "_id": "Trade identifier."
+        },
+        "return": "Trade params."
+      },
+      "startTrade(bytes,bytes,bytes,bytes)": {
+        "details": "Start trade by matching two orders.",
+        "params": {
+          "makerOrder": "ABI-encoded maker order",
+          "makerSignature": "Ethereum signature of maker order",
+          "takerOrder": "ABI-encoded taker order",
+          "takerSignature": "Ethereum signature of taker order"
+        },
+        "return": "started trade identifier"
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {
+      "confirmMakerTransfer(uint256)": {
+        "notice": "for trade oracles call only"
+      },
+      "confirmTakerTransfer(uint256)": {
+        "notice": "for trade oracles call only"
+      },
+      "startTrade(bytes,bytes,bytes,bytes)": {
+        "notice": "orders should not be used befor"
+      }
+    }
+  }
+}
