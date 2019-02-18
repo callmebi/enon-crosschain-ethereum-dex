@@ -205,7 +205,7 @@ class TradeBox extends React.Component {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
+                <th style={{width: '50px'}}>#</th>
                 <th>Amount</th>
                 <th>Price</th>
                 <th>Collateral</th>
@@ -226,7 +226,7 @@ class TradeBox extends React.Component {
           </Table>
         </Tab>
         <Tab eventKey='new' title='NewOrder'>
-          <Form>
+          <Form style={{margin: '40px'}}>
             <Form.Row>
               <Form.Group as={Col} md='3'>
                 <Form.Control as='select' onChange={e => this.setState({ pair: e.target.value })}>
