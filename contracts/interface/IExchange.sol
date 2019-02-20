@@ -8,6 +8,11 @@ import '../misc/Set.sol';
 
 interface IExchange {
     /**
+     * @dev New market params added to registry.
+     */
+    event NewMarket(bytes32 indexed id);
+
+    /**
      * @dev Trade open state notification. 
      */
     event TradeStart(uint256 indexed id);

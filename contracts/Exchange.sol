@@ -23,6 +23,8 @@ contract Exchange is IExchange, SingletonHash {
     string constant private ERROR_ORACLE_ONLY = "This method is for trade oracle only";
     string constant private ERROR_INVALID_STATE = "Call method in invalid trade state";
     string constant private ERROR_DOUBLE_VOTE = "Oracle can vote for trade only once"; 
+    string constant private ERROR_DEADLINE_REACHED = "Order message deadline was reached";
+    string constant private ERROR_ORDER_MISMATCHED = "Order messages mismatched by params";
 
     using SafeERC20 for ERC20;
     using ECDSA for bytes32;
@@ -111,6 +113,7 @@ contract Exchange is IExchange, SingletonHash {
         takerTimeout = market.takerTimeout;
         minimalConfirmations = market.minimalConfirmations;
 
+        oracles = new address[](market.oracles.size());
         for (uint256 i = 0; i < market.oracles.size(); ++i)
             oracles[i] = market.oracles.at(i);
     }
@@ -137,6 +140,8 @@ contract Exchange is IExchange, SingletonHash {
 
         for (uint256 i = 0; i < _oracles.length; ++i)
             market.oracles.insert(_oracles[i]);
+
+        emit NewMarket(id);
     }
 
     function startTrade(
@@ -273,7 +278,7 @@ contract Exchange is IExchange, SingletonHash {
             = abi.decode(_order, (bytes32, bytes32, uint256, uint256, bytes));
 
         // Order deadline check
-        require(deadline > block.number);
+        require(deadline > block.number, ERROR_DEADLINE_REACHED);
 
         // Collateral transfer
         token.safeTransferFrom(trade.maker, address(this), trade.collateral);
@@ -298,10 +303,10 @@ contract Exchange is IExchange, SingletonHash {
             = abi.decode(_order, (bytes32, bytes32, uint256, bytes));
 
         // Order deadline check
-        require(deadline > block.number);
+        require(deadline > block.number, ERROR_DEADLINE_REACHED);
 
         // Check for market & deal
-        require(trades[_id].market == market && trades[_id].deal == deal);
+        require(trades[_id].market == market && trades[_id].deal == deal, ERROR_ORDER_MISMATCHED);
 
         success = true;
     }

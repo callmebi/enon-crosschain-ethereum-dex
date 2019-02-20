@@ -35,14 +35,14 @@
     "absolutePath": "/home/akru/devel/cdex/contracts/interface/IOracle.sol",
     "exportedSymbols": {
       "IOracle": [
-        1191
+        1210
       ]
     },
-    "id": 1192,
+    "id": 1211,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1181,
+        "id": 1200,
         "literals": [
           "solidity",
           ">=",
@@ -58,9 +58,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1191,
+        "id": 1210,
         "linearizedBaseContracts": [
-          1191
+          1210
         ],
         "name": "IOracle",
         "nodeType": "ContractDefinition",
@@ -68,22 +68,22 @@
           {
             "body": null,
             "documentation": "@dev Check trade transfers and make decision.\n@param _dex Exchange address\n@param _id Trade identifier",
-            "id": 1190,
+            "id": 1209,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "checkTrade",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1186,
+              "id": 1205,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1183,
+                  "id": 1202,
                   "name": "_dex",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1190,
+                  "scope": 1209,
                   "src": "269:12:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -92,7 +92,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1182,
+                    "id": 1201,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "269:7:4",
@@ -107,10 +107,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1185,
+                  "id": 1204,
                   "name": "_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1190,
+                  "scope": 1209,
                   "src": "291:11:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -119,7 +119,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1184,
+                    "id": 1203,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "291:7:4",
@@ -135,15 +135,15 @@
               "src": "259:49:4"
             },
             "returnParameters": {
-              "id": 1189,
+              "id": 1208,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1188,
+                  "id": 1207,
                   "name": "success",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1190,
+                  "scope": 1209,
                   "src": "335:12:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -152,7 +152,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1187,
+                    "id": 1206,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "335:4:4",
@@ -167,14 +167,14 @@
               ],
               "src": "325:28:4"
             },
-            "scope": 1191,
+            "scope": 1210,
             "src": "240:114:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1192,
+        "scope": 1211,
         "src": "76:280:4"
       }
     ],
@@ -184,14 +184,14 @@
     "absolutePath": "/home/akru/devel/cdex/contracts/interface/IOracle.sol",
     "exportedSymbols": {
       "IOracle": [
-        1191
+        1210
       ]
     },
-    "id": 1192,
+    "id": 1211,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1181,
+        "id": 1200,
         "literals": [
           "solidity",
           ">=",
@@ -207,9 +207,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1191,
+        "id": 1210,
         "linearizedBaseContracts": [
-          1191
+          1210
         ],
         "name": "IOracle",
         "nodeType": "ContractDefinition",
@@ -217,22 +217,22 @@
           {
             "body": null,
             "documentation": "@dev Check trade transfers and make decision.\n@param _dex Exchange address\n@param _id Trade identifier",
-            "id": 1190,
+            "id": 1209,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "checkTrade",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1186,
+              "id": 1205,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1183,
+                  "id": 1202,
                   "name": "_dex",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1190,
+                  "scope": 1209,
                   "src": "269:12:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -241,7 +241,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1182,
+                    "id": 1201,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "269:7:4",
@@ -256,10 +256,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1185,
+                  "id": 1204,
                   "name": "_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1190,
+                  "scope": 1209,
                   "src": "291:11:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -268,7 +268,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1184,
+                    "id": 1203,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "291:7:4",
@@ -284,15 +284,15 @@
               "src": "259:49:4"
             },
             "returnParameters": {
-              "id": 1189,
+              "id": 1208,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1188,
+                  "id": 1207,
                   "name": "success",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1190,
+                  "scope": 1209,
                   "src": "335:12:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -301,7 +301,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1187,
+                    "id": 1206,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "335:4:4",
@@ -316,14 +316,14 @@
               ],
               "src": "325:28:4"
             },
-            "scope": 1191,
+            "scope": 1210,
             "src": "240:114:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1192,
+        "scope": 1211,
         "src": "76:280:4"
       }
     ],
@@ -335,7 +335,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-18T15:18:35.652Z",
+  "updatedAt": "2019-02-20T07:31:59.606Z",
   "devdoc": {
     "methods": {
       "checkTrade(address,uint256)": {

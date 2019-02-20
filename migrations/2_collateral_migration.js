@@ -5,7 +5,6 @@ module.exports = (deployer, network, accounts) => {
   deployer.deploy(Collateral, collateralSupply).then(async token => {
     if (network.startsWith('development')) {
       await token.transfer(accounts[1], '1000');
-      await token.transfer(accounts[2], '1000');
     }
   });
 };

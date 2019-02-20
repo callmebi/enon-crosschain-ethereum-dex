@@ -28,8 +28,8 @@ contract OwnedOracle is IOracle {
         return dex.confirmTakerTransfer(_id);
     }
 
-    function checkTrade(uint256 _id) external returns(bool success) {
-        require(msg.sender == address(dex));
+    function checkTrade(address _dex, uint256 _id) external returns(bool success) {
+        require(_dex == address(dex));
         emit CheckTrade(_id);
         success = true;
     }
