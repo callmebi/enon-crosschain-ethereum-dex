@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
+import IpfsHttpClient from 'ipfs-http-client';
 import { NotificationManager } from 'react-notifications';
 import { Form, Col, Button, Table, Tabs, Tab } from 'react-bootstrap';
 
@@ -18,99 +19,161 @@ class TradeBox extends React.Component {
       tradeId: null,
       trade: {},
     };
+    this.ipfs = IpfsHttpClient({
+      host: 'ipfs.infura.io',
+      port: 5001,
+      protocol: 'https'
+    });
 
-    this.signOrder = this.signOrder.bind(this);
+    this.signMakerOrder = this.signMakerOrder.bind(this);
+    this.signTakerOrder = this.signTakerOrder.bind(this);
     this.makeOrder = this.makeOrder.bind(this);
-    this.openTrade = this.openTrade.bind(this);
+    this.startTrade = this.startTrade.bind(this);
+    this.fetchOrders = this.fetchOrders.bind(this);
 
-    const DEX = this.props.drizzle.contracts.DEX;
-    DEX.events
-      .TradeOpened()
+    const Exchange = this.props.drizzle.contracts.Exchange;
+    Exchange.events
+      .TradeStart()
       .on('data', (e) => {
-          NotificationManager.success('Trade', 'Success opened');
+          NotificationManager.success('Trade', 'Start');
           this.loadTrade(e.returnValues.id);
       })
       .on('error', (error) => console.log(error));
-    DEX.events
-      .TradeClosed()
-      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Success closed'); })
+    Exchange.events
+      .TradePartial()
+      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Partial'); })
       .on('error', (error) => console.log(error));
-    DEX.events
-      .TransferConfirmed()
+    Exchange.events
+      .TradeFinish()
+      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Finish'); })
+      .on('error', (error) => console.log(error));
+    Exchange.events
+      .TakerTransferConfirmation()
       .on('data', (event) => {
           const tradeId = event.returnValues.id;
           const oracle = event.returnValues.oracle;
-          NotificationManager.success('Trade ' + tradeId, 'Transfer confirmed by ' + oracle);
+          NotificationManager.success('Trade ' + tradeId, 'Taker transfer confirmed by ' + oracle);
+      })
+      .on('error', (error) => console.log(error));
+    Exchange.events
+      .MakerTransferConfirmation()
+      .on('data', (event) => {
+          const tradeId = event.returnValues.id;
+          const oracle = event.returnValues.oracle;
+          NotificationManager.success('Trade ' + tradeId, 'Maker transfer confirmed by ' + oracle);
       })
       .on('error', (error) => console.log(error));
   }
 
   componentDidMount() {
-    const web3 = this.props.drizzle.web3;
-    this.interval = setInterval(() => this.fetchOrders(web3), 1000);
+    this.interval = setInterval(this.fetchOrders, 5000);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  fetchOrders(web3) {
-    function decode(order) {
+  fetchOrders() {
+    const web3 = this.props.drizzle.web3;
+    const ipfs = this.ipfs;
+    async function decode(order) {
         const params = web3.eth.abi.decodeParameters(
-          ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
+          ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
           order.params
         );
-        order.buy = params[1];
-        order.sell = params[2];
+        const ipfsRes = await ipfs.get(web3.utils.hexToAscii(params[4]));
+        const makerExtra = JSON.parse(ipfsRes[0].content);
+        order = Object.assign(order, makerExtra);
         order.amount = order.buy / 10**8;
         order.price = order.sell / 10**18 / order.amount;
-        order.collateral = params[3];
         return order;
     }
     fetch('http://cdex-relay.herokuapp.com/')
       .then(res => res.json())
-      .then(orders => orders.map(order => decode(order)))
+      .then(orders => Promise.all(orders.map(order => decode(order))))
       .then(orders => this.setState({orders}))
       .catch(console.log);
   }
 
-  async signOrder(mode, recipient, buy, sell, collateral) {
+  async signMakerOrder(recipient, buy, sell, collateral) {
     const web3 = this.props.drizzle.web3;
     const account = this.props.account;
 
-    const data = web3.utils.toHex(JSON.stringify({
-      mode: mode,
+    // BTC/ETH market id
+    const market = '0x96a3f85adb42475b09225424479877991c78c1f39f943c591462b4228de0494b';
+    const deal = web3.utils.soliditySha3(
+        {t: 'bytes32', v: market}
+      , {t: 'uint256', v: sell}
+      , {t: 'uint256', v: buy}
+    );
+
+    const extra = JSON.stringify({
+      market: market, 
+      deal: deal,
       account: recipient,
+      sell: sell,
+      buy: buy,
       nonce: web3.utils.randomHex(4)
-    }));
+    });
+    const ipfsRes = await this.ipfs.add(new Buffer(extra));
+    const extraHash = ipfsRes[0].hash;
 
     const blockNumber = await web3.eth.getBlockNumber();
     const deadline = blockNumber + 1000;
 
     const params = web3.eth.abi.encodeParameters(
-      ['bytes', 'uint256', 'uint256', 'uint256', 'uint256'],
-      [data, buy, sell, collateral, deadline]
+      ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
+      [market, deal, deadline, collateral, web3.utils.toHex(extraHash)]
     );
-    console.log('order params: '+[data, buy, sell, collateral, deadline]);
+    console.log('maker order params: '+[market, deal, deadline, collateral, web3.utils.toHex(extraHash)]);
     const paramsHash = web3.utils.sha3(params);
-    console.log('order hash: '+paramsHash);
+    console.log('maker order hash: '+paramsHash);
     const signature = await web3.eth.personal.sign(paramsHash, account);
-    console.log('order signature: '+signature);
+    console.log('maker order signature: '+signature);
+    return {params, signature};
+  }
+
+  async signTakerOrder(recipient, maker) {
+    const web3 = this.props.drizzle.web3;
+    const account = this.props.account;
+
+    const extra = JSON.stringify({
+      market: maker.market,
+      deal: maker.deal,
+      account: recipient,
+      sell: maker.buy,
+      buy: maker.sell,
+      nonce: web3.utils.randomHex(4)
+    });
+    const ipfsRes = await this.ipfs.add(new Buffer(extra));
+    const extraHash = ipfsRes[0].hash;
+
+    const blockNumber = await web3.eth.getBlockNumber();
+    const deadline = blockNumber + 1000;
+
+    const params = web3.eth.abi.encodeParameters(
+      ['bytes32', 'bytes32', 'uint256', 'bytes'],
+      [maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]
+    );
+    console.log('taker order params: '+[maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]);
+    const paramsHash = web3.utils.sha3(params);
+    console.log('taker order hash: '+paramsHash);
+    const signature = await web3.eth.personal.sign(paramsHash, account);
+    console.log('taker order signature: '+signature);
     return {params, signature};
   }
 
   async makeOrder() {
-    const { DEX, Collateral } = this.props.drizzle.contracts;
+    const { Exchange, Collateral } = this.props.drizzle.contracts;
     const account = this.props.account;
     const collateral = this.state.collateral * 10**18;
 
-    const allowance = await Collateral.methods.allowance(account, DEX.address).call();
+    const allowance = await Collateral.methods.allowance(account, Exchange.address).call();
     if (allowance < collateral)
-      await Collateral.methods.approve.cacheSend(DEX.address, collateral, {from: account});
+      await Collateral.methods.approve.cacheSend(Exchange.address, collateral, {from: account});
 
     const sell = this.state.buy * this.state.price;
-    const signed = await this.signOrder(
-      "BTC",
+    const signed = await this.signMakerOrder(
       this.state.account,
       (this.state.buy * 10**8).toString(),
       (sell * 10**18).toString(),
@@ -126,24 +189,13 @@ class TradeBox extends React.Component {
     });
   }
 
-  async openTrade(maker) {
-    const { DEX, Collateral } = this.props.drizzle.contracts;
+  async startTrade(maker) {
+    const { Exchange } = this.props.drizzle.contracts;
     const account = this.props.account;
 
-    // Approve when need
-    const allowance = await Collateral.methods.allowance(account, DEX.address).call();
-    if (allowance < maker.collateral)
-      await Collateral.methods.approve.cacheSend(DEX.address, maker.collateral, {from: account});
-
-    console.log('maker params: '+maker.amount+' '+maker.price+' '+maker.collateral);
-    const taker = await this.signOrder(
-      "ETH",
-      account,
-      maker.sell.toString(),
-      maker.buy.toString(),
-      maker.collateral.toString()
-    );
-    const stackId = DEX.methods.openTrade.cacheSend(
+    console.log('maker params: '+maker.market+' '+maker.deal);
+    const taker = await this.signTakerOrder(account, maker);
+    Exchange.methods.startTrade.cacheSend(
       maker.params,
       maker.signature,
       taker.params,
@@ -156,35 +208,15 @@ class TradeBox extends React.Component {
     if (!tradeId) return null;
     const account = this.props.account;
 
-    const { DEX } = this.props.drizzle.contracts;
+    const { Exchange } = this.props.drizzle.contracts;
     let state = this.state;
-    DEX.methods.trades(tradeId).call().then(trade => {
-      if (account == trade.maker) {
-        DEX.methods.valueToBuy(tradeId, trade.taker).call().then(sell =>
-          DEX.methods.extraData(tradeId, trade.taker).call().then(data => {
-            state.trade = trade;
-            state.trade.valueToSell = sell;
-            state.trade.recipient = JSON.parse(new Buffer(data.substr(2), 'hex'))['account'];
-            state.tradeId = tradeId;
-          })
-        )
-      } else if (account == trade.taker) {
-        DEX.methods.valueToBuy(tradeId, trade.maker).call().then(sell =>
-          DEX.methods.extraData(tradeId, trade.maker).call().then(data => {
-            state.trade = trade;
-            state.trade.valueToSell = sell;
-            state.trade.recipient = JSON.parse(new Buffer(data.substr(2), 'hex'))['account'];
-            state.tradeId = tradeId;
-          })
-        )
+    Exchange.methods.getTrade(tradeId).call().then(trade => {
+      if (account === trade.maker) {
+          // TODO
+      } else if (account === trade.taker) {
+          // TODO
       }
     });
-  }
-
-  closeTrade(tradeId) {
-    const { DEX } = this.props.drizzle.contracts;
-    const account = this.props.account;
-    DEX.methods.closeTrade.cacheSend(tradeId, {from: account});
   }
 
   render() {
@@ -199,7 +231,6 @@ class TradeBox extends React.Component {
               <p>Collateral: {this.state.trade.collateralValue / 10**18}</p>
               <hr/>
               <p>Send <b>{this.state.trade.valueToSell}</b> to <b>{this.state.trade.recipient}</b></p>
-              <Button onClick={() => this.closeTrade(this.state.tradeId)}>Close</Button>
             </div>
           </Modal>
           <Table striped bordered hover>
@@ -208,7 +239,6 @@ class TradeBox extends React.Component {
                 <th style={{width: '50px'}}>#</th>
                 <th>Amount</th>
                 <th>Price</th>
-                <th>Collateral</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -218,8 +248,7 @@ class TradeBox extends React.Component {
                 <td>{index}</td>
                 <td>{order.amount}</td>
                 <td>{order.price}</td>
-                <td>{order.collateral / 10**18}</td>
-                <td><Button onClick={() => this.openTrade(order)}>Sell</Button></td>
+                <td><Button onClick={() => this.startTrade(order)}>Sell</Button></td>
               </tr>
               )}
             </tbody>

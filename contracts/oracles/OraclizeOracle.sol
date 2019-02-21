@@ -22,19 +22,16 @@ contract OraclizeOracle is IOracle, usingOraclize {
         uint256 id = tradeOf[myid];
         uint8 retCode = uint8(bytes(result)[0]);
 
-        if (retCode == 0x31) {
+        if (retCode & 1 > 0)
             dex.confirmTakerTransfer(id);
-        } else if (retCode == 0x32) {
+        if (retCode & 2 > 0)
             dex.confirmMakerTransfer(id);
-        } else if (retCode == 0x33) {
-            return;
-        } else {
+        if (retCode & 4 > 0)
             _checkTrade(id, 300);
-        }
     }
 
-    function checkTrade(uint256 _id) external returns(bool success) {
-        require(msg.sender == address(dex));
+    function checkTrade(address _dex, uint256 _id) external returns(bool success) {
+        require(_dex == address(dex));
         _checkTrade(_id, 0);
         success = true;
     }
@@ -43,20 +40,10 @@ contract OraclizeOracle is IOracle, usingOraclize {
 
     function _checkTrade(uint256 _id, uint256 _wait) internal {
         bytes32 qid = oraclize_query(_wait, "computation", [
-            "QmfNoScMZnRWZP7Zhk587qYTgc4dJ5F21uz5353gvg7Vxz",
-            toString(address(dex)),
-            toString(_id)
+            "QmUVaM51sp7PD9L3F6DbsRpvsQFn1T5suhcr7sc9QXphTZ",
+            uint2str(uint(address(dex))),
+            uint2str(_id)
         ]);
         tradeOf[qid] = _id;
-    }
-
-    function toString(uint256 _i) internal returns (string memory result) {
-        // TODO
-        return "";
-    }
-
-    function toString(address _i) internal returns (string memory result) {
-        // TODO
-        return "";
     }
 }

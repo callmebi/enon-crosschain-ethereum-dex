@@ -3,7 +3,6 @@
 #  ERC20 token interface 
 ##
 from json import loads
-from web3 import Web3, HTTPProvider
 
 ABI = loads('''
 [
@@ -182,12 +181,9 @@ ABI = loads('''
     }
 ]''')
 
-WEB3_PROVIDER = 'https://kovan.infura.io/v3/4023cac5af2548e682ffe03d06c5dfef' 
-
 class Token:
-    def __init__(self, address):
-        web3 = Web3(HTTPProvider(WEB3_PROVIDER))
-        self.erc20 = web3.eth.contract(address, abi=ABI)
+    def __init__(self, web3, address):
+        self._contract = web3.eth.contract(address, abi=ABI)
 
     def balanceOf(self, address):
-        return self.erc20.functions.balanceOf(address).call()
+        return self._contract.functions.balanceOf(address).call()

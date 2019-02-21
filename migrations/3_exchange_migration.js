@@ -1,3 +1,4 @@
+const OraclizeOracle = artifacts.require('OraclizeOracle');
 const OwnedOracle = artifacts.require('OwnedOracle');
 const Collateral = artifacts.require('Collateral');
 const Exchange = artifacts.require('Exchange');
@@ -7,5 +8,7 @@ module.exports = (deployer, network, accounts) => {
   deployer.deploy(Exchange, Collateral.address).then(dex => {
     if (network.startsWith('development'))
         return deployer.deploy(OwnedOracle, dex.address, oracleAccount);
+    else
+        return deployer.deploy(OraclizeOracle, dex.address);
   });
 };

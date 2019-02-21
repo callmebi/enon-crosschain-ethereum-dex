@@ -5,7 +5,7 @@ import 'react-notifications/lib/notifications.css';
 import { Drizzle, generateStore } from 'drizzle';
 import App from './components/App';
 import Collateral from './contracts/Collateral.json'; // token
-import DEX from './contracts/DEX.json';
+import Exchange from './contracts/Exchange.json';
 
 const options = {
   web3: {
@@ -14,7 +14,7 @@ const options = {
       url: 'ws://127.0.0.1:8545'
     }
   },
-  contracts: [ DEX, Collateral ]
+  contracts: [ Exchange, Collateral ]
 };
 const drizzleStore = generateStore(options);
 const drizzle = new Drizzle(options, drizzleStore);
