@@ -220,7 +220,7 @@ class NewOrder extends React.Component {
     const account = this.props.account;
 
     // BTC/ETH market id
-    const market = '0xe0f4a6724033427de1d4e3b8b41f0ae08de7d949a567627dac8482a3fe5d7dc6'; 
+    const market = '0x964f73c20eae5b05a16e1462103c029e4d90fb66536718b97beab9f948874233'; 
     const deal = web3.utils.soliditySha3(
         {t: 'bytes32', v: market}
       , {t: 'uint256', v: sell}

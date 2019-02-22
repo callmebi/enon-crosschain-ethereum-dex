@@ -13,6 +13,8 @@ contract OraclizeOracle is IOracle, usingOraclize {
     mapping(bytes32 => uint256) public tradeOf;
     IExchange public dex;
 
+    event OraclizeQuery(bytes32 indexed qid);
+
     constructor(IExchange _dex) public {
         dex = _dex;
     }
@@ -36,6 +38,7 @@ contract OraclizeOracle is IOracle, usingOraclize {
                 uint2str(id)
             ]);
             tradeOf[qid] = id;
+            emit OraclizeQuery(qid);
         }
     }
 
@@ -47,6 +50,7 @@ contract OraclizeOracle is IOracle, usingOraclize {
             uint2str(_id)
         ]);
         tradeOf[qid] = _id;
+        emit OraclizeQuery(qid);
         success = true;
     }
 
