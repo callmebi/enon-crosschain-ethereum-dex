@@ -6,28 +6,16 @@ import { Form, Col, Button, Table, Tabs, Tab, InputGroup } from 'react-bootstrap
 
 import './Trade.css';
 
-class TradeBox extends React.Component {
+class Orderbook extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       orders: [],
-      pair: 0,
-      buy: null,
-      price: null,
-      account: "",
-      collateral: "",
       tradeId: null,
       trade: {},
     };
-    this.ipfs = IpfsHttpClient({
-      host: 'ipfs.infura.io',
-      port: 5001,
-      protocol: 'https'
-    });
-
-    this.signMakerOrder = this.signMakerOrder.bind(this);
+    this.ipfs = this.props.ipfs;
     this.signTakerOrder = this.signTakerOrder.bind(this);
-    this.makeOrder = this.makeOrder.bind(this);
     this.startTrade = this.startTrade.bind(this);
     this.fetchOrders = this.fetchOrders.bind(this);
 
@@ -110,6 +98,123 @@ class TradeBox extends React.Component {
       .catch(console.log);
   }
 
+  async signTakerOrder(recipient, maker) {
+    const web3 = this.props.drizzle.web3;
+    const account = this.props.account;
+
+    const extra = JSON.stringify({
+      market: maker.market,
+      deal: maker.deal,
+      account: recipient,
+      sell: maker.buy,
+      buy: maker.sell,
+      nonce: web3.utils.randomHex(4)
+    });
+    const ipfsRes = await this.ipfs.add(new Buffer(extra));
+    const extraHash = ipfsRes[0].hash;
+
+    const blockNumber = await web3.eth.getBlockNumber();
+    const deadline = blockNumber + 1000;
+
+    const params = web3.eth.abi.encodeParameters(
+      ['bytes32', 'bytes32', 'uint256', 'bytes'],
+      [maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]
+    );
+    console.log('taker order params: '+[maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]);
+    const paramsHash = web3.utils.sha3(params);
+    console.log('taker order hash: '+paramsHash);
+    const signature = await web3.eth.personal.sign(paramsHash, account);
+    console.log('taker order signature: '+signature);
+    return {params, signature};
+  }
+
+  async startTrade(maker) {
+    const { Exchange } = this.props.drizzle.contracts;
+    const account = this.props.account;
+
+    console.log('maker params: '+maker.market+' '+maker.deal);
+    const taker = await this.signTakerOrder(account, maker);
+    Exchange.methods.startTrade.cacheSend(
+      maker.params,
+      maker.signature,
+      taker.params,
+      taker.signature,
+      {from: account}
+    );
+  }
+
+  loadTrade(tradeId) {
+    if (!tradeId) return null;
+    this.setState({tradeId: tradeId});
+
+    const web3 = this.props.drizzle.web3;
+    const ipfs = this.ipfs;
+    const account = this.props.account;
+    const { Exchange } = this.props.drizzle.contracts;
+
+    Exchange.methods.getTrade(tradeId).call().then(trade => {
+        const extraHash = account == trade.maker ? trade.takerExtra : trade.makerExtra; 
+        ipfs.get(web3.utils.hexToAscii(extraHash)).then(ipfsRes => {
+            const extra = JSON.parse(ipfsRes[0].content);
+            this.setState({trade: Object.assign(trade, extra)});
+        });
+    });
+  }
+
+  render() {
+    return (
+      <>
+      <Modal open={this.state.tradeId != null} onClose={() => this.setState({tradeId: null})} center>
+        <div>
+          <h2>Trade {this.state.tradeId}</h2>
+          <p>Maker: {this.state.trade.maker}</p>
+          <p>Taker: {this.state.trade.taker}</p>
+          <hr/>
+          <p>Send <b>{this.state.trade.buy}</b> to <b>{this.state.trade.account}</b></p>
+        </div>
+      </Modal>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th style={{width: '50px'}}>#</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.orders.map((order, index) =>
+          <tr key={index}>
+            <td>{index}</td>
+            <td>{order.amount}</td>
+            <td>{order.price}</td>
+            <td><Button onClick={() => this.startTrade(order)}>Sell</Button></td>
+          </tr>
+          )}
+        </tbody>
+      </Table>
+      </>
+    );
+  }
+}
+
+class NewOrder extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pair: 0,
+      buy: null,
+      price: null,
+      recAccount: "", // recepient acccount, don't confuse with user account provided by web3
+      collateral: "",
+      trade: {}
+    };
+    this.ipfs = this.props.ipfs;
+    this.signMakerOrder = this.signMakerOrder.bind(this);
+    this.makeOrder = this.makeOrder.bind(this);
+
+  }
+
   async signMakerOrder(recipient, buy, sell, collateral) {
     const web3 = this.props.drizzle.web3;
     const account = this.props.account;
@@ -148,36 +253,6 @@ class TradeBox extends React.Component {
     return {params, signature};
   }
 
-  async signTakerOrder(recipient, maker) {
-    const web3 = this.props.drizzle.web3;
-    const account = this.props.account;
-
-    const extra = JSON.stringify({
-      market: maker.market,
-      deal: maker.deal,
-      account: recipient,
-      sell: maker.buy,
-      buy: maker.sell,
-      nonce: web3.utils.randomHex(4)
-    });
-    const ipfsRes = await this.ipfs.add(new Buffer(extra));
-    const extraHash = ipfsRes[0].hash;
-
-    const blockNumber = await web3.eth.getBlockNumber();
-    const deadline = blockNumber + 1000;
-
-    const params = web3.eth.abi.encodeParameters(
-      ['bytes32', 'bytes32', 'uint256', 'bytes'],
-      [maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]
-    );
-    console.log('taker order params: '+[maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]);
-    const paramsHash = web3.utils.sha3(params);
-    console.log('taker order hash: '+paramsHash);
-    const signature = await web3.eth.personal.sign(paramsHash, account);
-    console.log('taker order signature: '+signature);
-    return {params, signature};
-  }
-
   async makeOrder() {
     const { Exchange, Collateral } = this.props.drizzle.contracts;
     const account = this.props.account;
@@ -189,7 +264,7 @@ class TradeBox extends React.Component {
 
     const sell = this.state.buy * this.state.price;
     const signed = await this.signMakerOrder(
-      this.state.account,
+      this.state.recAccount,
       (this.state.buy * 10**8).toString(),
       (sell * 10**18).toString(),
       collateral.toString()
@@ -204,36 +279,73 @@ class TradeBox extends React.Component {
     });
   }
 
-  async startTrade(maker) {
-    const { Exchange } = this.props.drizzle.contracts;
-    const account = this.props.account;
-
-    console.log('maker params: '+maker.market+' '+maker.deal);
-    const taker = await this.signTakerOrder(account, maker);
-    Exchange.methods.startTrade.cacheSend(
-      maker.params,
-      maker.signature,
-      taker.params,
-      taker.signature,
-      {from: account}
-    );
+  handleSubmit(event) { // validate input and make an order
+    event.preventDefault();
+    event.stopPropagation();
+    event.target.className += " was-validated";
+    if (event.currentTarget.checkValidity() === true)
+      this.makeOrder();
   }
 
-  loadTrade(tradeId) {
-    if (!tradeId) return null;
-    this.setState({tradeId: tradeId});
+  render() {
+    return (
+      <Form style={{margin: '40px'}} noValidate onSubmit={e => this.handleSubmit(e)}>
+        <Form.Group as={Form.Row}>
+          <InputGroup as={Col} md='3'>
+            <Form.Control as='select' onChange={e => this.setState({ pair: e.target.value })}>
+              <option>BTC / ETH</option>
+            </Form.Control>
+          </InputGroup>
+          <InputGroup as={Col}>
+            <Form.Control required type='number' placeholder='How much'
+              value={this.state.buy || ""}
+              onChange={e => this.setState({ buy: e.target.value })}/>
+            <InputGroup.Append>
+              <InputGroup.Text id="basic-addon2">BTC</InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
+          <InputGroup as={Col}>
+            <Form.Control required type='number' placeholder='Price'
+              value={this.state.price || ""}
+              onChange={e => this.setState({ price: e.target.value })}/>
+            <InputGroup.Append>
+              <InputGroup.Text id="basic-addon2">ETH per BTC</InputGroup.Text>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form.Group>
+        <Form.Row>
+          <Form.Group as={Col}>
+            <Form.Control required type='text' placeholder='38yZJPKtAFG8kr3ErvwmSMSTZWeTnbj5E7'
+              value={this.state.recAccount}
+              onChange={e => this.setState({ recAccount: e.target.value })}/>
+            <Form.Text className='text-muted'>
+              Recipient account address
+            </Form.Text>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col}>
+            <Form.Control required type='number' placeholder='Collateral amount'
+              value={this.state.collateral}
+              onChange={e => this.setState({ collateral: e.target.value })}/>
+            <Form.Text className='text-muted'>
+              Value of collateral token to lock on DEX contract
+            </Form.Text>
+          </Form.Group>
+        </Form.Row>
+        <Button type="submit">Buy</Button>
+      </Form>
+    );
+  }
+}
 
-    const web3 = this.props.drizzle.web3;
-    const ipfs = this.ipfs;
-    const account = this.props.account;
-    const { Exchange } = this.props.drizzle.contracts;
-
-    Exchange.methods.getTrade(tradeId).call().then(trade => {
-        const extraHash = account == trade.maker ? trade.takerExtra : trade.makerExtra; 
-        ipfs.get(web3.utils.hexToAscii(extraHash)).then(ipfsRes => {
-            const extra = JSON.parse(ipfsRes[0].content);
-            this.setState({trade: Object.assign(trade, extra)});
-        });
+class Trade extends React.Component {
+  constructor(props) {
+    super(props);
+    this.ipfs = IpfsHttpClient({
+      host: 'ipfs.infura.io',
+      port: 5001,
+      protocol: 'https'
     });
   }
 
@@ -241,88 +353,22 @@ class TradeBox extends React.Component {
     return (
       <Tabs defaultActiveKey='orders'>
         <Tab eventKey='orders' title='OrderBook'>
-          <Modal open={this.state.tradeId != null} onClose={() => this.setState({tradeId: null})} center>
-            <div>
-              <h2>Trade {this.state.tradeId}</h2>
-              <p>Maker: {this.state.trade.maker}</p>
-              <p>Taker: {this.state.trade.taker}</p>
-              <hr/>
-              <p>Send <b>{this.state.trade.buy}</b> to <b>{this.state.trade.account}</b></p>
-            </div>
-          </Modal>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th style={{width: '50px'}}>#</th>
-                <th>Amount</th>
-                <th>Price</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.orders.map((order, index) =>
-              <tr key={index}>
-                <td>{index}</td>
-                <td>{order.amount}</td>
-                <td>{order.price}</td>
-                <td><Button onClick={() => this.startTrade(order)}>Sell</Button></td>
-              </tr>
-              )}
-            </tbody>
-          </Table>
+          <Orderbook
+            drizzle = {this.props.drizzle}
+            account = {this.props.account}
+            ipfs = {this.ipfs}
+          />
         </Tab>
         <Tab eventKey='new' title='NewOrder'>
-          <Form style={{margin: '40px'}}>
-            <Form.Group as={Form.Row}>
-              <InputGroup as={Col} md='3'>
-                <Form.Control as='select' onChange={e => this.setState({ pair: e.target.value })}>
-                  <option>BTC / ETH</option>
-                </Form.Control>
-              </InputGroup>
-              <InputGroup as={Col}>
-                <Form.Control type='number' placeholder='How much'
-                  value={this.state.buy}
-                  onChange={e => this.setState({ buy: e.target.value })}/>
-                <InputGroup.Append>
-                  <InputGroup.Text id="basic-addon2">BTC</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-              <InputGroup as={Col}>
-                <Form.Control type='number' placeholder='Price'
-                  value={this.state.price}
-                  onChange={e => this.setState({ price: e.target.value })}/>
-                <InputGroup.Append>
-                  <InputGroup.Text id="basic-addon2">ETH per BTC</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-            </Form.Group>
-            <Form.Row>
-              <Form.Group as={Col}>
-                <Form.Control type='text' placeholder='38yZJPKtAFG8kr3ErvwmSMSTZWeTnbj5E7'
-                  value={this.state.account}
-                  onChange={e => this.setState({ account: e.target.value })}/>
-                <Form.Text className='text-muted'>
-                  Recipient account address.
-                </Form.Text>
-              </Form.Group>
-            </Form.Row>
-            <Form.Row>
-              <Form.Group as={Col}>
-                <Form.Control type='number' placeholder='Collateral amount'
-                  value={this.state.collateral}
-                  onChange={e => this.setState({ collateral: e.target.value })}/>
-                <Form.Text className='text-muted'>
-                  Value of collateral token to lock on DEX contract.
-                </Form.Text>
-              </Form.Group>
-            </Form.Row>
-            <Button onClick={this.makeOrder}>Buy</Button>
-          </Form>
+          <NewOrder
+            drizzle = {this.props.drizzle}
+            account = {this.props.account}
+            ipfs = {this.ipfs}
+          />
         </Tab>
       </Tabs>
     );
   }
 }
 
-
-export default TradeBox;
+export default Trade;
