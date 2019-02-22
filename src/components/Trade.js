@@ -243,7 +243,7 @@ class NewOrder extends React.Component {
 
     const params = web3.eth.abi.encodeParameters(
       ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
-      [market, deal, deadline, collateral, web3.utils.toHex(extraHash)]
+      [market, deal, collateral, deadline, web3.utils.toHex(extraHash)]
     );
     console.log('maker order params: '+[market, deal, deadline, collateral, web3.utils.toHex(extraHash)]);
     const paramsHash = web3.utils.sha3(params);
