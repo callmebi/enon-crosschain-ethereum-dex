@@ -16,8 +16,6 @@ from BTC import Bitcoin
 WEB3_PROVIDER = 'https://kovan.infura.io/v3/4023cac5af2548e682ffe03d06c5dfef' 
 IPFS_PROVIDER = 'https://ipfs.infura.io'
 
-BTCETH_MARKET = '0x96a3f85adb42475b09225424479877991c78c1f39f943c591462b4228de0494b'
-
 TAKER_TRANSFER_CONFIRMED = 1
 MAKER_TRANSFER_CONFIRMED = 2
 WAITING_FOR_TRANSFER = 4
@@ -49,11 +47,11 @@ class Oracle:
         return self.trade[8] > 0 and self.trade[8] + self.market[0] < self.web3.eth.blockNumber
 
     def taker_transfer_check(self, params):
-        if self.taker_timeout():
+        if self.taker_timeout() or self.trade[8] > 0:
             return 0
 
-        if self.trade[0] == BTCETH_MARKET and Ethereum(self.web3).balanceOf(params['account']) == params['buy']:
-            return MAKER_TRANSFER_CONFIRMED
+        if Bitcoin().balanceOf(params['account']) >= int(params['buy']):
+            return TAKER_TRANSFER_CONFIRMED
 
         return WAITING_FOR_TRANSFER
 
@@ -61,7 +59,7 @@ class Oracle:
         if self.taker_timeout() or self.maker_timeout():
             return 0
 
-        if self.trade[0] == BTCETH_MARKET and Bitcoin().balanceOf(params['account']) == params['buy']:
-            return TAKER_TRANSFER_CONFIRMED
+        if self.trade[8] > 0 and Ethereum(self.web3).balanceOf(params['account']) >= int(params['buy']):
+            return MAKER_TRANSFER_CONFIRMED
 
         return WAITING_FOR_TRANSFER

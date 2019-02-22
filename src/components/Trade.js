@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import IpfsHttpClient from 'ipfs-http-client';
 import { NotificationManager } from 'react-notifications';
-import { Form, Col, Button, Table, Tabs, Tab } from 'react-bootstrap';
+import { Form, Col, Button, Table, Tabs, Tab, InputGroup } from 'react-bootstrap';
 
 import './Trade.css';
 
@@ -36,16 +36,31 @@ class TradeBox extends React.Component {
       .TradeStart()
       .on('data', (e) => {
           NotificationManager.success('Trade', 'Start');
-          this.loadTrade(e.returnValues.id);
+          const tradeId = e.returnValues.id;
+          Exchange.methods.getTrade(tradeId).call().then(trade => {
+            if (this.props.account == trade.taker)
+              this.loadTrade(tradeId);
+          });
       })
       .on('error', (error) => console.log(error));
     Exchange.events
       .TradePartial()
-      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Partial'); })
+      .on('data', (e) => {
+        NotificationManager.success('Trade', 'Partial');
+        const tradeId = e.returnValues.id;
+        Exchange.methods.getTrade(tradeId).call().then(trade => {
+          if (this.props.account == trade.maker)
+            this.loadTrade(tradeId);
+        });
+      })
       .on('error', (error) => console.log(error));
     Exchange.events
       .TradeFinish()
-      .on('data', (event) => { console.log(event); NotificationManager.success('Trade', 'Finish'); })
+      .on('data', (e) => {
+          NotificationManager.success('Trade', 'Finish');
+          if (e.returnValues.id == this.state.tradeId)
+            this.setState({tradeId: null});
+      })
       .on('error', (error) => console.log(error));
     Exchange.events
       .TakerTransferConfirmation()
@@ -100,7 +115,7 @@ class TradeBox extends React.Component {
     const account = this.props.account;
 
     // BTC/ETH market id
-    const market = '0x96a3f85adb42475b09225424479877991c78c1f39f943c591462b4228de0494b';
+    const market = '0x9b364a5d1dea005fc071073ce1a4d454f99c005d7ffddddadfc87fc3162fef9b';
     const deal = web3.utils.soliditySha3(
         {t: 'bytes32', v: market}
       , {t: 'uint256', v: sell}
@@ -108,7 +123,7 @@ class TradeBox extends React.Component {
     );
 
     const extra = JSON.stringify({
-      market: market, 
+      market: market,
       deal: deal,
       account: recipient,
       sell: sell,
@@ -206,16 +221,19 @@ class TradeBox extends React.Component {
 
   loadTrade(tradeId) {
     if (!tradeId) return null;
-    const account = this.props.account;
+    this.setState({tradeId: tradeId});
 
+    const web3 = this.props.drizzle.web3;
+    const ipfs = this.ipfs;
+    const account = this.props.account;
     const { Exchange } = this.props.drizzle.contracts;
-    let state = this.state;
+
     Exchange.methods.getTrade(tradeId).call().then(trade => {
-      if (account === trade.maker) {
-          // TODO
-      } else if (account === trade.taker) {
-          // TODO
-      }
+        const extraHash = account == trade.maker ? trade.takerExtra : trade.makerExtra; 
+        ipfs.get(web3.utils.hexToAscii(extraHash)).then(ipfsRes => {
+            const extra = JSON.parse(ipfsRes[0].content);
+            this.setState({trade: Object.assign(trade, extra)});
+        });
     });
   }
 
@@ -228,9 +246,8 @@ class TradeBox extends React.Component {
               <h2>Trade {this.state.tradeId}</h2>
               <p>Maker: {this.state.trade.maker}</p>
               <p>Taker: {this.state.trade.taker}</p>
-              <p>Collateral: {this.state.trade.collateralValue / 10**18}</p>
               <hr/>
-              <p>Send <b>{this.state.trade.valueToSell}</b> to <b>{this.state.trade.recipient}</b></p>
+              <p>Send <b>{this.state.trade.buy}</b> to <b>{this.state.trade.account}</b></p>
             </div>
           </Modal>
           <Table striped bordered hover>
@@ -256,32 +273,29 @@ class TradeBox extends React.Component {
         </Tab>
         <Tab eventKey='new' title='NewOrder'>
           <Form style={{margin: '40px'}}>
-            <Form.Row>
-              <Form.Group as={Col} md='3'>
+            <Form.Group as={Form.Row}>
+              <InputGroup as={Col} md='3'>
                 <Form.Control as='select' onChange={e => this.setState({ pair: e.target.value })}>
                   <option>BTC / ETH</option>
                 </Form.Control>
-                <Form.Text className='text-muted'>
-                  Trading pair.
-                </Form.Text>
-              </Form.Group>
-              <Form.Group as={Col}>
+              </InputGroup>
+              <InputGroup as={Col}>
                 <Form.Control type='number' placeholder='How much'
                   value={this.state.buy}
                   onChange={e => this.setState({ buy: e.target.value })}/>
-                <Form.Text className='text-muted'>
-                  Total amount of trade.
-                </Form.Text>
-              </Form.Group>
-              <Form.Group as={Col}>
+                <InputGroup.Append>
+                  <InputGroup.Text id="basic-addon2">BTC</InputGroup.Text>
+                </InputGroup.Append>
+              </InputGroup>
+              <InputGroup as={Col}>
                 <Form.Control type='number' placeholder='Price'
                   value={this.state.price}
                   onChange={e => this.setState({ price: e.target.value })}/>
-                <Form.Text className='text-muted'>
-                  Price of one traded unit.
-                </Form.Text>
-              </Form.Group>
-            </Form.Row>
+                <InputGroup.Append>
+                  <InputGroup.Text id="basic-addon2">ETH per BTC</InputGroup.Text>
+                </InputGroup.Append>
+              </InputGroup>
+            </Form.Group>
             <Form.Row>
               <Form.Group as={Col}>
                 <Form.Control type='text' placeholder='38yZJPKtAFG8kr3ErvwmSMSTZWeTnbj5E7'

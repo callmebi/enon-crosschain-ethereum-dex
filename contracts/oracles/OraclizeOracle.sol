@@ -20,7 +20,7 @@ contract OraclizeOracle is IOracle, usingOraclize {
         if (msg.sender != oraclize_cbAddress()) revert();
 
         uint256 id = tradeOf[myid];
-        uint8 retCode = uint8(bytes(result)[0]);
+        uint256 retCode = parseInt(result);
 
         if (retCode & 1 > 0)
             dex.confirmTakerTransfer(id);
@@ -40,10 +40,17 @@ contract OraclizeOracle is IOracle, usingOraclize {
 
     function _checkTrade(uint256 _id, uint256 _wait) internal {
         bytes32 qid = oraclize_query(_wait, "computation", [
-            "QmUVaM51sp7PD9L3F6DbsRpvsQFn1T5suhcr7sc9QXphTZ",
-            uint2str(uint(address(dex))),
+            "QmUHRfFbvz6M3m4W2mmdXjEbn2og5X6ghPMEkMcjQRZ7Bn",
+            toString(address(dex)),
             uint2str(_id)
         ]);
         tradeOf[qid] = _id;
+    }
+
+    function toString(address x) internal returns (string memory) {
+        bytes memory b = new bytes(20);
+        for (uint i = 0; i < 20; i++)
+            b[i] = byte(uint8(uint(x) / (2**(8*(19 - i)))));
+        return string(b);
     }
 }
