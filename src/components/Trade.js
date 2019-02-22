@@ -115,7 +115,7 @@ class TradeBox extends React.Component {
     const account = this.props.account;
 
     // BTC/ETH market id
-    const market = '0x9b364a5d1dea005fc071073ce1a4d454f99c005d7ffddddadfc87fc3162fef9b';
+    const market = '0x0fd815bdb7cefbe00ddd07cb720154dcb110b1f542917fdcbb93a58c75f79845'; 
     const deal = web3.utils.soliditySha3(
         {t: 'bytes32', v: market}
       , {t: 'uint256', v: sell}
@@ -138,9 +138,9 @@ class TradeBox extends React.Component {
 
     const params = web3.eth.abi.encodeParameters(
       ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
-      [market, deal, deadline, collateral, web3.utils.toHex(extraHash)]
+      [market, deal, collateral, deadline, web3.utils.toHex(extraHash)]
     );
-    console.log('maker order params: '+[market, deal, deadline, collateral, web3.utils.toHex(extraHash)]);
+    console.log('maker order params: '+[market, deal, collateral, deadline, web3.utils.toHex(extraHash)]);
     const paramsHash = web3.utils.sha3(params);
     console.log('maker order hash: '+paramsHash);
     const signature = await web3.eth.personal.sign(paramsHash, account);
