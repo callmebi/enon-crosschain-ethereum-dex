@@ -120,7 +120,7 @@ class Orderbook extends React.Component {
       ['bytes32', 'bytes32', 'uint256', 'bytes'],
       [maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]
     );
-    console.log('taker order params: '+[maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]);
+    console.log('maker order params: '+[maker.market, maker.deal, deadline, web3.utils.toHex(extraHash)]);
     const paramsHash = web3.utils.sha3(params);
     console.log('taker order hash: '+paramsHash);
     const signature = await web3.eth.personal.sign(paramsHash, account);
@@ -220,7 +220,7 @@ class NewOrder extends React.Component {
     const account = this.props.account;
 
     // BTC/ETH market id
-    const market = '0x9b364a5d1dea005fc071073ce1a4d454f99c005d7ffddddadfc87fc3162fef9b';
+    const market = '0x964f73c20eae5b05a16e1462103c029e4d90fb66536718b97beab9f948874233'; 
     const deal = web3.utils.soliditySha3(
         {t: 'bytes32', v: market}
       , {t: 'uint256', v: sell}
@@ -243,7 +243,7 @@ class NewOrder extends React.Component {
 
     const params = web3.eth.abi.encodeParameters(
       ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
-      [market, deal, deadline, collateral, web3.utils.toHex(extraHash)]
+      [market, deal, collateral, deadline, web3.utils.toHex(extraHash)]
     );
     console.log('maker order params: '+[market, deal, deadline, collateral, web3.utils.toHex(extraHash)]);
     const paramsHash = web3.utils.sha3(params);
