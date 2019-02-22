@@ -25,7 +25,7 @@ class Oracle:
         self.web3 = Web3(HTTPProvider(WEB3_PROVIDER))
         self.ipfs = connect(IPFS_PROVIDER) 
 
-        self.exchange = Exchange(self.web3, exchange_address) 
+        self.exchange = Exchange(self.web3, Web3.toChecksumAddress(exchange_address)) 
         self.trade = self.exchange.getTrade(int(trade_id))
         self.market = self.exchange.getMarket(self.trade[0])
 

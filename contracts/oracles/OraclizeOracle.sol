@@ -9,7 +9,7 @@ import '../interface/IExchange.sol';
 import '../interface/IOracle.sol';
 
 contract OraclizeOracle is IOracle, usingOraclize {
-    string public constant oracleComputation = "QmSDdJwTF66CVLKD52RdNkTz5KBfoPbk6aj3hLrrHq1wGc";
+    string public constant oracleComputation = "QmXiZAKhh77KGfn3jLfbbqeURfVVrKwUQfoXyT3ipV6KiU";
     mapping(bytes32 => uint256) public tradeOf;
     IExchange public dex;
 
