@@ -32,23 +32,24 @@ contract OraclizeOracle is IOracle, usingOraclize {
             dex.confirmMakerTransfer(id);
 
         if (retCode & 4 > 0) {
-            bytes32 qid = oraclize_query(300, "computation", [
+            bytes32 qid = oraclize_query(30, "computation", [
                 oracleComputation,
-                toString(address(dex)),
+                //toString(address(dex)),
+                "0x538c7a7b2ce0a50692b762bafc2de2630b9338eb", //toString(address(dex)),
                 uint2str(id)
-            ]);
+            ], 1000000);
             tradeOf[qid] = id;
             emit OraclizeQuery(qid);
         }
     }
 
     function checkTrade(address _dex, uint256 _id) external returns(bool success) {
-        require(_dex == address(dex));
+        //require(_dex == address(dex));
         bytes32 qid = oraclize_query("computation", [
             oracleComputation,
-            toString(address(dex)),
+            "0x538c7a7b2ce0a50692b762bafc2de2630b9338eb", //toString(address(dex)),
             uint2str(_id)
-        ]);
+        ], 1000000);
         tradeOf[qid] = _id;
         emit OraclizeQuery(qid);
         success = true;
@@ -56,7 +57,7 @@ contract OraclizeOracle is IOracle, usingOraclize {
 
     function() external payable {}
 
-    function toString(address x) internal returns (string memory) {
+    function toString(address x) public returns (string memory) {
         bytes memory b = new bytes(20);
         for (uint i = 0; i < 20; i++)
             b[i] = byte(uint8(uint(x) / (2**(8*(19 - i)))));

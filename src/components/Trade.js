@@ -32,17 +32,6 @@ class Orderbook extends React.Component {
       })
       .on('error', (error) => console.log(error));
     Exchange.events
-      .TradePartial()
-      .on('data', (e) => {
-        NotificationManager.success('Trade', 'Partial');
-        const tradeId = e.returnValues.id;
-        Exchange.methods.getTrade(tradeId).call().then(trade => {
-          if (this.props.account == trade.maker)
-            this.loadTrade(tradeId);
-        });
-      })
-      .on('error', (error) => console.log(error));
-    Exchange.events
       .TradeFinish()
       .on('data', (e) => {
           NotificationManager.success('Trade', 'Finish');
@@ -56,6 +45,10 @@ class Orderbook extends React.Component {
           const tradeId = event.returnValues.id;
           const oracle = event.returnValues.oracle;
           NotificationManager.success('Trade ' + tradeId, 'Taker transfer confirmed by ' + oracle);
+          Exchange.methods.getTrade(tradeId).call().then(trade => {
+          if (this.props.account == trade.maker)
+            this.loadTrade(tradeId);
+          });
       })
       .on('error', (error) => console.log(error));
     Exchange.events
@@ -220,7 +213,7 @@ class NewOrder extends React.Component {
     const account = this.props.account;
 
     // BTC/ETH market id
-    const market = '0x964f73c20eae5b05a16e1462103c029e4d90fb66536718b97beab9f948874233'; 
+    const market = '0xcf6fc693c6f4426237ed1ab599a354c552aec3fba40261c10423e809754bc14e'; 
     const deal = web3.utils.soliditySha3(
         {t: 'bytes32', v: market}
       , {t: 'uint256', v: sell}
