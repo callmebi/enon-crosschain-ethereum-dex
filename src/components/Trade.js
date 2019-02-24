@@ -200,7 +200,7 @@ class NewOrder extends React.Component {
       price: null,
       recAccount: "", // recepient acccount, don't confuse with user account provided by web3
       collateral: "",
-      trade: {}
+      trade: {},
     };
     this.ipfs = this.props.ipfs;
     this.signMakerOrder = this.signMakerOrder.bind(this);
@@ -272,12 +272,23 @@ class NewOrder extends React.Component {
     });
   }
 
-  handleSubmit(event) { // validate input and make an order
+  async handleSubmit(event) { // validate input and make an order
     event.preventDefault();
     event.stopPropagation();
-    event.target.className += " was-validated";
-    if (event.currentTarget.checkValidity() === true)
-      this.makeOrder();
+    if (!event.target.className.includes("was-validated"))
+      event.target.className += " was-validated";
+
+    if (event.currentTarget.checkValidity() === true) {
+      const { Collateral } = this.props.drizzle.contracts;
+      const cltBalance = await Collateral.methods.balanceOf(this.props.account).call() / 10**18;
+      if (cltBalance >= this.state.collateral) {
+        this.makeOrder();
+      }
+      else {
+        NotificationManager.warning("Your collateral token balance less then what you've provided");
+        this.setState({ collateral: cltBalance });
+      }
+    }
   }
 
   render() {
