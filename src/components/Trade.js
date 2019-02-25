@@ -333,7 +333,7 @@ class NewOrder extends React.Component {
               value={this.state.collateral}
               onChange={e => this.setState({ collateral: e.target.value })}/>
             <Form.Text className='text-muted'>
-              Value of collateral token to lock on DEX contract
+              Value of WETH token to lock on DEX contract
             </Form.Text>
           </Form.Group>
         </Form.Row>
