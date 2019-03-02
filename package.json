@@ -1,6 +1,6 @@
 {
-  "name": "cdex",
-  "version": "0.3.0",
+  "name": "enon",
+  "version": "0.3.1",
   "author": "Alexander Krupenkin <akru@aira.life>",
   "homepage": "https://cdex.herokuapp.com/",
   "description": "Collateral based decentralized exchange",

@@ -13,7 +13,7 @@ interface IExchange {
     event NewMarket(bytes32 indexed id);
 
     /**
-     * @dev Trade open state notification. 
+     * @dev Trade start state notification. 
      */
     event TradeStart(uint256 indexed id);
 
@@ -153,18 +153,18 @@ interface IExchange {
 
     /**
      * @dev Start trade by matching two orders.
-     * @param makerOrder ABI-encoded maker order
-     * @param makerSignature Ethereum signature of maker order
-     * @param takerOrder ABI-encoded taker order
-     * @param takerSignature Ethereum signature of taker order
+     * @param _makerOrder ABI-encoded maker order
+     * @param _makerSignature Ethereum signature of maker order
+     * @param _takerOrder ABI-encoded taker order
+     * @param _takerSignature Ethereum signature of taker order
      * @return started trade identifier
      * @notice orders should not be used befor
      */
     function startTrade(
-        bytes calldata makerOrder,
-        bytes calldata makerSignature,
-        bytes calldata takerOrder,
-        bytes calldata takerSignature
+        bytes calldata _makerOrder,
+        bytes calldata _makerSignature,
+        bytes calldata _takerOrder,
+        bytes calldata _takerSignature
     ) external returns (
         uint256 id
     );

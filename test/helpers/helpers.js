@@ -9,8 +9,7 @@ async function genMakerOrder(web3, marketId, deadline, collateral, signer) {
     const extra = web3.utils.toHex('QmfSnGmfexFsLDkbgN76Qhx2W8sxrNDobFEQZ6ER5qg2wW'+randomHex(1));
 
     const dealId = web3.utils.soliditySha3(
-        {t: 'bytes32', v: marketId}
-      , {t: 'uint256', v: 1}
+        {t: 'uint256', v: 1}
       , {t: 'uint256', v: 2}
     );
     const order = web3.eth.abi.encodeParameters(
@@ -25,8 +24,7 @@ async function genTakerOrder(web3, marketId, deadline, signer) {
     const extra = web3.utils.toHex('QmfSnGmfexFsLDkbgN76Qhx2W8sxrNDobFEQZ6ER5qg2wW'+randomHex(1));
 
     const dealId = web3.utils.soliditySha3(
-        {t: 'bytes32', v: marketId}
-      , {t: 'uint256', v: 1}
+        {t: 'uint256', v: 1}
       , {t: 'uint256', v: 2}
     );
     const order = web3.eth.abi.encodeParameters(

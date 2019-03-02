@@ -145,10 +145,10 @@ contract Exchange is IExchange, SingletonHash {
     }
 
     function startTrade(
-        bytes calldata makerOrder,
-        bytes calldata makerSignature,
-        bytes calldata takerOrder,
-        bytes calldata takerSignature
+        bytes calldata _makerOrder,
+        bytes calldata _makerSignature,
+        bytes calldata _takerOrder,
+        bytes calldata _takerSignature
     ) external returns (
         uint256 id
     ) {
@@ -157,23 +157,25 @@ contract Exchange is IExchange, SingletonHash {
         Trade storage trade = trades[id];
 
         // Recover trader addresses
-        singleton(keccak256(makerOrder));
-        trade.maker = keccak256(makerOrder)
+        bytes32 makerOrderHash = keccak256(_makerOrder);
+        singleton(makerOrderHash);
+        trade.maker = makerOrderHash
             .toEthSignedMessageHash()
-            .recover(makerSignature);
+            .recover(_makerSignature);
 
-        singleton(keccak256(takerOrder));
-        trade.taker = keccak256(takerOrder)
+        bytes32 takerOrderHash = keccak256(_takerOrder);
+        singleton(takerOrderHash);
+        trade.taker = takerOrderHash
             .toEthSignedMessageHash()
-            .recover(takerSignature);
+            .recover(_takerSignature);
 
         // Open order at current block
         trade.startBlock = block.number;
         trade.state = TradeState.Start;
 
         // Process orders
-        require(processMakerOrder(id, makerOrder));
-        require(processTakerOrder(id, takerOrder));
+        require(processMakerOrder(id, _makerOrder));
+        require(processTakerOrder(id, _takerOrder));
 
         // Notify oracles to start transfer checking
         Set.Address storage oracles = markets[trade.market].oracles;
