@@ -1,0 +1,28 @@
+@startuml
+title <b>Taker<b> \n takes offers from orderbook for market exchange
+left to right direction
+
+actor Taker
+
+rectangle DApp {
+  usecase "Get orderbook" as getOrderBook
+  usecase "Pick offer" as pickOffer
+  usecase "Open trade" as openTrade
+  usecase "Approve collateral" as approveCollateral
+  usecase "Sign confirmation" as signConfirmation
+  usecase "Send crypto" as sendCrypto
+  usecase "Send collateral" as sendCollateral
+}
+
+Taker -- getOrderBook
+Taker -- pickOffer
+Taker -- openTrade
+Taker -- approveCollateral
+Taker -- signConfirmation
+Taker -- sendCrypto
+
+openTrade .. approveCollateral : <<include>>
+openTrade .. signConfirmation : <<include>>
+sendCrypto .. sendCollateral : <<alternative>>
+
+@enduml
