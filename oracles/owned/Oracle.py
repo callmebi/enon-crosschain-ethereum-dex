@@ -30,7 +30,7 @@ class Oracle:
 
     def main(self, trade_id):
         trade = self.exchange.getTrade(trade_id)
-        market = self.exchange.getMarket(self.trade[0])
+        market = self.exchange.getMarket(trade[0])
 
         maker_params = self.ipfs.get_json(trade[10])
         taker_params = self.ipfs.get_json(trade[11])
