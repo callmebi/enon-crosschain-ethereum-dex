@@ -172,13 +172,13 @@ if __name__ == '__main__':
                     debug('Waiting for transfers trade_id = {}'.format(trade_id))
                     sleep(30)
                     res = oracle.main(trade_id)
-                    debug('Oracle returns {} for trade_id = {}', format(res, trade_id))
+                    debug('Oracle returns {} for trade_id = {}'.format(res, trade_id))
 
-                    if RES & MAKER_TRANSFER_CONFIRMED > 0:
+                    if res & MAKER_TRANSFER_CONFIRMED > 0:
                         info('Maker transfer confirmed: trade_id = {}'.format(trade_id))
                         send_tx(oracle_contract.functions.confirmMakerTransfer(trade_id))
 
-                    if RES & TAKER_TRANSFER_CONFIRMED > 0:
+                    if res & TAKER_TRANSFER_CONFIRMED > 0:
                         info('Taker transfer confirmed: trade_id = {}'.format(trade_id))
                         send_tx(oracle_contract.functions.confirmTakerTransfer(trade_id))
             Thread(target=trade_check_thread, daemon=True).start()

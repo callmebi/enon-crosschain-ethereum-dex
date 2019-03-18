@@ -9,6 +9,7 @@ from ipfsapi import connect
 
 # Network adapters 
 from Exchange import Exchange
+from logging import warning, debug
 from ERC20 import Token
 from ETH import Ethereum
 from BTC import Bitcoin
@@ -27,25 +28,34 @@ class Oracle:
 
         self.exchange = Exchange(self.web3, Web3.toChecksumAddress(exchange_address)) 
 
-
     def main(self, trade_id):
         trade = self.exchange.getTrade(trade_id)
         market = self.exchange.getMarket(trade[0])
+        debug('Check trade {} at market {}'.format(trade, market))
 
         maker_params = self.ipfs.get_json(trade[10])
         taker_params = self.ipfs.get_json(trade[11])
 
         # TODO: check deal hash
 
-        taker_res = self.taker_transfer_check(trade, market, maker_params)
-        maker_res = self.maker_transfer_check(trade, market, taker_params)
+        taker_res = 0
+        try:
+            taker_res = self.taker_transfer_check(trade, market, maker_params)
+        except Exception as e:
+            warning('Oracle exception: {}'.format(e))
+
+        maker_res = 0
+        try:
+            maker_res = self.maker_transfer_check(trade, market, taker_params)
+        except Exception as e:
+            warning('Oracle exception: {}'.format(e))
 
         return (taker_res | maker_res)
 
     def taker_timeout(self, trade, market):
         return trade[8] == 0 and trade[7] + market[1] < self.web3.eth.blockNumber
 
-    def maker_timeout(self):
+    def maker_timeout(self, trade, market):
         return trade[8] > 0 and trade[8] + market[0] < self.web3.eth.blockNumber
 
     def taker_transfer_check(self, trade, market, params):
