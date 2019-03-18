@@ -2,12 +2,14 @@
 ##
 #  Oraclize oracle main
 ##
+import codecs
 from os import environ
 from time import sleep
 from json import loads
+from eth_keys import keys
 from Oracle import Oracle
 from Oracle import WAITING_FOR_TRANSFER, MAKER_TRANSFER_CONFIRMED, TAKER_TRANSFER_CONFIRMED
-from logging import debug, info, basicConfig, DEBUG
+from logging import debug, info, basicConfig, INFO, DEBUG
 from threading import Timer, Thread
 from web3 import Web3, WebsocketProvider
 
@@ -136,35 +138,49 @@ OWNED_ORACLE_ABI = loads('''
 ''')
 
 if __name__ == '__main__':
-    info('Enon oracle application v0.1')
+    info('Enon oracle :: v0.1')
     exchange_address = environ['ARG0']
     oracle_address = environ['ARG1']
     oracle = Oracle(exchange_address, oracle_address)
 
     web3 = Web3(WebsocketProvider(WEB3_PROVIDER))
+    private_key = codecs.decode(environ['ARG2'], 'hex')
+    account_address = keys.PrivateKey(private_key).public_key.to_checksum_address()
+    info('Use account: {}'.format(account_address))
+    def send_tx(tx_gen):
+        nonce = web3.eth.getTransactionCount(account_address)
+        unsigned = tx_gen.buildTransaction({
+            'chainId': 42,
+            'gas': 300000,
+            'gasPrice': web3.toWei(1, 'gwei'),
+            'nonce': nonce})
+        signed = web3.eth.account.signTransaction(unsigned, private_key=private_key)
+        web3.eth.sendRawTransaction(signed.rawTransaction)
+
     oracle_contract = web3.eth.contract(oracle_address, abi=OWNED_ORACLE_ABI)
     event_filter = oracle_contract.eventFilter('CheckTrade') 
     def check_trades():
-        info('Poll contract events...')
+        debug('Poll contract events')
         for e in event_filter.get_new_entries():
             trade_id = e['args']['id']
-            info('Pending trade: id = {}'.format(trade_id))
+            debug('Pending trade: id = {}'.format(trade_id))
 
             def trade_check_thread():
-                debug('Started transfer tracker: trade_id = {}'.format(trade_id))
+                info('Started transfer tracker: trade_id = {}'.format(trade_id))
                 res = WAITING_FOR_TRANSFER
                 while res & WAITING_FOR_TRANSFER > 0:
                     debug('Waiting for transfers trade_id = {}'.format(trade_id))
                     sleep(30)
                     res = oracle.main(trade_id)
+                    debug('Oracle returns {} for trade_id = {}', format(res, trade_id))
 
                     if RES & MAKER_TRANSFER_CONFIRMED > 0:
                         info('Maker transfer confirmed: trade_id = {}'.format(trade_id))
-                        oracle_contract.functions.confirmMakerTransfer(trade_id).transact()
+                        send_tx(oracle_contract.functions.confirmMakerTransfer(trade_id))
 
                     if RES & TAKER_TRANSFER_CONFIRMED > 0:
                         info('Taker transfer confirmed: trade_id = {}'.format(trade_id))
-                        oracle_contract.functions.confirmTakerTransfer(trade_id).transact()
+                        send_tx(oracle_contract.functions.confirmTakerTransfer(trade_id))
             Thread(target=trade_check_thread, daemon=True).start()
         Timer(10, check_trades).start()
 
