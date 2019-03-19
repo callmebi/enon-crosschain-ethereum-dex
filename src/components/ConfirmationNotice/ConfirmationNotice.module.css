@@ -1,0 +1,36 @@
+.text {
+	margin-bottom: 24px;
+	color: #000;
+	font-size: 21px;
+	line-height: 35px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.confirmationCntr {
+	padding: 12px 0px;
+	margin-bottom: 25px;
+}
+
+.confirmationCntr::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.confirmationLable {
+	float: left;
+}
+
+.confirmationContent {
+	float: right;
+}
+
+.confirmationCounter {
+	margin-right: 5px;
+	color: #1acf9d;
+}
+
+.continueBtn {
+	width: 100%
+}

@@ -1,0 +1,26 @@
+.ENOrderList_row {}
+
+.ENOrderList_column {
+	border-bottom: none;
+}
+
+.ENOrderList_cntr .ant-table-tbody>tr>td {
+	border-bottom: none;
+	padding: 10px 17px;
+}
+
+.ENOrderList_cntr .ant-table-thead>tr>th {
+	background: none;
+}
+
+/* .ant-table-tbody>tr>td:hover {
+	background-color: gainsboro;
+}
+
+.ant-table-tbody>tr:hover {
+	background-color: gainsboro;
+} */
+
+.ENOrderList_cntr .ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+	background-color: hsla(156, 2%, 55%, .07);
+}

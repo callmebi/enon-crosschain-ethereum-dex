@@ -1,0 +1,47 @@
+.cntr {
+	height: 90px;
+	width: 100%;
+	min-width: 480px;
+	max-width: 620px;
+	padding: 20px 20px;
+	text-align: left;
+	display: flex;
+	border-right: 1px #ddd solid;
+	justify-content: space-between;
+}
+
+/* .cntr::after {
+	content: '';
+	clear: both;
+	display: block;
+} */
+
+.currIcon {
+	height: 20px;
+	width: 20px;
+	/* margin-left: 5px; */
+}
+
+.section {
+	/* float: left; */
+	/* width: 33%; */
+	/* display: inline-block; */
+}
+
+.sHeader {
+	margin-bottom: 5px;
+}
+
+.sContent {}
+
+.amount {
+	margin-left: 5px;
+}
+
+.compare {
+	margin-left: 5px;
+}
+
+.abbr {
+	margin-left: 5px;
+}

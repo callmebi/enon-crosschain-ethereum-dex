@@ -1,0 +1,41 @@
+.itemText {
+	/* font-weight: bolder; */
+}
+
+.menuItem {
+	padding: 18px 0px;
+	line-height: 20px;
+}
+
+.menuItem:hover {
+	background-color: rgba(0, 0, 0, .09);
+}
+
+.iconCntr {
+	display: inline-block;
+	vertical-align: top;
+	width: 40px;
+	font-size: 22px;
+}
+
+.textCntr {
+	display: inline-block;
+	vertical-align: top;
+	width: 160px;
+}
+
+.badgeCntr {
+	display: inline-block;
+	vertical-align: top;
+	width: 40px;
+	text-align: right;
+}
+
+.gasIcon {
+	background-image: url('/img/sliders.svg');
+	width: 22px;
+	height: 22px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+}

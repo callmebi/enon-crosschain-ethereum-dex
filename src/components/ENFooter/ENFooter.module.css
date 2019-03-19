@@ -1,0 +1,53 @@
+.cntr {
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	height: 90px;
+	border-top: 1px #dddddd solid;
+}
+
+.orderDetails {
+	float: left;
+	width: 32%;
+	min-width: 480px;
+}
+
+.collateralCntr {
+	float: left;
+	height: 100%;
+	margin-left: 50px;
+}
+
+.buyBtnCntr {
+	float: right;
+	height: 100%;
+	margin-right: 30px;
+	max-width: 330px;
+	width: 20%;
+}
+
+.buyBtnCntr:before {
+	display: inline-block;
+	height: 100%;
+	content: close-quote;
+	vertical-align: middle;
+}
+
+.collateralCntr:before {
+	display: inline-block;
+	height: 100%;
+	content: close-quote;
+	vertical-align: middle;
+}
+
+.buyBtn {
+	display: inline-block;
+	vertical-align: middle;
+	/* max-width: 330px; */
+	width: 100%;
+}
+
+.collateral {
+	display: inline-block;
+	vertical-align: middle;
+}

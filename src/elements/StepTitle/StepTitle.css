@@ -1,0 +1,30 @@
+.div-block-129-c7opy-copy {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: stretch;
+	-webkit-align-items: stretch;
+	-ms-flex-align: stretch;
+	align-items: stretch;
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 auto;
+	-ms-flex: 0 0 auto;
+	flex: 0 0 auto;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.div-block-129-c7opy-copy.stp {
+	box-shadow: inset 0 -5px 0 0 #006663;
+}

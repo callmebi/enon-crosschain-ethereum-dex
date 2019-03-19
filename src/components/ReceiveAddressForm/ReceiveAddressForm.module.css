@@ -1,0 +1,20 @@
+.text {
+	margin-bottom: 24px;
+	color: #000;
+	font-size: 21px;
+	line-height: 35px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.address {}
+
+.reconfirm {
+	margin-bottom: 60px;
+}
+
+.submit {}
+
+.submitBtn {
+	width: 100%
+}
