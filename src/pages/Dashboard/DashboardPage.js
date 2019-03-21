@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../../components/Header/Header';
-import ENDrawer from '../../components/Drawer/ENDrawer';
-import ENOrderList from '../../components/ENOrderList';
+import { ConnectedHeader as Header } from '../../components/Header/Header';
+import { ConnectedENDrawer as ENDrawer } from '../../components/Drawer/ENDrawer';
+import { ConnectedENOrderList as ENOrderList } from '../../components/ENOrderList';
 import SwitchBuySellOrderList from '../../components/SwitchBuySellOrderList';
 import OrderDetails from '../../components/OrderDetails';
 import ENFooter from '../../components/ENFooter';
@@ -50,10 +50,10 @@ export default (props) => {
 
 	return (
 		<div>
-			<Header />
-			{/* <ENDrawer /> */}
+			<Header onClickMenuItem={console.log} />
+			<ENDrawer />
 			{/* <SwitchBuySellOrderList onSwitch={console.log} /> */}
-			{/* <ENOrderList onOrderSelected={console.log} /> */}
+			<ENOrderList onOrderSelected={console.log} />
 			<CompareToMarketplaceOrder visible={false} theOrder={{
 				price: {
 					amount: 28.19512548

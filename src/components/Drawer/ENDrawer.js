@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Drawer, Divider } from 'antd';
 import ENUser from '../ENUser/ENUser';
 import UserMenu from '../UserMenu/UserMenu';
-import CurrencyMenu from '../CurrencyMenu/CurrencyMenu';
+import { ConnectedCurrencyMenu as CurrencyMenu } from '../CurrencyMenu/CurrencyMenu';
+import { connect } from 'react-redux';
 
 /** 
  * @module ENDrawer 
@@ -20,17 +21,23 @@ import CurrencyMenu from '../CurrencyMenu/CurrencyMenu';
  * @param {boolean} visible - opened or closed state of the component.
  * @param {onClose} onClose - on drawer close callback.
  */
-export default (props) => {
+const ENDrawer = (props) => {
 
-	let [vsbl, setVsbl] = useState(props.visible ? props.visible : false)
+	console.log(props)
+
+	if (!props.connected) {
+		var [vsbl, setVsbl] = useState(props.visible ? props.visible : false)
+	} else {
+		var vsbl = props.visible;
+	}
 
 	return (
 		<Drawer
 			placement="left"
 			closable={false}
 			onClose={e => {
-				setVsbl(false);
-				props.onClose(e);
+				!props.connected && setVsbl(false);
+				props.onClose && props.onClose(e);
 			}}
 			visible={vsbl}
 			width={290}
@@ -49,3 +56,27 @@ export default (props) => {
 		</Drawer>
 	)
 }
+
+export default ENDrawer;
+
+function onClose(id) {
+	console.log(id)
+	return {
+		type: 'CLOSE_DRAWER',
+		payload: id
+	}
+}
+
+function mapState(state) {
+	console.log(state);
+
+	return {
+		visible: state.drawer.visible,
+		connected: true
+	}
+
+}
+
+const ConnectedENDrawer = connect(mapState, { onClose })(ENDrawer);
+
+export { ConnectedENDrawer }

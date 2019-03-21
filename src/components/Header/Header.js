@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import styles from './Header.module.css';
 import './Header.css';
@@ -20,7 +21,7 @@ import './Header.css';
  * @param {number} messageNumber - Number of new items or events to show on header, in the App is used to show number of new user's limit orders.
  * @param {onClickMenuItem} onClickMenuItem - The callback that handles clicks on menu items. 
  */
-export default ({ messageNumber, onClickMenuItem }) => {
+const Header = ({ messageNumber, onClickMenuItem }) => {
 	return (
 		<div className={styles.header} >
 			<div className={styles.leftMenu}>
@@ -47,3 +48,25 @@ export default ({ messageNumber, onClickMenuItem }) => {
 		</div>
 	)
 }
+
+function onClickMenuItem(id) {
+	console.log(id)
+	if (id === 'openDrawerBtn') {
+		return {
+			type: 'OPEN_DRAWER',
+			payload: id
+		}
+	} else if (id === 'createLimitOrderBtn') {
+		return {
+			type: 'CREATE_LIMIT_ORDER_START',
+			payload: id
+		}
+	}
+
+}
+
+const ConnectedHeader = connect(null, { onClickMenuItem })(Header);
+
+export { ConnectedHeader };
+
+export default Header;

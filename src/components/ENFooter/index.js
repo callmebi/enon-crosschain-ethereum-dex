@@ -53,7 +53,7 @@ export default ({ collateral, buyBtn }) => {
 					id="footer_buy_btn"
 					className={styles.buyBtn}
 					onClick={e => buyBtn.callback(e.target.id, e)}
-					caption={buyBtn.caption ? buyBtn.caption : 'Buy now'}
+					caption={buyBtn && buyBtn.caption ? buyBtn.caption : 'Buy now'}
 				/>
 			</div>
 		</div>

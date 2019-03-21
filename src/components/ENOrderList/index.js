@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
+import { connect } from 'react-redux';
 import ButtonSelectOrder from '../../elements/ButtonSelectOrder/ButtonSelectOrder';
 import CurrencyBadge from '../../elements/CurrencyBadge/CurrencyBadge';
 import styles from './ENOrderList.module.css';
@@ -66,7 +67,7 @@ const data = [{
  * @param {OrderItem[]} orders - Array of limit orders.
  * @param {onOrderSelected} onOrderSelected - The callback that handles selection order item from list of limit orders. 
  */
-export default (props) => {
+const ENOrderList = (props) => {
 	return (
 		<div className="ENOrderList_cntr">
 			<Table className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>
@@ -112,3 +113,15 @@ export default (props) => {
 		</div>
 	)
 }
+
+export default ENOrderList;
+
+function mapState(state) {
+	return {
+		orders: state.limitOrderList.orders
+	}
+}
+
+const ConnectedENOrderList = connect(mapState)(ENOrderList);
+
+export { ConnectedENOrderList };

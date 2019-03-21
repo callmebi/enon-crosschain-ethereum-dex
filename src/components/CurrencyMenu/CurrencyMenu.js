@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getLimitOrders as onCurrencySelected } from '../../redux/actions'
 import styles from './CurrencyMenu.module.css';
 import CurrencyBadge from '../../elements/CurrencyBadge/CurrencyBadge';
 
-export default (props) => {
+const CurrencyMenu = (props) => {
 
 	function currSelected(currAbbr) {
 		if (props.onCurrencySelected)
@@ -35,3 +37,16 @@ export default (props) => {
 		</div>
 	)
 }
+
+export default CurrencyMenu;
+
+// function onCurrencySelected(currAbbr) {
+// 	return {
+// 		type: 'SELECT_CURRENCY',
+// 		payload: currAbbr
+// 	}
+// }
+
+const ConnectedCurrencyMenu = connect(null, { onCurrencySelected })(CurrencyMenu);
+
+export { ConnectedCurrencyMenu }
