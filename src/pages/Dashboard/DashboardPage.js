@@ -12,7 +12,14 @@ import CLOEnterCurrAndAmount from '../../components/CLOEnterCurrAndAmount';
 import CreateLimitOrder from '../../features/CreateLimitOrder';
 
 /**
- * The TradeCurrency object contains data about selling or buying currency.
+ * The TradeCurrency object describes how much and which cryptocurrency would be trading.
+ * @typedef {Object} TradeCurrency
+ * @property {number} amount - Amount of the cryptocurrency to trade.
+ * @property {string} abbr - Abbreviation of the currency e.g. BTC.
+ */
+
+/**
+ * The OrderItemTradeCurrency object contains data about selling or buying currency.
  * @typedef {Object} OrderItemTradeCurrency
  * @property {number} amount - Amount of the cryptocurrency to trade.
  * @property {string} name - Name of the currency e.g. Bitcoin.

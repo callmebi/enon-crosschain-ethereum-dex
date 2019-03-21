@@ -6,6 +6,25 @@ import ButtonNext from '../../elements/ButtonNext/ButtonNext';
 import ENInput from '../../elements/ENInput/ENInput';
 import './ENLogin.css';
 
+/** 
+ * @module ENLogin 
+ * The ENLogin component.
+ */
+
+/**
+ * @callback onLoginOptCb
+ * @param {Object} LogInOptData - Log In option (way do log in) data.
+ * @param {string} LogInOptData.loginOpt - Name of the log in option.
+ * @param {string} [LogInOptData.privateKey] - Ethereum account private key, when a user log in via submitting private key.
+ */
+
+/**
+ * Function that creates React's ENLogin component.
+ * The ENLogin component that lets user to log in different ways e.g. via Metamask, with private key of user's existing ethereum account etc.
+ * @function ENLogin
+ * @param {boolean} visible - The component state open or close.
+ * @param {onLoginOptCb} onLoginOpt - Link to the user avatar image.
+ */
 class LogIn extends Component {
 	constructor(props) {
 		super(props)
@@ -33,8 +52,15 @@ class LogIn extends Component {
 								<span>{this.loginTitle}</span>
 							</div>
 							<div className="login_opts_cntr">
-								<LoginOpt onClick={(e) => this.props.onLoginOpt({ event: e, loginOpt: 'metamask' })} iconSrc="/img/metamask.png" caption="Login with metamask" />
-								<LoginOpt onClick={(e) => this.props.onLoginOpt({ event: e, loginOpt: 'create_eth_addr' })} iconSrc="/img/icons8-ethereum-90_1icons8-ethereum-90.png" caption="Create ethereum address" />
+								<LoginOpt
+									onClick={(e) => this.props.onLoginOpt({ event: e, loginOpt: 'metamask' })}
+									iconSrc="/img/metamask.png"
+									caption="Login with metamask"
+								/>
+								<LoginOpt
+									onClick={(e) => this.props.onLoginOpt({ event: e, loginOpt: 'create_eth_addr' })}
+									iconSrc="/img/icons8-ethereum-90_1icons8-ethereum-90.png"
+									caption="Create ethereum address" />
 							</div>
 							<div className="login_form_cntr">
 								<Form

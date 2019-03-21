@@ -7,7 +7,7 @@ export default (props) => {
 
 	const Option = Select.Option;
 
-	let [inputVal, setInputVal] = useState('');
+	let [inputVal, setInputVal] = useState(props.defaultValue ? props.defaultValue : '');
 	let [selectVal, setSelectVal] = useState(props.defaultCurrency ? props.defaultCurrency : 'ETH');
 
 	function onChange(e) {
@@ -27,7 +27,7 @@ export default (props) => {
 	}
 
 	const selectAfter = (
-		<Select className="CurrencyInput_select" onSelect={onSelect} defaultValue={props.defaultCurrency && 'ETH'} >
+		<Select className="CurrencyInput_select" onSelect={onSelect} defaultValue={selectVal} >
 			<Option value="BTC"><CurrencyAbbr abbr="BTC" iconSrc="/img/BTC.png" /></Option>
 			<Option value="MNR"><CurrencyAbbr abbr="MNR" iconSrc="/img/MNR.png" /></Option>
 			<Option value="ETH"><CurrencyAbbr abbr="ETH" iconSrc="/img/ETH.png" /></Option>
@@ -42,6 +42,7 @@ export default (props) => {
 			defaultValue={props.defaultValue}
 			placeholder={props.title}
 			className={props.className}
+			value={props.inputValue}
 		/>
 	)
 }

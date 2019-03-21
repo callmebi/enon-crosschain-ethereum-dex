@@ -1,6 +1,29 @@
 import React from 'react';
 import styles from './OrderDetails.module.css';
 
+/** 
+ * @module OrderDetails 
+ * The OrderDetails component.
+ */
+
+/**
+ * The OrderDetailsTradeCurrency object describes limit order's data about how much and which cryptocurrency would be trading.
+ * @typedef {Object} OrderDetailsTradeCurrency
+ * @property {number} amount - Amount of the cryptocurrency to trade.
+ * @property {string} abbr - Abbreviation of the currency e.g. BTC.
+ * @property {string} amountDollar - Amount of the cryptocurrency to trade in USD.
+ */
+
+/**
+ * Function that creates React's OrderDetails component.
+ * The OrderDetails component that show details about selected limit order.
+ * @function OrderDetails
+ * @param {Object} order - Limit order data.
+ * @param {OrderDetailsTradeCurrency} send - Describes limit order's data about how much and which cryptocurrency would be selling.
+ * @param {OrderDetailsTradeCurrency} receive - Describes limit order's data about how much and which cryptocurrency would be buying.
+ * @param {Object} price - The price data of the buying currency.
+ * @param {Object} price.amount - The price of the buying currency in selling cryptocurrency.
+ */
 export default ({ order, price }) => {
 	return (
 		<div className={styles.cntr} >

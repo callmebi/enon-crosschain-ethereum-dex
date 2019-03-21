@@ -5,7 +5,6 @@ import styles from './UserMenu.module.css'
 export default (props) => {
 	return (
 		<div>
-
 			<div className={styles.menuItem}>
 				<div className={styles.iconCntr}>
 					<Icon type="folder" />
@@ -13,17 +12,13 @@ export default (props) => {
 				<div className={styles.textCntr}>
 					<span className={styles.itemText}>My orders</span>
 				</div>
-				<div className={styles.badgeCntr}>
-					<Badge
-						// style={{
-						// 	width: '10px',
-						// 	height: '10px',
-						// 	backgroundColor: '#55efc4'
-						// }}
-						count={props.myNewOrderCount}
-					>
-					</Badge>
-				</div>
+				{props.myNewOrderCount &&
+					<div className={styles.badgeCntr}>
+						<Badge
+							count={props.myNewOrderCount}
+						>
+						</Badge>
+					</div>}
 			</div>
 			<div className={styles.menuItem}>
 				<div className={styles.iconCntr}>

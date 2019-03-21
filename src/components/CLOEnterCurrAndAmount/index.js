@@ -5,6 +5,30 @@ import CurrencyInput from '../../elements/CurrencyInput/CurrencyInput';
 import styles from './CLOEnterCurrAndAmount.module.css';
 import './CLOEnterCurrAndAmount.css';
 
+/** 
+ * @module CLOEnterCurrAndAmount 
+ * The CLOEnterCurrAndAmount component.
+ */
+
+/**
+ * This callback handles the trade data submiting.
+ * @callback onContinue
+ * @param {Object} tradeData - How much and which currency will be trading.
+ * @param {Object} tradeData.you_pay - How much and which currency will be sending.
+ * @param {number} tradeData.you_pay.amount - Currency amount to send.
+ * @param {string} tradeData.you_pay.abbr - Currency abbreviation that will be sent.
+ * @param {Object} tradeData.you_got - How much and which currency will be receiving.
+ * @param {number} tradeData.you_got.amount - Currency amount to receive while trade.
+ * @param {string} tradeData.you_got.abbr - Currency abbreviation that will be received.
+ */
+
+/**
+ * Function that creates React's CLOEnterCurrAndAmount component.
+ * The CLOEnterCurrAndAmount component that lets a user to submit how much and which currencies a user want to trade.
+ * @function CLOEnterCurrAndAmount
+ * @param {boolean} visible - opened or closed state of the component.
+ * @param {onContinue} onContinue - The callback that handles the trade data submiting. 
+ */
 export default ({ onContinue, visible }) => {
 
 	const [mVisible, setMVisible] = useState(visible);

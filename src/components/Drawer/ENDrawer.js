@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Drawer, Divider } from 'antd';
 import ENUser from '../ENUser/ENUser';
 import UserMenu from '../UserMenu/UserMenu';
@@ -10,17 +10,29 @@ import CurrencyMenu from '../CurrencyMenu/CurrencyMenu';
  */
 
 /**
+ * @callback onClose
+ * @param {Object} e - drawer on close event.
+ */
+
+/**
  * function that creates React's ENDrawer component.
  * @function ENDrawer
  * @param {boolean} visible - opened or closed state of the component.
+ * @param {onClose} onClose - on drawer close callback.
  */
 export default (props) => {
+
+	let [vsbl, setVsbl] = useState(props.visible ? props.visible : false)
+
 	return (
 		<Drawer
 			placement="left"
 			closable={false}
-			//   onClose={this.onClose}
-			visible={props.visible}
+			onClose={e => {
+				setVsbl(false);
+				props.onClose(e);
+			}}
+			visible={vsbl}
 			width={290}
 		>
 			<ENUser

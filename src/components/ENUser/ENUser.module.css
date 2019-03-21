@@ -1,6 +1,9 @@
 .ethAddr {
 	color: #000;
 	font-weight: 400;
+	overflow-wrap: normal;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .onlineStatusBadge {}

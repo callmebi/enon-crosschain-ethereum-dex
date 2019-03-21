@@ -1,16 +1,21 @@
 import React from 'react';
-import { Radio, Icon } from 'antd';
+import { Button, Icon } from 'antd';
 import './ChangeAmount.css'
 
 export default (props) => {
+
+	function onChange(e) {
+		props.onAmountChange(e, parseInt(e.target.value));
+	}
+
 	return (
-		<Radio.Group defaultValue="plus" buttonStyle="solid">
-			<Radio.Button onClick={(e) => props.onAmountChange(e, +1)} shape="circle" value="plus">
+		<div className="ChangeAmount_cntr">
+			<Button onClick={onChange} shape="circle" value="+1">
 				<Icon type="plus-circle" />
-			</Radio.Button>
-			<Radio.Button onClick={(e) => props.onAmountChange(e, -1)} shape="circle" value="minus">
+			</Button>
+			<Button onClick={onChange} shape="circle" value="-1" style={{ marginLeft: '5px' }}>
 				<Icon type="minus-circle" />
-			</Radio.Button>
-		</Radio.Group>
+			</Button>
+		</div>
 	)
 }
