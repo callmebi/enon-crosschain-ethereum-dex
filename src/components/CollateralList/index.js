@@ -24,7 +24,7 @@ import './CollateralList.css';
  * @param {MarketplaceOrder[]} collaterals - Array of Collateral's data.
  * @param {boolean} visible - The component state open or close.
  */
-export default ({ collaterals, visible }) => {
+export default ({ collaterals, visible, setVisible }) => {
 
 	let collateralList = [];
 	if (collaterals) {
@@ -47,6 +47,7 @@ export default ({ collaterals, visible }) => {
 		<div className="CollateralList_cntr">
 			<Modal
 				visible={visible}
+				onCancel={() => setVisible(false)}
 				footer={null}
 				width={900}
 				title={<span className="CollateralList_modal_header" > Collateral </span>}

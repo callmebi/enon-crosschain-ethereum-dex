@@ -5,7 +5,17 @@ import { action } from '@storybook/addon-actions';
 
 import ENFooter from '../src/components/ENFooter';
 
+import { Provider } from 'react-redux';
+import store from '../src/redux/store';
+
+const withProvider = (story) => (
+	<Provider store={store}>
+		{story()}
+	</Provider>
+)
+
 storiesOf('ENFooter', module)
+	.addDecorator(withProvider)
 	.add('with 160 collaterals and ETH currency', () => (
 		<ENFooter
 			collateral={{

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import CompareToMarketplaceOrder from '../CompareToMarketplaceOrder';
 import styles from './OrderDetails.module.css';
 
 /** 
@@ -24,7 +26,10 @@ import styles from './OrderDetails.module.css';
  * @param {Object} price - The price data of the buying currency.
  * @param {Object} price.amount - The price of the buying currency in selling cryptocurrency.
  */
-export default ({ order, price }) => {
+const OrderDetails = ({ order, price }) => {
+
+	let [compareVisible, setCompareVisible] = useState(false);
+
 	return (
 		<div className={styles.cntr} >
 			<div className={styles.section}>
@@ -50,13 +55,38 @@ export default ({ order, price }) => {
 			<div className={styles.section}>
 				<div className={styles.sHeader}>
 					Price 1 {order.receive.abbr}
-					<a href="#compare" className={styles.compare}>Compare</a>
+					<a href="#compare" onClick={e => setCompareVisible(true)} className={styles.compare}>Compare</a>
 				</div>
 				<div className={styles.sContent}>
 					<span className={styles.priceAmount}>{price.amount}</span>
 					<span className={styles.abbr}>{order.send.abbr}</span>
 				</div>
 			</div>
+			<CompareToMarketplaceOrder visible={compareVisible} setVisible={setCompareVisible} theOrder={{
+				price: {
+					amount: 28.19512548
+				},
+				send: {
+					abbr: 'ETH',
+					amount: 120.669
+				},
+				receive: {
+					abbr: 'BTC'
+				},
+			}} />
 		</div>
 	)
 }
+
+export default OrderDetails;
+
+function mapState(state) {
+	return {
+		order: state.limitOrderDetails.order,
+		price: state.limitOrderDetails.price
+	}
+}
+
+const ConnectedOrderDetails = connect(mapState)(OrderDetails);
+
+export { ConnectedOrderDetails };

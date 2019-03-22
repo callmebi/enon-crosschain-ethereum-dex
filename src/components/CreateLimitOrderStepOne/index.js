@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { Modal, Form } from 'antd';
+import { Alert } from 'antd';
 import ButtonNext from "../../elements/ButtonNext/ButtonNext";
 import CurrencyInput from '../../elements/CurrencyInput/CurrencyInput';
 import styles from './CreateLimitOrderStepOne.module.css';
@@ -61,6 +61,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 	const [youGot, setYouGot] = useState(receiveDefault);
 	const [address, setAddress] = useState('');
 	const [reconfirm, setReconfirm] = useState('');
+	const [validationError, setValidationError] = useState(null)
 
 	function onBtnClick(e) {
 		e.preventDefault()
@@ -90,13 +91,33 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 
 	}
 
+	function onCurrencyInput(input, set) {
+		console.log(input);
+
+		if (!input.err) {
+			set(input)
+			setValidationError(null)
+		}
+		else {
+			set(input)
+			setValidationError(input.err.message)
+		}
+
+	}
+
 	return (
 		<div className={styles.cntr}>
 			<div className={styles.title}>Create limit order</div>
 			<div className={styles.content}>
+				{validationError && <Alert
+					message="Validation error"
+					description={validationError}
+					type="error"
+					showIcon
+				/>}
 				<div className={styles.exchangeCntr}>
 					<CurrencyInput
-						onInput={(input) => setYouPay(input)}
+						onInput={input => onCurrencyInput(input, setYouPay)}
 						title='Send'
 						className={styles.sendInput}
 						defaultCurrency={youPay.abbr}
@@ -105,7 +126,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 					/>
 					<img className={styles.exchangeIcon} src="/img/icons8-up-down-arrow-52.png" alt="/img/icons8-up-down-arrow-52.png" />
 					<CurrencyInput
-						onInput={(input) => setYouGot(input)}
+						onInput={input => onCurrencyInput(input, setYouGot)}
 						title='Receive'
 						className={styles.receiveInput}
 						defaultCurrency={youGot.abbr}

@@ -54,7 +54,7 @@ export default (props) => {
 			<ENDrawer />
 			{/* <SwitchBuySellOrderList onSwitch={console.log} /> */}
 			<ENOrderList onOrderSelected={console.log} />
-			<CompareToMarketplaceOrder visible={false} theOrder={{
+			{/* <CompareToMarketplaceOrder visible={false} theOrder={{
 				price: {
 					amount: 28.19512548
 				},
@@ -65,14 +65,14 @@ export default (props) => {
 				receive: {
 					abbr: 'BTC'
 				}
-			}} />
-			<CollateralList visible={false} collaterals={collaterals} />
+			}} /> */}
+			{/* <CollateralList visible={false} collaterals={collaterals} /> */}
 			{/* <BuyCurrency /> */}
 			{/* <CLOEnterCurrAndAmount
 				visible={true}
 				onContinue={console.log}
 			/> */}
-			<CreateLimitOrder visible={true} />
+			<CreateLimitOrder visible={false} />
 			<ENFooter collateral={{
 				amount: 160,
 				currencyAbbr: 'ETH'

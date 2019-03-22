@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
 import { connect } from 'react-redux';
+import { getLimitOrderDetails as onOrderSelected } from '../../redux/actions'
 import ButtonSelectOrder from '../../elements/ButtonSelectOrder/ButtonSelectOrder';
 import CurrencyBadge from '../../elements/CurrencyBadge/CurrencyBadge';
 import styles from './ENOrderList.module.css';
@@ -122,6 +123,6 @@ function mapState(state) {
 	}
 }
 
-const ConnectedENOrderList = connect(mapState)(ENOrderList);
+const ConnectedENOrderList = connect(mapState, { onOrderSelected })(ENOrderList);
 
 export { ConnectedENOrderList };

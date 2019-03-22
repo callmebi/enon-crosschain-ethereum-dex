@@ -1,5 +1,5 @@
 import { mockLimitOrderList } from '../mockBackend/mockList';
-
+import { getLimitOrderDetails as getLimitOrderById } from '../mockBackend/mockOrder';
 // Meet our first thunk action creator!
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
@@ -39,6 +39,21 @@ export function getLimitOrders(currAbbr) {
 				dispatch({
 					type: 'SET_LIMIT_ORDERS',
 					payload: limitOrders
+				})
+			)
+	}
+}
+
+export function getLimitOrderDetails(id) {
+
+	return function (dispatch) {
+
+		return getLimitOrderById(id)
+			.then(limitOrder =>
+
+				dispatch({
+					type: 'SET_LIMIT_ORDER_DETAILS',
+					payload: limitOrder
 				})
 			)
 	}

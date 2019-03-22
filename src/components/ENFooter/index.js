@@ -1,7 +1,8 @@
-import React from 'react';
-import OrderDetails from '../OrderDetails';
+import React, { useState } from 'react';
+import { ConnectedOrderDetails as OrderDetails } from '../OrderDetails';
 import Button from '../../elements/Button/Button';
 import styles from './ENFooter.module.css';
+import CollateralList from '../../components/CollateralList';
 
 /** 
  * @module ENFooter 
@@ -26,6 +27,19 @@ import styles from './ENFooter.module.css';
  */
 export default ({ collateral, buyBtn }) => {
 
+	let [collateralVisible, setCollateralVisible] = useState(false);
+
+	const collaterals = [];
+
+	for (let i = 0; i < 6; i++) {
+		collaterals.push({
+			key: i,
+			site: 'Enon (enon.com)',
+			eth_addr: '0x7fdcd2a1e52f10c28cb7732f46393e297ecadda1',
+			verifyHref: '#verify'
+		})
+	}
+
 	return (
 		<div className={styles.cntr}>
 			<div className={styles.orderDetails}>
@@ -46,8 +60,9 @@ export default ({ collateral, buyBtn }) => {
 				/>
 			</div>
 			<div className={styles.collateralCntr}>
-				<a className={styles.collateral} href="#collatral">{collateral.amount} {collateral.currencyAbbr} collateral</a>
+				<a onClick={e => setCollateralVisible(true)} className={styles.collateral} href="#collatral">{collateral.amount} {collateral.currencyAbbr} collateral</a>
 			</div>
+			<CollateralList visible={collateralVisible} setVisible={setCollateralVisible} collaterals={collaterals} />
 			<div className={styles.buyBtnCntr}>
 				<Button
 					id="footer_buy_btn"

@@ -59,7 +59,7 @@ const marketplaceMockData = [
  * @param {OrderItem} theOrder - The order selected to compare.
  * @param {boolean} visible - The component state open or close.
  */
-export default ({ theOrder, visible, marketplaceData }) => {
+export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 
 	return (
 		<div className="CompareToMarketpalceOrder_cntr">
@@ -67,6 +67,7 @@ export default ({ theOrder, visible, marketplaceData }) => {
 				visible={visible}
 				footer={null}
 				width={900}
+				onCancel={() => setVisible(false)}
 				title={<span className="CompareToMarketpalceOrder_modal_header" > Price Compare </span>}
 				className="CompareToMarketpalceOrder_modal"
 			>

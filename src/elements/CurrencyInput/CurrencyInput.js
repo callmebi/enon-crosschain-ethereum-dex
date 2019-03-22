@@ -9,13 +9,26 @@ export default (props) => {
 
 	let [inputVal, setInputVal] = useState(props.defaultValue ? props.defaultValue : '');
 	let [selectVal, setSelectVal] = useState(props.defaultCurrency ? props.defaultCurrency : 'ETH');
+	let [errorInputStyle, setErrorInputStyle] = useState({});
 
 	function onChange(e) {
-		setInputVal(e.target.value);
-		props.onInput({
-			amount: e.target.value,
-			abbr: selectVal
-		}, e)
+		let val = e.target.value;
+		if (val.match(/^\d*(\.|\d{0,1})\d*(\s+|)$/ig)) {
+			setInputVal(val);
+			props.onInput({
+				amount: e.target.value,
+				abbr: selectVal
+			}, e)
+			setErrorInputStyle({})
+		} else {
+			setInputVal(val);
+			props.onInput({
+				err: new Error('Input value must be decimal number with or without decimal separator e.g. 120.55'),
+				amount: e.target.value,
+				abbr: selectVal
+			})
+			setErrorInputStyle({ borderColor: 'red', borderWidth: '1px', borderStyle: 'solid', borderRadius: '5px' })
+		}
 	}
 
 	function onSelect(selectedOption, e) {
@@ -42,7 +55,8 @@ export default (props) => {
 			defaultValue={props.defaultValue}
 			placeholder={props.title}
 			className={props.className}
-			value={props.inputValue}
+			value={props.inputValue ? props.inputValue : inputVal}
+			style={errorInputStyle}
 		/>
 	)
 }
