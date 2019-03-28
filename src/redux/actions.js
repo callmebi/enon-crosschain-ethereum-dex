@@ -1,12 +1,15 @@
-import { mockLimitOrderList } from '../mockBackend/mockList';
+//import { mockLimitOrderList } from '../mockBackend/mockList';
 import { getLimitOrderDetails as getLimitOrderById } from '../mockBackend/mockOrder';
+import { limitOrderList } from '../relayBackend/relayApi';
 // Meet our first thunk action creator!
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
-export function getLimitOrders(currAbbr) {
+export function getLimitOrders(currAbbr, ipfs, web3) {
+    console.log(web3);
 	// Thunk middleware knows how to handle functions.
 	// It passes the dispatch method as an argument to the function,
 	// thus making it able to dispatch actions itself.
+    /*
 	let per_page = 10;
 	switch (currAbbr) {
 		case 'ETH':
@@ -18,6 +21,7 @@ export function getLimitOrders(currAbbr) {
 		default:
 			break;
 	}
+    */
 
 	return function (dispatch) {
 		// First dispatch: the app state is updated to inform
@@ -31,7 +35,7 @@ export function getLimitOrders(currAbbr) {
 		// In this case, we return a promise to wait for.
 		// This is not required by thunk middleware, but it is convenient for us.
 
-		return mockLimitOrderList(per_page)
+		return limitOrderList(ipfs, web3)
 			.then(limitOrders =>
 				// We can dispatch many times!
 				// Here, we update the app state with the results of the API call.

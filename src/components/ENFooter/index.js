@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { ConnectedOrderDetails as OrderDetails } from '../OrderDetails';
 import Button from '../../elements/Button/Button';
 import styles from './ENFooter.module.css';
@@ -25,7 +26,7 @@ import CollateralList from '../../components/CollateralList';
  * @param {string} buyBtn.caption - Caption of the button.
  * @param {onBuyBtnClick} buyBtn.callback - OnClick callback of the button.
  */
-export default ({ collateral, buyBtn }) => {
+const ENFooter = ({ collateral, buyBtn }) => {
 
 	let [collateralVisible, setCollateralVisible] = useState(false);
 
@@ -43,21 +44,7 @@ export default ({ collateral, buyBtn }) => {
 	return (
 		<div className={styles.cntr}>
 			<div className={styles.orderDetails}>
-				<OrderDetails
-					order={{
-						send: {
-							abbr: 'ETH',
-							amount: 120,
-							amountDollar: 10000
-						},
-						receive: {
-							abbr: 'BTC',
-							amount: 4,
-							amountDollar: 10000
-						}
-					}}
-					price={{ amount: 28.19512548 }}
-				/>
+				<OrderDetails />
 			</div>
 			<div className={styles.collateralCntr}>
 				<a onClick={e => setCollateralVisible(true)} className={styles.collateral} href="#collatral">{collateral.amount} {collateral.currencyAbbr} collateral</a>
@@ -74,3 +61,15 @@ export default ({ collateral, buyBtn }) => {
 		</div>
 	)
 }
+
+export default ENFooter;
+
+function mapState(state) {
+	return {
+        collateral: state.limitOrderDetails.collateral
+	}
+}
+
+const ConnectedENFooter = connect(mapState)(ENFooter);
+
+export { ConnectedENFooter };

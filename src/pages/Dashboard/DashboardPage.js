@@ -1,10 +1,11 @@
 import React from 'react';
+import { DrizzleContext } from "drizzle-react";
 import { ConnectedHeader as Header } from '../../components/Header/Header';
-import { ConnectedENDrawer as ENDrawer } from '../../components/Drawer/ENDrawer';
+import { ConnectedENDrawer as ENDrawer } from '../../components/ENDrawer/ENDrawer';
 import { ConnectedENOrderList as ENOrderList } from '../../components/ENOrderList';
+import { ConnectedENFooter as ENFooter } from '../../components/ENFooter';
 import SwitchBuySellOrderList from '../../components/SwitchBuySellOrderList';
 import OrderDetails from '../../components/OrderDetails';
-import ENFooter from '../../components/ENFooter';
 import CompareToMarketplaceOrder from '../../components/CompareToMarketplaceOrder';
 import CollateralList from '../../components/CollateralList';
 import BuyCurrency from '../../features/BuyCurrency/BuyCurrency';
@@ -35,23 +36,37 @@ import CreateLimitOrder from '../../features/CreateLimitOrder';
  * @property {number} order_total - Order total in usd.
  */
 
-export default (props) => {
+export default (props) => (
+    <DrizzleContext.Consumer>
+    { drizzleContext => {
+        const { drizzle, drizzleState, initialized } = drizzleContext;
+              
+        if (!initialized) {
+            return "Loading...";
+        }
 
-	const collaterals = [];
+        const account = drizzleState.accounts[0];
+        const balance = drizzleState.accountBalances[account];
+	    const collaterals = [];
 
-	for (let i = 0; i < 6; i++) {
-		collaterals.push({
-			key: i,
-			site: 'Enon (enon.com)',
-			eth_addr: '0x7fdcd2a1e52f10c28cb7732f46393e297ecadda1',
-			verifyHref: '#verify'
-		})
-	}
+	    for (let i = 0; i < 6; i++) {
+		    collaterals.push({
+			    key: i,
+			    site: 'Enon (enon.com)',
+			    eth_addr: '0x7fdcd2a1e52f10c28cb7732f46393e297ecadda1',
+			    verifyHref: '#verify'
+		    })
+	    }
 
-	return (
+	    return (
 		<div>
 			<Header onClickMenuItem={console.log} />
-			<ENDrawer />
+			<ENDrawer
+                account={account}
+                balance={Math.round(drizzle.web3.utils.fromWei(balance, 'finney')) / 1000}
+                ipfs={props.ipfs}
+                web3={drizzle.web3}
+            />
 			{/* <SwitchBuySellOrderList onSwitch={console.log} /> */}
 			<ENOrderList onOrderSelected={console.log} />
 			{/* <CompareToMarketplaceOrder visible={false} theOrder={{
@@ -73,10 +88,9 @@ export default (props) => {
 				onContinue={console.log}
 			/> */}
 			<CreateLimitOrder visible={false} />
-			<ENFooter collateral={{
-				amount: 160,
-				currencyAbbr: 'ETH'
-			}} />
+			<ENFooter />
 		</div>
-	)
-}
+	);
+    }}
+    </DrizzleContext.Consumer>
+)

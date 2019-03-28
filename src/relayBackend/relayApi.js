@@ -1,4 +1,5 @@
-function limitOrderList(web3, ipfs) {
+function limitOrderList(ipfs, web3) {
+    console.log(web3);
     async function decode(order) {
         const params = web3.eth.abi.decodeParameters(
             ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
@@ -7,14 +8,23 @@ function limitOrderList(web3, ipfs) {
         const ipfsRes = await ipfs.get(web3.utils.hexToAscii(params[4]));
         const makerExtra = JSON.parse(ipfsRes[0].content);
         order = Object.assign(order, makerExtra);
-        order.amount = order.buy / 10**8;
-        order.price = order.sell / 10**18 / order.amount;
+        order.receive = {
+            amount: order.buy / 10**8,
+            name: 'Bitcoin',
+            abbr: 'BTC'
+		};
+        order.send = {
+            amount: order.sell / 10**18,
+            name: 'Ethereum',
+            abbr: 'ETH'
+        };
+        // TODO: Order total estimation
+        order.order_total = 8888;
         return order;
     }
     return fetch('http://enon-relay.herokuapp.com/')
         .then(res => res.json())
         .then(orders => Promise.all(orders.map(order => decode(order))))
-        .catch(console.log);
 }
 
 async function signTakerOrder(ipfs, web3, account, recipient, maker) {
@@ -106,4 +116,8 @@ async function makeOrder(contracts, ipfs, web3, account, recipient, order) {
     });
 }
 
-export { limitOrderList, signTakerOrder };
+export {
+    limitOrderList
+  , signTakerOrder
+  , makeOrder
+};

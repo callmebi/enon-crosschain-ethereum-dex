@@ -7,7 +7,7 @@ export default (props) => {
 		<div>
 			<ENLogIn
 				visible={true}
-				onLoginOpt={(e) => console.log(e, 'onMetamaskLogin')}
+				onLoginOpt={(e) => console.log(e) }
 			// onMetamaskLogin={(e) => console.log(e, 'onMetamaskLogin')}
 			// onCreateEthAddr={(e) => console.log(e, 'onCreateEthAddr')}
 			// onPrivateKeySubmit={(e) => {

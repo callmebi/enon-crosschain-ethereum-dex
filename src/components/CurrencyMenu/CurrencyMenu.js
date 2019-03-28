@@ -8,7 +8,7 @@ const CurrencyMenu = (props) => {
 
 	function currSelected(currAbbr) {
 		if (props.onCurrencySelected)
-			props.onCurrencySelected(currAbbr)
+			props.onCurrencySelected(currAbbr, props.ipfs, props.web3)
 	}
 
 	return (
@@ -20,6 +20,7 @@ const CurrencyMenu = (props) => {
 					abbr="BTC"
 				/>
 			</div>
+            {/*
 			<div onClick={() => currSelected('MRN')} className={styles.menuItem} >
 				<CurrencyBadge
 					iconSrc="/img/monero.png"
@@ -27,6 +28,7 @@ const CurrencyMenu = (props) => {
 					abbr="MRN"
 				/>
 			</div>
+            */}
 			<div onClick={() => currSelected('ETH')} className={styles.menuItem} >
 				<CurrencyBadge
 					iconSrc="/img/icons8-ethereum-90_1icons8-ethereum-90.png"

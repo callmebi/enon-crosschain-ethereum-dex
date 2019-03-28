@@ -1,13 +1,15 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { mockLimitOrderList } from '../mockBackend/mockList'
+import getLimitOrders from '../relayBackend/relayApi';
+//import { mockLimitOrderList } from '../mockBackend/mockList'
 
 const initialState = {
 	drawer: {
 		visible: false
 	},
 	limitOrderList: {
-		orders: mockLimitOrderList(20, true)
+		orders: [] 
+        //mockLimitOrderList(20, true)
 	},
 	limitOrderDetails: {
 		order: {
@@ -22,7 +24,8 @@ const initialState = {
 				amountDollar: 10000
 			}
 		},
-		price: { amount: 28.19512548 }
+		price: { amount: 28.19512548 },
+        collateral: { amount: 1000, currencyAbbr: 'ETH' }
 	}
 }
 

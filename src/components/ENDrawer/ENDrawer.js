@@ -43,15 +43,18 @@ const ENDrawer = (props) => {
 			width={290}
 		>
 			<ENUser
-				avatarSrc="/img/download_1download.png"
-				ethAddr="0x1B0....3CA50"
-				etherAvailable="0.0"
+				ethAddr={props.account}
+				etherAvailable={props.balance}
 				onlineStatus="online"
 			/>
 			<Divider />
 			<UserMenu myNewOrderCount={2} />
 			<Divider />
-			<CurrencyMenu onCurrencySelected={currAbbr => console.log(currAbbr)} />
+			<CurrencyMenu
+                ipfs={props.ipfs}
+                web3={props.web3}
+                onCurrencySelected={currAbbr => console.log(currAbbr)}
+            />
 			<Divider />
 		</Drawer>
 	)

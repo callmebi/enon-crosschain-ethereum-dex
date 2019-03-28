@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Avatar, Badge, Icon } from 'antd';
+import makeBlockie from 'ethereum-blockies-base64'
 import styles from './ENUser.module.css';
 
 /** 
@@ -28,7 +29,7 @@ export default (props) => {
 					}}
 					status={props.onlineStatus == "online" ? "success" : "default"}
 					offset={[0, 30]}>
-					<Avatar src={props.avatarSrc} size={35} icon="user" />
+					<Avatar src={makeBlockie(props.ethAddr)} size={35} icon="user" />
 				</Badge>
 			</Col>
 			<Col span={19}>
