@@ -18,8 +18,12 @@ function limitOrderList(ipfs, web3) {
             name: 'Ethereum',
             abbr: 'ETH'
         };
-        // TODO: Order total estimation
+		// TODO: Price estimation 
+        order.price = { amount: 28.19512548 };
+        // TODO: Total estimation
         order.order_total = 8888;
+        // TODO: Collateral fetch
+        order.collateral= { amount: 1000, currencyAbbr: 'ETH' };
         return order;
     }
     return fetch('http://enon-relay.herokuapp.com/')

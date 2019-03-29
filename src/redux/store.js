@@ -7,26 +7,28 @@ const initialState = {
 	drawer: {
 		visible: false
 	},
+    createLimitOrder: {
+        visible: false
+    },
 	limitOrderList: {
 		orders: [] 
         //mockLimitOrderList(20, true)
 	},
-	limitOrderDetails: {
-		order: {
-			send: {
-				abbr: 'ETH',
-				amount: 125,
-				amountDollar: 10000
-			},
-			receive: {
-				abbr: 'BTC',
-				amount: 4,
-				amountDollar: 10000
-			}
+	limitOrderDetails: null
+    /*{
+		send: {
+			abbr: 'ETH',
+			amount: 125,
+			amountDollar: 10000
+		},
+		receive: {
+			abbr: 'BTC',
+			amount: 4,
+			amountDollar: 10000
 		},
 		price: { amount: 28.19512548 },
         collateral: { amount: 1000, currencyAbbr: 'ETH' }
-	}
+	}*/
 }
 
 function rootReducer(state = initialState, action) {
@@ -66,6 +68,20 @@ function rootReducer(state = initialState, action) {
 				...state,
 				limitOrderDetails: action.payload
 			}
+        case 'CREATE_LIMIT_ORDER_START':
+            return {
+                ...state,
+                createLimitOrder: {
+                    visible: true
+                }
+            }
+        case 'CREATE_LIMIT_ORDER_STOP':
+            return {
+                ...state,
+                createLimitOrder: {
+                    visible: false
+                }
+            }
 		default:
 			return state;
 

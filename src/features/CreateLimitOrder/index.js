@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Modal, Form } from 'antd';
 // import ButtonNext from "../../elements/ButtonNext/ButtonNext";
 // import CurrencyInput from '../../elements/CurrencyInput/CurrencyInput';
@@ -7,18 +8,15 @@ import CreateLimitOrderStepOne from '../../components/CreateLimitOrderStepOne';
 import styles from './CreateLimitOrder.module.css';
 import './CreateLimitOrder.css';
 
-export default ({ visible }) => {
-
-	const [mVisible, setMVisible] = useState(visible);
-
+const CreateLimitOrder = ({ visible, onClose }) => {
 	return (
 		<div>
 			<Modal
-				visible={mVisible}
+				visible={visible}
 				footer={null}
 				width={790}
 				className="CreateLimitOrder_modal"
-				onCancel={() => setMVisible(false)}
+				onCancel={onClose}
 			>
 				<div className={styles.cntr}>
 					<div className={styles.stepsMenuCntr}>
@@ -50,3 +48,22 @@ export default ({ visible }) => {
 		</div >
 	)
 }
+
+function onClose(id) {
+	console.log(id)
+	return {
+		type: 'CREATE_LIMIT_ORDER_STOP',
+		payload: id
+	}
+}
+
+function mapState(state) {
+	console.log(state);
+
+	return {
+		visible: state.createLimitOrder.visible,
+	}
+
+}
+
+export default connect(mapState, { onClose })(CreateLimitOrder);

@@ -26,7 +26,7 @@ import styles from './OrderDetails.module.css';
  * @param {Object} price - The price data of the buying currency.
  * @param {Object} price.amount - The price of the buying currency in selling cryptocurrency.
  */
-const OrderDetails = ({ order, price }) => {
+const OrderDetails = ({ order }) => {
 
 	let [compareVisible, setCompareVisible] = useState(false);
 
@@ -58,7 +58,7 @@ const OrderDetails = ({ order, price }) => {
 					<a href="#compare" onClick={e => setCompareVisible(true)} className={styles.compare}>Compare</a>
 				</div>
 				<div className={styles.sContent}>
-					<span className={styles.priceAmount}>{price.amount}</span>
+					<span className={styles.priceAmount}>{order.price.amount}</span>
 					<span className={styles.abbr}>{order.send.abbr}</span>
 				</div>
 			</div>
@@ -82,8 +82,7 @@ export default OrderDetails;
 
 function mapState(state) {
 	return {
-		order: state.limitOrderDetails.order,
-		price: state.limitOrderDetails.price
+		order: state.limitOrderDetails,
 	}
 }
 

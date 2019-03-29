@@ -19,14 +19,11 @@ import CollateralList from '../../components/CollateralList';
  * Function that creates React's ENFooter component.
  * The ENFooter component that represent footer of the app and contains limit order details and button to start buying process.
  * @function ENFooter
- * @param {Object} collateral - Collateral badge data.
- * @param {number} collateral.amount - Number of the collaterals that support the limit order.
- * @param {string} collateral.currencyAbbr - Abbreviation of the selected currency to sell.
  * @param {Object} buyBtn - Button to start buying process.
  * @param {string} buyBtn.caption - Caption of the button.
  * @param {onBuyBtnClick} buyBtn.callback - OnClick callback of the button.
  */
-const ENFooter = ({ collateral, buyBtn }) => {
+const ENFooter = ({ order, buyBtn }) => {
 
 	let [collateralVisible, setCollateralVisible] = useState(false);
 
@@ -41,13 +38,15 @@ const ENFooter = ({ collateral, buyBtn }) => {
 		})
 	}
 
+    if (!order) return '';
+
 	return (
 		<div className={styles.cntr}>
 			<div className={styles.orderDetails}>
-				<OrderDetails />
+				<OrderDetails order={order}/>
 			</div>
 			<div className={styles.collateralCntr}>
-				<a onClick={e => setCollateralVisible(true)} className={styles.collateral} href="#collatral">{collateral.amount} {collateral.currencyAbbr} collateral</a>
+				<a onClick={e => setCollateralVisible(true)} className={styles.collateral} href="#collatral">{order.collateral.amount} {order.collateral.currencyAbbr} collateral</a>
 			</div>
 			<CollateralList visible={collateralVisible} setVisible={setCollateralVisible} collaterals={collaterals} />
 			<div className={styles.buyBtnCntr}>
@@ -66,7 +65,7 @@ export default ENFooter;
 
 function mapState(state) {
 	return {
-        collateral: state.limitOrderDetails.collateral
+        order: state.limitOrderDetails
 	}
 }
 

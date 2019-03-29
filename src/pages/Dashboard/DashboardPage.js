@@ -60,7 +60,7 @@ export default (props) => (
 
 	    return (
 		<div>
-			<Header onClickMenuItem={console.log} />
+			<Header  />
 			<ENDrawer
                 account={account}
                 balance={Math.round(drizzle.web3.utils.fromWei(balance, 'finney')) / 1000}
@@ -68,7 +68,7 @@ export default (props) => (
                 web3={drizzle.web3}
             />
 			{/* <SwitchBuySellOrderList onSwitch={console.log} /> */}
-			<ENOrderList onOrderSelected={console.log} />
+			<ENOrderList />
 			{/* <CompareToMarketplaceOrder visible={false} theOrder={{
 				price: {
 					amount: 28.19512548
@@ -87,7 +87,7 @@ export default (props) => (
 				visible={true}
 				onContinue={console.log}
 			/> */}
-			<CreateLimitOrder visible={false} />
+			<CreateLimitOrder />
 			<ENFooter />
 		</div>
 	);

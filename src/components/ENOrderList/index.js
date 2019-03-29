@@ -58,7 +58,6 @@ const data = [{
 /**
  * This callback handles selection order item form order list.
  * @callback onOrderSelected
- * @param {number} index - Index of selected limit order.
  * @param {OrderItem} order - Selected limit order item. 
  */
 
@@ -106,7 +105,7 @@ const ENOrderList = (props) => {
 					align="right"
 					width={110}
 					render={(text, record) => (
-						<ButtonSelectOrder onClick={e => props.onOrderSelected(record.key, record)} />
+						<ButtonSelectOrder onClick={e => props.onOrderSelected(record)} />
 					)}
 					className="ENOrderList_column"
 				/>

@@ -48,17 +48,13 @@ export function getLimitOrders(currAbbr, ipfs, web3) {
 	}
 }
 
-export function getLimitOrderDetails(id) {
+export function getLimitOrderDetails(order) {
 
 	return function (dispatch) {
 
-		return getLimitOrderById(id)
-			.then(limitOrder =>
-
-				dispatch({
-					type: 'SET_LIMIT_ORDER_DETAILS',
-					payload: limitOrder
-				})
-			)
+		return dispatch({
+            type: 'SET_LIMIT_ORDER_DETAILS',
+            payload: order
+        })
 	}
 }
