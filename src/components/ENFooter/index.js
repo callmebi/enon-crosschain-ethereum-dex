@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { ConnectedOrderDetails as OrderDetails } from '../OrderDetails';
+import { startTrade } from '../../relayBackend/relayApi';
 import Button from '../../elements/Button/Button';
 import styles from './ENFooter.module.css';
 import CollateralList from '../../components/CollateralList';
@@ -19,11 +20,10 @@ import CollateralList from '../../components/CollateralList';
  * Function that creates React's ENFooter component.
  * The ENFooter component that represent footer of the app and contains limit order details and button to start buying process.
  * @function ENFooter
- * @param {Object} buyBtn - Button to start buying process.
- * @param {string} buyBtn.caption - Caption of the button.
- * @param {onBuyBtnClick} buyBtn.callback - OnClick callback of the button.
  */
-const ENFooter = ({ order, buyBtn }) => {
+const ENFooter = ({ dispatch, order, ipfs, drizzle, account }) => {
+
+    const { contracts, web3 } = drizzle;
 
 	let [collateralVisible, setCollateralVisible] = useState(false);
 
@@ -53,8 +53,11 @@ const ENFooter = ({ order, buyBtn }) => {
 				<Button
 					id="footer_buy_btn"
 					className={styles.buyBtn}
-					onClick={e => buyBtn.callback(e.target.id, e)}
-					caption={buyBtn && buyBtn.caption ? buyBtn.caption : 'Buy now'}
+					onClick={() => {
+                        startTrade(contracts, ipfs, web3, account, order);
+		                dispatch({type: 'SET_LIMIT_ORDER_DETAILS', payload: null});
+                    }}
+					caption="Buy now"
 				/>
 			</div>
 		</div>

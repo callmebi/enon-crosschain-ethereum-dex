@@ -87,8 +87,16 @@ export default (props) => (
 				visible={true}
 				onContinue={console.log}
 			/> */}
-			<CreateLimitOrder />
-			<ENFooter />
+			<CreateLimitOrder 
+                ipfs={props.ipfs}
+                drizzle={drizzle}
+                account={account}
+            />
+			<ENFooter
+                ipfs={props.ipfs}
+                drizzle={drizzle}
+                account={account}
+            />
 		</div>
 	);
     }}

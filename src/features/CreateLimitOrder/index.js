@@ -6,9 +6,11 @@ import { Modal, Form } from 'antd';
 import StepTitle from '../../elements/StepTitle/StepTitle';
 import CreateLimitOrderStepOne from '../../components/CreateLimitOrderStepOne';
 import styles from './CreateLimitOrder.module.css';
+import { makeOrder } from '../../relayBackend/relayApi';
 import './CreateLimitOrder.css';
 
-const CreateLimitOrder = ({ visible, onClose }) => {
+const CreateLimitOrder = ({ visible, onClose, ipfs, drizzle, account }) => {
+    const { contracts, web3 } = drizzle;
 	return (
 		<div>
 			<Modal
@@ -25,7 +27,12 @@ const CreateLimitOrder = ({ visible, onClose }) => {
 					</div>
 					<div className={styles.stepCntr}>
 						<CreateLimitOrderStepOne
-							onContinue={console.log}
+							onContinue={(order) => {
+                                onClose();
+                                order.collateral = web3.utils.toWei('1', 'ether');
+                                console.log(order);
+                                makeOrder(contracts, ipfs, web3, account, order); 
+                            }}
 							send={{
 								abbr: 'ETH',
 								amount: 120

@@ -19,7 +19,7 @@ function limitOrderList(ipfs, web3) {
             abbr: 'ETH'
         };
 		// TODO: Price estimation 
-        order.price = { amount: 28.19512548 };
+        order.price = { amount: order.send.amount / order.receive.amount };
         // TODO: Total estimation
         order.order_total = 8888;
         // TODO: Collateral fetch
@@ -58,7 +58,7 @@ async function signTakerOrder(ipfs, web3, account, recipient, maker) {
     return {params, signature};
 }
 
-async function signMakerOrder(web3, ipfs, account, recipient, buy, sell, collateral) {
+async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collateral) {
     // BTC/ETH market id
     const market = '0x17f166723b75c5da81f69d333af4676251d1b8b97326351320cf3ca53beacca0'; 
     const deal = web3.utils.soliditySha3(
@@ -92,7 +92,7 @@ async function signMakerOrder(web3, ipfs, account, recipient, buy, sell, collate
     return {params, signature};
 }
 
-async function makeOrder(contracts, ipfs, web3, account, recipient, order) {
+async function makeOrder(contracts, ipfs, web3, account, order) {
     const { Exchange, Collateral } = contracts;
 
     const allowance = await Collateral.methods.allowance(account, Exchange.address).call();
@@ -105,9 +105,9 @@ async function makeOrder(contracts, ipfs, web3, account, recipient, order) {
         ipfs,
         web3,
         account,
-        recipient,
-        order.buy,
-        order.buy.mul(order.price),
+        order.address,
+        order.receive.abbr == 'BTC' ? order.receive.amount * 10**8 : undefined,
+        order.send.abbr == 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
         order.collateral
     );
     fetch('http://enon-relay.herokuapp.com/', {
@@ -120,8 +120,22 @@ async function makeOrder(contracts, ipfs, web3, account, recipient, order) {
     });
 }
 
+async function startTrade(contracts, ipfs, web3, account, order) {
+    console.log('maker params: '+order.market+' '+order.deal);
+
+    const { Exchange } = contracts;
+    const taker = await signTakerOrder(ipfs, web3, account, account, order);
+    Exchange.methods.startTrade.cacheSend(
+        order.params,
+        order.signature,
+        taker.params,
+        taker.signature,
+        {from: account}
+    );
+}
+
 export {
     limitOrderList
-  , signTakerOrder
+  , startTrade
   , makeOrder
 };
