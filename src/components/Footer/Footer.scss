@@ -1,0 +1,111 @@
+.footerHome {
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #e1e8ed;
+  background-color: #fff;
+  padding-top: 19px !important;
+  padding-bottom: 19px !important;
+  .leftFooterSection {
+    border-right: 1px solid #e1e8ed;
+    padding-right: 20px;
+    padding-left: 0;
+    p {
+      color: #949aa7;
+      // color: #535353;
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 5px;
+      line-height: 20px;
+      font-family: "MySoRegular";
+      // text-align: left;
+    }
+    img {
+      margin-left: 45px;
+    }
+    span {
+      //  padding-top: 5px;
+    }
+    span,
+    p {
+      color: #949aa7;
+      // color: #535353;
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 5px;
+      line-height: 20px;
+      font-family: "MySoRegular";
+      margin-left: 9px;
+
+      strong {
+        font-size: 20px;
+        line-height: 21px;
+        // font-weight: 300;
+        color: #5e5e5e;
+      }
+      //   margin-left: 9px;
+      //   color: #535353;
+      //   font-size: 12px;
+      //   line-height: 12px;
+      //   font-weight: 300;
+    }
+    div:nth-child(2) {
+      img {
+        margin-left: 15px;
+      }
+    }
+    div:nth-child(3) {
+      p {
+        text-align: left;
+      }
+      a {
+        color: #0084f085;
+        font-weight: 600;
+        margin-left: 7px;
+      }
+    }
+  }
+  .rightFooterSection {
+    p {
+      text-decoration: underline;
+      margin-top: 13px;
+      color: #949aa7;
+      // color: #535353;
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 5px;
+      line-height: 20px;
+      font-family: "MySoRegular";
+      margin-left: 9px;
+      cursor: pointer;
+    }
+    button {
+      // display: -webkit-box;
+      // display: -webkit-flex;
+      // display: -ms-flexbox;
+      // display: flex;
+      width: 327.75px;
+      padding-right: 21px;
+      padding-left: 21px;
+      // -webkit-box-pack: center;
+      // -webkit-justify-content: center;
+      // -ms-flex-pack: center;
+      // justify-content: center;
+      // -webkit-box-align: center;
+      // -webkit-align-items: center;
+      // -ms-flex-align: center;
+      // align-items: center;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      background-color: #0070e0;
+      color: #fff;
+      padding: 12px 54px;
+      border-radius: 89px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-family: "MySoBold";
+    }
+  }
+}
