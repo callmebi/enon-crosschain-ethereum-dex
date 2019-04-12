@@ -1,0 +1,35 @@
+.orderFirst{
+    text-align: left;
+    padding-top: 102px!important;
+    padding-bottom: 47px!important;
+    padding-left: 190px!important;
+    h2 {
+        margin-bottom: 35px;
+        color: #000;
+        font-size: 22px;
+        line-height: 35px;
+        font-weight: 700;
+        text-align: left;
+        padding-right: 24px;
+        font-family: "MySoRegular";
+        font-weight: 600;
+    }
+    p {
+        font-size: 16px;
+    }
+    button{
+        padding: 12px 54px;
+        border-radius: 89px;
+        background-color: #0070e0;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-top: 28px;
+        line-height: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: "MySoRegular";
+    }
+}
