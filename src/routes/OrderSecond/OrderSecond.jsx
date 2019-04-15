@@ -56,7 +56,7 @@ export default class OrderSecond extends Component {
                 </Row>
                 <Row>
                     <Col xs={12}>
-                        <a href="/">return home</a>
+                        <a href="/prehome">return home</a>
                     </Col>
                 </Row>
             </Container>

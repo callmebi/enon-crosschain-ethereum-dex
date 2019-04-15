@@ -108,7 +108,7 @@ export default class Header extends React.Component {
                             </ul>
                         </li>
                         <li className="log-in">
-                            <a href="#">Whitepaper</a>
+                            <a href="/login">Login</a>
                         </li>
                     </ul>
                     <span className="burger-btn"></span>

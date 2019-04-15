@@ -34,7 +34,7 @@ class App extends Component {
     } else if (window.location.pathname === "/login"){
       FooterComponent =FooterEmpty
       HeaderComponent =HaderEmpty
-    }else if (window.location.pathname === "/home"){
+    }else if (window.location.pathname === "/home" || window.location.pathname === "/" ){
       FooterComponent =FooterPre
       HeaderComponent =HeaderPre
     }
