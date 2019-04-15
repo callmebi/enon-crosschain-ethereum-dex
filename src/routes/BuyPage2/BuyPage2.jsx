@@ -6,10 +6,10 @@ import { Container, Row } from 'react-bootstrap';
 import BuyPage1Top from './BuyPage1Top/BuyPage1Top.jsx';
 import BuyPage1Bottom from './BuyPage1Bottom/BuyPage1Bottom.jsx';
 import './BuyPage.scss';
-export default class BuyPage1 extends Component {
+export default class BuyPage2 extends Component {
     render() {
         return (
-            <Container className="buyPage1">
+            <Container className="buyPage2">
                 <Row>
                     
                     <BuyPage1Top />

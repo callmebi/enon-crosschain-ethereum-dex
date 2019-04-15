@@ -6,7 +6,7 @@ export default class BuyPage1Bottom extends Component {
     return (
       <div className="buyPage1bottom">
         <div className="innerDiv">
-          <p className="inP">The other trader will send after you, or you will receive 160 ETH in collaterals.</p>
+          <p className="inP">Other trader will send after you,or you will receive 160 ETH in collaterals.</p>
           <div className="innerDiv2">
             <div className="innerP">
               <p>1PYDG8rSTbyfrDKKo3kvBP6cCfJqdcEzUh</p>
@@ -14,7 +14,7 @@ export default class BuyPage1Bottom extends Component {
             <div className="darkerDiv">
               <div>
                 <p>Time Left</p>
-                <p className="whiteP">Not started</p>
+                <p className="whiteP">45:00</p>
               </div>
               <img className="arrImg" src={ForwardImg} alt="" />
               <div>
