@@ -11,7 +11,6 @@ export default class BuyPage2 extends Component {
         return (
             <Container className="buyPage2">
                 <Row>
-                    
                     <BuyPage1Top />
                     <BuyPage1Bottom />
                 </Row>

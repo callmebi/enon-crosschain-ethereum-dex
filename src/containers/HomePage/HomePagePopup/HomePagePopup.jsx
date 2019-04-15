@@ -12,21 +12,18 @@ export default class HomePagePopup extends Component {
     popHandler() {
         let pop1 = document.getElementById("homePagePopup");
         pop1.classList.toggle("showfooterPop");
-        console.log("toggle")
     }
     innerPopHandler() {
         let pop2 = document.getElementById("popup_inner");
         pop2.classList.toggle("hidefooterPop");
         let pop3 = document.getElementById("popup_inner2");
         pop3.classList.toggle("showfooterPop");
-        console.log("toggle")
     }
     innerPopHandler2() {
         let pop1 = document.getElementById("homePagePopup");
         pop1.classList.toggle("showfooterPop");
         let pop3 = document.getElementById("popup_inner2");
         pop3.classList.toggle("showfooterPop");
-        console.log("toggle2")
 
     }
     popHandler2() {
@@ -36,7 +33,6 @@ export default class HomePagePopup extends Component {
         pop2.classList.toggle("hidefooterPop");
         let pop3 = document.getElementById("popup_inner2");
         pop3.classList.toggle("showfooterPop");
-        console.log("toggle")
     }
     render() {
         return (
@@ -59,7 +55,7 @@ export default class HomePagePopup extends Component {
                         Please have 120 ETH ready to pay once this transaction reaches 3 confirmations
                     </h4>
                     <div><p id="left">Confirmations:</p><p id="right"><span>0/3</span> (est: 35 minutes)</p></div>
-                    <button href="/">CONTINUE<img src={arrowImg} alt="" /></button>
+                    <a href="/buyPage1"><button >CONTINUE<img src={arrowImg} alt="" /></button></a>
                 </div>
             </div>
         )

@@ -1,7 +1,6 @@
 //import packages
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import {  Link } from "react-router-dom";
 //import componets
 
 import BtcImg from '../../assets/images/BC_Logo_-p-130x130q80.png';
@@ -30,7 +29,7 @@ export default class OrderSecond extends Component {
                         <p>Your ETH address:</p>
                     </Col>
                     <Col xs={2}>
-                    <p>
+                        <p>
                             <img src={BtcImg} alt="" /> 4/4 BTC
                         </p>
                     </Col>
@@ -50,14 +49,14 @@ export default class OrderSecond extends Component {
                         <p>Transaction ID</p>
                     </Col>
                     <Col xs={2}>
-                        <p> 
+                        <p>
                             3JQSigWTCHyBLRD979JWgEtWP5YiiFwcQB
                         </p>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12}>
-                    <Link to="/">return home</Link>
+                        <a href="/">return home</a>
                     </Col>
                 </Row>
             </Container>

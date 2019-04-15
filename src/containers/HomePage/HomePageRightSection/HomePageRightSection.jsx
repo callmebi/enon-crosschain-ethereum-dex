@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 //import componets
-// import Aux from '../../../hoc/Aux';
 //import assets
 import BitcoinImage from '../../../assets/images/BC_Logo_-p-130x130q80.png';
 import Ethereum from '../../../assets/images/eth.svg';
@@ -23,8 +22,6 @@ export default class HomePageRightSection extends Component {
                 <Col xs={12}>
                     <Row className="hPRightBottomSection">
                         <div className="coinTable">
-                            {/* <div className="coinRowHead"><span>Receive</span><span>Send</span><span>Order total USD</span></div> */}
-
                             <Row className="head">
                                 <Col xs={4}>
                                     <p>Receive</p>
@@ -45,8 +42,8 @@ export default class HomePageRightSection extends Component {
                                     <img src={Ethereum} alt="" /><p> 120 ETH</p>
                                 </Col>
                                 <Col xs={4}>
-                                <p className="valueDolar">$12.845.92</p>
-                                <a href="/">SELECT</a>
+                                    <p className="valueDolar">$12.845.92</p>
+                                    <a href="/">SELECT</a>
                                 </Col>
                             </Row>
                             <Row className="coinRow">

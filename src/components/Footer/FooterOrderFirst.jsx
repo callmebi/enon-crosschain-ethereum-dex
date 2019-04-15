@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
-// import Popup from "reactjs-popup";
+
 import './Footer.scss';
 //import assets
 import EthImage from '../../assets/images/eth.svg';
@@ -8,28 +8,22 @@ import BtcImage from '../../assets/images/BC_Logo_.png';
 export default class FooterOrderFirst extends Component {
   constructor(props) {
     super(props)
-  
+
     this.state = {
-       
+
     }
   }
-  componentDidMount() {
-    
-  }
-  popHandler () {
+  popHandler() {
     let pop1 = document.getElementById("homePagePopup");
     pop1.classList.toggle("showfooterPop");
-    console.log("toggle")
   }
-  collateralPopHandler () {
+  collateralPopHandler() {
     let pop1 = document.getElementById("homePagePopupCollateral");
     pop1.classList.toggle("showfooterPop");
-    console.log("toggle")
   }
-  comparePopHandler () {
+  comparePopHandler() {
     let pop1 = document.getElementById("homePagePopupCompare");
     pop1.classList.toggle("showfooterPop");
-    console.log("toggle")
   }
   render() {
     return (
@@ -59,13 +53,12 @@ export default class FooterOrderFirst extends Component {
                     <p onClick={this.collateralPopHandler}>160 ETH collateral</p>
                   </Col>
                   <Col xs={8}>
-                    {/* <button onClick={this.popHandler}>BUY NOW</button> */}
+                    <a href="/buyPage2"><button className="buybutton1">Awaiting payment from you</button></a>
                   </Col>
                 </Row>
               </Col>
             </Row>
           </Container>
-          
         </Row>
       </Container>
     )

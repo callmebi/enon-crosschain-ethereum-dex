@@ -19,15 +19,13 @@ export default class Home extends Component {
 
         }
     }
-
-
     render() {
         return (
             <Container className="home">
                 <HomePagePopup />
-                <HomePagePopupCollateral/>
-                <HomePagePopupLimir/>
-                <HomePagePopupCompare/>
+                <HomePagePopupCollateral />
+                <HomePagePopupLimir />
+                <HomePagePopupCompare />
                 <Row>
                     <HomePageLeftSection />
                     <HomePageRightSection />

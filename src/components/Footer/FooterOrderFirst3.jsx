@@ -5,7 +5,7 @@ import './Footer.scss';
 //import assets
 import EthImage from '../../assets/images/eth.svg';
 import BtcImage from '../../assets/images/BC_Logo_.png';
-export default class Footer extends Component {
+export default class FooterOrderFirst3 extends Component {
   constructor(props) {
     super(props)
 
@@ -53,7 +53,6 @@ export default class Footer extends Component {
                     <p onClick={this.collateralPopHandler}>160 ETH collateral</p>
                   </Col>
                   <Col xs={8}>
-                    <button onClick={this.popHandler}>BUY NOW</button>
                   </Col>
                 </Row>
               </Col>

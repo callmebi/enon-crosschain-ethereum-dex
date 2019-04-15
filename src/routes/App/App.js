@@ -1,7 +1,7 @@
 //import packages
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+import {Container } from 'react-bootstrap';
 
 //import components
 import Header from '../../components/Header/Header.jsx';
@@ -13,40 +13,36 @@ import Footer from '../../components/Footer/Footer.jsx';
 import OrderSecond from '../OrderSecond/OrderSecond.jsx';
 import './App.scss';
 import FooterOrderFirst from '../../components/Footer/FooterOrderFirst.jsx';
+import FooterOrderFirst2 from '../../components/Footer/FooterOrderFirst2.jsx';
+import FooterOrderFirst3 from '../../components/Footer/FooterOrderFirst3.jsx';
+import FooterEmpty from '../../components/Footer/FooterEmpty.jsx';
+import HaderEmpty from '../../components/Header/HeaderEmpty.jsx';
+import Login from '../Login/Login.jsx';
 let FooterComponent = Footer;
-if(window.location.pathname === "/orderfirst" || window.location.pathname === "/orderSecond"){
-  FooterComponent = FooterOrderFirst;
-  } 
+let HeaderComponent = Header;
 class App extends Component {
-  // constructor(props) {
-  //   super(props)
-
-  //   this.state = {
-  //     clicked: false,
-  //   }
-  // }
-  // footerPopupHandler = () => {
-  //   let ace = !this.state.clicked
-  //   this.setState({ clicked:  ace});
-  //   console.log("smeneto");
-  //   console.log(this.state.clicked);
-  //   console.log(this.setState({ clicked: !this.state.clicked }));
-
-  // }
   render() {
-   
+    if (window.location.pathname === "/buyPage1") {
+      FooterComponent = FooterOrderFirst;
+    } else if (window.location.pathname === "/buyPage2") {
+      FooterComponent = FooterOrderFirst2;
+    } else if (window.location.pathname === "/orderfirst") {
+      FooterComponent = FooterOrderFirst3;
+    } else if (window.location.pathname == "/login"){
+      FooterComponent =FooterEmpty
+      HeaderComponent =HaderEmpty
+    }
     return (
       <div className="App">
         <BrowserRouter>
-          <Header />
+          <HeaderComponent />
           <Switch>
-            {/* <Route path="/about" component={About} /> */}
-          <Route path="/orderSecond" component={OrderSecond} />
-          <Route path="/orderfirst" component={Orderfirst} />
-          <Route path="/buypage2" component={BuyPage2} />
-          <Route path="/buypage1" component={BuyPage1} />
+            <Route path="/login" component={Login} />
+            <Route path="/orderSecond" component={OrderSecond} />
+            <Route path="/orderfirst" component={Orderfirst} />
+            <Route path="/buypage2" component={BuyPage2} />
+            <Route path="/buypage1" component={BuyPage1} />
             <Route path={["/", "/home"]} exact component={Home} />
-            {/* <Route component={NotFound} /> */}
           </Switch>
           <FooterComponent />
         </BrowserRouter>

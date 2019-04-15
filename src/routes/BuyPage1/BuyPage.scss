@@ -1,103 +1,96 @@
 .buyPage1 {
-    display: block;
-    width: 530px;
-    margin-left: auto;
-    margin-right: auto;
-    .buyPage1Top {
-        background-color: #043332;
-        padding: 71px 45px;
-        margin: auto;
-        width: 100%;
-        .innerDiv {
-          .inP {
-            margin-bottom: 40px;
-            color: #fff;
-            font-size: 21px;
-            line-height: 35px;
-            font-weight: 700;
-            text-align: center;
-            font-family: "MySoRegular";
+  display: block;
+  width: 530px;
+  margin-left: auto;
+  margin-right: auto;
+  .buyPage1Top {
+    background-color: #043332;
+    padding: 71px 45px;
+    margin: auto;
+    width: 100%;
+    .innerDiv {
+      .inP {
+        margin-bottom: 40px;
+        color: #fff;
+        font-size: 21px;
+        line-height: 35px;
+        font-weight: 700;
+        text-align: center;
+        font-family: "MySoRegular";
+      }
+      .innerDiv2 {
+        background-color: #217a77;
+        .innerP {
+          color: #fff !important;
+          font-size: 17px;
+          text-align: left;
+          padding: 18px 21px;
+          background-color: #217a77;
+          width: 100%;
+          display: inline-flex;
+          p {
+            margin-bottom: 0;
           }
-          .innerDiv2 {
-            background-color: #217A77;
-            .innerP {
-              color: #fff !important;
-              font-size: 17px;
+          img {
+            width: 30px;
+            height: 30px;
+            margin-left: 30px;
+          }
+        }
+        .greyDiv {
+          height: 12px;
+          background-color: #005b58;
+          width: 50%;
+        }
+        .darkerDiv {
+          display: inline-flex;
+          width: 100%;
+          opacity: 0.83;
+          padding-top: 10px;
+          background-color: #006663;
+          div {
+            padding: 5px 21px;
+            p {
+              font-size: 14px;
+              color: rgba(0, 0, 0, 0.45);
+              margin-bottom: 0;
               text-align: left;
-              padding: 18px 21px;
-              background-color: #217A77;
-              width: 100%;
-              display: inline-flex;
-              p {
-                margin-bottom: 0;
-              }
-              img {
-                //   margin-top: 0;
-                //   margin-bottom: auto;
-                width: 30px;
-                height: 30px;
-                margin-left: 30px;
-    // margin-right: 10px;
-                // float: right;
+              padding-top: 5px;
             }
-            }
-            .greyDiv {
-              height: 12px;
-              background-color: #005B58;
-              width: 50%;
-            }
-            .darkerDiv {
-            //   border-top: 12px solid rgba(0, 0, 0, 0.11);
-              display: inline-flex;
-              width: 100%;
-              opacity: 0.83;
-              padding-top: 10px;
-              background-color: #006663;
-              div {
-                padding: 5px 21px;
-                p {
-                  font-size: 14px;
-                  color: rgba(0, 0, 0, 0.45);
-                  margin-bottom: 0;
-                  text-align: left;
-                  padding-top: 5px;
-                }
-                .whiteP {
-                  color: #fff;
-                //   font-size: 16px;
-                  font-size: 18px;
-                  span {
-                    color: rgba(0, 0, 0, 0.45);
-                    padding-left: 2px;
-                    font-size: 12px;  
-                }
-                }
-                .pad {
-                  padding-left: 5px;
-                  font-size: 20px;
-
-                }
-                .smallImg{
-                    width: 30px;
-                    height: 30px;
-                    margin-left: 70px;
-                }
-              }
-              .arrImg {
-                margin-top: auto;
-                margin-bottom: auto;
-                opacity: 0.78;
-                width: 25px;
-                height: 25px;
-              }
-              .imgP {
-                display: inline-flex;
-                padding: 5px 0;
+            .whiteP {
+              color: #fff;
+              font-size: 18px;
+              span {
+                color: rgba(0, 0, 0, 0.45);
+                padding-left: 2px;
+                font-size: 12px;
               }
             }
+            .pad {
+              padding-left: 5px;
+              font-size: 20px;
+            }
+            .smallImg {
+              width: 30px;
+              height: 30px;
+              margin-left: 70px;
+            }
+          }
+          .arrImg {
+            margin-top: auto;
+            margin-bottom: auto;
+            opacity: 0.78;
+            width: 25px;
+            height: 25px;
+          }
+          .imgP {
+            display: inline-flex;
+            padding: 5px 0;
           }
         }
       }
+    }
+  }
   .buyPage1bottom {
     background: #f3f3f3;
     padding: 71px 45px;

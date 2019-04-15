@@ -32,32 +32,20 @@ export default class homePagePopupLimir extends Component {
     popHandler() {
         let pop1 = document.getElementById("homePagePopupLimir");
         pop1.classList.toggle("showfooterPop");
-        // let pop3 = document.getElementById("popup_inner2");
-        // pop3.style.display = "none";
-        // let pop2 = document.getElementById("popup_inner");
-        // pop2.classList.toggle("hidefooterPop");
-        console.log("toggle")
     }
     innerPopHandler() {
         let pop2 = document.getElementById("popup_innerLimit");
         pop2.classList.toggle("hidefooterPop");
         let pop3 = document.getElementById("popup_innerLimit2");
         pop3.classList.toggle("showfooterPop");
-        console.log("toggle")
     }
     innerPopHandler2() {
-        // let pop1 = document.getElementById("homePagePopupLimir");
-        // pop1.classList.toggle("showfooterPop");
-        // let pop3 = document.getElementById("popup_innerLimit2");
-        // pop3.classList.toggle("hidefooterPop");
-        // console.log("toggle2")
         let pop1 = document.getElementById("homePagePopupLimir");
         pop1.classList.toggle("showfooterPop");
         let pop2 = document.getElementById("popup_innerLimit");
         pop2.classList.toggle("hidefooterPop");
         let pop3 = document.getElementById("popup_innerLimit2");
         pop3.classList.toggle("showfooterPop");
-        console.log("toggle")
 
     }
     popHandler2() {
@@ -67,9 +55,8 @@ export default class homePagePopupLimir extends Component {
         pop2.classList.toggle("hidefooterPop");
         let pop3 = document.getElementById("popup_innerLimit2");
         pop3.classList.toggle("showfooterPop");
-        console.log("toggle")
     }
-    comparePopHandlerHome () {
+    comparePopHandlerHome() {
         let pop3 = document.getElementById("popup_innerLimit2");
         pop3.classList.toggle("showfooterPop");
         let pop2 = document.getElementById("popup_innerLimit");
@@ -78,7 +65,6 @@ export default class homePagePopupLimir extends Component {
     render() {
         return (
             <div id={"homePagePopupLimir"} className=" popup">
-                {/* <div className='homePagePopupLimir'> */}
                 <div id="popup_innerLimit" className='popup_innerLimit'>
                     <Container>
                         <Row>
@@ -151,11 +137,9 @@ export default class homePagePopupLimir extends Component {
                                                 <input type="text" placeholder="Re-confirm" />
                                             </Col>
                                         </Row>
-                                        {/* <Row> */}
                                         <Col xs={12}>
                                             <div id="continueButton" onClick={this.innerPopHandler}>CONTINUE<img src={arrowImg} alt="" /></div>
                                         </Col>
-                                        {/* </Row> */}
                                     </form>
                                 </Row>
 
@@ -189,30 +173,6 @@ export default class homePagePopupLimir extends Component {
                                         <h4>Limit order requires a collateral. Don't have collaterals? Buy a market order.</h4>
                                     </Col>
                                 </Row>
-                                {/* <Row className="tradeParag">
-                                    <div className="coinParag">
-                                        <div className="divleft">
-                                            <p>Send</p>
-                                            <p id="biggerNum">120</p>
-                                        </div>
-                                        <div className="imgright">
-                                            <img src={EthIcon} alt="" />
-                                            <p>ETH</p><i className="fas fa-chevron-down"></i>
-                                        </div>
-                                    </div>
-                                    <div id="tradeimgP">
-                                        <img className="tradeimg" src={TradeImage} alt="" />
-                                    </div>
-                                    <div className="coinParag">
-                                        <div className="divleft">
-                                            <p>Receive</p>
-                                            <p id="biggerNum">4</p>
-                                        </div>
-                                        <div className="imgright">
-                                            <img src={BTCImage} alt="" />
-                                            <p>BTC</p><i className="fas fa-chevron-down"></i></div>
-                                    </div>
-                                </Row> */}
                                 <Row className="paddingRow">
                                     <p>Collaterals</p>
                                 </Row>
@@ -271,22 +231,11 @@ export default class homePagePopupLimir extends Component {
                                 </Row>
                                 <Row className="formGroup">
                                     <form>
-                                        {/* <Row>
-                                            <Col lg={6}>
-                                                <input type="text" placeholder="Address" />
-                                            </Col>
-                                            <Col lg={6}>
-                                                <input type="text" placeholder="Re-confirm" />
-                                            </Col>
-                                        </Row> */}
-                                        {/* <Row> */}
                                         <Col xs={12}>
                                             <div id="continueButton" onClick={this.innerPopHandler2}>CONTINUE<img src={arrowImg} alt="" /></div>
                                         </Col>
-                                        {/* </Row> */}
                                     </form>
                                 </Row>
-
                             </Col>
                         </Row>
                     </Container>

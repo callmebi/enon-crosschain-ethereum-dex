@@ -1,10 +1,8 @@
 //import packages
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import {  Link } from "react-router-dom";
 
 //import componets
-
 import EthImg from '../../assets/images/eth.svg';
 import './Orderfirst.scss';
 export default class Orderfirst extends Component {
@@ -50,7 +48,7 @@ export default class Orderfirst extends Component {
                 </Row>
                 <Row>
                     <Col xs={12}>
-                        <Link to="/orderSecond">return home</Link>
+                        <a href="/orderSecond">return home</a>
                     </Col>
                 </Row>
             </Container>

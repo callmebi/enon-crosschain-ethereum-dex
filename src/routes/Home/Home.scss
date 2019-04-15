@@ -1,13 +1,8 @@
 .home {
-  //   height: 255px;
   margin: auto;
   margin-top: 99px;
   .hPLeftSection {
-    // display: block;
     width: 255px;
-    // margin-top: 99px;
-    // margin-left: auto;
-    // margin-right: auto;
     padding-bottom: 0px;
     -webkit-align-self: flex-start;
     -ms-flex-item-align: start;
@@ -143,11 +138,8 @@
       }
     }
     .hPRightBottomSection {
-      // width: 856px;
       padding-top: 41px;
-
       .coinTable {
-        //  display: block;
         width: 100%;
         .head {
           border-style: none none solid;
@@ -159,18 +151,14 @@
               text-align: left;
               padding: 0 0px;
               color: #070707;
-              //   font-weight: 400;
               font-size: 16px;
               font-family: "MySoRegular";
             }
           }
         }
-
-        .coinRowHead {
-        }
         .coinRow {
-          padding-top: 20px;
-          padding-bottom: 20px;
+          padding-top: 15px;
+          padding-bottom: 15px;
           border-style: none;
           &:hover {
             background-image: linear-gradient(180deg, hsla(156, 2%, 55%, 0.07), hsla(156, 2%, 55%, 0.07));
@@ -190,7 +178,6 @@
               text-align: center;
             }
             a {
-              // margin-left: 1/0px;
               border: 1px solid #e1e8ed;
               background-color: #fff;
               box-shadow: 0 1px 1px 0 hsla(0, 0%, 73%, 0.21);
@@ -198,7 +185,6 @@
               margin-top: -8px;
               margin-bottom: -8px;
               margin-left: 85px;
-              // float: right;
               padding: 7px 23px;
               border-radius: 3px;
               font-size: 12px;
@@ -210,10 +196,6 @@
             .valueDolar {
               color: rgba(51, 51, 51, 0.62);
             }
-            // }
-          }
-          .firstIcon {
-            //   width: 30%;
           }
         }
         .active {
@@ -267,38 +249,38 @@
   .popup_innerLimit2 {
     display: none;
     width: 788px;
-    height: 559px!important;
-    h4{
-      padding: 0px 51px 10px 35px!important;
+    height: 559px !important;
+    h4 {
+      padding: 0px 51px 10px 35px !important;
     }
-    .paddingRow{
-      #pContinue{
+    .paddingRow {
+      #pContinue {
         font-size: 14px;
       }
-      #pContinueWhite{
+      #pContinueWhite {
         color: #999;
         font-weight: 300;
         font-size: 14px;
       }
-      .padCol{
+      .padCol {
         padding: 0;
         div {
           float: left;
         }
-        p{
+        p {
           color: #0084f0;
-          font-size:14px!important;
+          font-size: 14px !important;
           padding-top: 3px;
-          font-family:"MySoRegular";
+          font-family: "MySoRegular";
           strong {
             color: #0084f0;
           }
         }
-        #textWhite{
-          color: #333!important;
+        #textWhite {
+          color: #333 !important;
         }
       }
-      .checkDiv{
+      .checkDiv {
         width: 30px;
         height: 30px;
         margin-right: 11px;
@@ -316,28 +298,22 @@
         -ms-flex: 0 0 auto;
         flex: 0 0 auto;
         border-style: solid;
-        /* border-width: 1px; */
-        /* border-color: rgba(0, 0, 0, .14); */
-        /* border-radius: 4px; */
-        /* background-color: #fff; */
         .check {
-      // display: none;
-      width: 15px;
-      height: 15px;
-      max-width: 100%;
-      vertical-align: middle;
-      display: block!important;
-      margin: auto;
-      }
-      .check2 {
-        display: none!important;
+          width: 15px;
+          height: 15px;
+          max-width: 100%;
+          vertical-align: middle;
+          display: block !important;
+          margin: auto;
         }
-    }
+        .check2 {
+          display: none !important;
+        }
+      }
     }
   }
   .popup_innerLimit,
   .popup_innerLimit2 {
-    // display: none;
     position: absolute;
     left: 25%;
     right: 25%;
@@ -357,7 +333,7 @@
       cursor: pointer;
       .row {
         margin: auto;
-        
+
         h2 {
           width: 100%;
           text-align: center;
@@ -366,7 +342,7 @@
           font-size: 21px;
           line-height: 21px;
           font-weight: 700;
-          margin-left:-5px;
+          margin-left: -5px;
         }
         p {
           width: 100%;
@@ -375,11 +351,8 @@
           margin-bottom: 0;
           color: #000;
           font-size: 16px;
-          // line-height: 21px;
-          // font-weight: 700;
         }
         .step {
-          // padding-top: 16px;
           padding-bottom: 16px;
           -webkit-box-orient: vertical;
           -webkit-box-direction: normal;
@@ -425,15 +398,12 @@
         background-color: #fff;
         display: inline-flex;
         width: 270px;
-        // padding: 10px;
         padding-top: 11px;
         padding-bottom: 11px;
         padding-left: 16px;
         .divleft {
           width: 50%;
           margin: auto;
-          // margin-top: auto;
-          // margin-bottom: auto;
           p {
             margin-bottom: 0;
             margin-bottom: 1px;
@@ -453,7 +423,6 @@
           width: 50%;
           padding: 0px 13px 0px 11px;
           border-left: 1px solid rgba(0, 0, 0, 0.21);
-          // margin: auto;
           p {
             margin: auto;
             font-size: 13px;
@@ -552,7 +521,7 @@
           }
           #continueButton {
             min-width: 150px;
-            margin-top: 80px!important;
+            margin-top: 80px !important;
             padding: 13px 20px 12px 20px;
             -webkit-box-pack: justify;
             -webkit-justify-content: space-between;
@@ -571,7 +540,6 @@
             letter-spacing: 1px;
             font-family: "MySoBold";
             text-transform: uppercase;
-            // margin-top: 20px !important;
             text-align: left;
             float: right;
             img {
@@ -585,7 +553,6 @@
           }
         }
       }
-      
     }
   }
   .popup_innerC {
@@ -637,8 +604,6 @@
           color: #333;
           font-size: 15px;
           font-family: "MySoRegular";
-        }
-        .liHead {
         }
         .liMid {
           margin-top: 5px;
