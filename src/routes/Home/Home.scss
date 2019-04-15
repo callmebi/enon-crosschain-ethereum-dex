@@ -270,6 +270,8 @@
     height: 559px!important;
     h4{
       padding: 0px 51px 10px 35px!important;
+      line-height: 35px;
+      font-size:21;
     }
     .paddingRow{
       #pContinue{
@@ -551,6 +553,7 @@
             height: 55px;
           }
           #continueButton {
+            cursor: pointer;
             min-width: 150px;
             margin-top: 80px!important;
             padding: 13px 20px 12px 20px;
