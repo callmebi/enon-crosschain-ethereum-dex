@@ -43,13 +43,13 @@ class App extends Component {
         <BrowserRouter>
           <HeaderComponent />
           <Switch>
-          <Route path="/prehome" component={PreHome} />
+          <Route path="/prehome" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/orderSecond" component={OrderSecond} />
             <Route path="/orderfirst" component={Orderfirst} />
             <Route path="/buypage2" component={BuyPage2} />
             <Route path="/buypage1" component={BuyPage1} />
-            <Route path={["/", "/home"]} exact component={Home} />
+            <Route path={["/", "/home"]} exact component={PreHome} />
           </Switch>
           <FooterComponent />
         </BrowserRouter>
