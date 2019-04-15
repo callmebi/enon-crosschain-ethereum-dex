@@ -1,0 +1,212 @@
+@font-face {
+    font-family: "Helvetica Neue Cyr Light";
+    src: url("../assets/fonts/HelveticaNeueCyr-Light.woff");
+    font-weight: normal;
+}
+@font-face {
+    font-family: "Helvetica Neue Cyr Medium";
+    src: url("../assets/fonts/HelveticaNeueCyr-Medium.woff");
+}
+.advantages {
+    .justColor {
+        margin: {
+            top: 4em;
+            right: -110%;
+        }
+        padding-left: 0;
+        background: {
+            image: -webkit-gradient(linear, left top, left bottom, from(#2c373a), to(#3a464c));
+            image: -webkit-linear-gradient(top, #2c373a, #3a464c);
+            image: -o-linear-gradient(top, #2c373a, #3a464c);
+            image: linear-gradient(to bottom, #2c373a, #3a464c); 
+        }
+         
+        color: #ffffff;
+        text-align: left;
+        .enon-advantages {
+            padding: {
+                top: 5rem;
+                left: 5.5rem;
+                bottom: 0em;
+            }
+            h2 {
+                font: {
+                    family: "Helvetica Neue Cyr Light";
+                    size: 32px; 
+                }
+                color: #ffffff;
+                line-height: 38px;
+            }
+        }
+        .enon-advantages__list {
+            display:inline-flex;
+            padding-bottom: 5em;
+            .enon-advantages__item {
+                padding-right: 1rem;
+                p {
+                    font-family: "Helvetica Neue Cyr Medium";
+                    font-size: 15px;
+                }
+                span {
+                    font-family: "Helvetica Neue Cyr Light";
+                    font-size: 13px;
+                    line-height: 25px;
+                    color: #e0e2e2;
+                }
+            }
+        }
+        .get-started {
+            width: 154px;
+            height: 55px;
+            background: #3a80f6;
+            font-family: "Helvetica Neue Cyr Light";
+            font-size: 12px;
+            color: #fff;
+            text-transform: uppercase;
+            position: absolute;
+            right: 0;
+            left: -78%;
+            top: -27px;
+            -webkit-transition: background 0.2s ease-in-out;
+            -o-transition: background 0.2s ease-in-out;
+            transition: background 0.2s ease-in-out;
+            border:none;
+            &hover {
+                background: #4085fa;
+              }
+            &:after {
+                content: "";
+                display: inline-block;
+                width: 13px;
+                height: 10px;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='31px' height='25px'%3e%3cpath fill-rule='evenodd' stroke-width='1px' stroke='rgb(255, 255, 255)' fill='rgb(255, 255, 255)' d='M27.494,12.598 C27.494,12.693 27.453,12.778 27.389,12.840 L18.540,21.402 C18.471,21.469 18.381,21.503 18.291,21.503 C18.200,21.503 18.110,21.469 18.041,21.402 C17.903,21.270 17.903,21.053 18.041,20.920 L26.288,12.939 L4.808,12.939 C4.614,12.939 4.455,12.786 4.455,12.598 C4.455,12.409 4.614,12.256 4.808,12.256 L26.290,12.256 L18.041,4.276 C17.903,4.143 17.903,3.927 18.041,3.793 C18.178,3.660 18.402,3.660 18.540,3.793 L27.390,12.355 C27.457,12.419 27.493,12.506 27.493,12.596 C27.493,12.596 27.493,12.596 27.493,12.596 C27.493,12.597 27.494,12.597 27.494,12.598 Z'/%3e%3c/svg%3e");
+                background-size: cover;
+                margin-bottom: -1px;
+                margin-left: 10px;
+              }
+        }
+        .enon-advantages .get-started:hover::after {
+            -webkit-transform: translateX(6px);
+                -ms-transform: translateX(6px);
+                    transform: translateX(6px);
+        }
+    }
+}
+@media only screen and (max-width: 1199px){
+    .advantages {
+        .container-fluid {
+            padding-right: 0px; 
+            padding-left: 0px; 
+        }
+        .justColor {
+            margin-right: 0%;
+            padding-left: 0px;
+            padding-right: 0em;
+            .enon-advantages {
+                padding-left: 2em;
+                h2 {
+                    font-size: 25px;
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                }
+            }
+            .enon-advantages__list {
+                .sho {
+                    .enon-advantages__item {
+                        padding-bottom: 2em;
+                        // padding-right: 20em;
+                    }
+                }
+            }
+            .get-started {
+                left: -285%;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1024px){
+    .advantages {
+        .container-fluid {
+            padding-right: 0px; 
+            padding-left: 0px; 
+        }
+        .justColor {
+            margin-right: 0%;
+            padding-left: 0px;
+            padding-right: 0em;
+            .enon-advantages {
+                padding-left: 2em;
+                h2 {
+                    font-size: 30px;
+                }
+            }
+            .enon-advantages__list {
+                .sho {
+                    .enon-advantages__item {
+                        padding-bottom: 2em;
+                        // padding-right: 20rem;
+                    }
+                }
+            }
+            .get-started {
+                left: -270%;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 991px){
+    .advantages {
+        .justColor {
+            .enon-advantages {
+                h2 {
+                    font-size: 25px;
+                }
+            }
+            .get-started {
+                left: 8%;
+                top: -115px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 680px){
+    .advantages {
+        .justColor {
+            .enon-advantages__list {
+                .sho {
+                    .enon-advantages__item {
+                        // padding-right: 10rem;
+                    }
+                }
+            }
+            .get-started {
+                // top: -140px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 573px){
+    .advantages {
+        .justColor {
+            .enon-advantages__list {
+                .sho {
+                    .enon-advantages__item {
+                        // padding-right: 50%;
+                    }
+                }
+            }
+            .get-started {
+                top: -155px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 357px){
+    .advantages {
+        .justColor {
+            .get-started {
+                // top: -180px;
+            }
+        }
+    }
+}

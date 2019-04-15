@@ -18,6 +18,9 @@ import FooterOrderFirst3 from '../../components/Footer/FooterOrderFirst3.jsx';
 import FooterEmpty from '../../components/Footer/FooterEmpty.jsx';
 import HaderEmpty from '../../components/Header/HeaderEmpty.jsx';
 import Login from '../Login/Login.jsx';
+import PreHome from '../Prehome/scripts/routes/Home.jsx';
+import HeaderPre from '../Prehome/scripts/components/Header.jsx';
+import FooterPre from '../Prehome/scripts/components/Footer.jsx';
 let FooterComponent = Footer;
 let HeaderComponent = Header;
 class App extends Component {
@@ -28,15 +31,19 @@ class App extends Component {
       FooterComponent = FooterOrderFirst2;
     } else if (window.location.pathname === "/orderfirst") {
       FooterComponent = FooterOrderFirst3;
-    } else if (window.location.pathname == "/login"){
+    } else if (window.location.pathname === "/login"){
       FooterComponent =FooterEmpty
       HeaderComponent =HaderEmpty
+    }else if (window.location.pathname === "/prehome"){
+      FooterComponent =FooterPre
+      HeaderComponent =HeaderPre
     }
     return (
       <div className="App">
         <BrowserRouter>
           <HeaderComponent />
           <Switch>
+          <Route path="/prehome" component={PreHome} />
             <Route path="/login" component={Login} />
             <Route path="/orderSecond" component={OrderSecond} />
             <Route path="/orderfirst" component={Orderfirst} />

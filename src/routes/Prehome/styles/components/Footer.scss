@@ -1,0 +1,204 @@
+@font-face {
+    font-family: "Roboto Light";
+    src: url("../assets/fonts/Roboto-Light.woff");
+}
+@font-face {
+    font-family: "SF Pro Display Semibold";
+    src: url("../assets/fonts/SF-Pro-Display-Semibold.otf");
+}
+@font-face {
+    font-family: "Helvetica Neue Cyr Light";
+    src: url("../assets/fonts/HelveticaNeueCyr-Light.woff");
+}
+.footer {
+    .container-fluid {
+        padding: 0;
+        .show-grid{
+            margin: {
+                left: 0;
+                right: 0; 
+            }
+            .col-md-12{
+                padding: 0px;
+            }
+            .col-md-6{
+                padding: 0px;
+            }
+            .col-lg-6{
+                padding: 0px;
+            }
+            h3 {
+                color: #060d23;
+                font: {
+                    family: "Helvetica Neue Cyr Light";
+                    weight: normal;
+                }
+                padding: {
+                    top: 2em; 
+                    bottom: 2em;   
+                    right: 3rem;
+                }
+                float: right;
+                text-align: left;
+                font-size: 32px;
+            }
+            .page-footer__info-subscribe {
+                text-align: left;
+                background-color:#060d23;
+                padding: 5rem 5rem 5rem 0rem;
+                float: right;
+                width: 40%;
+                a {
+                    color: #fff;
+                    font: {
+                        family: "SF Pro Display Semibold";
+                        size: 18px;
+                    }
+                }
+                i {
+                    color: #fff;
+                    font-size: 20px;
+                    padding-left: 1em;
+                }
+                p {
+                    font: {
+                        family: "Roboto Light";
+                        size: 15px;    
+                    }
+                    margin-top: 2em;
+                    color: #fff;
+                    opacity: 0.6;
+                }
+            }
+            .page-footer__info-hiring {
+                text-align: left;
+                color: rgb(105, 101, 101);
+                padding: 5rem 5rem 5rem 5rem;
+                a {
+                    color: #060d23;
+                    font: {
+                        family: "SF Pro Display Semibold";
+                        size: 18px;
+                    }
+                }
+                i {
+                    font-size: 20px;
+                    padding-left: 1em;
+                    color: #060d23;
+                }
+                p {
+                    font: {
+                        family: "Roboto Light";
+                        size: 15px; 
+                    }
+                    margin-top: 2em;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1440px){
+    .footer {
+        .container-fluid {
+            .show-grid{
+                .page-footer__info-subscribe {
+                    i {
+                        font-size: 20px;
+                    }
+                    p {
+                        font: {
+                            size: 18px;    
+                        }
+                    }
+                }
+                .page-footer__info-hiring {
+                    a {
+                        font: {
+                            size: 22px;
+                        }
+                    }
+                    i {
+                        font-size: 20px;
+                    }
+                    p {
+                        font: {
+                            size: 18px; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1199px){
+    .footer {
+        .container-fluid {
+            .show-grid{
+                h3 {
+                    padding-left: 5rem;
+                    float: left;
+                }
+                .page-footer__info-subscribe {
+                    padding: 5rem 5rem 5rem 5rem;
+                    float: left;
+                    margin-left: 0%;
+                }
+                .page-footer__info-hiring {
+                    padding: 5rem 5rem 5rem 3rem;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 991px){
+    .footer {
+        .container-fluid {
+            .show-grid{
+                h3 {
+                    padding-left: 3rem;
+                    font-size: 28px;
+                }
+                .page-footer__info-subscribe {
+                    width: 100%;
+                }
+                .page-footer__info-hiring {
+                    margin-top: 20rem;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 420px){
+    .footer {
+        .container-fluid {
+            .show-grid{
+                .page-footer__info-hiring {
+                    margin-top: 60%;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 376px){
+    .footer {
+        .container-fluid {
+            .show-grid{
+                h3 {
+                    font-size: 24px;
+                }
+                .page-footer__info-hiring {
+                    margin-top: 80%;
+                }
+            }
+        }
+    }
+}
+//iPad
+// @media only screen and (max-width: 769px) and (max-height: 1025px){}
+//mobiles
+// @media only screen and (max-width: 426px){}
+//iphone 6+/7+/8+ 
+// @media only screen and (max-width: 415px){}
+// @media only screen and (max-width: 376px){}
+//iphone 6/7/8/x
+// @media only screen and (max-width: 376px) and (max-height: 813px) {}

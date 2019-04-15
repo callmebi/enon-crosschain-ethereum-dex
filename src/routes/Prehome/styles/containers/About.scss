@@ -1,0 +1,92 @@
+
+@font-face {
+    font-family: "Helvetica Neue Cyr Thin";
+    src: url("../assets/fonts/HelveticaNeueCyr-Thin.woff");
+}
+@font-face {
+    font-family: "Helvetica Neue Cyr Light";
+    src: url("../assets/fonts/HelveticaNeueCyr-Light.woff");
+}
+  
+.about{
+    .show-grid{
+        width: 100%;
+    }
+    .enon-about{
+        text-align: left;
+        margin-top: 6em;
+        h1{
+            font-family: "Helvetica Neue Cyr Thin";
+            font-size: 45px;
+            font-weight: normal;
+            color: #0b1328;
+            line-height: 1.2em;
+        }
+        p{
+            font-family: "Helvetica Neue Cyr Light";
+            color: #5c7680;
+            font-size: 18px;
+            margin-top: 1.5em;
+        }
+    }
+}
+@media only screen and (max-width: 2600px){
+    .about{
+        .enon-about{
+            h1{
+                font-size: 55px;
+            }
+            p{
+                font-size: 20px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1250px){
+    .about{
+        .enon-about{
+            h1{
+                font-size: 30px;
+            }
+            // p{
+            //     font-size: 20px;
+            // }
+        }
+    }
+}
+@media only screen and (max-width: 430px){
+    .about{
+        .enon-about{
+            h1{
+                font-size: 30px;
+            }
+            p{
+                font-size: 20px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 376px){
+    .about{
+        .enon-about{
+            h1{
+                font-size: 25px;
+            }
+            p{
+                font-size: 17px;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 321px){
+    .about{
+        .enon-about{
+            h1{
+                font-size: 22px;
+            }
+            p{
+                font-size: 15px;
+            }
+        }
+    }
+}
