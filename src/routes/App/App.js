@@ -34,22 +34,23 @@ class App extends Component {
     } else if (window.location.pathname === "/login"){
       FooterComponent =FooterEmpty
       HeaderComponent =HaderEmpty
-    }else if (window.location.pathname === "/home" || window.location.pathname === "/" ){
-      FooterComponent =FooterPre
-      HeaderComponent =HeaderPre
     }
+    // else if (window.location.pathname === "/home" || window.location.pathname === "/" ){
+    //   FooterComponent =FooterPre
+    //   HeaderComponent =HeaderPre
+    // }
     return (
       <div className="App">
         <BrowserRouter>
           <HeaderComponent />
           <Switch>
-          <Route path="/prehome" component={Home} />
+          {/* <Route path="/prehome" component={Home} /> */}
             <Route path="/login" component={Login} />
             <Route path="/orderSecond" component={OrderSecond} />
             <Route path="/orderfirst" component={Orderfirst} />
             <Route path="/buypage2" component={BuyPage2} />
             <Route path="/buypage1" component={BuyPage1} />
-            <Route path={["/", "/home"]} exact component={PreHome} />
+            <Route path={["/", "/home"]} exact component={Home} />
           </Switch>
           <FooterComponent />
         </BrowserRouter>
