@@ -26,7 +26,7 @@ export default class Login extends Component {
                             <hr />
                             <p>Private key</p>
                             <input type="text" />
-                            <a id="logButton" href="/"><button >LOG IN<img src={arrowImg} alt="" /></button></a>
+                            <a id="logButton" href="/prehome"><button >LOG IN<img src={arrowImg} alt="" /></button></a>
                         </Col>
                         <Col xs={5}>
                         <img id="xbutton"src={Ximg} alt=""/>

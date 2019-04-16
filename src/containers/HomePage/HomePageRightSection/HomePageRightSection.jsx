@@ -43,7 +43,7 @@ export default class HomePageRightSection extends Component {
                                 </Col>
                                 <Col xs={4}>
                                     <p className="valueDolar">$12.845.92</p>
-                                    <a href="/">SELECT</a>
+                                    <a href="/prehome">SELECT</a>
                                 </Col>
                             </Row>
                             <Row className="coinRow">

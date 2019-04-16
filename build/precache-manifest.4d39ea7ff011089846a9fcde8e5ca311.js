@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ddd5e285dd706d762303",
+    "revision": "7341b07642884e879de3",
     "url": "/static/css/main.9bb36428.chunk.css"
   },
   {
-    "revision": "ddd5e285dd706d762303",
-    "url": "/static/js/main.b8e50518.chunk.js"
+    "revision": "7341b07642884e879de3",
+    "url": "/static/js/main.fe16c0b3.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/static/media/sf-pro-text-regular.12d8580f.ttf"
   },
   {
-    "revision": "0d61db61d7adaefb9b0c4b0b2e979116",
-    "url": "/static/media/SF-Pro-Display-Thin.0d61db61.otf"
-  },
-  {
     "revision": "65a0d9b6814bf082ddf316c079d4849a",
     "url": "/static/media/SF-Pro-Text-Light.65a0d9b6.otf"
+  },
+  {
+    "revision": "0d61db61d7adaefb9b0c4b0b2e979116",
+    "url": "/static/media/SF-Pro-Display-Thin.0d61db61.otf"
   },
   {
     "revision": "f186187b9d5cd09f69a63bc3953e9ccb",
@@ -132,7 +132,7 @@ self.__precacheManifest = [
     "url": "/static/media/GothamPro-Bold.a3d7d652.woff"
   },
   {
-    "revision": "ac6b35638ef7fe3e00b61f1f623713d7",
+    "revision": "02825d487216d9a6b1c732db92bdfbd3",
     "url": "/index.html"
   }
 ];
