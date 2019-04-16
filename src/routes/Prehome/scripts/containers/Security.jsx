@@ -1,7 +1,7 @@
 //import packages
 import React from 'react';
 import $ from 'jquery';
-import {Container, Row, Col, Image } from 'react-bootstrap';
+import {Container, Row, Col } from 'react-bootstrap';
 //import components
 import '../../styles/containers/Security.scss';
 //import files

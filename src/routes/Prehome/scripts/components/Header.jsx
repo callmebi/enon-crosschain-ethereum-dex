@@ -1,6 +1,6 @@
 //import packages
 import React from 'react';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem, Button,Container, Row,Col} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import $ from 'jquery';
 //import components
 import '../../styles/components/Header.scss';
@@ -70,40 +70,40 @@ export default class Header extends React.Component {
             <div className="headerNav">
             <Container> 
                 <header className="page-header block-align">
-                    <a href="#" className="logo">enon</a>
+                    <a href="#0" className="logo">enon</a>
                     <ul className="page-header__list">
                         <li className="active">
                             <a href="https://docs.google.com/document/d/e/2PACX-1vTFHqUi5bvNPd-T1pdgT1PbOiyuu1O8T4NSSWUoSZYVAJJ0Vb-Iorb1x7z7GOFfff2l1oJGGV2ZpMbt/pub">Roadmap</a>
                         </li>
                         <li>
-                            <a href="#">Team</a>
+                            <a href="#0">Team</a>
                         </li>
                         <li>
                             <a href="https://t.me/Enonchain">Telegram</a>
                         </li>
                         <li>
-                            <a href="#">Blog</a>
+                            <a href="#0">Blog</a>
                         </li>
                         <li className="language">
-                            <a className="lang">English</a>
+                            <a href="#0" className="lang">English</a>
                             <ul className="language-wrapper">
                                 <li>
-                                    <a href="" className="eng">English</a>
+                                    <a href="#0" className="eng">English</a>
                                 </li>
                                 <li>
-                                    <a href="" className="lat">Latvian</a>
+                                    <a href="#0" className="lat">Latvian</a>
                                 </li>
                                 <li>
-                                    <a href="" className="fra">French</a>
+                                    <a href="#0" className="fra">French</a>
                                 </li>
                                 <li>
-                                    <a href="" className="jap">Japanese</a>
+                                    <a href="#0" className="jap">Japanese</a>
                                 </li>
                                 <li>
-                                    <a href="" className="chi">Chinese</a>
+                                    <a href="#0" className="chi">Chinese</a>
                                 </li>
                                 <li>
-                                    <a href="" className="gre">Greek</a>
+                                    <a href="#0" className="gre">Greek</a>
                                 </li>
                             </ul>
                         </li>

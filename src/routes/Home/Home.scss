@@ -245,15 +245,107 @@
       font-family: "MySoRegular";
       text-decoration: none;
     }
+    .BarChart {
+      width: 100%;
+      .leftCol {
+        width: 15%;
+        // position: absolute;
+        height: 100%;
+        bottom: 0;
+        margin-left: 12px;
+        p {
+          color: #333;
+          font-size: 15px;
+          line-height: 20px;
+          font-family: "MySoRegular";
+          span {
+            width: 79%;
+            border-bottom: 1px solid lightgray;
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 25px;
+            z-index: 0;
+          }
+          // span:nth-child(3){
+          //   margin-top: 0!important;
+          // }
+        }
+        p:nth-child(1) {
+          // padding-bottom: 50px;
+          padding-top: 68px;
+        }
+        p:nth-child(2) {
+          // padding: 62px 0;
+          padding-top: 134px;
+        }
+        p:nth-child(3) {
+          // padding: 65px 0;
+          // padding-bottom: 68px;
+          padding-top: 134px;
+          margin-bottom: 0;
+        }
+      }
+      .positionOnCol {
+        height: 100%;
+    width: 80%;
+    bottom: 0;
+    display: table-cell;
+    vertical-align: bottom;
+    z-index: 99;
+        .rightCol {
+          display: inline-flex;
+    bottom: 0;
+    width: 100%;
+    padding-top: 360px;
+    height: 500px;
+          .bar {
+            // position: absolute;
+            bottom: 0;
+            width: 30px;
+            // height: 350px;
+            margin-right: 68px;
+            margin-bottom: 82px;
+            background-color: #0084f0;
+            box-shadow: inset 0 -22px 0 0 hsla(206.76258992805754, 0%, 100%, 0.33);
+          }
+          div:nth-child(8){
+            margin-right: 0;
+          }
+        }
+      }
+      .pogore{
+margin-left: -5px;
+        margin-top: -45px;
+      }
+    }
+    .iconBar {
+      display: inline-block;
+      padding-top: 0!important;
+      height: 30px!important;
+      margin-top: -40px;
+      margin-left: 156px;
+      img {
+        width: 30px;
+        height: 30px;
+        bottom: 0;
+            // width: 30px;
+            // height: 350px;
+            margin-right: 68px;
+            margin-bottom: -3px;
+
+            // background-color: #0084f0;
+            // box-shadow: inset 0 -22px 0 0 hsla(206.76258992805754, 0%, 100%, 0.33);
+      }
+    }
   }
   .popup_innerLimit2 {
     display: none;
     width: 788px;
-    height: 559px!important;
-    h4{
-      padding: 0px 51px 10px 35px!important;
+    height: 559px !important;
+    h4 {
+      padding: 0px 51px 10px 35px !important;
       line-height: 35px;
-      font-size:21;
+      font-size: 21;
     }
     .paddingRow {
       #pContinue {
