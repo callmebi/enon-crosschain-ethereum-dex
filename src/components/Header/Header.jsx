@@ -18,10 +18,10 @@ export default class Header extends Component {
       <Row>
         <Col xs={10}>
       <Navbar>
-        <Navbar.Brand ><img src={LogoImg}
-          className="float-right align-center"
+        <Navbar.Brand href="/"><img src={LogoImg}
+          className="float-right align-center widthImg" 
           alt=""
-          href="/" /></Navbar.Brand>
+           /></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>

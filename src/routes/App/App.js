@@ -18,9 +18,9 @@ import FooterOrderFirst3 from '../../components/Footer/FooterOrderFirst3.jsx';
 import FooterEmpty from '../../components/Footer/FooterEmpty.jsx';
 import HaderEmpty from '../../components/Header/HeaderEmpty.jsx';
 import Login from '../Login/Login.jsx';
-import PreHome from '../Prehome/scripts/routes/Home.jsx';
-import HeaderPre from '../Prehome/scripts/components/Header.jsx';
-import FooterPre from '../Prehome/scripts/components/Footer.jsx';
+// import PreHome from '../Prehome/scripts/routes/Home.jsx';
+// import HeaderPre from '../Prehome/scripts/components/Header.jsx';
+// import FooterPre from '../Prehome/scripts/components/Footer.jsx';
 let FooterComponent = Footer;
 let HeaderComponent = Header;
 class App extends Component {
