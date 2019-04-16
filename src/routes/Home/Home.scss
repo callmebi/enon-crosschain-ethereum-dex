@@ -835,6 +835,10 @@
 @media only screen and (max-width: 1280px) {
   .home {
     .popup {
+      .popup_innerLimit,
+      .popup_innerLimit2 {
+        left: 20%;
+      }
       .popup_innerC {
         left: 15%;
       }
@@ -844,6 +848,10 @@
 @media only screen and (max-width: 1024px) {
   .home {
     .popup {
+      .popup_innerLimit,
+      .popup_innerLimit2 {
+        left: 7%;
+      }
       .popup_inner,
       .popup_inner2 {
         left: 20%;
@@ -857,6 +865,23 @@
 @media only screen and (max-width: 800px) {
   .home {
     .popup {
+      .popup_innerLimit,
+      .popup_innerLimit2 {
+        left: 3%;
+        width: 85%;
+        .tradeParag {
+          // display: block;
+          width: 85%;
+        }
+        .rightColo {
+          .divider #dividerRight {
+            padding-left: 135px;
+          }
+          .formGroup form #continueButton {
+            margin-top: 40px !important;
+          }
+        }
+      }
       .popup_inner,
       .popup_inner2 {
         left: 16%;
@@ -873,6 +898,42 @@
 @media only screen and (max-width: 450px) {
   .home {
     .popup {
+      .popup_innerLimit,
+      .popup_innerLimit2 {
+        overflow-y: auto;
+        img {
+          margin-right: 15%;
+        }
+        .leftColo {
+          width: 70px !important;
+          .row {
+            .step {
+              margin-left: 35%;
+            }
+          }
+        }
+        .rightColo {
+          flex: auto;
+          width: 0%;
+          .divider {
+            margin: 10px 18px;
+            #dividerRight {
+              padding-left: 0;
+            }
+          }
+          .formGroup form #continueButton {
+            float: none;
+            img {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+      .popup_innerLimit2 {
+        .paddingRow {
+          display: inline-block;
+        }
+      }
       .popup_inner,
       .popup_inner2 {
         left: 2%;
@@ -902,6 +963,13 @@
 @media only screen and (max-width: 376px) {
   .home {
     .popup {
+      .popup_innerLimit,
+      .popup_innerLimit2 {
+        height: 480px;
+        h4 {
+          padding: 0px 0px 10px 15px;
+        }
+      }
       .popup_inner,
       .popup_inner2 {
         button {
@@ -911,6 +979,11 @@
         }
       }
       .popup_inner2 {
+        h4 {
+          width: 90%;
+          margin-left: 5%;
+          font-size: 18px;
+        }
         p {
           margin-left: 2%;
         }
