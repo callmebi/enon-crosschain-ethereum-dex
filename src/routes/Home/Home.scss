@@ -249,7 +249,6 @@
       width: 100%;
       .leftCol {
         width: 15%;
-        // position: absolute;
         height: 100%;
         bottom: 0;
         margin-left: 12px;
@@ -266,75 +265,61 @@
             margin-left: 25px;
             z-index: 0;
           }
-          // span:nth-child(3){
-          //   margin-top: 0!important;
-          // }
         }
         p:nth-child(1) {
-          // padding-bottom: 50px;
           padding-top: 68px;
         }
         p:nth-child(2) {
-          // padding: 62px 0;
           padding-top: 134px;
         }
         p:nth-child(3) {
-          // padding: 65px 0;
-          // padding-bottom: 68px;
           padding-top: 134px;
           margin-bottom: 0;
         }
       }
       .positionOnCol {
         height: 100%;
-    width: 80%;
-    bottom: 0;
-    display: table-cell;
-    vertical-align: bottom;
-    z-index: 99;
+        width: 80%;
+        bottom: 0;
+        display: table-cell;
+        vertical-align: bottom;
+        z-index: 99;
         .rightCol {
           display: inline-flex;
-    bottom: 0;
-    width: 100%;
-    padding-top: 360px;
-    height: 500px;
+          bottom: 0;
+          width: 100%;
+          padding-top: 360px;
+          height: 500px;
           .bar {
-            // position: absolute;
             bottom: 0;
             width: 30px;
-            // height: 350px;
             margin-right: 68px;
             margin-bottom: 82px;
             background-color: #0084f0;
             box-shadow: inset 0 -22px 0 0 hsla(206.76258992805754, 0%, 100%, 0.33);
           }
-          div:nth-child(8){
+          div:nth-child(8) {
             margin-right: 0;
           }
         }
       }
-      .pogore{
-margin-left: -5px;
+      .pogore {
+        margin-left: -5px;
         margin-top: -45px;
       }
     }
     .iconBar {
       display: inline-block;
-      padding-top: 0!important;
-      height: 30px!important;
+      padding-top: 0 !important;
+      height: 30px !important;
       margin-top: -40px;
       margin-left: 156px;
       img {
         width: 30px;
         height: 30px;
         bottom: 0;
-            // width: 30px;
-            // height: 350px;
-            margin-right: 68px;
-            margin-bottom: -3px;
-
-            // background-color: #0084f0;
-            // box-shadow: inset 0 -22px 0 0 hsla(206.76258992805754, 0%, 100%, 0.33);
+        margin-right: 68px;
+        margin-bottom: -3px;
       }
     }
   }
@@ -718,7 +703,6 @@ margin-left: -5px;
       }
     }
   }
-
   .popup_inner2 {
     display: none;
     position: absolute;
@@ -839,53 +823,72 @@ margin-left: -5px;
     }
   }
 }
-@media only screen and (max-width:1440px){
+@media only screen and (max-width: 1440px) {
   .home {
-    .popup{
-      .popup_innerC{
+    .popup {
+      .popup_innerC {
         left: 20%;
       }
     }
   }
 }
-@media only screen and (max-width:1280px){
+@media only screen and (max-width: 1280px) {
   .home {
-    .popup{
-      .popup_innerC{
+    .popup {
+      .popup_innerC {
         left: 15%;
       }
     }
   }
 }
-@media only screen and (max-width:1024px){
+@media only screen and (max-width: 1024px) {
   .home {
-    .popup{
-      .popup_innerC{
+    .popup {
+      .popup_inner,
+      .popup_inner2 {
+        left: 20%;
+      }
+      .popup_innerC {
         left: 2%;
       }
     }
   }
 }
-@media only screen and (max-width:800px){
+@media only screen and (max-width: 800px) {
   .home {
-    .popup{
-      .popup_innerC{
+    .popup {
+      .popup_inner,
+      .popup_inner2 {
+        left: 16%;
+      }
+      .popup_innerC {
         width: 87%;
-        ul{
+        ul {
           padding-left: 30px;
         }
       }
     }
   }
 }
-@media only screen and (max-width:450px){
+@media only screen and (max-width: 450px) {
   .home {
-    .popup{
-      .popup_innerC{
+    .popup {
+      .popup_inner,
+      .popup_inner2 {
+        left: 2%;
+        width: 87%;
+      }
+      .popup_inner2 {
+        #right {
+          margin-left: 0;
+          font-size: 14px;
+        }
+      }
+      .popup_innerC {
         overflow-y: auto;
-        ul{
-          li{
-            .liMid{
+        ul {
+          li {
+            .liMid {
               font-size: 14px;
               overflow: auto;
               width: 200px;
@@ -896,10 +899,23 @@ margin-left: -5px;
     }
   }
 }
-@media only screen and (max-width:376px){
+@media only screen and (max-width: 376px) {
   .home {
-    .popup{
-      .popup_innerC{
+    .popup {
+      .popup_inner,
+      .popup_inner2 {
+        button {
+          img {
+            margin-left: 0px;
+          }
+        }
+      }
+      .popup_inner2 {
+        p {
+          margin-left: 2%;
+        }
+      }
+      .popup_innerC {
         height: 500px;
       }
     }
