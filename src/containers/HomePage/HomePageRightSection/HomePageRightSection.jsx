@@ -12,17 +12,24 @@ import Coin3Image from '../../../assets/images/2_12.png';
 import Coin4Image from '../../../assets/images/3408_13408.png';
 
 export default class HomePageRightSection extends Component {
+    handleTable() {
+        if( window.innerWidth <= 450){
+        document.getElementById('hPRightBottomSection').classList.toggle('showfooterPop')
+        document.getElementById('hPLeftSection').classList.toggle('hidefooterPop')
+        }
+        // console.log( window.innerWidth)
+    }
     render() {
         return (
-            <Col xs={9} className="hPRightSection">
+            <Col sm={9} xs={12} className="hPRightSection">
                 <Row className="hPRightTopSection justify-content-md-start">
                     <Col xs={12} >
-                        <button id="buybu">BUY BITCOIN</button>
-                        <button id="sellbu">SELL BITCOIN</button>
+                        <button onClick={this.handleTable} id="buybu">BUY BITCOIN</button>
+                        <button onClick={this.handleTable} id="sellbu">SELL BITCOIN</button>
                     </Col>
                 </Row>
 
-                <Row className="hPRightBottomSection">
+                <Row id="hPRightBottomSection" className="hPRightBottomSection">
                     {/* <Col xs={12}> */}
                     <Col xl={12} sm={10} xs={10} className="coinTable">
                         <Row className="head">

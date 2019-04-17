@@ -855,8 +855,7 @@
 @media only screen and (max-width: 1024px) {
   .home {
     .hPRightSection .hPRightBottomSection .coinTable .coinRow div a{
-      margin-left: 15%;
-      padding: 7px 10px;
+      display: none;
     }
     .popup {
       .popup_innerLimit,
@@ -879,6 +878,12 @@
 }
 @media only screen and (max-width: 800px) {
   .home {
+    
+      .hPLeftSection{
+        padding-left: 22px;
+        max-width: 25%;
+      
+      }
     .popup {
       .popup_innerLimit,
       .popup_innerLimit2 {
@@ -926,6 +931,22 @@
 }
 @media only screen and (max-width: 450px) {
   .home {
+    margin-top: 9%;
+    .hPRightSection{
+      margin-top: 10%;
+      .hPRightTopSection{
+        // padding-bottom: 6px;
+        padding-bottom: 4%;
+      }
+      .hPRightBottomSection{
+        display: none;
+      }
+    }
+    .hPLeftSection{
+      padding-left: 22px;
+      max-width: 100%;
+    margin-left: 10%;
+    }
     .popup {
       .popup_innerLimit,
       .popup_innerLimit2 {

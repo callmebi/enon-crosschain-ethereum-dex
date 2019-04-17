@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap';
 export default class HomePageLeftSection extends Component {
     render() {
         return (
-            <Col xs={3} className="hPLeftSection">
+            <Col sm={3} xs={9}  id="hPLeftSection" className="hPLeftSection">
                 <div className="hPLeftSection1">
                     <p id="address">0x1B0....3CA50</p>
                     <p id="balance">0.0 ETH</p>
