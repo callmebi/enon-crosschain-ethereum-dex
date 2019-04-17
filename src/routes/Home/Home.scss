@@ -829,6 +829,9 @@
       .popup_innerC {
         left: 20%;
       }
+      .popup_innerCompare{
+       left: 21%; 
+      }
     }
   }
 }
@@ -842,6 +845,9 @@
       .popup_innerC {
         left: 15%;
       }
+      .popup_innerCompare{
+        left: 16%; 
+       }
     }
   }
 }
@@ -859,6 +865,10 @@
       .popup_innerC {
         left: 2%;
       }
+      .popup_innerCompare{
+        left: 1%;
+        width: 89%; 
+       }
     }
   }
 }
@@ -892,6 +902,20 @@
           padding-left: 30px;
         }
       }
+      .popup_innerCompare{
+        .BarChart .leftCol p span{
+          margin-left: 2%;
+        }
+        .BarChart .positionOnCol .rightCol .bar {
+          margin-right: 40px;
+        }
+        .iconBar{
+          margin-left: 128px;
+          img{
+margin-right: 40px;
+          }
+        }
+       }
     }
   }
 }
@@ -957,6 +981,26 @@
           }
         }
       }
+      .popup_innerCompare{
+        .BarChart .leftCol p{
+          font-size: 10px;
+        }
+        .BarChart .positionOnCol .rightCol {
+            
+          .bar{
+          margin-right: 12px;
+          width: 27px;
+        }
+      }
+        .iconBar {
+          margin-left: 25%;
+          img{
+            margin-right: 5.8%;
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
     }
   }
 }
@@ -990,6 +1034,52 @@
       }
       .popup_innerC {
         height: 500px;
+      }
+      .popup_innerCompare{
+        .BarChart .leftCol p{
+          font-size: 7px;
+        }
+        .BarChart .positionOnCol .rightCol {
+            
+          .bar{
+          margin-right: 10px;
+          width: 25px;
+        }
+      }
+        .iconBar {
+          margin-left: 25%;
+          img{
+            margin-right: 5%;
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 376px) {
+  .home {
+    .popup {
+      .popup_innerCompare{
+        .BarChart .leftCol p{
+          font-size: 7px;
+        }
+        .BarChart .positionOnCol .rightCol {
+            
+          .bar{
+          margin-right: 9px;
+          width: 21px;
+        }
+      }
+        .iconBar {
+          margin-left: 27%;
+          img{
+            margin-right: 6%;
+            width: 15px;
+            height: 15px;
+          }
+        }
       }
     }
   }
