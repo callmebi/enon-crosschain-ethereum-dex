@@ -2,7 +2,7 @@
   margin: auto;
   margin-top: 99px;
   .hPLeftSection {
-    width: 255px;
+    max-width: 22%;
     padding-bottom: 0px;
     -webkit-align-self: flex-start;
     -ms-flex-item-align: start;
@@ -88,11 +88,12 @@
     }
   }
   .hPRightSection {
-    margin-left: 61px;
+    padding-left: 7%;
     margin-top: -30px;
     .hPRightTopSection {
       button {
         letter-spacing: 1.5px;
+        float: left;
       }
       #buybu {
         width: auto;
@@ -140,7 +141,7 @@
     .hPRightBottomSection {
       padding-top: 41px;
       .coinTable {
-        width: 100%;
+        // width: 100%;
         .head {
           border-style: none none solid;
           border-width: 1px;
@@ -184,7 +185,7 @@
               color: #0d0d0e;
               margin-top: -8px;
               margin-bottom: -8px;
-              margin-left: 85px;
+              margin-left: 40%;
               padding: 7px 23px;
               border-radius: 3px;
               font-size: 12px;
@@ -829,8 +830,8 @@
       .popup_innerC {
         left: 20%;
       }
-      .popup_innerCompare{
-       left: 21%; 
+      .popup_innerCompare {
+        left: 21%;
       }
     }
   }
@@ -845,14 +846,18 @@
       .popup_innerC {
         left: 15%;
       }
-      .popup_innerCompare{
-        left: 16%; 
-       }
+      .popup_innerCompare {
+        left: 16%;
+      }
     }
   }
 }
 @media only screen and (max-width: 1024px) {
   .home {
+    .hPRightSection .hPRightBottomSection .coinTable .coinRow div a{
+      margin-left: 15%;
+      padding: 7px 10px;
+    }
     .popup {
       .popup_innerLimit,
       .popup_innerLimit2 {
@@ -865,10 +870,10 @@
       .popup_innerC {
         left: 2%;
       }
-      .popup_innerCompare{
+      .popup_innerCompare {
         left: 1%;
-        width: 89%; 
-       }
+        width: 89%;
+      }
     }
   }
 }
@@ -902,20 +907,20 @@
           padding-left: 30px;
         }
       }
-      .popup_innerCompare{
-        .BarChart .leftCol p span{
+      .popup_innerCompare {
+        .BarChart .leftCol p span {
           margin-left: 2%;
         }
         .BarChart .positionOnCol .rightCol .bar {
           margin-right: 40px;
         }
-        .iconBar{
+        .iconBar {
           margin-left: 128px;
-          img{
-margin-right: 40px;
+          img {
+            margin-right: 40px;
           }
         }
-       }
+      }
     }
   }
 }
@@ -981,20 +986,19 @@ margin-right: 40px;
           }
         }
       }
-      .popup_innerCompare{
-        .BarChart .leftCol p{
+      .popup_innerCompare {
+        .BarChart .leftCol p {
           font-size: 10px;
         }
         .BarChart .positionOnCol .rightCol {
-            
-          .bar{
-          margin-right: 12px;
-          width: 27px;
+          .bar {
+            margin-right: 12px;
+            width: 27px;
+          }
         }
-      }
         .iconBar {
           margin-left: 25%;
-          img{
+          img {
             margin-right: 5.8%;
             width: 20px;
             height: 20px;
@@ -1035,20 +1039,19 @@ margin-right: 40px;
       .popup_innerC {
         height: 500px;
       }
-      .popup_innerCompare{
-        .BarChart .leftCol p{
+      .popup_innerCompare {
+        .BarChart .leftCol p {
           font-size: 7px;
         }
         .BarChart .positionOnCol .rightCol {
-            
-          .bar{
-          margin-right: 10px;
-          width: 25px;
+          .bar {
+            margin-right: 10px;
+            width: 25px;
+          }
         }
-      }
         .iconBar {
           margin-left: 25%;
-          img{
+          img {
             margin-right: 5%;
             width: 20px;
             height: 20px;
@@ -1061,20 +1064,19 @@ margin-right: 40px;
 @media only screen and (max-width: 376px) {
   .home {
     .popup {
-      .popup_innerCompare{
-        .BarChart .leftCol p{
+      .popup_innerCompare {
+        .BarChart .leftCol p {
           font-size: 7px;
         }
         .BarChart .positionOnCol .rightCol {
-            
-          .bar{
-          margin-right: 9px;
-          width: 21px;
+          .bar {
+            margin-right: 9px;
+            width: 21px;
+          }
         }
-      }
         .iconBar {
           margin-left: 27%;
-          img{
+          img {
             margin-right: 6%;
             width: 15px;
             height: 15px;

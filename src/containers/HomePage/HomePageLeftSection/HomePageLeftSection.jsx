@@ -1,10 +1,10 @@
 //import packages
 import React, { Component } from 'react';
-// import { Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 export default class HomePageLeftSection extends Component {
     render() {
         return (
-            <div className="hPLeftSection">
+            <Col xs={3} className="hPLeftSection">
                 <div className="hPLeftSection1">
                     <p id="address">0x1B0....3CA50</p>
                     <p id="balance">0.0 ETH</p>
@@ -18,7 +18,7 @@ export default class HomePageLeftSection extends Component {
                     <p id="orders">My orders<span>2</span></p>
                     <p id="">Exit</p>
                 </div>
-            </div>
+            </Col>
         )
     }
 }

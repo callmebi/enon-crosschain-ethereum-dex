@@ -14,129 +14,133 @@ import Coin4Image from '../../../assets/images/3408_13408.png';
 export default class HomePageRightSection extends Component {
     render() {
         return (
-            <Col className="hPRightSection">
-                <Row className="hPRightTopSection">
-                    <button id="buybu">BUY BITCOIN</button>
-                    <button id="sellbu">SELL BITCOIN</button>
+            <Col xs={9} className="hPRightSection">
+                <Row className="hPRightTopSection justify-content-md-start">
+                    <Col xs={12} >
+                        <button id="buybu">BUY BITCOIN</button>
+                        <button id="sellbu">SELL BITCOIN</button>
+                    </Col>
                 </Row>
-                <Col xs={12}>
-                    <Row className="hPRightBottomSection">
-                        <div className="coinTable">
-                            <Row className="head">
-                                <Col xs={4}>
-                                    <p>Receive</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <p>Send</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <p>Order total USD</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow active">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Ethereum} alt="" /><p> 120 ETH</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <p className="valueDolar">$12.845.92</p>
-                                    <a href="/prehome">SELECT</a>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={MoneroImage} alt="" /><p>12 MNR</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Coin1Image} alt="" /><p>12 ETH</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Coin2Image} alt="" /><p>120 USDT</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Coin3Image} alt="" /><p>120 LTC</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Coin4Image} alt="" /><p> 120 ETH</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Ethereum} alt="" /><p> 120 ETH</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Ethereum} alt="" /><p> 120 ETH</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                            <Row className="coinRow">
-                                <Col xs={4}>
-                                    <img src={BitcoinImage} alt="" className="firstIcon" />
-                                    <p>4 BTC</p>
-                                </Col>
-                                <Col xs={4}>
-                                    <img src={Ethereum} alt="" /><p>120 ETH</p>
-                                </Col>
-                                <Col xs={4}><p className="valueDolar">$12.845.92</p>
-                                </Col>
-                            </Row>
-                        </div>
-                    </Row>
-                </Col>
+
+                <Row className="hPRightBottomSection">
+                    {/* <Col xs={12}> */}
+                    <Col xl={12} sm={10} xs={10} className="coinTable">
+                        <Row className="head">
+                            <Col xs={4}>
+                                <p>Receive</p>
+                            </Col>
+                            <Col xs={4}>
+                                <p>Send</p>
+                            </Col>
+                            <Col xs={4}>
+                                <p>Order total USD</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow active">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Ethereum} alt="" /><p> 120 ETH</p>
+                            </Col>
+                            <Col xs={4}>
+                                <p className="valueDolar">$12.845.92</p>
+                                <a href="#0">SELECT</a>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={MoneroImage} alt="" /><p>12 MNR</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Coin1Image} alt="" /><p>12 ETH</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Coin2Image} alt="" /><p>120 USDT</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Coin3Image} alt="" /><p>120 LTC</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Coin4Image} alt="" /><p> 120 ETH</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Ethereum} alt="" /><p> 120 ETH</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Ethereum} alt="" /><p> 120 ETH</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        <Row className="coinRow">
+                            <Col xs={4}>
+                                <img src={BitcoinImage} alt="" className="firstIcon" />
+                                <p>4 BTC</p>
+                            </Col>
+                            <Col xs={4}>
+                                <img src={Ethereum} alt="" /><p>120 ETH</p>
+                            </Col>
+                            <Col xs={4}><p className="valueDolar">$12.845.92</p>
+                            </Col>
+                        </Row>
+                        {/* </div> */}
+                    </Col>
+                </Row>
+
             </Col>
         )
     }
