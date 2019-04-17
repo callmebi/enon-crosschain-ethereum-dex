@@ -12,6 +12,17 @@ import Coin3Image from '../../../assets/images/2_12.png';
 import Coin4Image from '../../../assets/images/3408_13408.png';
 
 export default class HomePageRightSection extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+    
+        }
+      }
+      popHandler() {
+        let pop1 = document.getElementById("homePagePopup");
+        pop1.classList.toggle("showfooterPop");
+      }
     render() {
         return (
             <Col className="hPRightSection">
@@ -43,7 +54,7 @@ export default class HomePageRightSection extends Component {
                                 </Col>
                                 <Col xs={4}>
                                     <p className="valueDolar">$12.845.92</p>
-                                    <a href="/prehome">SELECT</a>
+                                    <a onClick={this.popHandler}>SELECT</a>
                                 </Col>
                             </Row>
                             <Row className="coinRow">
