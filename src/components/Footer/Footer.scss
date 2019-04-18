@@ -1,4 +1,7 @@
 .footerHome {
+  overflow-x: hidden;
+  width: 88%;
+    margin-left: 0;
   position: fixed;
   bottom: 0;
   border-top: 1px solid #e1e8ed;
@@ -94,8 +97,33 @@
     }
   }
 }
-@media only screen and (max-width:450px){
+@media only screen and (min-width:1200px){
+  .hideXl{
+    display: none;
+  }
+}
+@media only screen and (max-width:580px){
   .footerHome{
+    padding-left: 0;
+    padding-right: 0;
+
     position: relative;
+    .leftFooterSection div div:nth-child(1),
+    .leftFooterSection div div:nth-child(2) {
+      max-width: 50%;
+      padding-bottom: 10px;
+    }
+     .leftFooterSection div:nth-child(3) p{
+       text-align: center;
+       padding-top: 10px;
+     }
+    .rightFooterSection button{
+      width: auto;
+      padding: 10px 40px;
+      font-size: 12px;
+    }
+    .leftFooterSection img{
+      margin-left: 0!important;
+    }
   }
 } 

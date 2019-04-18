@@ -12,11 +12,16 @@ export default class Header extends Component {
     let pop1 = document.getElementById("homePagePopupLimir");
     pop1.classList.toggle("showfooterPop");
   }
+  componentDidMount() {
+    if(window.innerWidth <= 580){
+document.getElementById("mobWidth").classList.toggle("col-12")
+    }
+  }
   render() {
     return (
       <Container fluid>
       <Row>
-        <Col xs={10}>
+        <Col id="mobWidth" xs={10}>
       <Navbar>
         <Navbar.Brand href="/"><img src={LogoImg}
           className="float-right align-center widthImg" 

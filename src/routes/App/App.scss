@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -37,6 +37,13 @@
 }
 .hidefooterPop{
   display: none!important;
+}
+@media only screen and (max-width:600px){
+.row{
+  max-width: 506px;
+  padding: 0;
+  margin: 0;
+}
 }
 @keyframes App-logo-spin {
   from {

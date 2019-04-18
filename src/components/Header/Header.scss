@@ -16,3 +16,44 @@
         }
     }
 }
+@media only screen and (max-width:580px){
+    #mobWidth{
+            padding-left: 0;
+        }
+}
+@media only screen and (max-width:376px){
+    #mobWidth > nav{
+        display: inline-flex;
+    }
+        .navbar{
+            .widthImg {
+                width: 85px;
+            }
+            a{
+                font-size: 10px;
+                img {
+                    width: 20px;
+                    margin-left: 2px;
+                }
+            }
+            
+    }
+}
+@media only screen and (max-width:320px){
+    #mobWidth > nav{
+        display: inline-block;
+    }
+    //     .navbar{
+    //         .widthImg {
+    //             width: 85px;
+    //         }
+    //         a{
+    //             font-size: 10px;
+    //             img {
+    //                 width: 20px;
+    //                 margin-left: 2px;
+    //             }
+    //         }
+            
+    // }
+}

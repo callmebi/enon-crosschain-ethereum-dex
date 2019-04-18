@@ -854,7 +854,7 @@
 }
 @media only screen and (max-width: 1024px) {
   .home {
-    .hPRightSection .hPRightBottomSection .coinTable .coinRow div a{
+    .hPRightSection .hPRightBottomSection .coinTable .coinRow div a {
       display: none;
     }
     .popup {
@@ -878,12 +878,10 @@
 }
 @media only screen and (max-width: 800px) {
   .home {
-    
-      .hPLeftSection{
-        padding-left: 22px;
-        max-width: 25%;
-      
-      }
+    .hPLeftSection {
+      padding-left: 22px;
+      max-width: 25%;
+    }
     .popup {
       .popup_innerLimit,
       .popup_innerLimit2 {
@@ -929,23 +927,28 @@
     }
   }
 }
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 580px) {
   .home {
     margin-top: 9%;
-    .hPRightSection{
+    .hPRightSection {
       margin-top: 10%;
-      .hPRightTopSection{
-        // padding-bottom: 6px;
+      width: 100%;
+      padding: 0;
+      .hPRightTopSection {
         padding-bottom: 4%;
+        button {
+          width: 50% !important;
+          font-size: 10px;
+        }
       }
-      .hPRightBottomSection{
+      .hPRightBottomSection {
         display: none;
       }
     }
-    .hPLeftSection{
+    .hPLeftSection {
       padding-left: 22px;
       max-width: 100%;
-    margin-left: 10%;
+      margin-left: 8%;
     }
     .popup {
       .popup_innerLimit,
@@ -1084,6 +1087,10 @@
 }
 @media only screen and (max-width: 376px) {
   .home {
+    .hPRightSection .hPRightBottomSection .coinTable {
+      .head div p{
+        text-align: center;
+      }}
     .popup {
       .popup_innerCompare {
         .BarChart .leftCol p {
@@ -1103,6 +1110,24 @@
             height: 15px;
           }
         }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 321px) {
+  .home .hPRightSection .hPRightBottomSection .coinTable {
+    .head div p{
+      text-align: center;
+      font-size: 12px;
+
+    }
+    .coinRow div {
+      p {
+        margin-top: 5px;
+        font-size: 11px;
+      }
+      img {
+        margin-right: 0px;
       }
     }
   }

@@ -31,28 +31,31 @@ export default class Footer extends Component {
         <Row>
           <Container>
             <Row>
-              <Col lg={6} xs={12} className="leftFooterSection">
+              <Col xl={6} lg={12} sm={12} xs={12} className="leftFooterSection">
                 <Row>
-                  <Col xs={4}>
+                  <Col sm={4} xs={6}>
                     <p>You send</p>
                     <img src={EthImage} alt="" /><span><strong>120</strong> ETH</span>
                   </Col>
-                  <Col xs={4}>
+                  <Col sm={4} xs={6}>
                     <p>You receive</p>
                     <img src={BtcImage} alt="" /><span><strong>4</strong> BTC</span>
                   </Col>
-                  <Col xs={4}>
+                  <Col sm={4} xs={12}>
                     <p>Price 1 BTC<a href="#0" onClick={this.comparePopHandler}>Compare</a></p>
                     <p><strong>28.19512548</strong> ETH</p>
                   </Col>
                 </Row>
               </Col>
-              <Col lg={6} xs={12} className="rightFooterSection">
+              <Col className="hideXl" lg={12} sm={12} xs={12}>
+              <hr/>
+              </Col>
+              <Col xl={6} lg={12} sm={12} xs={12} className="rightFooterSection">
                 <Row>
-                  <Col xs={4}>
+                  <Col xs={5}>
                     <p onClick={this.collateralPopHandler}>160 ETH collateral</p>
                   </Col>
-                  <Col xs={8}>
+                  <Col xs={7}>
                     <button onClick={this.popHandler}>BUY NOW</button>
                   </Col>
                 </Row>
