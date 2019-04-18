@@ -18,8 +18,8 @@ export default class Login extends Component {
             <Container className="login">
                 <Row>
                     {/* <Col xs={12}> */}
-                    <Col xs={1}></Col>
-                        <Col xs={5} className="leftLog">
+                    <Col xl={1} smHidden xsHidden></Col>
+                        <Col lg={5} sm={10} xs={10} className="leftLog">
                             <h4>You only need ETH to pay for smart contract fees</h4>
                             <a href="#0"><img id="firstimg"src={FoxImg} alt=""/> LOGIN WITH METAMASK</a>
                             <a href="#0"><img id="secondimg"src={EthImg} alt=""/> CREATE ETHEREUM ADDRESS</a>
@@ -28,7 +28,7 @@ export default class Login extends Component {
                             <input type="text" />
                             <a id="logButton" href="/"><button >LOG IN<img src={arrowImg} alt="" /></button></a>
                         </Col>
-                        <Col xs={5}>
+                        <Col lg={5} sm={10} xs={10}>
                         <img id="xbutton"src={Ximg} alt=""/>
                         <ul>
                             <li><div className="liDiv"><img src={LogImg1} alt=""/></div>No KYC</li>

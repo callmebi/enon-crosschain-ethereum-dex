@@ -170,3 +170,86 @@
     }
   }
 }
+@media only screen and (max-width: 580px) {
+  .buyPage1 {
+    width: 85%;
+    margin-left: 3%;
+    .buyPage1Top .innerDiv .innerDiv2 {
+      .darkerDiv {
+        display: inline-block;
+        div {
+          .smallImg {
+            display: none;
+          }
+        }
+        .imgP {
+          height: 38px;
+          // width: 28px;
+        }
+      }
+      .innerP p {
+        width: 80%;
+        overflow-x: auto;
+      }
+    }
+    .buyPage1bottom .innerDiv .innerDiv2 {
+      .darkerDiv {
+        display: inline-block;
+        .imgP {
+          height: 38px;
+          // width: 28px;
+        }
+      }
+      .innerP p {
+        width: 80%;
+        overflow-x: auto;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 376px) {
+  .buyPage1 {
+    .buyPage1Top .innerDiv .innerDiv2 {
+      .darkerDiv {
+        div {
+          .pad {
+            font-size: 12px;
+            span {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+    .buyPage1bottom .innerDiv .innerDiv2 {
+      .darkerDiv {
+        div {
+          .pad {
+            font-size: 12px;
+            span {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 325px) {
+  .buyPage1 {
+    .buyPage1Top .innerDiv .innerDiv2 {
+      .darkerDiv {
+        div {
+          padding: 5px 10px;
+        }
+      }
+    }
+    .buyPage1bottom .innerDiv .innerDiv2 {
+      .darkerDiv {
+        div {
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+}

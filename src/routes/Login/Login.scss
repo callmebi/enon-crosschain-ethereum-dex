@@ -2,8 +2,8 @@
   margin: auto;
   display: block;
   position: absolute;
-    left: 25%;
-    top: 25%;
+  left: 25%;
+  top: 25%;
   .leftLog {
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     padding: 27px 70px;
@@ -42,10 +42,10 @@
         // display: inline-block;
       }
       #firstimg {
-          margin-left: 46px;
+        margin-left: 46px;
       }
       #secondimg {
-          margin-left: 30px;
+        margin-left: 30px;
       }
     }
     #logButton {
@@ -140,6 +140,67 @@
     }
     li:nth-child(7) {
       border-bottom: none;
+    }
+  }
+}
+@media only screen and (max-width: 1440px) {
+  .login {
+    left: 11%;
+  }
+}
+@media only screen and (max-width: 1290px) {
+  .login {
+    left: 6%;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .login {
+    left: 2%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .login {
+    .leftLog {
+      border-right: none;
+    }
+    #xbutton {
+      display: none;
+    }
+  }
+}
+@media only screen and (max-width: 580px) {
+  .login {
+    .leftLog {
+      padding: 27px 10px;
+    }
+  }
+}
+@media only screen and (max-width: 375px) {
+  .login {
+    .leftLog {
+      a #firstimg {
+        margin-left: 10%;
+      }
+      a #secondimg {
+        margin-left: 0%;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 325px) {
+  .login {
+    .leftLog {
+      a {
+        padding: 12px 5px;
+      }
+      a #firstimg {
+        margin-left: 0%;
+        margin-right: 0;
+      }
+      a #secondimg {
+        margin-left: 0%;
+        margin-right: 0;
+      }
     }
   }
 }
