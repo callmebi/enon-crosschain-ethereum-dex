@@ -1,6 +1,6 @@
 //import packages
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 // import {Container } from 'react-bootstrap';
 
 //import components
@@ -51,6 +51,9 @@ class App extends Component {
             <Route path="/buypage2" component={BuyPage2} />
             <Route path="/buypage1" component={BuyPage1} />
             <Route path={["/", "/home"]} exact component={Home} />
+            <Redirect from='*' to='/home' />
+
+
           </Switch>
           <FooterComponent />
         </BrowserRouter>
