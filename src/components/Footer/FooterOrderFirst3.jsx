@@ -31,7 +31,7 @@ export default class FooterOrderFirst3 extends Component {
         <Row>
           <Container>
             <Row>
-              <Col lg={6} xs={12} className="leftFooterSection">
+              <Col lg={7} xs={12} className="leftFooterSection">
                 <Row>
                   <Col xs={4}>
                     <p>You send</p>
@@ -47,7 +47,7 @@ export default class FooterOrderFirst3 extends Component {
                   </Col>
                 </Row>
               </Col>
-              <Col lg={6} xs={12} className="rightFooterSection">
+              <Col lg={5} xs={12} className="rightFooterSection">
                 <Row>
                   <Col xs={4}>
                     <p onClick={this.collateralPopHandler}>160 ETH collateral</p>
