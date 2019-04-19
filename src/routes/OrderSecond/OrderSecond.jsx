@@ -10,45 +10,45 @@ export default class OrderSecond extends Component {
         return (
             <Container fluid className="orderSecond">
                 <Row>
-                    <Col xs={3}>
+                    <Col xl={6} lg={10} sm={8}>
                         <h2>Trade is completed.</h2>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
+                    <Col sm={2} xs={3}>
                         <p>Your ETH address:</p>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={5} xs={9}>
                         <p>
                             <img src={BtcImg} alt="" /> 3JQSigWTCHyBLRD979JWgEtWP5YiiFwcQB
                         </p>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
+                    <Col sm={2} xs={3}>
                         <p>Your ETH address:</p>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={5} xs={9}>
                         <p>
                             <img src={BtcImg} alt="" /> 4/4 BTC
                         </p>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
+                    <Col sm={2} xs={3}>
                         <p>Confirmations:</p>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={5} xs={9}>
                         <p>
                             3
                         </p>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
+                    <Col sm={2} xs={3}>
                         <p>Transaction ID</p>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={5} xs={9}>
                         <p>
                             3JQSigWTCHyBLRD979JWgEtWP5YiiFwcQB
                         </p>

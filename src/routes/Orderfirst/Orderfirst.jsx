@@ -10,37 +10,37 @@ export default class Orderfirst extends Component {
         return (
             <Container fluid className="orderFirst">
                 <Row>
-                    <Col xs={3}>
+                    <Col xl={6} lg={10} sm={8}>
                         <h2>Since the other trader didn't send BTC, you received
                             160 ETH to your address.
                     </h2>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
+                    <Col sm={2} xs={3}>
                         <p>Your ETH address:</p>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={5} xs={9}>
                         <p>
                             <img src={EthImg} alt="" /> 3JQSigWTCHyBLRD979JWgEtWP5YiiFwcQB
                         </p>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
+                    <Col sm={2} xs={3}>
                         <p>Collateral status:</p>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={5} xs={9}>
                         <p>
                             You received 160 ETH
                         </p>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
+                    <Col sm={2} xs={3}>
                         <p>Transaction ID:</p>
                     </Col>
-                    <Col xs={2}>
+                    <Col sm={5} xs={9}>
                         <p>
                             3JQSigWTCHyBLRD979JWgEtWP5YiiFwcQB
                         </p>
