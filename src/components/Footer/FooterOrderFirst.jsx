@@ -27,11 +27,11 @@ export default class FooterOrderFirst extends Component {
   }
   render() {
     return (
-      <Container fluid className="footerHome">
+      <Container fluid className="footerHome footerOrderFirst">
         <Row>
           <Container>
             <Row>
-              <Col lg={6} xs={12} className="leftFooterSection">
+              <Col xl={6} xs={12} className="leftFooterSection">
                 <Row>
                   <Col xs={4}>
                     <p>You send</p>
@@ -42,15 +42,15 @@ export default class FooterOrderFirst extends Component {
                     <img src={BtcImage} alt="" /><span><strong>4</strong> BTC</span>
                   </Col>
                   <Col xs={4}>
-                    <p>Price 1 BTC<a href="#0" onClick={this.comparePopHandler}>Compare</a></p>
+                    <p>Price 1 BTC<a href="#0" /*onClick={this.comparePopHandler}*/>Compare</a></p>
                     <p><strong>28.19512548</strong> ETH</p>
                   </Col>
                 </Row>
               </Col>
-              <Col lg={6} xs={12} className="rightFooterSection">
+              <Col xl={6} xs={12} className="rightFooterSection">
                 <Row>
                   <Col xs={4}>
-                    <p onClick={this.collateralPopHandler}>160 ETH collateral</p>
+                    <p /*onClick={this.collateralPopHandler}*/>160 ETH collateral</p>
                   </Col>
                   <Col xs={8}>
                     <a href="/buyPage2"><button className="buybutton1">Awaiting payment from you</button></a>
