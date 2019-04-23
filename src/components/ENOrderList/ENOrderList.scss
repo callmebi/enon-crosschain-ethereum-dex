@@ -1,0 +1,147 @@
+.hPLeftSection {
+  max-width: 22%;
+  padding-bottom: 0px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  border-right: 1px none rgba(0, 0, 0, 0.07);
+  background-color: hsla(0, 0%, 61%, 0.11);
+  box-shadow: none;
+  -webkit-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  transform: scale(1.15);
+  margin-top: 13%;
+  text-align: left;
+  .hPLeftSection1 {
+    p {
+      padding: 0 31px;
+    }
+  }
+  div {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin: auto;
+    p {
+      position: relative;
+      box-shadow: none;
+      color: rgba(51, 51, 51, 0.62);
+      font-weight: 500;
+      margin-bottom: 0;
+      font-size: 16px;
+      display: flex;
+      padding: 11px 31px;
+      -webkit-box-align: center;
+      font-family: "Sf pro text", sans-serif;
+    }
+    #address {
+      color: #000;
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+    #balance {
+      margin-top: 10px;
+      color: rgba(0, 0, 0, 0.47);
+      line-height: 15px;
+      font-weight: 400;
+      font-size: 14px;
+    }
+    #coin1 {
+      position: relative;
+      background-color: hsla(0, 3%, 64%, 0.09);
+      box-shadow: none;
+      color: #000;
+      font-weight: 500;
+      display: flex;
+      -webkit-box-align: center;
+    }
+  }
+  .hPLeftSection2{
+    .CurrencyMenu_menuItem__nHZ2w {
+      padding: 18px 10%;
+    }
+  }
+  .hPLeftSection2,
+  .hPLeftSection3 {
+    p {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.09);
+        -webkit-box-pack: justify;
+        position: relative;
+        box-shadow: none;
+        font-weight: 500;
+        -webkit-box-align: center;
+      }
+    }
+  }
+  .hPLeftSection3 {
+    #orders {
+      span {
+        right: 0;
+        position: absolute;
+        margin-right: 30px;
+        background: red;
+        border-radius: 99px;
+        padding-right: 6px;
+        padding-left: 6px;
+        color: white;
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 300;
+      }
+    }
+  }
+}
+.hPRightSection {
+  padding-left: 7%;
+  // margin-top: -30px;
+  .hPRightTopSection {
+    padding-bottom: 5%;
+    button {
+      letter-spacing: 1.5px;
+      float: left;
+    }
+    #buybu {
+      width: auto;
+      margin-right: 0px;
+      padding-right: 32px;
+      padding-left: 32px;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      border-style: none;
+      border-color: #004279;
+      border-bottom-width: 4px;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      background-color: #0070e0;
+      color: #fff;
+      height: 42.8px;
+      font-weight: 600;
+      font-size: 12px;
+      font-family: "MySoBold";
+    }
+    #sellbu {
+      font-family: "MySoBold";
+      width: auto;
+      font-weight: 600;
+      font-size: 12px;
+      margin-right: 0px;
+      padding-right: 32px;
+      padding-left: 32px;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      border-style: none;
+      border-color: #692aed #692aed hsla(0, 0%, 65%, 0.49);
+      border-bottom-width: 4px;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      background-color: hsla(0, 0%, 65%, 0.23);
+      color: #2e2e2e;
+      height: 42.8px;
+    }
+  }
+}

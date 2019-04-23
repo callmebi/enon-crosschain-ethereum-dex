@@ -1,0 +1,56 @@
+.theOrder {
+	margin-bottom: 25px;
+}
+
+.theOrderCntr {}
+
+.theOrderHeader {
+	margin-bottom: 5px;
+}
+
+.theOrderContent {}
+
+.theOrderAmount {
+	font-size: 21px;
+	line-height: 21px;
+	font-weight: 300;
+}
+
+.theOrderCurrAbbr {
+	margin-left: 9px;
+}
+
+.marketplaceOrderListCntr {}
+
+.marketplaceOrderList {}
+
+.sourceLogo {
+	height: 20px;
+	width: 20px;
+}
+
+.sourceName {
+	margin-left: 7px;
+}
+
+.price {}
+
+.priceUsd {
+	margin-left: 9px;
+	color: #999;
+	font-weight: 300;
+}
+
+.orderTotal {}
+
+.cheaperUsd {
+	margin-left: 9px;
+	color: #999;
+	font-weight: 300;
+}
+
+.expensiveUsd {
+	margin-left: 9px;
+	color: #999;
+	font-weight: 300;
+}

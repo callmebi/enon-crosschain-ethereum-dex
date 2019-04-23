@@ -1,0 +1,35 @@
+.currency_badge_cntr {}
+
+.currency_badge_img {
+	height: 22px;
+	font-size: 22px;
+	margin-right: 20px;
+}
+
+.currency_badge_name {}
+
+.currency_badge_abbr {
+	margin-left: 5px;
+}
+
+.currency_badge_amount {
+	margin-right: 20px;
+}
+
+.div-block-270 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 18px 31px;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	border-bottom: 1px none rgba(0, 0, 0, .11);
+	font-size: 16px;
+}
+
+.image-67 {
+	margin-right: 19px;
+}

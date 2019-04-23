@@ -1,0 +1,26 @@
+.CompareToMarketpalceOrder_cntr {}
+
+.CompareToMarketpalceOrder_modal .ant-table-tbody>tr>td {
+	padding: 11px 17px;
+}
+
+.CompareToMarketpalceOrder_modal .ant-table-thead>tr>th {
+	background: none;
+}
+
+.CompareToMarketpalceOrder_modal .ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+	background-color: hsla(156, 2%, 55%, .07);
+}
+
+.CompareToMarketpalceOrder_modal_header {
+	margin: 11px 0px;
+	display: inline-block;
+}
+
+.CompareToMarketpalceOrder_modal .ant-modal-header {
+	padding: 17px 37px;
+}
+
+.CompareToMarketpalceOrder_modal .ant-modal-body {
+	padding: 41px 37px;
+}

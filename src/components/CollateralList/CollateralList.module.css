@@ -1,0 +1,25 @@
+.listItem {
+	margin-bottom: 15px;
+}
+
+.site {}
+
+.ethAddr {
+	margin: 5px 0px;
+}
+
+.verify {
+	color: #1acf9d;
+}
+
+.verifyHref {
+	color: #1acf9d;
+}
+
+.list {
+	padding-left: 40px;
+}
+
+.text {
+	margin-bottom: 30px;
+}

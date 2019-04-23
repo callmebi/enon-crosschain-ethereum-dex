@@ -1,0 +1,9 @@
+.menuItem {
+	padding: 18px 0px;
+	line-height: 20px;
+	height: 58px;
+}
+
+.menuItem:hover {
+	background-color: rgba(0, 0, 0, .09);
+}

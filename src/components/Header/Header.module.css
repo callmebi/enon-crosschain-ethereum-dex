@@ -1,0 +1,94 @@
+.header {
+	display: block;
+	height: 77px;
+	padding: 20px;
+	padding-right: 37px;
+	padding-left: 29px;
+	/* -ms-flex-align: center; */
+	border-bottom: 1px solid #e1e8ed;
+	background-color: #fff;
+}
+
+.header::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.leftMenu {
+	float: left;
+	height: 100%;
+}
+
+.menuCntr {
+	margin: 0px;
+	padding: 0px;
+	display: table;
+	height: 100%;
+}
+
+.openDrawerBtn {
+	width: 43px;
+	height: 43px;
+	margin-right: 27px;
+	margin-left: 10px;
+	/* padding: 8px; */
+	background-image: url(/img/menu.svg);
+	background-repeat: no-repeat;
+	background-size: 70%;
+	background-position: center;
+}
+
+.openDrawerBtn:hover {
+	background-color: rgba(0, 0, 0, .07);
+	border-radius: 50%;
+}
+
+.logo {
+	background-image: url(/img/Screen_Shot_2019-03-06_at_12.52.40_PM.png);
+	width: 150px;
+	height: 35px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-left: 10px;
+}
+
+.rightMenu {
+	float: right;
+	height: 100%;
+}
+
+.menuItem {
+	display: inline-block;
+	/* vertical-align: middle; */
+	display: table-cell;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.createLimitOrder {
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #2d3436;
+	font-size: 14px;
+	font-family: 'Sf pro text', sans-serif;
+	line-height: 20px;
+	/* margin-top: 8px; */
+}
+
+.openDrawerBtn_MessageNumbBadge_cntr {
+	position: relative;
+}
+
+.messageNumbBagde {
+	position: absolute;
+	top: -10px;
+	right: 0;
+	background-color: red;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+	color: white;
+	text-align: center;
+}

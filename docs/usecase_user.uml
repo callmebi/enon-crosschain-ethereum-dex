@@ -1,0 +1,24 @@
+@startuml
+title <b>User<b> \n general functionality
+left to right direction
+skinparam packageStyle rect
+
+actor User 
+
+rectangle DApp {
+  usecase "Login" as login
+  usecase "Get userguide" as getUserGuide
+  usecase "List own orders" as listOwnOrders
+  usecase "Manage own orders" as manageOwnOrders
+  usecase "Make an order" as makeAnOrder
+  usecase "Open trade" as openTrade
+}
+
+User -- login
+User -- getUserGuide
+User -- listOwnOrders
+User -- manageOwnOrders
+User -- makeAnOrder
+User -- openTrade
+
+@enduml

@@ -1,0 +1,22 @@
+.cntr::after {
+	display: block;
+	content: '';
+	clear: both;
+}
+
+.stepsMenuCntr {
+	width: 50px;
+	/* padding-right: 28px; */
+	/* display: inline-block; */
+	/* border-right: 1px #eeeeee solid; */
+	/* margin-right: -50px; */
+	float: left;
+}
+
+.stepCntr {
+	/* margin-left: 0px; */
+	/* display: inline-block; */
+	border-left: 1px #eeeeee solid;
+	float: left;
+	width: 90%;
+}
