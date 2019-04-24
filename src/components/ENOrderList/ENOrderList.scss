@@ -10,9 +10,12 @@
   -webkit-transform: scale(1.15);
   -ms-transform: scale(1.15);
   transform: scale(1.15);
-  margin-top: 13%;
+  margin-top: 10%;
   text-align: left;
   .hPLeftSection1 {
+    .newpadTopBot{
+      padding: 0;
+    }
     p {
       padding: 0 31px;
     }
@@ -31,11 +34,11 @@
       display: flex;
       padding: 11px 31px;
       -webkit-box-align: center;
-      font-family: "Segoe UI", sans-serif;
+      // font-family: "Segoe UI", sans-serif;
     }
-    p[data-useragent*='Mac OS X'] {
-      font-family: "San Francisco";
-    }
+    // p[data-useragent*='Mac OS X'] {
+    //   font-family: "San Francisco";
+    // }
     #address {
       color: #000;
       font-size: 16px;
@@ -61,7 +64,7 @@
   }
   .hPLeftSection2{
     .CurrencyMenu_menuItem__nHZ2w {
-      padding: 18px 10%;
+      padding: 11px 10%;
     }
   }
   .hPLeftSection2,
@@ -123,13 +126,13 @@
       height: 42.8px;
       font-weight: 700;
       font-size: 12px;
-      font-family: "Segoe UI";
+      // font-family: "Segoe UI";
     }
-    #buybu[data-useragent*='Mac OS X'] {
-      font-family: "San Francisco";
-    }
+    // #buybu[data-useragent*='Mac OS X'] {
+    //   font-family: "San Francisco";
+    // }
     #sellbu {
-      font-family: "Segoe UI";
+      // font-family: "Segoe UI";
       width: auto;
       font-weight: 700;
       font-size: 12px;
@@ -149,8 +152,8 @@
       color: #2e2e2e;
       height: 42.8px;
     }
-    #sellbu[data-useragent*='Mac OS X'] {
-      font-family: "San Francisco";
-    }
+    // #sellbu[data-useragent*='Mac OS X'] {
+    //   font-family: "San Francisco";
+    // }
   }
 }

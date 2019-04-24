@@ -1,17 +1,21 @@
 .ethAddr {
 	color: #000;
-	font-weight: 400;
+	font-weight: 500;
 	overflow-wrap: normal;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	text-align: left;
+	font-size: 16px;
 }
 .ethAddr2 {
-	color: rgba(51, 51, 51, 0.62);
+	color: rgba(0, 0, 0, 0.47);
 	font-weight: 400;
 	overflow-wrap: normal;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	text-align: left;
+	font-size: 14px;
+	line-height: 15px;
+	padding: 0!important;
 }
 .onlineStatusBadge {}

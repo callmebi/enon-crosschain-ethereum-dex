@@ -32,8 +32,8 @@ export default (props) => {
 					<Avatar src={makeBlockie(props.ethAddr)} size={35} icon="user" />
 				</Badge>
 			</Col> */}
-			<Col span={19}>
-				<Row>
+			<Col span={19} className="newpadTopBot">
+				<Row className="newpadTopBot">
 					<Col span={24} className={styles.ethAddr}>
 						{props.ethAddr}
 					</Col>
