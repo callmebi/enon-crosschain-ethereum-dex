@@ -30,9 +30,9 @@ export default (props) => {
 				<div className={styles.badgeCntr}></div>
 			</div> */}
 			<div className={styles.menuItem}>
-				<div className={styles.iconCntr}>
+				{/* <div className={styles.iconCntr}>
 					<Icon type="arrow-right" />
-				</div>
+				</div> */}
 				<div className={styles.textCntr}>
 					<span className={styles.itemText}>Exit</span>
 				</div>

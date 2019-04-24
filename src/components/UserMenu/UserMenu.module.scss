@@ -1,14 +1,22 @@
 .itemText {
 	/* font-weight: bolder; */
+	// font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.itemText[data-useragent*='Mac OS X'] {
+	// font-family: "San Francisco";
+  }
 .menuItem {
 	padding: 18px 10%;
 	line-height: 20px;
+	color: rgba(51, 51, 51, 0.62);
 }
 
 .menuItem:hover {
-	background-color: rgba(0, 0, 0, .09);
+	background-color: rgba(0, 0, 0, 0.09);
+    box-shadow: none;
+    color: rgba(51, 51, 51, 0.62);
+    font-weight: 500;
 }
 
 .iconCntr {

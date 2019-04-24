@@ -31,7 +31,10 @@
       display: flex;
       padding: 11px 31px;
       -webkit-box-align: center;
-      font-family: "Sf pro text", sans-serif;
+      font-family: "Segoe UI", sans-serif;
+    }
+    p[data-useragent*='Mac OS X'] {
+      font-family: "San Francisco";
     }
     #address {
       color: #000;
@@ -118,14 +121,17 @@
       background-color: #0070e0;
       color: #fff;
       height: 42.8px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12px;
-      font-family: "MySoBold";
+      font-family: "Segoe UI";
+    }
+    #buybu[data-useragent*='Mac OS X'] {
+      font-family: "San Francisco";
     }
     #sellbu {
-      font-family: "MySoBold";
+      font-family: "Segoe UI";
       width: auto;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12px;
       margin-right: 0px;
       padding-right: 32px;
@@ -142,6 +148,9 @@
       background-color: hsla(0, 0%, 65%, 0.23);
       color: #2e2e2e;
       height: 42.8px;
+    }
+    #sellbu[data-useragent*='Mac OS X'] {
+      font-family: "San Francisco";
     }
   }
 }
