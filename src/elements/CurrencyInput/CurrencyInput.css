@@ -3,3 +3,31 @@
 .CurrencyInput_currIcon {}
 
 .CurrencyInput_select {}
+
+span.CreateLimitOrderStepOne_sendInput__2gMer.ant-input-group-wrapper.ant-input-group-wrapper-lg > span > span,
+span.CreateLimitOrderStepOne_receiveInput__Pc6i_.ant-input-group-wrapper.ant-input-group-wrapper-lg > span > span
+    {
+    background-color: transparent;
+    border-left:1px solid #d9d9d9;
+    border-right:none;
+    border-top:none;
+    border-bottom:none;
+    /* margin: 50px; */
+}
+span.CreateLimitOrderStepOne_sendInput__2gMer.ant-input-group-wrapper.ant-input-group-wrapper-lg,
+span.CreateLimitOrderStepOne_receiveInput__Pc6i_.ant-input-group-wrapper.ant-input-group-wrapper-lg{
+        border: 1px solid #d9d9d9;
+        border-radius:5px;
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
+span.CreateLimitOrderStepOne_sendInput__2gMer.ant-input-group-wrapper.ant-input-group-wrapper-lg > span >input,
+span.CreateLimitOrderStepOne_receiveInput__Pc6i_.ant-input-group-wrapper.ant-input-group-wrapper-lg > span >input{
+    border: none!important;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 16px;
+}
+.CurrencyInput_select{
+    
+}

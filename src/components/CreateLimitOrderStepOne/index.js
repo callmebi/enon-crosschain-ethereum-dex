@@ -124,7 +124,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 						defaultValue={youPay.amount}
 						inputValue={youPay.amount}
 					/>
-					<img className={styles.exchangeIcon} src="/img/icons8-up-down-arrow-52.png" alt="/img/icons8-up-down-arrow-52.png" />
+					<img className={styles.exchangeIcon} src="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" alt="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" />
 					<CurrencyInput
 						onInput={input => onCurrencyInput(input, setYouGot)}
 						title='Receive'

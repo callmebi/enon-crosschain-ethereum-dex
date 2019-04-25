@@ -7,10 +7,10 @@ import StepTitle from '../../elements/StepTitle/StepTitle';
 import CreateLimitOrderStepOne from '../../components/CreateLimitOrderStepOne';
 import styles from './CreateLimitOrder.module.css';
 import { makeOrder } from '../../relayBackend/relayApi';
-import './CreateLimitOrder.css';
+import './CreateLimitOrder.scss';
 
 const CreateLimitOrder = ({ visible, onClose, ipfs, drizzle, account }) => {
-    const { contracts, web3 } = drizzle;
+	const { contracts, web3 } = drizzle;
 	return (
 		<div>
 			<Modal
@@ -22,17 +22,27 @@ const CreateLimitOrder = ({ visible, onClose, ipfs, drizzle, account }) => {
 			>
 				<div className={styles.cntr}>
 					<div className={styles.stepsMenuCntr}>
-						<StepTitle stepNumber={1} />
-						<StepTitle stepNumber={2} />
+						{/* <StepTitle stepNumber={1} /> */}
+						{/* <StepTitle stepNumber={2} /> */}
+						<div>
+							<h2>1</h2>
+							<p>step</p>
+							<div className="step stepBlue"></div>
+						</div>
+						<div>
+							<h2>2</h2>
+							<p>step</p>
+							<div className="step"></div>
+						</div>
 					</div>
 					<div className={styles.stepCntr}>
 						<CreateLimitOrderStepOne
 							onContinue={(order) => {
-                                onClose();
-                                order.collateral = web3.utils.toWei('1', 'ether');
-                                console.log(order);
-                                makeOrder(contracts, ipfs, web3, account, order); 
-                            }}
+								onClose();
+								order.collateral = web3.utils.toWei('1', 'ether');
+								console.log(order);
+								makeOrder(contracts, ipfs, web3, account, order);
+							}}
 							send={{
 								abbr: 'ETH',
 								amount: 120
