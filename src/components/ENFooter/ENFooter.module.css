@@ -16,6 +16,8 @@
 	bottom: 0px;
 	height: 90px;
 	border-top: 1px #dddddd solid;
+	background-color: white;
+
 }
 .collateralCntr {
 	float: left;

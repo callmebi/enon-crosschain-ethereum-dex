@@ -1,4 +1,6 @@
-.CollateralList_cntr {}
+.CollateralList_cntr {
+	
+}
 
 .CollateralList_modal_header {
 	color: #000;
@@ -8,7 +10,10 @@
 	display: inline-block;
 }
 
-.CollateralList_modal {}
+.CollateralList_modal {
+	margin: auto;
+    top: 15%;
+}
 
 .CollateralList_modal .ant-modal-header {
 	padding: 17px 37px;
@@ -16,4 +21,14 @@
 
 .CollateralList_modal .ant-modal-body {
 	padding: 41px 37px;
+}
+@media only screen and (max-width:1440px){
+	.CollateralList_modal {
+		top: 7%;
+	}
+}
+@media only screen and (max-width:1280px){
+	.CollateralList_modal {
+		top: 2%;
+	}
 }
