@@ -8,6 +8,7 @@ function limitOrderList(ipfs, web3) {
         const ipfsRes = await ipfs.get(web3.utils.hexToAscii(params[4]));
         const makerExtra = JSON.parse(ipfsRes[0].content);
         order = Object.assign(order, makerExtra);
+        // console.log(order+"aceace")
         order.receive = {
             amount: order.buy / 10**8,
             name: 'Bitcoin',
@@ -106,8 +107,8 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         web3,
         account,
         order.address,
-        order.receive.abbr == 'BTC' ? order.receive.amount * 10**8 : undefined,
-        order.send.abbr == 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
+        order.receive.abbr === 'BTC' ? order.receive.amount * 10**8 : undefined,
+        order.send.abbr === 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
         order.collateral
     );
     fetch('http://enon-relay.herokuapp.com/', {

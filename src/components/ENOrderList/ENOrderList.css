@@ -6,7 +6,7 @@
 
 .ENOrderList_cntr {
 	margin: 0px auto;
-	margin-top: 100px;
+	margin-top: 7%;
 	width: fit-content;
 	margin-bottom: 100px;
 }
@@ -19,6 +19,47 @@
 .ENOrderList_cntr .ant-table-thead>tr>th {
 	background: none;
 }
+.ENOrderList_cntr .ant-table-thead>tr{
+	background: white!important;
+
+}
+.ENOrderList_cntr .ant-table-thead>tr>th{
+	padding: 12px 18px;
+	color: #070707;
+	font-size: 17px;
+	font-weight: 400;
+}
+.mouseO {
+	display: none;
+}
+
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(2),
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(3){
+	/* text-align: center; */
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(2),
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(2){
+	padding-left: 8%
+
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th{
+	width: 35%;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(4){
+	display: none;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(3),
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(3){
+padding-left: 5%;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(3){
+	font-size: 15px;
+	color: rgba(51, 51, 51, 0.62);
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(2){
+	/* padding-left: 8% */
+}
+
 
 /* .ant-table-tbody>tr>td:hover {
 	background-color: gainsboro;

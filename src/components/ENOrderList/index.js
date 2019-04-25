@@ -92,7 +92,7 @@ const ENOrderList = (props) => {
 								dataIndex="receive"
 								key="receive"
 								render={receive => (
-									<CurrencyBadge gap="7px" name={receive.name} abbr={receive.abbr} amount={receive.amount} />
+									<CurrencyBadge gap="7px" name={receive.abbr} abbr={receive.abbr} amount={receive.amount} />
 								)}
 								className="ENOrderList_column"
 							/>
@@ -101,7 +101,9 @@ const ENOrderList = (props) => {
 								dataIndex="send"
 								key="send"
 								render={send => (
-									<CurrencyBadge gap="7px" name={send.name} abbr={send.abbr} amount={send.amount} />
+									<CurrencyBadge gap="7px" name={send.abbr} abbr={send.abbr} amount={send.amount} />
+									// <CurrencyBadge gap="7px" name={send.name} abbr={send.abbr} amount={send.amount} />
+									
 								)}
 								className="ENOrderList_column"
 							/>
@@ -109,7 +111,7 @@ const ENOrderList = (props) => {
 								title="Order total (USD)"
 								dataIndex="order_total"
 								key="order_total"
-								width={130}
+								// width={130}
 								render={order_total => (
 									<span>${order_total}</span>
 								)}
@@ -119,13 +121,25 @@ const ENOrderList = (props) => {
 								title=""
 								key="action"
 								align="right"
-								width={110}
+								width={100}
 								render={(text, record) => (
 									<ButtonSelectOrder onClick={e => props.onOrderSelected(record)} />
 								)}
-								className="ENOrderList_column"
+								className="ENOrderList_column "
+								// onMouseOver={(event.target).classList.toggle("mouseO")}
 							/>
 						</Table>
+
+
+
+
+
+
+
+
+
+
+						
 					</Col>
 			
 		</div>

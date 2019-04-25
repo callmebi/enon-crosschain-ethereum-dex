@@ -5,7 +5,7 @@ import './CurrencyBadge.css'
 export default (props) => {
 
 	return (
-		<div onClick={props.onClick} className={props.className ? 'currency_badge_cntr ' + props.className : 'currency_badge_cntr'}>
+		<div  onClick={props.onClick} className={props.className ? 'currency_badge_cntr ' + props.className : 'currency_badge_cntr'}>
 			<img
 				style={{ marginRight: props.gap ? props.gap : '20px' }}
 				src={props.iconSrc ? props.iconSrc : `/img/${props.abbr}.png`}
@@ -17,7 +17,7 @@ export default (props) => {
 				className="currency_badge_amount"
 			>{props.amount}</span>}
 			<span className="currency_badge_name">{props.name}</span>
-			<span className="currency_badge_abbr">({props.abbr})</span>
+			{/* <span className="currency_badge_abbr">({props.abbr})</span> */}
 		</div>
 	)
 }

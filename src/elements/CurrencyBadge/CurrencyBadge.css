@@ -2,10 +2,26 @@
 
 .currency_badge_img {
 	height: 22px;
+	/* width: 15%; */
 	font-size: 22px;
 	margin-right: 20px;
 }
-
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td > div{
+	padding-top: 10px;
+    padding-bottom: 10px;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td > div > img{
+	width: 17%;
+	height: auto;
+	/* margin-right: 55px; */
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td > div >span{
+	font-size: 15px;
+    font-weight: 400;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    color: #333;
+}
 .currency_badge_name {}
 
 .currency_badge_abbr {
