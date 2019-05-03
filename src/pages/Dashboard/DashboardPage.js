@@ -4,14 +4,14 @@ import { ConnectedHeader as Header } from '../../components/Header/Header';
 import { ConnectedENDrawer as ENDrawer } from '../../components/ENDrawer/ENDrawer';
 import { ConnectedENOrderList as ENOrderList } from '../../components/ENOrderList';
 import { ConnectedENFooter as ENFooter } from '../../components/ENFooter';
-import SwitchBuySellOrderList from '../../components/SwitchBuySellOrderList';
-import OrderDetails from '../../components/OrderDetails';
-import CompareToMarketplaceOrder from '../../components/CompareToMarketplaceOrder';
-import CollateralList from '../../components/CollateralList';
-import BuyCurrency from '../../features/BuyCurrency/BuyCurrency';
-import CLOEnterCurrAndAmount from '../../components/CLOEnterCurrAndAmount';
+// import SwitchBuySellOrderList from '../../components/SwitchBuySellOrderList';
+// import OrderDetails from '../../components/OrderDetails';
+// import CompareToMarketplaceOrder from '../../components/CompareToMarketplaceOrder';
+// import CollateralList from '../../components/CollateralList';
+// import BuyCurrency from '../../features/BuyCurrency/BuyCurrency';
+// import CLOEnterCurrAndAmount from '../../components/CLOEnterCurrAndAmount';
 import CreateLimitOrder from '../../features/CreateLimitOrder';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row} from 'react-bootstrap';
 
 /**
  * The TradeCurrency object describes how much and which cryptocurrency would be trading.

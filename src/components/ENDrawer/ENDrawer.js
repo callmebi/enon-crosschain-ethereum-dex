@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Drawer, Divider } from 'antd';
+import React from 'react';
+// import { Drawer, Divider } from 'antd';
 import ENUser from '../ENUser/ENUser';
 import UserMenu from '../UserMenu/UserMenu';
 import { ConnectedCurrencyMenu as CurrencyMenu } from '../CurrencyMenu/CurrencyMenu';
@@ -21,17 +21,17 @@ import { connect } from 'react-redux';
  * @param {boolean} visible - opened or closed state of the component.
  * @param {onClose} onClose - on drawer close callback.
  */
-import { Container, Row, Col } from 'react-bootstrap';
+import {Col } from 'react-bootstrap';
 
 const ENDrawer = (props) => {
 
 	console.log(props)
 
-	if (!props.connected) {
-		var [vsbl, setVsbl] = useState(props.visible ? props.visible : false)
-	} else {
-		var vsbl = props.visible;
-	}
+	// if (!props.connected) {
+	// 	var [vsbl, setVsbl] = useState(props.visible ? props.visible : false)
+	// } else {
+	// 	var vsbl = props.visible;
+	// }
 
 	return (
 		// <Drawer

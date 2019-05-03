@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Modal, Form } from 'antd';
+import { Modal } from 'antd';
 // import ButtonNext from "../../elements/ButtonNext/ButtonNext";
 // import CurrencyInput from '../../elements/CurrencyInput/CurrencyInput';
-import StepTitle from '../../elements/StepTitle/StepTitle';
+// import StepTitle from '../../elements/StepTitle/StepTitle';
 import CreateLimitOrderStepOne from '../../components/CreateLimitOrderStepOne';
 import styles from './CreateLimitOrder.module.css';
 import { makeOrder } from '../../relayBackend/relayApi';

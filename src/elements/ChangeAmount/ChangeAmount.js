@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon } from 'antd';
+import { Button} from 'antd';
 import './ChangeAmount.scss'
 // import MinusImage from '../../../assets/images/minus.svg';
 // import PlusImage from '../../../assets/images/plus.svg';

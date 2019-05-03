@@ -1,6 +1,6 @@
 // import React from 'react';
-import { Modal, Table, Col } from 'antd';
-import styles from './CompareToMarketplaceOrder.module.css';
+import { Modal } from 'antd';
+// import styles from './CompareToMarketplaceOrder.module.css';
 import './CompareToMarketplaceOrder.scss';
 
 import React, { Component } from 'react';
@@ -19,35 +19,35 @@ import { Container, Row } from 'react-bootstrap';
 
 
 
-const { Column } = Table;
+// const { Column } = Table;
 
-const marketplaceMockData = [
-	{
-		key: '1',
-		source: 'Kraken',
-		price: 28.19512548,
-		price_usd: 4536.22,
-		order_total: 120.668,
-		cheaper_usd: 35,
-		expensive_usd: undefined
-	}, {
-		key: '2',
-		source: 'Kraken',
-		price: 28.19512548,
-		price_usd: 4536.22,
-		order_total: 120.668,
-		cheaper_usd: 35,
-		expensive_usd: undefined
-	}, {
-		key: '3',
-		source: 'Kraken',
-		price: 28.19512548,
-		price_usd: 4536.22,
-		order_total: 120.668,
-		cheaper_usd: 35,
-		expensive_usd: undefined
-	}
-];
+// const marketplaceMockData = [
+// 	{
+// 		key: '1',
+// 		source: 'Kraken',
+// 		price: 28.19512548,
+// 		price_usd: 4536.22,
+// 		order_total: 120.668,
+// 		cheaper_usd: 35,
+// 		expensive_usd: undefined
+// 	}, {
+// 		key: '2',
+// 		source: 'Kraken',
+// 		price: 28.19512548,
+// 		price_usd: 4536.22,
+// 		order_total: 120.668,
+// 		cheaper_usd: 35,
+// 		expensive_usd: undefined
+// 	}, {
+// 		key: '3',
+// 		source: 'Kraken',
+// 		price: 28.19512548,
+// 		price_usd: 4536.22,
+// 		order_total: 120.668,
+// 		cheaper_usd: 35,
+// 		expensive_usd: undefined
+// 	}
+// ];
 
 /**
  * The limit order data from marketplaces with marketplace name.
@@ -100,10 +100,10 @@ class HomePagePopupCompare extends Component {
 	//   let numberCol = 8;
   
 	// }
-	popHandler() {
-	  let pop1 = document.getElementById("homePagePopupCompare");
-	  pop1.classList.toggle("showfooterPop");
-	}
+	// popHandler() {
+	//   let pop1 = document.getElementById("homePagePopupCompare");
+	//   pop1.classList.toggle("showfooterPop");
+	// }
 	render() {
 	  return (
 		// <div id={"homePagePopupCompare"} className=" popup">

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Row, Col, Avatar, Badge, Icon } from 'antd';
-import makeBlockie from 'ethereum-blockies-base64'
+import { Row, Col} from 'antd';
+// import makeBlockie from 'ethereum-blockies-base64'
 import styles from './ENUser.module.css';
 
 /** 

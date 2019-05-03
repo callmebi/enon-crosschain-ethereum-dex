@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Badge } from 'antd';
+// import { Icon, Badge } from 'antd';
 import styles from './UserMenu.module.scss'
 
 export default (props) => {

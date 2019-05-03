@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Form, Row, Col } from 'antd';
+import { Modal, Form} from 'antd';
 import ENInput from "../../elements/ENInput/ENInput";
 import ButtonNext from "../../elements/ButtonNext/ButtonNext";
 import styles from './ReceiveAddressForm.module.css';
@@ -43,7 +43,7 @@ export default ({ receive, fee, onSubmit, visible }) => {
 
 	function onFormSubmit(e) {
 		e.preventDefault();
-		if (input_addr == input_reconfirm)
+		if (input_addr === input_reconfirm)
 			onSubmit(input_addr, input_reconfirm, e)
 		else
 			onSubmit(new Error('Submitted Address does not match Re-confirm!'))

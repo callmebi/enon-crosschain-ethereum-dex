@@ -33,14 +33,14 @@
   <style>
     @font-face {
       font-family: 'Sf pro text';
-      src: url('../fonts/SF-Pro-Text-Bold.otf') format('opentype');
+      src: url('../fonts/SF-Pro-Text-Bold.otf') format('otf');
       font-weight: 700;
       font-style: normal;
     }
 
     @font-face {
       font-family: 'Segoe UI';
-      src: url('../fonts/SegoePro-Bold.ttf') format('opentype');
+      src: url('../fonts/SegoePro-Bold.ttf') format('ttf');
       font-weight: 700;
       font-style: normal;
     }
@@ -57,14 +57,12 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script>console.log(window.navigator.userAgent.indexOf("Windows"));
+  <script>
     if (window.navigator.userAgent.indexOf("Windows") != -1) {
       let prv = document.getElementById("root");
-      console.log("prvot")
       prv.setAttribute('style', 'font-family:"Segoe UI" !important')
     } else if (window.navigator.userAgent.indexOf("Mac") != -1) {
       let prv = document.getElementById("root");
-      console.log("prvot")
       prv.setAttribute('style', 'font-family:"Sf pro text" !important')
     }
 

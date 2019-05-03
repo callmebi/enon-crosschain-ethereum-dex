@@ -6,7 +6,7 @@ import styles from './CreateLimitOrderStepOne.module.css';
 import './CreateLimitOrderStepOne.scss';
 import ChangeAmount from '../../elements/ChangeAmount/ChangeAmount';
 import ENInput from '../../elements/ENInput/ENInput';
-import {Row,Col} from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import Secound from './secound.jsx';
 /** 
   * @module CreateLimitOrderStepOne 
@@ -116,7 +116,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 		document.getElementById("vtoro").style.display = "none";
 
 	}
-	
+
 	return (
 		<div>
 			<div id="prvo" className={styles.cntr}>
@@ -130,22 +130,22 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 					/>}
 					<div className={styles.exchangeCntr}>
 						<CurrencyInput
-						onInput={input => onCurrencyInput(input, setYouPay)}
-						title='Send'
-						className={styles.sendInput}
-						defaultCurrency={youPay.abbr}
-						defaultValue={youPay.amount}
-						inputValue={youPay.amount}
-					/>
-					<img className={styles.exchangeIcon} src="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" alt="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" />
-					<CurrencyInput
-						onInput={input => onCurrencyInput(input, setYouGot)}
-						title='Receive'
-						className={styles.receiveInput}
-						defaultCurrency={youGot.abbr}
-						defaultValue={youGot.amount}
-						inputValue={youGot.amount}
-					/>
+							onInput={input => onCurrencyInput(input, setYouPay)}
+							title='Send'
+							className={styles.sendInput}
+							defaultCurrency={youPay.abbr}
+							defaultValue={youPay.amount}
+							inputValue={youPay.amount}
+						/>
+						<img className={styles.exchangeIcon} src="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" alt="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" />
+						<CurrencyInput
+							onInput={input => onCurrencyInput(input, setYouGot)}
+							title='Receive'
+							className={styles.receiveInput}
+							defaultCurrency={youGot.abbr}
+							defaultValue={youGot.amount}
+							inputValue={youGot.amount}
+						/>
 					</div>
 					<div className={styles.priceCntr}>
 						{/* <span className={styles.priceCntrTitle}>{youGot.abbr} price</span> */}
@@ -170,14 +170,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 					</div>
 				</div>
 			</div >
-
-
-
-
-
-
-
-
+			{/* secouynd step */}
 			<div id="vtoro" className={styles.cntr0}>
 				<div className={styles.title}>Limit order requires a collateral. Don't have collaterals? Buy a market order.</div>
 				<div className={styles.content}>
@@ -188,10 +181,8 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 						showIcon
 					/>}
 					<div className={styles.exchangeCntr}>
-					<p>Collaterals</p>
-					
-
-					<Secound/>
+						<p>Collaterals</p>
+						<Secound />
 					</div>
 					<div className={styles.priceCntr}>
 						{/* <span className={styles.priceCntrTitle}>{youGot.abbr} price</span> */}
@@ -201,12 +192,12 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 						</span>
 					</div>
 					<div className={styles.receivingAddressCntr}>
-					<Row className="paddingRow sec">
-                                    <p id="pContinue">Your receiving BTC address</p>
-                                </Row>
-                                <Row className="paddingRow sec">
-                                    <p id="pContinueWhite">WETH Balance: 0</p>
-                                </Row>
+						<Row className="paddingRow sec">
+							<p id="pContinue">Your receiving BTC address</p>
+						</Row>
+						<Row className="paddingRow sec">
+							<p id="pContinueWhite">WETH Balance: 0</p>
+						</Row>
 					</div>
 					<div className={styles.continueBtnCntr}>
 						<ButtonNext

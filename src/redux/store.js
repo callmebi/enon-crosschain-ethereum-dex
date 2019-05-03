@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import getLimitOrders from '../relayBackend/relayApi';
+// import getLimitOrders from '../relayBackend/relayApi';
 //import { mockLimitOrderList } from '../mockBackend/mockList'
 
 const initialState = {

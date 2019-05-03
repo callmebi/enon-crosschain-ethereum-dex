@@ -1,63 +1,62 @@
-.sec{
-    padding-left: 2%!important;
+.sec {
+  padding-left: 2% !important;
 }
 .paddingRow {
-    padding-left: 5%;
-    #pContinue {
-      font-size: 14px;
+  padding-left: 5%;
+  #pContinue {
+    font-size: 14px;
+  }
+  #pContinueWhite {
+    color: #999;
+    font-weight: 300;
+    font-size: 14px;
+  }
+  .padCol {
+    padding: 0;
+    div {
+      float: left;
     }
-    #pContinueWhite {
-      color: #999;
-      font-weight: 300;
-      font-size: 14px;
-    }
-    .padCol {
-      padding: 0;
-      div {
-        float: left;
-      }
-      p {
+    p {
+      color: #0084f0;
+      font-size: 14px !important;
+      padding-top: 3px;
+      font-family: "MySoRegular";
+      strong {
         color: #0084f0;
-        font-size: 14px !important;
-        padding-top: 3px;
-        font-family: "MySoRegular";
-        strong {
-          color: #0084f0;
-        }
-      }
-      #textWhite {
-        color: #333 !important;
       }
     }
-    .checkDiv {
-      width: 30px;
-      height: 30px;
-      margin-right: 11px;
-      padding: 4px;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      -ms-flex-align: center;
-      align-items: center;
-      -webkit-box-flex: 0;
-      -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      border-style: solid;
-      .check {
-        width: 15px;
-        height: 15px;
-        max-width: 100%;
-        // vertical-align: middle;
-        display: block ;
-        margin: auto;
-        margin-top: -30%;
-      }
-      .check2 {
-        display: none ;
-      }
+    #textWhite {
+      color: #333 !important;
     }
   }
+  .checkDiv {
+    width: 30px;
+    height: 30px;
+    margin-right: 11px;
+    padding: 4px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    border-style: solid;
+    .check {
+      width: 15px;
+      height: 15px;
+      max-width: 100%;
+      display: block;
+      margin: auto;
+      margin-top: -30%;
+    }
+    .check2 {
+      display: none;
+    }
+  }
+}

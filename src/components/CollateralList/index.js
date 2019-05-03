@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Table, Row, Col } from 'antd';
+import { Modal} from 'antd';
 import styles from './CollateralList.module.css';
 import './CollateralList.css';
 

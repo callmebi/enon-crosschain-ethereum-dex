@@ -8,9 +8,9 @@ import styles from './ENOrderList.module.css';
 import './ENOrderList.css';
 //add
 import './ENOrderList.scss'
-import { Container, Row, Col } from 'react-bootstrap';
+import {  Row, Col } from 'react-bootstrap';
 import { getLimitOrders as onCurrencySelected } from '../../redux/actions'
-const { Column, ColumnGroup } = Table;
+const { Column} = Table;
 
 const data = [{
 	key: '1',
@@ -71,14 +71,12 @@ const data = [{
  * @param {onOrderSelected} onOrderSelected - The callback that handles selection order item from list of limit orders. 
  */
 const ENOrderList = (props) => {
-	function currSelected(currAbbr) {
-		if (props.onCurrencySelected)
-			props.onCurrencySelected(currAbbr, props.ipfs, props.web3)
-	}
+	// function currSelected(currAbbr) {
+	// 	if (props.onCurrencySelected)
+	// 		props.onCurrencySelected(currAbbr, props.ipfs, props.web3)
+	// }
 	return (
 		<div className="ENOrderList_cntr">
-			
-					
 					<Col sm={9} xs={11} className="hPRightSection">
 						<Row className="hPRightTopSection justify-content-md-start">
 							<Col xs={11} >
@@ -129,19 +127,7 @@ const ENOrderList = (props) => {
 								// onMouseOver={(event.target).classList.toggle("mouseO")}
 							/>
 						</Table>
-
-
-
-
-
-
-
-
-
-
-						
 					</Col>
-			
 		</div>
 	)
 }
