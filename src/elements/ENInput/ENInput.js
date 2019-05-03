@@ -4,6 +4,6 @@ import './ENInput.css'
 
 export default (props) => {
 	return (
-		<Input size="large" {...props} />
+		<Input className="inputLimitDown" size="large" {...props} />
 	)
 }
