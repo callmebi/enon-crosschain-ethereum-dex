@@ -60,7 +60,7 @@ const ENFooter = ({ dispatch, order, ipfs, drizzle, account }) => {
                         startTrade(contracts, ipfs, web3, account, order);
 		                dispatch({type: 'SET_LIMIT_ORDER_DETAILS', payload: null});
                     }}
-					caption="Buy now"
+					caption="BUY NOW"
 				/>
 			</div>
 		</div>

@@ -32,9 +32,9 @@
 	/* height: 100%; */
 	margin-left: 5%;
 	max-width: 330px;
-	width: 25%;
+	width: 28%;
 	/* padding: 20px 20px; */
-    height: 90px;
+	height: 100px;
 	/* margin: auto; */
 }
 
@@ -57,11 +57,18 @@
 	vertical-align: middle;
 	/* max-width: 330px; */
 	width: 100%;
+	background-color: #0070e0;
+	font-size: 12px!important;
+    font-weight: 700;
+	letter-spacing: 1px;
+	margin-top: -5%;
 }
 
 .collateral {
 	display: inline-block;
 	vertical-align: middle;
-	color: #000;
+	color: #535353;
 text-decoration: underline;
+font-size: 13px;
+
 }

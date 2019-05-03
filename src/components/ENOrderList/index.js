@@ -106,7 +106,7 @@ const ENOrderList = (props) => {
 								className="ENOrderList_column"
 							/>
 							<Column
-								title="Order total (USD)"
+								title="Order total USD"
 								dataIndex="order_total"
 								key="order_total"
 								// width={130}

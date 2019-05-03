@@ -8,13 +8,13 @@
 	font-size: 16px;
 }
 .ethAddr2 {
-	color: rgba(0, 0, 0, 0.47);
-	font-weight: 400;
+	color: rgba(0, 0, 0, 0.40);
+	font-weight: 500;
 	overflow-wrap: normal;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	text-align: left;
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 15px;
 	padding: 0!important;
 }
