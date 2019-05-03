@@ -20,9 +20,14 @@
       padding: 0 31px;
     }
   }
-  div:nth-child(2){
-    padding-top: 2px;
+  div:nth-child(1){
+    padding-bottom: 0;
+    padding-top: 7px;
   }
+  div:nth-child(2){
+    padding-top: 9px;
+  }
+  
   div {
     padding-top: 9px;
     padding-bottom: 9px;
