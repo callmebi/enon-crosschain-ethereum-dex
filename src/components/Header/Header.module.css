@@ -7,7 +7,7 @@
 	/* -ms-flex-align: center; */
 	/* border-bottom: 1px solid #e1e8ed; */
 	background-color: #fff;
-	width: 83%;
+	width: 83.5%;
 }
 
 .header::after {
@@ -75,7 +75,7 @@
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	color: #2d3436;
-	font-size: 13.5px;
+	font-size: 13px;
 	font-family: 'Sf pro text', sans-serif;
 	line-height: 20px;
 	/* margin-top: 8px; */

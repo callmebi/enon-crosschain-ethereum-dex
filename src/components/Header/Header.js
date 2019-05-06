@@ -41,7 +41,7 @@ const Header = ({ messageNumber, onClickMenuItem }) => {
 			<div className={styles.rightMenu}>
 				<ul className={styles.menuCntr}>
 					<li id="createLimitOrderBtn" onClick={e => onClickMenuItem(e.currentTarget.id)} className={styles.menuItem}>
-						<div className={styles.createLimitOrder}>Create limit order &nbsp;&nbsp;&nbsp;> </div>
+						<div className={styles.createLimitOrder}>Create limit order<img className="imgArrow" src="img/images/chevron-right.svg" alt=""/> </div>
 					</li>
 				</ul>
 			</div>

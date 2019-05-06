@@ -26,7 +26,7 @@
 .ENOrderList_cntr .ant-table-thead>tr>th{
 	padding: 12px 18px;
 	color: #070707;
-	font-size: 16.5px;
+	font-size: 17px;
 	font-weight: 400;
 }
 .mouseO {
@@ -39,7 +39,7 @@ div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > di
 }
 div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(2),
 div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(2){
-	padding-left: 5%
+	padding-left: 6%
 
 }
 div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th{
