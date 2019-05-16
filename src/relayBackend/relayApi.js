@@ -20,7 +20,7 @@ async function limitOrderList(ipfs, web3) {
         // Make logic to search for the latest XX orders and remember the last block so it knows where from to fetch
         options = {
             fromBlock: 10573500,
-            toBlock: 10673501
+            // toBlock: 10673501
         };
         // Get the past events
         let pastEvents = await webEx.getPastEvents("TradeStart", options)
@@ -31,39 +31,31 @@ async function limitOrderList(ipfs, web3) {
         let orders = [];
         // Loop trough past Events and call getTrade Contract Function
         for(let x=0; x < pastEvents.length; x++){
+            
+            (async function test () {
             // Call getTrade
             await webEx.methods.getTrade(pastEvents[x].raw.topics[1]).call().then(res => {
              pastEvents[x].getTrade = res;
-             console.log("res ", res)
              let collateral = res.collateral
-             console.log(collateral)
-             console.log("This is Collateral :", collateral)
              pastEvents[x].getTrade.collateralWei = web3.utils.fromWei(collateral);
-            console.log("Get Trade: ", Math.floor(Date.now()/1000))
             })
     
             // Call getMarket 
             await webEx.methods.getMarket(pastEvents[x].getTrade.market).call().then(res => {
                 pastEvents[x].getMarket = res;
             })
-            console.log("getMarket: ", Math.floor(Date.now()/1000))
-            console.log(pastEvents[x].getTrade.takerExtra)
             // Call IPFS storage and decode takeExtra and makeExtra 
             await ipfs.get(web3.utils.hexToAscii(pastEvents[x].getTrade.takerExtra))
             .then(res => JSON.parse(res[0].content)).then(res => {
                 pastEvents[x].takerInfo = res
             })
-            console.log("IPFS TakerExtra ", Math.floor(Date.now()/1000))
     
             await ipfs.get(web3.utils.hexToAscii(pastEvents[x].getTrade.makerExtra))
             .then(res =>  JSON.parse(res[0].content)).then(res => {
             pastEvents[x].makerInfo = res
             })
-            console.log("IPFS MakerExtra", Math.floor(Date.now()/1000))
-            console.log(pastEvents[x])
             // get pairs info       
             let pairs = await getPair(pastEvents[x].takerInfo.account, pastEvents[x].makerInfo.account, Cryptos)
-            console.log(pairs, Math.floor(Date.now()/1000))
             pastEvents[x].makerInfo.name = pairs.address1 
             pastEvents[x].takerInfo.name = pairs.address2 
     
@@ -96,8 +88,11 @@ async function limitOrderList(ipfs, web3) {
             }
           }
           orders[x] = order;
-    
-        }
+          console.log(order)
+        }() )
+     
+
+    }
         return orders;   
 }
 
