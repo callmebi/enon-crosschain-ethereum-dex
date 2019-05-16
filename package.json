@@ -22,22 +22,12 @@
   "dependencies": {
     "antd": "^3.15.0",
     "bn-chai": "^1.0.1",
-<<<<<<< HEAD
-    "bootstrap": "^4.2.1",
-=======
     "bootstrap": "^4.3.1",
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "drizzle": "^1.2.4",
     "drizzle-react": "^1.2.0",
     "eth-gas-reporter": "^0.1.12",
-<<<<<<< HEAD
-    "ganache-cli": "^6.2.4",
-    "ipfs-http-client": "^29.1.1",
-    "openzeppelin-solidity": "^2.1.1",
-    "react": "^16.8.4",
-=======
     "ethereum-blockies-base64": "^1.0.2",
     "ganache-cli": "^6.2.4",
     "ipfs-http-client": "^29.1.1",
@@ -46,7 +36,6 @@
     "openzeppelin-solidity": "^2.1.1",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.8",
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
     "react-scripts": "2.1.8",
@@ -56,11 +45,7 @@
     "truffle": "^5.0.3",
     "truffle-flattener": "^1.2.12",
     "truffle-hdwallet-provider": "^1.0.3",
-<<<<<<< HEAD
-    "ethereum-blockies-base64": "^1.0.2",
-=======
     "wallet-address-validator": "^0.2.4",
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
     "web3": "^1.0.0-beta.43"
   },
   "devDependencies": {
