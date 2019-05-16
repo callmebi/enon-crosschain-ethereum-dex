@@ -3,12 +3,22 @@ import { Alert } from 'antd';
 import ButtonNext from "../../elements/ButtonNext/ButtonNext";
 import CurrencyInput from '../../elements/CurrencyInput/CurrencyInput';
 import styles from './CreateLimitOrderStepOne.module.css';
+<<<<<<< HEAD
 import './CreateLimitOrderStepOne.css';
 import ChangeAmount from '../../elements/ChangeAmount/ChangeAmount';
 import ENInput from '../../elements/ENInput/ENInput';
 
 /** 
  * @module CreateLimitOrderStepOne 
+=======
+import './CreateLimitOrderStepOne.scss';
+import ChangeAmount from '../../elements/ChangeAmount/ChangeAmount';
+import ENInput from '../../elements/ENInput/ENInput';
+import { Row } from 'react-bootstrap';
+import Secound from './secound.jsx';
+/** 
+  * @module CreateLimitOrderStepOne 
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
  * The CreateLimitOrderStepOne component.
  */
 
@@ -64,6 +74,10 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 	const [validationError, setValidationError] = useState(null)
 
 	function onBtnClick(e) {
+<<<<<<< HEAD
+=======
+		displayNone2();
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 		e.preventDefault()
 		onContinue({
 			send: youPay,
@@ -104,6 +118,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 		}
 
 	}
+<<<<<<< HEAD
 
 	return (
 		<div className={styles.cntr}>
@@ -157,5 +172,111 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 				</div>
 			</div>
 		</div >
+=======
+	function displayNone() {
+		document.getElementById("prvo").style.display = "none";
+		document.getElementById("vtoro").style.display = "block";
+
+	}
+	function displayNone2() {
+		document.getElementById("prvo").style.display = "block";
+		document.getElementById("vtoro").style.display = "none";
+
+	}
+
+	return (
+		<div>
+			<div id="prvo" className={styles.cntr}>
+				<div className={styles.title}>Create limit order</div>
+				<div className={styles.content}>
+					{validationError && <Alert
+						message="Validation error"
+						description={validationError}
+						type="error"
+						showIcon
+					/>}
+					<div className={styles.exchangeCntr}>
+						<CurrencyInput
+							onInput={input => onCurrencyInput(input, setYouPay)}
+							title='Send'
+							className={styles.sendInput}
+							defaultCurrency={youPay.abbr}
+							defaultValue={youPay.amount}
+							inputValue={youPay.amount}
+						/>
+						<img className={styles.exchangeIcon} src="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" alt="/img/images/icons8-left-and-right-arrows-96_1icons8-left-and-right-arrows-96.png" />
+						<CurrencyInput
+							onInput={input => onCurrencyInput(input, setYouGot)}
+							title='Receive'
+							className={styles.receiveInput}
+							defaultCurrency={youGot.abbr}
+							defaultValue={youGot.amount}
+							inputValue={youGot.amount}
+						/>
+					</div>
+					<div className={styles.priceCntr}>
+						{/* <span className={styles.priceCntrTitle}>{youGot.abbr} price</span> */}
+						<span className={styles.price}>1 {youGot.abbr} = {priceCalc(youGot.amount, youPay.amount).toFixed(4)} {youPay.abbr}  </span>
+						<span className={styles.priceChangerCntr}>
+							<ChangeAmount onAmountChange={(e, diff) => priceChangeHandle(diff)} />
+						</span>
+					</div>
+					<div className={styles.receivingAddressCntr}>
+						<div className={styles.receivingAddresTitle}>Your receiving {youGot.abbr} address</div>
+						<div className={styles.receivingAddressInputCntr}>
+							<ENInput onChange={e => setAddress(e.target.value)} className={styles.address} placeholder="Address" />
+							<ENInput onChange={e => setReconfirm(e.target.value)} className={styles.reconfirm} placeholder="Re-confirm" />
+						</div>
+					</div>
+					<div className={styles.continueBtnCntr}>
+						<ButtonNext
+							className={styles.continueBtn}
+							caption="Continue"
+							onClick={displayNone}
+						/>
+					</div>
+				</div>
+			</div >
+			{/* secouynd step */}
+			<div id="vtoro" className={styles.cntr0}>
+				<div className={styles.title}>Limit order requires a collateral. Don't have collaterals? Buy a market order.</div>
+				<div className={styles.content}>
+					{validationError && <Alert
+						message="Validation error"
+						description={validationError}
+						type="error"
+						showIcon
+					/>}
+					<div className={styles.exchangeCntr}>
+						<p>Collaterals</p>
+						<Secound />
+					</div>
+					<div className={styles.priceCntr}>
+						{/* <span className={styles.priceCntrTitle}>{youGot.abbr} price</span> */}
+						<span className={styles.price}>1 {youGot.abbr} = {priceCalc(youGot.amount, youPay.amount).toFixed(4)} {youPay.abbr}  </span>
+						<span className={styles.priceChangerCntr}>
+							<ChangeAmount onAmountChange={(e, diff) => priceChangeHandle(diff)} />
+						</span>
+					</div>
+					<div className={styles.receivingAddressCntr}>
+						<Row className="paddingRow sec">
+							<p id="pContinue">Your receiving BTC address</p>
+						</Row>
+						<Row className="paddingRow sec">
+							<p id="pContinueWhite">WETH Balance: 0</p>
+						</Row>
+					</div>
+					<div className={styles.continueBtnCntr}>
+						<ButtonNext
+							className={styles.continueBtn}
+							caption="Continue"
+							onClick={onBtnClick}
+						/>
+					</div>
+				</div>
+			</div >
+
+		</div>
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 	)
 }

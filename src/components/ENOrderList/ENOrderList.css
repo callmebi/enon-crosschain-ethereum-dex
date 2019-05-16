@@ -6,19 +6,72 @@
 
 .ENOrderList_cntr {
 	margin: 0px auto;
+<<<<<<< HEAD
 	margin-top: 100px;
+=======
+	margin-top: 7%;
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 	width: fit-content;
 	margin-bottom: 100px;
 }
 
 .ENOrderList_cntr .ant-table-tbody>tr>td {
 	border-bottom: none;
+<<<<<<< HEAD
 	padding: 10px 17px;
+=======
+	padding: 9px 17px;
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 .ENOrderList_cntr .ant-table-thead>tr>th {
 	background: none;
 }
+<<<<<<< HEAD
+=======
+.ENOrderList_cntr .ant-table-thead>tr{
+	background: white!important;
+
+}
+.ENOrderList_cntr .ant-table-thead>tr>th{
+	padding: 12px 18px;
+	color: #070707;
+	font-size: 17px;
+	font-weight: 400;
+}
+.mouseO {
+	display: none;
+}
+
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(2),
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(3){
+	/* text-align: center; */
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(2),
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(2){
+	padding-left: 6%
+
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th{
+	width: 36%;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(4){
+	display: none;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(3),
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > thead > tr > th:nth-child(3){
+padding-left: 7%;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(3){
+	font-size: 16px;
+	color: rgba(51, 51, 51, 0.62);
+	font-weight: 400;
+}
+div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > div > div > div > div > div > table > tbody > tr > td:nth-child(2){
+	/* padding-left: 8% */
+}
+
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 
 /* .ant-table-tbody>tr>td:hover {
 	background-color: gainsboro;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function limitOrderList(ipfs, web3) {
     console.log(web3);
     async function decode(order) {
@@ -29,6 +30,108 @@ function limitOrderList(ipfs, web3) {
     return fetch('http://enon-relay.herokuapp.com/')
         .then(res => res.json())
         .then(orders => Promise.all(orders.map(order => decode(order))))
+=======
+let getPair = require("./getCoinName.js")
+
+let Cryptos = ["ETH", "BTC", "LTC", "XMR"];
+
+async function limitOrderList(ipfs, web3) {
+
+    let contractInstance = require("../contracts/IExchange.json")
+    console.log(contractInstance)
+    // to be sent at APP or Index js
+    let webEx = new web3.eth.Contract(contractInstance.abi, '0x0a7FBfd6C6eaB1e06b0a21Ab2Dd0CAEfaD2957B9', {
+        defaultAccount: '0x1234567890123456789012345678901234567891', // default from address
+        defaultGasPrice: '20000000000' // default gas price in wei, 20 gwei in this case
+    });
+
+        // let trades = [];
+        let options = {
+            fromBlock: Number,
+            toBlock: Number
+        };
+        // Make logic to search for the latest XX orders and remember the last block so it knows where from to fetch
+        options = {
+            fromBlock: 10573500,
+            // toBlock: 10673501
+        };
+        // Get the past events
+        let pastEvents = await webEx.getPastEvents("TradeStart", options)
+            .then(tradeEvent => {
+                return tradeEvent
+            });
+    
+        let orders = [];
+        // Loop trough past Events and call getTrade Contract Function
+        for(let x=0; x < pastEvents.length; x++){
+            
+            (async function test () {
+            // Call getTrade
+            await webEx.methods.getTrade(pastEvents[x].raw.topics[1]).call().then(res => {
+             pastEvents[x].getTrade = res;
+             let collateral = res.collateral
+             pastEvents[x].getTrade.collateralWei = web3.utils.fromWei(collateral);
+            })
+            // Call getMarket 
+            await webEx.methods.getMarket(pastEvents[x].getTrade.market).call().then(res => {
+                pastEvents[x].getMarket = res;
+            })
+            // Call IPFS storage and decode takeExtra and makeExtra 
+            await ipfs.get(web3.utils.hexToAscii(pastEvents[x].getTrade.takerExtra))
+            .then(res => JSON.parse(res[0].content)).then(res => {
+                pastEvents[x].takerInfo = res
+            })
+            await ipfs.get(web3.utils.hexToAscii(pastEvents[x].getTrade.makerExtra))
+            .then(res =>  JSON.parse(res[0].content)).then(res => {
+            pastEvents[x].makerInfo = res
+            })
+            // Get coin name and trading pair       
+            let pairs = await getPair(pastEvents[x].takerInfo.account, pastEvents[x].makerInfo.account, Cryptos)
+            // Filter undefined addresses
+            if(pairs.address1 == undefined || pairs.address2 == undefined)
+            {
+                return
+            }
+            pastEvents[x].makerInfo.name = pairs.address1 
+            pastEvents[x].takerInfo.name = pairs.address2 
+    
+            let order = {
+            "key": x,
+            "params": "",
+            "signature": pastEvents[x].signature,
+            "market": pastEvents[x].getTrade.market,
+            "deal": pastEvents[x].getTrade.deal,
+            "account": pastEvents[x].takerInfo.account,
+            "sell": pastEvents[x].takerInfo.sell,
+            "buy": pastEvents[x].takerInfo.buy,
+            "nonce": pastEvents[x].takerInfo.nonce,
+            "receive": {
+              "amount": pastEvents[x].takerInfo.buy,
+              "name": pastEvents[x].makerInfo.name,
+              "abbr": pastEvents[x].makerInfo.name
+            },
+            "send": {
+              "amount": pastEvents[x].takerInfo.sell,
+              "name": pastEvents[x].takerInfo.name, 
+              "abbr": pastEvents[x].takerInfo.name 
+            },
+            "price": {
+              "amount": (pastEvents[x].takerInfo.sell / pastEvents[x].takerInfo.buy )
+            },
+            "order_total": pastEvents[x].makerInfo.sell,
+            "collateral": {
+              "amount": pastEvents[x].getTrade.collateralWei,
+              "currencyAbbr": pastEvents[x].makerInfo.name
+            }
+          }
+          orders[x] = order;
+          console.log(order)
+        }() )
+     
+
+    }
+        return orders;   
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 async function signTakerOrder(ipfs, web3, account, recipient, maker) {
@@ -106,6 +209,7 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         web3,
         account,
         order.address,
+<<<<<<< HEAD
         order.receive.abbr == 'BTC' ? order.receive.amount * 10**8 : undefined,
         order.send.abbr == 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
         order.collateral
@@ -118,6 +222,13 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         },
         body: JSON.stringify(signed)
     });
+=======
+        order.receive.abbr === 'BTC' ? order.receive.amount * 10**8 : undefined,
+        order.send.abbr === 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
+        order.collateral
+    );
+    console.log(signed);
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 async function startTrade(contracts, ipfs, web3, account, order) {

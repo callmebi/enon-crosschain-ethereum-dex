@@ -1,3 +1,15 @@
 .selectOrderBtn {
 	width: 100px;
+<<<<<<< HEAD
+=======
+	/* position: absolute; */
+	border: 1px solid #e1e8ed;
+    background-color: #fff;
+    box-shadow: 0 1px 1px 0 hsla(0,0%,72.9%,.21);
+	color: #0d0d0e;
+	font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }

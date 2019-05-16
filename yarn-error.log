@@ -1,0 +1,100 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add web3js@1.0.0-beta.37
+
+PATH: 
+  C:\Users\ace92\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\ace92\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Guiffy;C:\Program Files\PuTTY;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;%NVM_HOME%;%NVM_SYMLINK%;C:\Users\ace92\.windows-build-tools\python27;C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\ace92\AppData\Roaming\npm\node_modules\windows-build-tools\node_modules\.bin;C:\Users\ace92\AppData\Roaming\npm\node_modules\.bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Guiffy;C:\Ruby25-x64\bin;C:\Users\ace92\AppData\Local\Microsoft\WindowsApps;C:\Users\ace92\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ace92\AppData\Local\Yarn\bin;C:\Users\ace92\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  11.14.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/web3js: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:64202:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:137468:22)
+      at Request.emit (events.js:193:13)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:138440:10)
+      at Request.emit (events.js:193:13)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:138362:12)
+      at Object.onceWrapper (events.js:281:20)
+      at IncomingMessage.emit (events.js:198:15)
+      at endReadableNT (_stream_readable.js:1139:12)
+      at processTicksAndRejections (internal/process/task_queues.js:81:17)
+
+npm manifest: 
+  {
+    "name": "enon-dex",
+    "version": "0.3.1",
+    "author": "Alexander Krupenkin <akru@aira.life>",
+    "homepage": "https://cdex.herokuapp.com/",
+    "description": "Collateral based decentralized exchange",
+    "main": "truffle.js",
+    "directories": {
+      "test": "test"
+    },
+    "scripts": {
+      "test": "truffle test",
+      "build": "react-scripts build",
+      "start": "react-scripts start",
+      "eject": "react-scripts eject",
+      "storybook": "start-storybook -s ./public -p 6006",
+      "build-storybook": "build-storybook",
+      "migrate": "truffle migrate",
+      "console": "truffle console",
+      "testrpc": "ganache-cli"
+    },
+    "dependencies": {
+      "antd": "^3.15.0",
+      "bn-chai": "^1.0.1",
+      "bootstrap": "^4.2.1",
+      "chai": "^4.2.0",
+      "chai-as-promised": "^7.1.1",
+      "drizzle": "^1.2.4",
+      "drizzle-react": "^1.2.0",
+      "eth-gas-reporter": "^0.1.12",
+      "ganache-cli": "^6.2.4",
+      "ipfs-http-client": "^29.1.1",
+      "openzeppelin-solidity": "^2.1.1",
+      "react": "^16.8.4",
+      "react-dom": "^16.8.4",
+      "react-redux": "^6.0.1",
+      "react-scripts": "2.1.8",
+      "redux": "^4.0.1",
+      "redux-thunk": "^2.3.0",
+      "terser": "3.14.1",
+      "truffle": "^5.0.3",
+      "truffle-flattener": "^1.2.12",
+      "truffle-hdwallet-provider": "^1.0.3",
+      "ethereum-blockies-base64": "^1.0.2",
+      "web3": "^1.0.0-beta.43"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.3.4",
+      "@storybook/addon-actions": "^5.0.3",
+      "@storybook/addon-links": "^5.0.3",
+      "@storybook/addons": "^5.0.3",
+      "@storybook/react": "^5.0.3",
+      "babel-loader": "^8.0.5"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ],
+    "license": "BSD-3-Clause"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

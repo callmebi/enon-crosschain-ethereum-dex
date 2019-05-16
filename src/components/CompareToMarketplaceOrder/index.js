@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { Modal, Table, Row, Col } from 'antd';
 import styles from './CompareToMarketplaceOrder.module.css';
@@ -32,6 +33,58 @@ const marketplaceMockData = [
 		expensive_usd: undefined
 	}
 ];
+=======
+// import React from 'react';
+import { Modal } from 'antd';
+// import styles from './CompareToMarketplaceOrder.module.css';
+import './CompareToMarketplaceOrder.scss';
+
+import React, { Component } from 'react';
+import { Container, Row } from 'react-bootstrap';
+// import XImg from '../../../public/img/images/x.svg';
+
+// import BarImg1 from '/img/images/iconsBar/logo-desktop_1logo-desktop.png';
+// import BarImg2 from '/img/images/iconsBar/270_1270.png';
+// import BarImg3 from '/img/images/iconsBar/22_122.png';
+// import BarImg4 from '/img/images/iconsBar/89_189.png';
+// import BarImg5 from '/img/images/iconsBar/37_137.png';
+// import BarImg6 from '/img/images/iconsBar/coin-market-cap-logo-p-130x130q80.png';
+// import BarImg7 from '/img/images/iconsBar/24_124.png';
+// import BarImg8 from '/img/images/iconsBar/157_1157.png';
+
+
+
+
+// const { Column } = Table;
+
+// const marketplaceMockData = [
+// 	{
+// 		key: '1',
+// 		source: 'Kraken',
+// 		price: 28.19512548,
+// 		price_usd: 4536.22,
+// 		order_total: 120.668,
+// 		cheaper_usd: 35,
+// 		expensive_usd: undefined
+// 	}, {
+// 		key: '2',
+// 		source: 'Kraken',
+// 		price: 28.19512548,
+// 		price_usd: 4536.22,
+// 		order_total: 120.668,
+// 		cheaper_usd: 35,
+// 		expensive_usd: undefined
+// 	}, {
+// 		key: '3',
+// 		source: 'Kraken',
+// 		price: 28.19512548,
+// 		price_usd: 4536.22,
+// 		order_total: 120.668,
+// 		cheaper_usd: 35,
+// 		expensive_usd: undefined
+// 	}
+// ];
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 
 /**
  * The limit order data from marketplaces with marketplace name.
@@ -59,6 +112,87 @@ const marketplaceMockData = [
  * @param {OrderItem} theOrder - The order selected to compare.
  * @param {boolean} visible - The component state open or close.
  */
+<<<<<<< HEAD
+=======
+
+
+class HomePagePopupCompare extends Component {
+	constructor(props) {
+	  super(props)
+  
+	  this.state = {
+		firstPrice: "$3,846.92",
+		secondPrice: "$3,846.92",
+		thirdPrice: "$3,846.92",
+		coin: [
+		  { coinName: 1, coinIcon: "BarImg1", coinheight: -250 },
+		  { coinName: 2, coinIcon: "BarImg1", coinheight: -270 },
+		  { coinName: 3, coinIcon: "BarImg1", coinheight: -300 },
+		  { coinName: 4, coinIcon: "BarImg1", coinheight: -270 },
+		  { coinName: 5, coinIcon: "BarImg1", coinheight: -270 },
+		  { coinName: 6, coinIcon: "BarImg1", coinheight: -200 },
+		  { coinName: 7, coinIcon: "BarImg1", coinheight: -250 },
+		  { coinName: 8, coinIcon: "BarImg1", coinheight: -270 }]
+	  }
+	}
+	// handleCoinBarNumber(){
+	//   let numberCol = 8;
+  
+	// }
+	// popHandler() {
+	//   let pop1 = document.getElementById("homePagePopupCompare");
+	//   pop1.classList.toggle("showfooterPop");
+	// }
+	render() {
+	  return (
+		// <div id={"homePagePopupCompare"} className=" popup">
+		  <div id="popup_innerCompare" className='popup_innerCompare'>
+			{/* <img className="xbutton" src={`/img/images/x.svg`} alt="" onClick={this.popHandler} />
+			<h4>Price Compare</h4> */}
+			<Container className="BarChart">
+			  <Row>
+				<div className="leftCol">
+				  <p>{this.state.firstPrice}<span></span></p>
+				  <p>{this.state.secondPrice}<span></span></p>
+				  <p>{this.state.thirdPrice}<span></span></p>
+				</div>
+				<div className="positionOnCol">
+				  <div className="rightCol">
+					{this.state.coin.map(item => {
+					  return <div className="bar" key={item.coinName} style={{ marginTop: item.coinheight }}></div>
+					})}
+				  </div>
+				</div>
+  
+				<div className="positionOnCol pogore">
+				  <div className="rightCol iconBar">
+					<img src={`/img/images/iconsBar/logo-desktop_1logo-desktop.png`} alt="" />
+					<img src={`/img/images/iconsBar/270_1270.png`} alt="" />
+					<img src={`/img/images/iconsBar/22_122.png`} alt="" />
+					<img src={`/img/images/iconsBar/89_189.png`} alt="" />
+					<img src={`/img/images/iconsBar/37_137.png`} alt="" />
+					<img src={`/img/images/iconsBar/coin-market-cap-logo-p-130x130q80.png`} alt="" />
+					<img src={`/img/images/iconsBar/24_124.png`} alt="" />
+					<img src={`/img/images/iconsBar/157_1157.png`} alt="" />
+				  </div>
+				</div>
+  
+			  </Row>
+			</Container>
+  
+		  </div>
+		// </div>
+	  )
+	}
+  }
+  
+
+
+
+
+
+
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 
 	return (
@@ -71,7 +205,12 @@ export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 				title={<span className="CompareToMarketpalceOrder_modal_header" > Price Compare </span>}
 				className="CompareToMarketpalceOrder_modal"
 			>
+<<<<<<< HEAD
 				<Row className={styles.theOrder}>
+=======
+<HomePagePopupCompare/>
+				{/* <Row className={styles.theOrder}>
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 					<Col span={6} className={styles.theOrderCntr}>
 						<Row className={styles.theOrderHeader}>
 							Price 1 {theOrder.receive.abbr}
@@ -132,6 +271,37 @@ export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 						/>
 					</Table>
 				</Row>
+<<<<<<< HEAD
+=======
+
+
+ */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 			</Modal>
 		</div>
 	)

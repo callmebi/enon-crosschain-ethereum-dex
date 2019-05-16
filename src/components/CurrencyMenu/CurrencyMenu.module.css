@@ -1,4 +1,5 @@
 .menuItem {
+<<<<<<< HEAD
 	padding: 18px 0px;
 	line-height: 20px;
 	height: 58px;
@@ -6,4 +7,20 @@
 
 .menuItem:hover {
 	background-color: rgba(0, 0, 0, .09);
+=======
+	line-height: 20px;
+	height: 58px;
+
+	box-shadow: none;
+    color: rgba(51, 51, 51, 0.62);
+    font-weight: 500;
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+.menuItem:hover {
+	background-color: rgba(0, 0, 0, 0.09);
+        box-shadow: none;
+        /* font-weight: 500; */
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }

@@ -5,7 +5,11 @@ import { startTrade } from '../../relayBackend/relayApi';
 import Button from '../../elements/Button/Button';
 import styles from './ENFooter.module.css';
 import CollateralList from '../../components/CollateralList';
+<<<<<<< HEAD
 
+=======
+import {Container,Row} from 'react-bootstrap';
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 /** 
  * @module ENFooter 
  * The ENFooter component.
@@ -41,6 +45,12 @@ const ENFooter = ({ dispatch, order, ipfs, drizzle, account }) => {
     if (!order) return '';
 
 	return (
+<<<<<<< HEAD
+=======
+		<Container fluid className={styles.footerBot}>
+		<Row>
+			<Container>
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 		<div className={styles.cntr}>
 			<div className={styles.orderDetails}>
 				<OrderDetails order={order}/>
@@ -57,10 +67,20 @@ const ENFooter = ({ dispatch, order, ipfs, drizzle, account }) => {
                         startTrade(contracts, ipfs, web3, account, order);
 		                dispatch({type: 'SET_LIMIT_ORDER_DETAILS', payload: null});
                     }}
+<<<<<<< HEAD
 					caption="Buy now"
 				/>
 			</div>
 		</div>
+=======
+					caption="BUY NOW"
+				/>
+			</div>
+		</div>
+		</Container>
+		</Row>
+		</Container>
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 	)
 }
 

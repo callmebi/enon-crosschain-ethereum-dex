@@ -1,5 +1,9 @@
 //import { mockLimitOrderList } from '../mockBackend/mockList';
+<<<<<<< HEAD
 import { getLimitOrderDetails as getLimitOrderById } from '../mockBackend/mockOrder';
+=======
+// import { getLimitOrderDetails as getLimitOrderById } from '../mockBackend/mockOrder';
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 import { limitOrderList } from '../relayBackend/relayApi';
 // Meet our first thunk action creator!
 // Though its insides are different, you would use it just like any other action creator:

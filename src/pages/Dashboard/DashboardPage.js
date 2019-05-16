@@ -4,6 +4,7 @@ import { ConnectedHeader as Header } from '../../components/Header/Header';
 import { ConnectedENDrawer as ENDrawer } from '../../components/ENDrawer/ENDrawer';
 import { ConnectedENOrderList as ENOrderList } from '../../components/ENOrderList';
 import { ConnectedENFooter as ENFooter } from '../../components/ENFooter';
+<<<<<<< HEAD
 import SwitchBuySellOrderList from '../../components/SwitchBuySellOrderList';
 import OrderDetails from '../../components/OrderDetails';
 import CompareToMarketplaceOrder from '../../components/CompareToMarketplaceOrder';
@@ -11,6 +12,16 @@ import CollateralList from '../../components/CollateralList';
 import BuyCurrency from '../../features/BuyCurrency/BuyCurrency';
 import CLOEnterCurrAndAmount from '../../components/CLOEnterCurrAndAmount';
 import CreateLimitOrder from '../../features/CreateLimitOrder';
+=======
+// import SwitchBuySellOrderList from '../../components/SwitchBuySellOrderList';
+// import OrderDetails from '../../components/OrderDetails';
+// import CompareToMarketplaceOrder from '../../components/CompareToMarketplaceOrder';
+// import CollateralList from '../../components/CollateralList';
+// import BuyCurrency from '../../features/BuyCurrency/BuyCurrency';
+// import CLOEnterCurrAndAmount from '../../components/CLOEnterCurrAndAmount';
+import CreateLimitOrder from '../../features/CreateLimitOrder';
+import { Container, Row} from 'react-bootstrap';
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 
 /**
  * The TradeCurrency object describes how much and which cryptocurrency would be trading.
@@ -61,6 +72,11 @@ export default (props) => (
 	    return (
 		<div>
 			<Header  />
+<<<<<<< HEAD
+=======
+			<Container>
+				<Row>
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 			<ENDrawer
                 account={account}
                 balance={Math.round(drizzle.web3.utils.fromWei(balance, 'finney')) / 1000}
@@ -68,7 +84,17 @@ export default (props) => (
                 web3={drizzle.web3}
             />
 			{/* <SwitchBuySellOrderList onSwitch={console.log} /> */}
+<<<<<<< HEAD
 			<ENOrderList />
+=======
+			<ENOrderList account={account}
+                balance={Math.round(drizzle.web3.utils.fromWei(balance, 'finney')) / 1000}
+                ipfs={props.ipfs}
+				web3={drizzle.web3}
+				 onCurrencySelected={currAbbr => console.log(currAbbr)}/>
+				 </Row>
+				 </Container>
+>>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 			{/* <CompareToMarketplaceOrder visible={false} theOrder={{
 				price: {
 					amount: 28.19512548
