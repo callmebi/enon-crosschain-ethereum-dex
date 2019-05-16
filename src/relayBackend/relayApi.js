@@ -39,7 +39,6 @@ async function limitOrderList(ipfs, web3) {
              let collateral = res.collateral
              pastEvents[x].getTrade.collateralWei = web3.utils.fromWei(collateral);
             })
-    
             // Call getMarket 
             await webEx.methods.getMarket(pastEvents[x].getTrade.market).call().then(res => {
                 pastEvents[x].getMarket = res;
@@ -49,13 +48,17 @@ async function limitOrderList(ipfs, web3) {
             .then(res => JSON.parse(res[0].content)).then(res => {
                 pastEvents[x].takerInfo = res
             })
-    
             await ipfs.get(web3.utils.hexToAscii(pastEvents[x].getTrade.makerExtra))
             .then(res =>  JSON.parse(res[0].content)).then(res => {
             pastEvents[x].makerInfo = res
             })
-            // get pairs info       
+            // Get coin name and trading pair       
             let pairs = await getPair(pastEvents[x].takerInfo.account, pastEvents[x].makerInfo.account, Cryptos)
+            // Filter undefined addresses
+            if(pairs.address1 == undefined || pairs.address2 == undefined)
+            {
+                return
+            }
             pastEvents[x].makerInfo.name = pairs.address1 
             pastEvents[x].takerInfo.name = pairs.address2 
     
