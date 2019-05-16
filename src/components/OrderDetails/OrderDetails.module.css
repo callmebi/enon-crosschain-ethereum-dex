@@ -17,13 +17,8 @@
 } */
 
 .currIcon {
-<<<<<<< HEAD
-	height: 20px;
-	width: 20px;
-=======
 	height: 30px;
 	width: 30px;
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 	/* margin-left: 5px; */
 }
 
@@ -35,37 +30,26 @@
 
 .sHeader {
 	margin-bottom: 5px;
-<<<<<<< HEAD
-=======
 font-size: 13px;
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 .sContent {}
 
 .amount {
 	margin-left: 5px;
-<<<<<<< HEAD
-=======
 	font-size: 20px;
     line-height: 21px;
     color: #5e5e5e;
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 .compare {
 	margin-left: 5px;
-<<<<<<< HEAD
-=======
 	font-weight: 500;
 	color: rgba(0,132,240,.52);
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 .abbr {
 	margin-left: 5px;
-<<<<<<< HEAD
-=======
 	color: #535353;
     font-weight: 400;
     font-size: 13px;
@@ -82,5 +66,4 @@ font-size: 13px;
 	color: #535353;
     font-weight: 400;
     font-size: 13px;
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }

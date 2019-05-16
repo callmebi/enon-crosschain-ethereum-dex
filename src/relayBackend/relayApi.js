@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-function limitOrderList(ipfs, web3) {
-    console.log(web3);
-    async function decode(order) {
-        const params = web3.eth.abi.decodeParameters(
-            ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
-            order.params
-        );
-        const ipfsRes = await ipfs.get(web3.utils.hexToAscii(params[4]));
-        const makerExtra = JSON.parse(ipfsRes[0].content);
-        order = Object.assign(order, makerExtra);
-        order.receive = {
-            amount: order.buy / 10**8,
-            name: 'Bitcoin',
-            abbr: 'BTC'
-		};
-        order.send = {
-            amount: order.sell / 10**18,
-            name: 'Ethereum',
-            abbr: 'ETH'
-        };
-		// TODO: Price estimation 
-        order.price = { amount: order.send.amount / order.receive.amount };
-        // TODO: Total estimation
-        order.order_total = 8888;
-        // TODO: Collateral fetch
-        order.collateral= { amount: 1000, currencyAbbr: 'ETH' };
-        return order;
-    }
-    return fetch('http://enon-relay.herokuapp.com/')
-        .then(res => res.json())
-        .then(orders => Promise.all(orders.map(order => decode(order))))
-=======
 let getPair = require("./getCoinName.js")
 
 let Cryptos = ["ETH", "BTC", "LTC", "XMR"];
@@ -131,7 +98,6 @@ async function limitOrderList(ipfs, web3) {
 
     }
         return orders;   
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 async function signTakerOrder(ipfs, web3, account, recipient, maker) {
@@ -209,26 +175,11 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         web3,
         account,
         order.address,
-<<<<<<< HEAD
-        order.receive.abbr == 'BTC' ? order.receive.amount * 10**8 : undefined,
-        order.send.abbr == 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
-        order.collateral
-    );
-    fetch('http://enon-relay.herokuapp.com/', {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(signed)
-    });
-=======
         order.receive.abbr === 'BTC' ? order.receive.amount * 10**8 : undefined,
         order.send.abbr === 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
         order.collateral
     );
     console.log(signed);
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 async function startTrade(contracts, ipfs, web3, account, order) {

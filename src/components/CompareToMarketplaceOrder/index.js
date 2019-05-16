@@ -1,39 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { Modal, Table, Row, Col } from 'antd';
-import styles from './CompareToMarketplaceOrder.module.css';
-import './CompareToMarketplaceOrder.css';
-
-const { Column } = Table;
-
-const marketplaceMockData = [
-	{
-		key: '1',
-		source: 'Kraken',
-		price: 28.19512548,
-		price_usd: 4536.22,
-		order_total: 120.668,
-		cheaper_usd: 35,
-		expensive_usd: undefined
-	}, {
-		key: '2',
-		source: 'Kraken',
-		price: 28.19512548,
-		price_usd: 4536.22,
-		order_total: 120.668,
-		cheaper_usd: 35,
-		expensive_usd: undefined
-	}, {
-		key: '3',
-		source: 'Kraken',
-		price: 28.19512548,
-		price_usd: 4536.22,
-		order_total: 120.668,
-		cheaper_usd: 35,
-		expensive_usd: undefined
-	}
-];
-=======
 // import React from 'react';
 import { Modal } from 'antd';
 // import styles from './CompareToMarketplaceOrder.module.css';
@@ -84,7 +48,6 @@ import { Container, Row } from 'react-bootstrap';
 // 		expensive_usd: undefined
 // 	}
 // ];
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 
 /**
  * The limit order data from marketplaces with marketplace name.
@@ -112,8 +75,6 @@ import { Container, Row } from 'react-bootstrap';
  * @param {OrderItem} theOrder - The order selected to compare.
  * @param {boolean} visible - The component state open or close.
  */
-<<<<<<< HEAD
-=======
 
 
 class HomePagePopupCompare extends Component {
@@ -192,7 +153,6 @@ class HomePagePopupCompare extends Component {
 
 
 
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 
 	return (
@@ -205,12 +165,8 @@ export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 				title={<span className="CompareToMarketpalceOrder_modal_header" > Price Compare </span>}
 				className="CompareToMarketpalceOrder_modal"
 			>
-<<<<<<< HEAD
-				<Row className={styles.theOrder}>
-=======
 <HomePagePopupCompare/>
 				{/* <Row className={styles.theOrder}>
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 					<Col span={6} className={styles.theOrderCntr}>
 						<Row className={styles.theOrderHeader}>
 							Price 1 {theOrder.receive.abbr}
@@ -271,8 +227,6 @@ export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 						/>
 					</Table>
 				</Row>
-<<<<<<< HEAD
-=======
 
 
  */}
@@ -301,7 +255,6 @@ export default ({ theOrder, visible, marketplaceData, setVisible }) => {
 
 
 				
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 			</Modal>
 		</div>
 	)

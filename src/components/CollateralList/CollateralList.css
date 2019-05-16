@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-.CollateralList_cntr {}
-
-.CollateralList_modal_header {
-	color: #000;
-	font-size: 18px;
-	font-weight: 500;
-	margin: 10px 0px;
-	display: inline-block;
-}
-
-.CollateralList_modal {}
-
-.CollateralList_modal .ant-modal-header {
-	padding: 17px 37px;
-}
-
-.CollateralList_modal .ant-modal-body {
-	padding: 41px 37px;
-}
-=======
 /* .CollateralList_cntr {
 } */
 
@@ -52,4 +31,3 @@
     top: 2%;
   }
 }
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c

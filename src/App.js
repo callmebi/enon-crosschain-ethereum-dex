@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { DrizzleContext } from "drizzle-react";
 // import logo from './logo.svg';
-<<<<<<< HEAD
-import Login from './features/Login/Login';
-=======
 // import Login from './features/Login/Login';
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 import Dashboard from './pages/Dashboard/DashboardPage';
 import './App.css';
 

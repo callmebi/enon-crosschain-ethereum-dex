@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { Drawer, Divider } from 'antd';
-=======
 import React from 'react';
 // import { Drawer, Divider } from 'antd';
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 import ENUser from '../ENUser/ENUser';
 import UserMenu from '../UserMenu/UserMenu';
 import { ConnectedCurrencyMenu as CurrencyMenu } from '../CurrencyMenu/CurrencyMenu';
@@ -26,49 +21,12 @@ import { connect } from 'react-redux';
  * @param {boolean} visible - opened or closed state of the component.
  * @param {onClose} onClose - on drawer close callback.
  */
-<<<<<<< HEAD
-=======
 import {Col } from 'react-bootstrap';
 
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 const ENDrawer = (props) => {
 
 	console.log(props)
 
-<<<<<<< HEAD
-	if (!props.connected) {
-		var [vsbl, setVsbl] = useState(props.visible ? props.visible : false)
-	} else {
-		var vsbl = props.visible;
-	}
-
-	return (
-		<Drawer
-			placement="left"
-			closable={false}
-			onClose={e => {
-				!props.connected && setVsbl(false);
-				props.onClose && props.onClose(e);
-			}}
-			visible={vsbl}
-			width={290}
-		>
-			<ENUser
-				ethAddr={props.account}
-				etherAvailable={props.balance}
-				onlineStatus="online"
-			/>
-			<Divider />
-			<UserMenu myNewOrderCount={2} />
-			<Divider />
-			<CurrencyMenu
-                ipfs={props.ipfs}
-                web3={props.web3}
-                onCurrencySelected={currAbbr => console.log(currAbbr)}
-            />
-			<Divider />
-		</Drawer>
-=======
 	// if (!props.connected) {
 	// 	var [vsbl, setVsbl] = useState(props.visible ? props.visible : false)
 	// } else {
@@ -127,7 +85,6 @@ const ENDrawer = (props) => {
 				<UserMenu myNewOrderCount={2} />
 			</div>
 		</Col>
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 	)
 }
 

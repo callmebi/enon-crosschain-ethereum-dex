@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 // import LoginOpt from '../../elements/LoginOpt/LoginOpt';
 import ReceiveAddressForm from '../../components/ReceiveAddressForm';
 import './BuyCurrency.css';
-<<<<<<< HEAD
-import styles from './BuyCurrency.module.css';
-=======
 // import styles from './BuyCurrency.module.css';
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 import ConfirmationNotice from '../../components/ConfirmationNotice';
 import TradingView from '../../components/TradingView';
 

@@ -5,16 +5,11 @@ import { getLimitOrderDetails as onOrderSelected } from '../../redux/actions'
 import ButtonSelectOrder from '../../elements/ButtonSelectOrder/ButtonSelectOrder';
 import CurrencyBadge from '../../elements/CurrencyBadge/CurrencyBadge';
 import styles from './ENOrderList.module.css';
-<<<<<<< HEAD
-import './ENOrderList.css'
-
-=======
 import './ENOrderList.css';
 //add
 import './ENOrderList.scss'
 import {  Row, Col } from 'react-bootstrap';
 import { getLimitOrders as onCurrencySelected } from '../../redux/actions'
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 const { Column, ColumnGroup } = Table;
 
 const data = [{
@@ -76,50 +71,6 @@ const data = [{
  * @param {onOrderSelected} onOrderSelected - The callback that handles selection order item from list of limit orders. 
  */
 const ENOrderList = (props) => {
-<<<<<<< HEAD
-	return (
-		<div className="ENOrderList_cntr">
-			<Table className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>
-				<Column
-					title="Receive"
-					dataIndex="receive"
-					key="receive"
-					render={receive => (
-						<CurrencyBadge gap="7px" name={receive.name} abbr={receive.abbr} amount={receive.amount} />
-					)}
-					className="ENOrderList_column"
-				/>
-				<Column
-					title="Send"
-					dataIndex="send"
-					key="send"
-					render={send => (
-						<CurrencyBadge gap="7px" name={send.name} abbr={send.abbr} amount={send.amount} />
-					)}
-					className="ENOrderList_column"
-				/>
-				<Column
-					title="Order total (USD)"
-					dataIndex="order_total"
-					key="order_total"
-					width={130}
-					render={order_total => (
-						<span>${order_total}</span>
-					)}
-					className="ENOrderList_column"
-				/>
-				<Column
-					title=""
-					key="action"
-					align="right"
-					width={110}
-					render={(text, record) => (
-						<ButtonSelectOrder onClick={e => props.onOrderSelected(record)} />
-					)}
-					className="ENOrderList_column"
-				/>
-			</Table>
-=======
 	// function currSelected(currAbbr) {
 	// 	if (props.onCurrencySelected)
 	// 		props.onCurrencySelected(currAbbr, props.ipfs, props.web3)
@@ -181,7 +132,6 @@ const ENOrderList = (props) => {
 							/>
 						</Table>
 					</Col>
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 		</div>
 	)
 }
@@ -195,11 +145,6 @@ function mapState(state) {
 }
 
 const ConnectedENOrderList = connect(mapState, { onOrderSelected })(ENOrderList);
-<<<<<<< HEAD
-
-export { ConnectedENOrderList };
-=======
 const ConnectedCurrencyMenu = connect(null, { onCurrencySelected })(ENOrderList);
 
 export { ConnectedENOrderList, ConnectedCurrencyMenu };
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c

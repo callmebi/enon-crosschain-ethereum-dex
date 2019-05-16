@@ -6,29 +6,19 @@
 
 .ENOrderList_cntr {
 	margin: 0px auto;
-<<<<<<< HEAD
-	margin-top: 100px;
-=======
 	margin-top: 7%;
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 	width: fit-content;
 	margin-bottom: 100px;
 }
 
 .ENOrderList_cntr .ant-table-tbody>tr>td {
 	border-bottom: none;
-<<<<<<< HEAD
-	padding: 10px 17px;
-=======
 	padding: 9px 17px;
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 .ENOrderList_cntr .ant-table-thead>tr>th {
 	background: none;
 }
-<<<<<<< HEAD
-=======
 .ENOrderList_cntr .ant-table-thead>tr{
 	background: white!important;
 
@@ -71,7 +61,6 @@ div.ENOrderList_cntr > div > div.ant-table-wrapper.ENOrderList_table__1nsZs > di
 	/* padding-left: 8% */
 }
 
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 
 /* .ant-table-tbody>tr>td:hover {
 	background-color: gainsboro;

@@ -28,13 +28,8 @@ const Header = ({ messageNumber, onClickMenuItem }) => {
 				<ul className={styles.menuCntr}>
 					<li className={styles.menuItem}>
 						<div className={styles.openDrawerBtn_MessageNumbBadge_cntr}>
-<<<<<<< HEAD
-							<div id="openDrawerBtn" onClick={e => onClickMenuItem(e.target.id)} className={styles.openDrawerBtn}>
-							</div>
-=======
 							{/* <div id="openDrawerBtn" onClick={e => onClickMenuItem(e.target.id)} className={styles.openDrawerBtn}>
 							</div> */}
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 							{messageNumber && <div className={styles.messageNumbBagde}>{messageNumber}</div>}
 						</div>
 					</li>
@@ -46,11 +41,7 @@ const Header = ({ messageNumber, onClickMenuItem }) => {
 			<div className={styles.rightMenu}>
 				<ul className={styles.menuCntr}>
 					<li id="createLimitOrderBtn" onClick={e => onClickMenuItem(e.currentTarget.id)} className={styles.menuItem}>
-<<<<<<< HEAD
-						<div className={styles.createLimitOrder}>Create limit order > </div>
-=======
 						<div className={styles.createLimitOrder}>Create limit order<img className="imgArrow" src="img/images/chevron-right.svg" alt=""/> </div>
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 					</li>
 				</ul>
 			</div>

@@ -1,37 +1,12 @@
 .cntr {
 	width: 100%;
-<<<<<<< HEAD
-	position: fixed;
-	bottom: 0px;
-	height: 90px;
-	border-top: 1px #dddddd solid;
-=======
 	/* margin-left: 15%; */
 
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 	background-color: white;
 }
 
 .orderDetails {
 	float: left;
-<<<<<<< HEAD
-	width: 32%;
-	min-width: 480px;
-}
-
-.collateralCntr {
-	float: left;
-	height: 100%;
-	margin-left: 50px;
-}
-
-.buyBtnCntr {
-	float: right;
-	height: 100%;
-	margin-right: 30px;
-	max-width: 330px;
-	width: 20%;
-=======
 	width: 50%;
 	min-width: 480px;
 	
@@ -61,7 +36,6 @@
 	/* padding: 20px 20px; */
 	height: 100px;
 	/* margin: auto; */
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 .buyBtnCntr:before {
@@ -83,24 +57,18 @@
 	vertical-align: middle;
 	/* max-width: 330px; */
 	width: 100%;
-<<<<<<< HEAD
-=======
 	background-color: #0070e0;
 	font-size: 12px!important;
     font-weight: 700;
 	letter-spacing: 1px;
 	margin-top: -5%;
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }
 
 .collateral {
 	display: inline-block;
 	vertical-align: middle;
-<<<<<<< HEAD
-=======
 	color: #535353;
 text-decoration: underline;
 font-size: 13px;
 
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 }

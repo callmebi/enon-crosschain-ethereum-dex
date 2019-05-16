@@ -34,11 +34,7 @@ const OrderDetails = ({ order }) => {
 		<div className={styles.cntr} >
 			<div className={styles.section}>
 				<div className={styles.sHeader}>
-<<<<<<< HEAD
-					You send (~${order.send.amountDollar})
-=======
 					You send 
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 				</div>
 				<div className={styles.sContent}>
 					<img className={styles.currIcon} src={`/img/${order.send.abbr}.png`} alt={`/img/${order.send.abbr}.png`} />
@@ -48,11 +44,7 @@ const OrderDetails = ({ order }) => {
 			</div>
 			<div className={styles.section}>
 				<div className={styles.sHeader}>
-<<<<<<< HEAD
-					You receive (~${order.receive.amountDollar})
-=======
 					You receive 
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 				</div>
 				<div className={styles.sContent}>
 					<img className={styles.currIcon} src={`/img/${order.receive.abbr}.png`} alt={`/img/${order.receive.abbr}.png`} />
@@ -66,13 +58,8 @@ const OrderDetails = ({ order }) => {
 					<a href="#compare" onClick={e => setCompareVisible(true)} className={styles.compare}>Compare</a>
 				</div>
 				<div className={styles.sContent}>
-<<<<<<< HEAD
-					<span className={styles.priceAmount}>{order.price.amount}</span>
-					<span className={styles.abbr}>{order.send.abbr}</span>
-=======
 					<span className={styles.amount1}>{order.price.amount}</span>
 					<span className={styles.abbr1}>{order.send.abbr}</span>
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 				</div>
 			</div>
 			<CompareToMarketplaceOrder visible={compareVisible} setVisible={setCompareVisible} theOrder={{

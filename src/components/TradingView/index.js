@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
 import React from 'react';
->>>>>>> ef36a1bd0ace55a699ada0b5c2d5cf5c19a7141c
 import { Progress, Icon } from 'antd';
 // import ButtonNext from "../../elements/ButtonNext/ButtonNext";
 import styles from './TradingView.module.css';
