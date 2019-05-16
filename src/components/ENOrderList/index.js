@@ -10,7 +10,7 @@ import './ENOrderList.css';
 import './ENOrderList.scss'
 import {  Row, Col } from 'react-bootstrap';
 import { getLimitOrders as onCurrencySelected } from '../../redux/actions'
-const { Column} = Table;
+const { Column, ColumnGroup } = Table;
 
 const data = [{
 	key: '1',
@@ -84,9 +84,10 @@ const ENOrderList = (props) => {
 								<button id="sellbu">SELL BITCOIN</button>
 							</Col>
 						</Row>
-						<Table className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>
+						<Table rowKey="uid" className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>
 							<Column
 								title="Receive"
+								rowKey="uid" 
 								dataIndex="receive"
 								key="receive"
 								render={receive => (
@@ -96,6 +97,7 @@ const ENOrderList = (props) => {
 							/>
 							<Column
 								title="Send"
+								rowKey="uid" 
 								dataIndex="send"
 								key="send"
 								render={send => (
@@ -107,6 +109,7 @@ const ENOrderList = (props) => {
 							/>
 							<Column
 								title="Order total USD"
+								rowKey="uid" 
 								dataIndex="order_total"
 								key="order_total"
 								// width={130}
@@ -117,6 +120,7 @@ const ENOrderList = (props) => {
 							/>
 							<Column
 								title=""
+								rowKey="uid" 
 								key="action"
 								align="right"
 								width={100}

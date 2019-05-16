@@ -1,35 +1,104 @@
-function limitOrderList(ipfs, web3) {
-    console.log(web3);
-    async function decode(order) {
-        const params = web3.eth.abi.decodeParameters(
-            ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
-            order.params
-        );
-        const ipfsRes = await ipfs.get(web3.utils.hexToAscii(params[4]));
-        const makerExtra = JSON.parse(ipfsRes[0].content);
-        order = Object.assign(order, makerExtra);
-        // console.log(order+"aceace")
-        order.receive = {
-            amount: order.buy / 10**8,
-            name: 'Bitcoin',
-            abbr: 'BTC'
-		};
-        order.send = {
-            amount: order.sell / 10**18,
-            name: 'Ethereum',
-            abbr: 'ETH'
+let getPair = require("./getCoinName.js")
+
+let Cryptos = ["ETH", "BTC", "LTC", "XMR"];
+
+async function limitOrderList(ipfs, web3) {
+
+    let contractInstance = require("../contracts/IExchange.json")
+    console.log(contractInstance)
+    // to be sent at APP or Index js
+    let webEx = new web3.eth.Contract(contractInstance.abi, '0x0a7FBfd6C6eaB1e06b0a21Ab2Dd0CAEfaD2957B9', {
+        defaultAccount: '0x1234567890123456789012345678901234567891', // default from address
+        defaultGasPrice: '20000000000' // default gas price in wei, 20 gwei in this case
+    });
+
+        // let trades = [];
+        let options = {
+            fromBlock: Number,
+            toBlock: Number
         };
-		// TODO: Price estimation 
-        order.price = { amount: order.send.amount / order.receive.amount };
-        // TODO: Total estimation
-        order.order_total = 8888;
-        // TODO: Collateral fetch
-        order.collateral= { amount: 1000, currencyAbbr: 'ETH' };
-        return order;
-    }
-    return fetch('http://enon-relay.herokuapp.com/')
-        .then(res => res.json())
-        .then(orders => Promise.all(orders.map(order => decode(order))))
+        // Make logic to search for the latest XX orders and remember the last block so it knows where from to fetch
+        options = {
+            fromBlock: 10573500,
+            toBlock: 10673501
+        };
+        // Get the past events
+        let pastEvents = await webEx.getPastEvents("TradeStart", options)
+            .then(tradeEvent => {
+                return tradeEvent
+            });
+    
+        let orders = [];
+        // Loop trough past Events and call getTrade Contract Function
+        for(let x=0; x < pastEvents.length; x++){
+            // Call getTrade
+            await webEx.methods.getTrade(pastEvents[x].raw.topics[1]).call().then(res => {
+             pastEvents[x].getTrade = res;
+             console.log("res ", res)
+             let collateral = res.collateral
+             console.log(collateral)
+             console.log("This is Collateral :", collateral)
+             pastEvents[x].getTrade.collateralWei = web3.utils.fromWei(collateral);
+            console.log("Get Trade: ", Math.floor(Date.now()/1000))
+            })
+    
+            // Call getMarket 
+            await webEx.methods.getMarket(pastEvents[x].getTrade.market).call().then(res => {
+                pastEvents[x].getMarket = res;
+            })
+            console.log("getMarket: ", Math.floor(Date.now()/1000))
+            console.log(pastEvents[x].getTrade.takerExtra)
+            // Call IPFS storage and decode takeExtra and makeExtra 
+            await ipfs.get(web3.utils.hexToAscii(pastEvents[x].getTrade.takerExtra))
+            .then(res => JSON.parse(res[0].content)).then(res => {
+                pastEvents[x].takerInfo = res
+            })
+            console.log("IPFS TakerExtra ", Math.floor(Date.now()/1000))
+    
+            await ipfs.get(web3.utils.hexToAscii(pastEvents[x].getTrade.makerExtra))
+            .then(res =>  JSON.parse(res[0].content)).then(res => {
+            pastEvents[x].makerInfo = res
+            })
+            console.log("IPFS MakerExtra", Math.floor(Date.now()/1000))
+            console.log(pastEvents[x])
+            // get pairs info       
+            let pairs = await getPair(pastEvents[x].takerInfo.account, pastEvents[x].makerInfo.account, Cryptos)
+            console.log(pairs, Math.floor(Date.now()/1000))
+            pastEvents[x].makerInfo.name = pairs.address1 
+            pastEvents[x].takerInfo.name = pairs.address2 
+    
+            let order = {
+            "params": "",
+            "signature": pastEvents[x].signature,
+            "market": pastEvents[x].getTrade.market,
+            "deal": pastEvents[x].getTrade.deal,
+            "account": pastEvents[x].takerInfo.account,
+            "sell": pastEvents[x].takerInfo.sell,
+            "buy": pastEvents[x].takerInfo.buy,
+            "nonce": pastEvents[x].takerInfo.nonce,
+            "receive": {
+              "amount": pastEvents[x].takerInfo.buy,
+              "name": pastEvents[x].makerInfo.name,
+              "abbr": pastEvents[x].makerInfo.name
+            },
+            "send": {
+              "amount": pastEvents[x].takerInfo.sell,
+              "name": pastEvents[x].takerInfo.name, 
+              "abbr": pastEvents[x].takerInfo.name 
+            },
+            "price": {
+              "amount": (pastEvents[x].takerInfo.sell / pastEvents[x].takerInfo.buy )
+            },
+            "order_total": pastEvents[x].makerInfo.sell,
+            "collateral": {
+              "amount": pastEvents[x].getTrade.collateralWei,
+              "currencyAbbr": pastEvents[x].makerInfo.name
+            }
+          }
+          orders[x] = order;
+    
+        }
+        return orders;   
 }
 
 async function signTakerOrder(ipfs, web3, account, recipient, maker) {
@@ -111,14 +180,7 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         order.send.abbr === 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
         order.collateral
     );
-    fetch('http://enon-relay.herokuapp.com/', {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(signed)
-    });
+    console.log(signed);
 }
 
 async function startTrade(contracts, ipfs, web3, account, order) {
