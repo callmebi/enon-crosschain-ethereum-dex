@@ -63,6 +63,7 @@ async function limitOrderList(ipfs, web3) {
             pastEvents[x].takerInfo.name = pairs.address2 
     
             let order = {
+            "key": x,
             "params": "",
             "signature": pastEvents[x].signature,
             "market": pastEvents[x].getTrade.market,

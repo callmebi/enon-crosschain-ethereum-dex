@@ -84,7 +84,7 @@ const ENOrderList = (props) => {
 								<button id="sellbu">SELL BITCOIN</button>
 							</Col>
 						</Row>
-						<Table rowKey="uid" className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>
+						<Table rowKey={props.id} className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>
 							<Column
 								title="Receive"
 								rowKey="uid" 
