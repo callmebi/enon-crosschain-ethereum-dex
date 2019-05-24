@@ -1,14 +1,19 @@
 function limitOrderList(ipfs, web3) {
+
     async function decode(order) {
         const params = web3.eth.abi.decodeParameters(
             ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
             order.params
         );
-        console.log(params)
+
+        let btcPrice = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
+        .then(res => res.json()).then(res => parseFloat(res.bpi.USD.rate.replace(",", "")))
+
         const ipfsRes = await ipfs.get(web3.utils.hexToAscii(params[4]));
-        console.log(params)
+        console.log("ipfs Res is", ipfsRes[0].content)
         const makerExtra = JSON.parse(ipfsRes[0].content);
         order = Object.assign(order, makerExtra);
+        console.log("now order is ", order)
         order.receive = {
             amount: order.buy / 10**8,
             name: 'Bitcoin',
@@ -20,14 +25,15 @@ function limitOrderList(ipfs, web3) {
             abbr: 'ETH'
         };
 		// TODO: Price estimation 
-        order.price = { amount: order.send.amount / order.receive.amount };
+        order.price =  order.receive.amount * btcPrice ;
         // TODO: Total estimation
-        order.order_total = 8888;
+        order.order_total = order.price;
         // TODO: Collateral fetch
-        order.collateral= { amount: 1000, currencyAbbr: 'ETH' };
+        order.collateral = web3.utils.fromWei(params[2])
+        console.log("order collateral: ,", order.collateral)
         return order;
     }
-    return fetch('http://enon-relay.herokuapp.com/')
+    return fetch('http://192.99.56.237:8000')
         .then(res => res.json())
         .then(orders => Promise.all(orders.map(order => decode(order))))
 }
@@ -61,7 +67,7 @@ async function signTakerOrder(ipfs, web3, account, recipient, maker) {
 
 async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collateral) {
     // BTC/ETH market id
-    const market = '0x17f166723b75c5da81f69d333af4676251d1b8b97326351320cf3ca53beacca0'; 
+    const market = '0xf0eac308065dc9d05d7b7b217d88378878a9adfa9851eb6e2a053ebdbda32ff4'; 
     const deal = web3.utils.soliditySha3(
         {t: 'uint256', v: sell},
         {t: 'uint256', v: buy}
@@ -111,7 +117,7 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         order.send.abbr === 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
         order.collateral
     );
-    fetch('http://enon-relay.herokuapp.com/', {
+    fetch('http://192.99.56.237:8000', {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
