@@ -118,14 +118,15 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b506040516040806103648339810180604052604081101561003057600080fd5b50805160209091015160008054600160a060020a03938416600160a060020a031991821617909155600180549390921692169190911790556102ed806100776000396000f3fe608060405234801561001057600080fd5b5060043610610073577c0100000000000000000000000000000000000000000000000000000000600035046318671b0d8114610078578063692058c2146100a957806381145d5c146100cd5780638da5cb5b146100f9578063b29531a814610101575b600080fd5b6100956004803603602081101561008e57600080fd5b503561011e565b604080519115158252519081900360200190f35b6100b16101d2565b60408051600160a060020a039092168252519081900360200190f35b610095600480360360408110156100e357600080fd5b50600160a060020a0381351690602001356101e1565b6100b1610230565b6100956004803603602081101561011757600080fd5b503561023f565b600154600090600160a060020a0316331461013857600080fd5b60008054604080517f18671b0d000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a03909216926318671b0d926024808401936020939083900390910190829087803b1580156101a057600080fd5b505af11580156101b4573d6000803e3d6000fd5b505050506040513d60208110156101ca57600080fd5b505192915050565b600054600160a060020a031681565b60008054600160a060020a038481169116146101fc57600080fd5b60405182907f8e613cdc4b6f1c7aef914fe20df6bc18028bdc4e2b5a05c9d73844226fd84cbc90600090a250600192915050565b600154600160a060020a031681565b600154600090600160a060020a0316331461025957600080fd5b60008054604080517fb29531a8000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a039092169263b29531a8926024808401936020939083900390910190829087803b1580156101a057600080fdfea165627a7a723058207ad1c346372a69e7ed8465b16e5301ba692488266bb450e3c38a443a5e81213c0029",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610073577c0100000000000000000000000000000000000000000000000000000000600035046318671b0d8114610078578063692058c2146100a957806381145d5c146100cd5780638da5cb5b146100f9578063b29531a814610101575b600080fd5b6100956004803603602081101561008e57600080fd5b503561011e565b604080519115158252519081900360200190f35b6100b16101d2565b60408051600160a060020a039092168252519081900360200190f35b610095600480360360408110156100e357600080fd5b50600160a060020a0381351690602001356101e1565b6100b1610230565b6100956004803603602081101561011757600080fd5b503561023f565b600154600090600160a060020a0316331461013857600080fd5b60008054604080517f18671b0d000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a03909216926318671b0d926024808401936020939083900390910190829087803b1580156101a057600080fd5b505af11580156101b4573d6000803e3d6000fd5b505050506040513d60208110156101ca57600080fd5b505192915050565b600054600160a060020a031681565b60008054600160a060020a038481169116146101fc57600080fd5b60405182907f8e613cdc4b6f1c7aef914fe20df6bc18028bdc4e2b5a05c9d73844226fd84cbc90600090a250600192915050565b600154600160a060020a031681565b600154600090600160a060020a0316331461025957600080fd5b60008054604080517fb29531a8000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a039092169263b29531a8926024808401936020939083900390910190829087803b1580156101a057600080fdfea165627a7a723058207ad1c346372a69e7ed8465b16e5301ba692488266bb450e3c38a443a5e81213c0029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.4+commit.9549d8ff\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"confirmMakerTransfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"dex\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_dex\",\"type\":\"address\"},{\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"checkTrade\",\"outputs\":[{\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"confirmTakerTransfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_dex\",\"type\":\"address\"},{\"name\":\"_onwer\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"CheckTrade\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/akru/enon-dex/contracts/oracles/OwnedOracle.sol\":\"OwnedOracle\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/akru/enon-dex/contracts/interface/IExchange.sol\":{\"keccak256\":\"0x60a40806d10196e5ce254ba7c388107cc07e267abd1ebf63cd3cb797ff9d4f97\",\"urls\":[\"bzzr://edb989f2a001b3012afab240f66b61b0ae5f85c4dc0b8ba5f32da54410ef9d1c\"]},\"/home/akru/enon-dex/contracts/interface/IOracle.sol\":{\"keccak256\":\"0x9dd1250a292850902aadb1fc3ac0e356dbf0a9cdda1aa8599870e4821da99333\",\"urls\":[\"bzzr://04fc6a7b498eb1512ccb55ec6ade45a5a0520337067822894dde5aa68ecf54aa\"]},\"/home/akru/enon-dex/contracts/misc/Set.sol\":{\"keccak256\":\"0xdd8e697c66a30ea13663aa21ddc30c8294f1180a9ffbfebc344952e29dc6ed2a\",\"urls\":[\"bzzr://4952f0da09cd94c8a0457831c4d5bf875aebefcf56c036adb5bab3fefc17f520\"]},\"/home/akru/enon-dex/contracts/oracles/OwnedOracle.sol\":{\"keccak256\":\"0x28c7f412ed1110258fac30316425e9415f612d84cb6d6e8cba7f291ca6275907\",\"urls\":[\"bzzr://a2071931884f4810a525e1bf1eb706e6921d923382804a0bc1e40cc703f8f977\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516040806103648339810180604052604081101561003057600080fd5b50805160209091015160008054600160a060020a03938416600160a060020a031991821617909155600180549390921692169190911790556102ed806100776000396000f3fe608060405234801561001057600080fd5b5060043610610073577c0100000000000000000000000000000000000000000000000000000000600035046318671b0d8114610078578063692058c2146100a957806381145d5c146100cd5780638da5cb5b146100f9578063b29531a814610101575b600080fd5b6100956004803603602081101561008e57600080fd5b503561011e565b604080519115158252519081900360200190f35b6100b16101d2565b60408051600160a060020a039092168252519081900360200190f35b610095600480360360408110156100e357600080fd5b50600160a060020a0381351690602001356101e1565b6100b1610230565b6100956004803603602081101561011757600080fd5b503561023f565b600154600090600160a060020a0316331461013857600080fd5b60008054604080517f18671b0d000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a03909216926318671b0d926024808401936020939083900390910190829087803b1580156101a057600080fd5b505af11580156101b4573d6000803e3d6000fd5b505050506040513d60208110156101ca57600080fd5b505192915050565b600054600160a060020a031681565b60008054600160a060020a038481169116146101fc57600080fd5b60405182907f8e613cdc4b6f1c7aef914fe20df6bc18028bdc4e2b5a05c9d73844226fd84cbc90600090a250600192915050565b600154600160a060020a031681565b600154600090600160a060020a0316331461025957600080fd5b60008054604080517fb29531a8000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a039092169263b29531a8926024808401936020939083900390910190829087803b1580156101a057600080fdfea165627a7a72305820d1dd67ab118feed29fcfc74c9208189616dc9f7b879d5ce835b9ba50f75ad4820029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610073577c0100000000000000000000000000000000000000000000000000000000600035046318671b0d8114610078578063692058c2146100a957806381145d5c146100cd5780638da5cb5b146100f9578063b29531a814610101575b600080fd5b6100956004803603602081101561008e57600080fd5b503561011e565b604080519115158252519081900360200190f35b6100b16101d2565b60408051600160a060020a039092168252519081900360200190f35b610095600480360360408110156100e357600080fd5b50600160a060020a0381351690602001356101e1565b6100b1610230565b6100956004803603602081101561011757600080fd5b503561023f565b600154600090600160a060020a0316331461013857600080fd5b60008054604080517f18671b0d000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a03909216926318671b0d926024808401936020939083900390910190829087803b1580156101a057600080fd5b505af11580156101b4573d6000803e3d6000fd5b505050506040513d60208110156101ca57600080fd5b505192915050565b600054600160a060020a031681565b60008054600160a060020a038481169116146101fc57600080fd5b60405182907f8e613cdc4b6f1c7aef914fe20df6bc18028bdc4e2b5a05c9d73844226fd84cbc90600090a250600192915050565b600154600160a060020a031681565b600154600090600160a060020a0316331461025957600080fd5b60008054604080517fb29531a8000000000000000000000000000000000000000000000000000000008152600481018690529051600160a060020a039092169263b29531a8926024808401936020939083900390910190829087803b1580156101a057600080fdfea165627a7a72305820d1dd67ab118feed29fcfc74c9208189616dc9f7b879d5ce835b9ba50f75ad4820029",
   "sourceMap": "138:746:9:-;;;272:102;8:9:-1;5:2;;;30:1;27;20:12;5:2;272:102:9;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;272:102:9;;;;;;;333:3;:10;;-1:-1:-1;;;;;333:10:9;;;-1:-1:-1;;;;;;333:10:9;;;;;;;;353:14;;;;;;;;;;;;;;138:746;;;;;;",
   "deployedSourceMap": "138:746:9:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;138:746:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;380:156;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;380:156:9;;:::i;:::-;;;;;;;;;;;;;;;;;;176:20;;;:::i;:::-;;;;-1:-1:-1;;;;;176:20:9;;;;;;;;;;;;;;704:178;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;704:178:9;;;;;;;;:::i;202:20::-;;;:::i;542:156::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;542:156:9;;:::i;380:::-;477:5;;439:4;;-1:-1:-1;;;;;477:5:9;463:10;:19;455:28;;;;;;500:3;;;:29;;;;;;;;;;;;;;-1:-1:-1;;;;;500:3:9;;;;:24;;:29;;;;;;;;;;;;;;;;;:3;:29;;;5:2:-1;;;;30:1;27;20:12;5:2;500:29:9;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;500:29:9;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;500:29:9;;380:156;-1:-1:-1;;380:156:9:o;176:20::-;;;-1:-1:-1;;;;;176:20:9;;:::o;704:178::-;768:12;816:3;;-1:-1:-1;;;;;800:20:9;;;816:3;;800:20;792:29;;;;;;836:15;;847:3;;836:15;;;;;-1:-1:-1;871:4:9;;704:178;-1:-1:-1;;704:178:9:o;202:20::-;;;-1:-1:-1;;;;;202:20:9;;:::o;542:156::-;639:5;;601:4;;-1:-1:-1;;;;;639:5:9;625:10;:19;617:28;;;;;;662:3;;;:29;;;;;;;;;;;;;;-1:-1:-1;;;;;662:3:9;;;;:24;;:29;;;;;;;;;;;;;;;;;:3;:29;;;5:2:-1;;;;30:1;27;20:12",
   "source": "/*\n    EOA based oracle contract.\n*/\n\npragma solidity >= 0.5.0;\n\nimport '../interface/IExchange.sol';\nimport '../interface/IOracle.sol';\n\ncontract OwnedOracle is IOracle {\n    IExchange public dex;\n    address public owner;\n\n    event CheckTrade(uint256 indexed id);\n\n    constructor(IExchange _dex, address _onwer) public {\n        dex = _dex;\n        owner = _onwer;\n    }\n\n    function confirmMakerTransfer(uint256 _id) public returns (bool) {\n        require(msg.sender == owner);\n        return dex.confirmMakerTransfer(_id);\n    }\n\n    function confirmTakerTransfer(uint256 _id) public returns (bool) {\n        require(msg.sender == owner);\n        return dex.confirmTakerTransfer(_id);\n    }\n\n    function checkTrade(address _dex, uint256 _id) external returns(bool success) {\n        require(_dex == address(dex));\n        emit CheckTrade(_id);\n        success = true;\n    }\n}\n",
-  "sourcePath": "/home/akru/devel/cdex/contracts/oracles/OwnedOracle.sol",
+  "sourcePath": "/home/akru/enon-dex/contracts/oracles/OwnedOracle.sol",
   "ast": {
-    "absolutePath": "/home/akru/devel/cdex/contracts/oracles/OwnedOracle.sol",
+    "absolutePath": "/home/akru/enon-dex/contracts/oracles/OwnedOracle.sol",
     "exportedSymbols": {
       "OwnedOracle": [
         7985
@@ -146,7 +147,7 @@
         "src": "38:25:9"
       },
       {
-        "absolutePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+        "absolutePath": "/home/akru/enon-dex/contracts/interface/IExchange.sol",
         "file": "../interface/IExchange.sol",
         "id": 7891,
         "nodeType": "ImportDirective",
@@ -157,7 +158,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/akru/devel/cdex/contracts/interface/IOracle.sol",
+        "absolutePath": "/home/akru/enon-dex/contracts/interface/IOracle.sol",
         "file": "../interface/IOracle.sol",
         "id": 7892,
         "nodeType": "ImportDirective",
@@ -509,7 +510,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9168,
+                            "referencedDeclaration": 9209,
                             "src": "463:3:9",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -563,10 +564,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9171,
-                        9172
+                        9212,
+                        9213
                       ],
-                      "referencedDeclaration": 9171,
+                      "referencedDeclaration": 9212,
                       "src": "455:7:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -772,7 +773,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9168,
+                            "referencedDeclaration": 9209,
                             "src": "625:3:9",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -826,10 +827,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9171,
-                        9172
+                        9212,
+                        9213
                       ],
-                      "referencedDeclaration": 9171,
+                      "referencedDeclaration": 9212,
                       "src": "617:7:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1111,10 +1112,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9171,
-                        9172
+                        9212,
+                        9213
                       ],
-                      "referencedDeclaration": 9171,
+                      "referencedDeclaration": 9212,
                       "src": "792:7:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1360,7 +1361,7 @@
     "src": "38:847:9"
   },
   "legacyAST": {
-    "absolutePath": "/home/akru/devel/cdex/contracts/oracles/OwnedOracle.sol",
+    "absolutePath": "/home/akru/enon-dex/contracts/oracles/OwnedOracle.sol",
     "exportedSymbols": {
       "OwnedOracle": [
         7985
@@ -1381,7 +1382,7 @@
         "src": "38:25:9"
       },
       {
-        "absolutePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+        "absolutePath": "/home/akru/enon-dex/contracts/interface/IExchange.sol",
         "file": "../interface/IExchange.sol",
         "id": 7891,
         "nodeType": "ImportDirective",
@@ -1392,7 +1393,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/akru/devel/cdex/contracts/interface/IOracle.sol",
+        "absolutePath": "/home/akru/enon-dex/contracts/interface/IOracle.sol",
         "file": "../interface/IOracle.sol",
         "id": 7892,
         "nodeType": "ImportDirective",
@@ -1744,7 +1745,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9168,
+                            "referencedDeclaration": 9209,
                             "src": "463:3:9",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1798,10 +1799,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9171,
-                        9172
+                        9212,
+                        9213
                       ],
-                      "referencedDeclaration": 9171,
+                      "referencedDeclaration": 9212,
                       "src": "455:7:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2007,7 +2008,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9168,
+                            "referencedDeclaration": 9209,
                             "src": "625:3:9",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2061,10 +2062,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9171,
-                        9172
+                        9212,
+                        9213
                       ],
-                      "referencedDeclaration": 9171,
+                      "referencedDeclaration": 9212,
                       "src": "617:7:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2346,10 +2347,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9171,
-                        9172
+                        9212,
+                        9213
                       ],
-                      "referencedDeclaration": 9171,
+                      "referencedDeclaration": 9212,
                       "src": "792:7:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2606,8 +2607,8 @@
       "transactionHash": "0xb7c6576dfcb027064fb90428cb3c5836e2d4250471eddb0fe7e4e1026bfb644f"
     }
   },
-  "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-02T10:05:18.475Z",
+  "schemaVersion": "3.0.6",
+  "updatedAt": "2019-05-24T14:10:55.136Z",
   "devdoc": {
     "methods": {}
   },

@@ -321,14 +321,15 @@
       "type": "function"
     }
   ],
+  "metadata": "",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "/**\n * @title Interface of exchange smart contract.\n */\n\npragma solidity >= 0.5.0;\n\nimport '../misc/Set.sol';\n\ninterface IExchange {\n    /**\n     * @dev New market params added to registry.\n     */\n    event NewMarket(bytes32 indexed id);\n\n    /**\n     * @dev Trade start state notification. \n     */\n    event TradeStart(uint256 indexed id);\n\n    /**\n     * @dev Trade partial state notification. \n     */\n    event TradePartial(uint256 indexed id);\n\n    /**\n     * @dev Trade finish state notification. \n     */\n    event TradeFinish(uint256 indexed id);\n\n    /**\n     * @dev Notify for every transfer taker confirmation from oracle. \n     */\n    event TakerTransferConfirmation(\n        uint256 indexed id,\n        address indexed oracle\n    );\n\n    /**\n     * @dev Notify for every confirmed taker transfers. \n     */\n    event TakerTransferConfirmed(uint256 indexed id);\n\n    /**\n     * @dev Notify for every maker transfer confirmation from oracle. \n     */\n    event MakerTransferConfirmation(\n        uint256 indexed id,\n        address indexed oracle\n    );\n\n    /**\n     * @dev Notify for every confirmed maker transfers. \n     */\n    event MakerTransferConfirmed(uint256 indexed id);\n\n    enum TradeState {\n        Start,\n        Partial,\n        Release,\n        Penalty,\n        Finish\n    }\n\n    struct Trade {\n        // Market id: sha3(timeouts, oracles, min confirmations) \n        bytes32 market;\n\n        // Deal id: sha3(makret id, sell value, buy value)\n        bytes32 deal;\n\n        // Collateral params\n        address maker;\n        address taker;\n        uint256 collateral;\n\n        // Trade oracles\n        Set.Address makerTransferConfirmations;\n        Set.Address takerTransferConfirmations;\n\n        // Trade state\n        TradeState state;\n        uint256 startBlock;\n        uint256 partialBlock;\n        uint256 finishBlock;\n\n        // Trade extra params (used by oracle to check trade off-chain)\n        bytes makerExtra;\n        bytes takerExtra;\n    }\n\n    struct Market {\n        // Timeout params\n        uint256 makerTimeout;\n        uint256 takerTimeout;\n\n        // Trade oracles\n        Set.Address oracles;\n        uint256 minimalConfirmations;\n    }\n\n    /**\n     * @dev Get trade summary.\n     * @param _id Trade identifier.\n     * @return Trade params.\n     */\n    function getTrade(\n        uint256 _id\n    ) external view returns (\n        bytes32 market,\n        bytes32 deal,\n        address maker,\n        address taker,\n        uint256 collateral,\n        uint256 makerTransferConfirmations,\n        uint256 takerTransferConfirmations,\n        uint256 startBlock,\n        uint256 partialBlock,\n        uint256 finishBlock,\n        bytes memory makerExtra,\n        bytes memory takerExtra\n    );\n\n    /**\n     * @dev Get market summary.\n     * @param _id Market identifier.\n     * @return Market params.\n     */\n    function getMarket(\n        bytes32 _id\n    ) external view returns (\n        uint256 makerTimeout,\n        uint256 takerTimeout,\n        address[] memory oracles,\n        uint256 minimalConfirmations\n    );\n\n    /**\n     * @dev Add new market descriptor.\n     * @param _makerTimeout Maker timeout in blocks.\n     * @param _takerTimeout Taker timeout in blocks.\n     * @param _oracles Trade oracle list.\n     * @param _minimalConfirmations Minimal confirmation for trade.\n     * @return Market id.\n     */\n    function addMarket(\n        uint256 _makerTimeout,\n        uint256 _takerTimeout,\n        address[] calldata _oracles,\n        uint256 _minimalConfirmations\n    ) external returns (\n        bytes32 id\n    );\n\n    /**\n     * @dev Start trade by matching two orders.\n     * @param _makerOrder ABI-encoded maker order\n     * @param _makerSignature Ethereum signature of maker order\n     * @param _takerOrder ABI-encoded taker order\n     * @param _takerSignature Ethereum signature of taker order\n     * @return started trade identifier\n     * @notice orders should not be used befor\n     */\n    function startTrade(\n        bytes calldata _makerOrder,\n        bytes calldata _makerSignature,\n        bytes calldata _takerOrder,\n        bytes calldata _takerSignature\n    ) external returns (\n        uint256 id\n    );\n\n    /**\n     * @dev Confirm taker transfer for trade.\n     * @param _id trade identifier \n     * @notice for trade oracles call only\n     */\n    function confirmTakerTransfer(\n        uint256 _id\n    ) external returns (\n        bool success\n    );\n\n    /**\n     * @dev Confirm maker transfer for trade.\n     * @param _id trade identifier \n     * @notice for trade oracles call only\n     */\n    function confirmMakerTransfer(\n        uint256 _id\n    ) external returns (\n        bool success\n    );\n\n    /**\n     * @dev Finish trade and pay refund when transfer isn't confirmed.\n     * @param _id trade identifier\n     * @return true when success closed\n     */\n    function finishTrade(\n        uint256 _id\n    ) external returns (\n        bool success\n    );\n}\n",
-  "sourcePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+  "sourcePath": "/home/akru/enon-dex/contracts/interface/IExchange.sol",
   "ast": {
-    "absolutePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+    "absolutePath": "/home/akru/enon-dex/contracts/interface/IExchange.sol",
     "exportedSymbols": {
       "IExchange": [
         1211
@@ -349,7 +350,7 @@
         "src": "57:25:3"
       },
       {
-        "absolutePath": "/home/akru/devel/cdex/contracts/misc/Set.sol",
+        "absolutePath": "/home/akru/enon-dex/contracts/misc/Set.sol",
         "file": "../misc/Set.sol",
         "id": 1041,
         "nodeType": "ImportDirective",
@@ -2396,7 +2397,7 @@
     "src": "57:4902:3"
   },
   "legacyAST": {
-    "absolutePath": "/home/akru/devel/cdex/contracts/interface/IExchange.sol",
+    "absolutePath": "/home/akru/enon-dex/contracts/interface/IExchange.sol",
     "exportedSymbols": {
       "IExchange": [
         1211
@@ -2417,7 +2418,7 @@
         "src": "57:25:3"
       },
       {
-        "absolutePath": "/home/akru/devel/cdex/contracts/misc/Set.sol",
+        "absolutePath": "/home/akru/enon-dex/contracts/misc/Set.sol",
         "file": "../misc/Set.sol",
         "id": 1041,
         "nodeType": "ImportDirective",
@@ -4468,8 +4469,8 @@
     "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.2",
-  "updatedAt": "2019-03-02T10:05:18.477Z",
+  "schemaVersion": "3.0.6",
+  "updatedAt": "2019-05-24T14:10:53.585Z",
   "devdoc": {
     "methods": {
       "addMarket(uint256,uint256,address[],uint256)": {
