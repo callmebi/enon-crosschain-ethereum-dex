@@ -39,8 +39,7 @@ const CreateLimitOrder = ({ visible, onClose, ipfs, drizzle, account }) => {
 						<CreateLimitOrderStepOne
 							onContinue={(order) => {
 								onClose();
-								order.collateral = web3.utils.toWei('1', 'ether');
-								console.log(order);
+
 								makeOrder(contracts, ipfs, web3, account, order);
 							}}
 							send={{

@@ -81,7 +81,6 @@ const ENOrderList = (props) => {
 						<Row className="hPRightTopSection justify-content-md-start">
 							<Col xs={11} >
 								<button id="buybu">BUY BITCOIN</button>
-								<button id="sellbu">SELL BITCOIN</button>
 							</Col>
 						</Row>
 						<Table rowKey="uid" className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>

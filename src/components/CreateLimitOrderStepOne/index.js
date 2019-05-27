@@ -170,9 +170,9 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 					</div>
 				</div>
 			</div >
-			{/* secouynd step */}
+			{/* second step */}
 			<div id="vtoro" className={styles.cntr0}>
-				<div className={styles.title}>Limit order requires a collateral. Don't have collaterals? Buy a market order.</div>
+				<div className={styles.title}>Confirm your order</div>
 				<div className={styles.content}>
 					{validationError && <Alert
 						message="Validation error"

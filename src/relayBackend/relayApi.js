@@ -29,8 +29,7 @@ function limitOrderList(ipfs, web3) {
         // TODO: Total estimation
         order.order_total = order.price;
         // TODO: Collateral fetch
-        order.collateral = web3.utils.fromWei(params[2])
-        console.log("order collateral: ,", order.collateral)
+        order.collateral = order.receive.amount
         return order;
     }
     return fetch('http://192.99.56.237:8000')
@@ -101,13 +100,16 @@ async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collate
 
 async function makeOrder(contracts, ipfs, web3, account, order) {
     const { Exchange, Collateral } = contracts;
-
+    order.collateral = new web3.utils.BN(order.send.amount.toString());
+    order.collateral = new web3.utils.toBN(order.collateral);
+    console.log("Order Collateral is:", order.collateral)
     const allowance = await Collateral.methods.allowance(account, Exchange.address).call();
     if (allowance < order.collateral) {
         console.log('Allowance is low, request more');
         await Collateral.methods.approve.cacheSend(Exchange.address, order.collateral, {from: account});
     }
-
+    
+    console.log("order.collateral is: ", order.collateral)
     const signed = await signMakerOrder(
         ipfs,
         web3,
@@ -117,6 +119,7 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         order.send.abbr === 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
         order.collateral
     );
+    
     fetch('http://192.99.56.237:8000', {
         method: 'PUT',
         headers: {
@@ -124,7 +127,7 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(signed)
-    });
+    })
 }
 
 async function startTrade(contracts, ipfs, web3, account, order) {
