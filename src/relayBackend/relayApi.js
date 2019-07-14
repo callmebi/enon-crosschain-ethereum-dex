@@ -66,7 +66,11 @@ async function signTakerOrder(ipfs, web3, account, recipient, maker) {
 
 async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collateral) {
     // BTC/ETH market id
+<<<<<<< HEAD
     const market = '0xf0eac308065dc9d05d7b7b217d88378878a9adfa9851eb6e2a053ebdbda32ff4'; 
+=======
+    const market = '0xd45d8a1a60c7652dc1e6e8ac77dfa5933191065bec24142124cdaf579606f71a'; 
+>>>>>>> 6d94322... Fix market_id
     const deal = web3.utils.soliditySha3(
         {t: 'uint256', v: sell},
         {t: 'uint256', v: buy}
