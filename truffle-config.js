@@ -69,7 +69,7 @@ module.exports = {
       network_id: 3,       // Ropsten's id
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      gasPrice: 10000000000,// Kovan typically use 1GWei gas price
+      gasPrice: 1000000000,// Kovan typically use 1GWei gas price
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
   },
@@ -86,13 +86,13 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: '0.5.4',
+      version: '0.5.7',
       settings: {
         optimizer: {
           enabled: true,
           runs: 200
         },
-        evmVersion: 'byzantium'
+        evmVersion: 'petersburg'
       }
     }
   }
