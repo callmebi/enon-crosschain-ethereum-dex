@@ -66,11 +66,7 @@ async function signTakerOrder(ipfs, web3, account, recipient, maker) {
 
 async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collateral) {
     // BTC/ETH market id
-<<<<<<< HEAD
-    const market = '0xf0eac308065dc9d05d7b7b217d88378878a9adfa9851eb6e2a053ebdbda32ff4'; 
-=======
     const market = '0xd45d8a1a60c7652dc1e6e8ac77dfa5933191065bec24142124cdaf579606f71a'; 
->>>>>>> 6d94322... Fix market_id
     const deal = web3.utils.soliditySha3(
         {t: 'uint256', v: sell},
         {t: 'uint256', v: buy}
@@ -104,10 +100,22 @@ async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collate
 
 async function makeOrder(contracts, ipfs, web3, account, order) {
     const { Exchange, Collateral } = contracts;
+<<<<<<< HEAD
     order.collateral = new web3.utils.BN(order.send.amount.toString());
     order.collateral = new web3.utils.toBN(order.collateral);
     console.log("Order Collateral is:", order.collateral)
+=======
+
+    const collateralBalance = await Collateral.methods.balanceOf(account).call();
+    console.log('Collateral balance = '+collateralBalance);
+    if (collateralBalance < order.collateral) {
+        console.log('Balance is low, request more');
+        await web3.eth.sendTransaction({from: account, to: Collateral.address, value: order.collateral});
+    }
+
+>>>>>>> b1cb97b... Added WETH balance check before making order
     const allowance = await Collateral.methods.allowance(account, Exchange.address).call();
+    console.log('Allowance = '+allowance);
     if (allowance < order.collateral) {
         console.log('Allowance is low, request more');
         await Collateral.methods.approve.cacheSend(Exchange.address, order.collateral, {from: account});
