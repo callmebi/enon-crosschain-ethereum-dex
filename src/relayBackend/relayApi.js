@@ -100,11 +100,6 @@ async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collate
 
 async function makeOrder(contracts, ipfs, web3, account, order) {
     const { Exchange, Collateral } = contracts;
-<<<<<<< HEAD
-    order.collateral = new web3.utils.BN(order.send.amount.toString());
-    order.collateral = new web3.utils.toBN(order.collateral);
-    console.log("Order Collateral is:", order.collateral)
-=======
 
     const collateralBalance = await Collateral.methods.balanceOf(account).call();
     console.log('Collateral balance = '+collateralBalance);
@@ -113,7 +108,6 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         await web3.eth.sendTransaction({from: account, to: Collateral.address, value: order.collateral});
     }
 
->>>>>>> b1cb97b... Added WETH balance check before making order
     const allowance = await Collateral.methods.allowance(account, Exchange.address).call();
     console.log('Allowance = '+allowance);
     if (allowance < order.collateral) {

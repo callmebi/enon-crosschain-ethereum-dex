@@ -18,14 +18,12 @@ contract OwnedOracle is IOracle {
         owner = _onwer;
     }
 
-    function confirmMakerTransfer(uint256 _id) public returns (bool) {
+    function confirmTransfer(
+        uint256[] calldata _makers,
+        uint256[] calldata _takers
+    ) external returns (bool) {
         require(msg.sender == owner);
-        return dex.confirmMakerTransfer(_id);
-    }
-
-    function confirmTakerTransfer(uint256 _id) public returns (bool) {
-        require(msg.sender == owner);
-        return dex.confirmTakerTransfer(_id);
+        return dex.confirmTransfer(_makers, _takers);
     }
 
     function checkTrade(address _dex, uint256 _id) external returns(bool success) {

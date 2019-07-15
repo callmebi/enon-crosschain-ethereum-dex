@@ -142,7 +142,7 @@ interface IExchange {
      * @param _minimalConfirmations Minimal confirmation for trade.
      * @return Market id.
      */
-    function addMarket(
+    function newMarket(
         uint256 _makerTimeout,
         uint256 _takerTimeout,
         address[] calldata _oracles,
@@ -170,23 +170,14 @@ interface IExchange {
     );
 
     /**
-     * @dev Confirm taker transfer for trade.
-     * @param _id trade identifier 
+     * @dev Confirm transfer for a trade.
+     * @param _makers list trade id with maker transfer confirmed
+     * @param _takers list trade id with maker transfer confirmed
      * @notice for trade oracles call only
      */
-    function confirmTakerTransfer(
-        uint256 _id
-    ) external returns (
-        bool success
-    );
-
-    /**
-     * @dev Confirm maker transfer for trade.
-     * @param _id trade identifier 
-     * @notice for trade oracles call only
-     */
-    function confirmMakerTransfer(
-        uint256 _id
+    function confirmTransfer(
+        uint256[] calldata _makers,
+        uint256[] calldata _takers
     ) external returns (
         bool success
     );

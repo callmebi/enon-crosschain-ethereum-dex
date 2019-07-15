@@ -118,7 +118,7 @@ contract Exchange is IExchange, SingletonHash {
             oracles[i] = market.oracles.at(i);
     }
 
-    function addMarket(
+    function newMarket(
         uint256 _makerTimeout,
         uint256 _takerTimeout,
         address[] calldata _oracles,
@@ -126,11 +126,11 @@ contract Exchange is IExchange, SingletonHash {
     ) external returns (
         bytes32 id 
     ) {
-        id = keccak256(abi.encodePacked(
-            _makerTimeout,
-            _takerTimeout,
-            _oracles,
-            _minimalConfirmations
+        id = keccak256(abi.encode(
+            _makerTimeout
+          , _takerTimeout
+          , _oracles
+          , _minimalConfirmations
         ));
 
         Market storage market = markets[id];
@@ -174,8 +174,8 @@ contract Exchange is IExchange, SingletonHash {
         trade.state = TradeState.Start;
 
         // Process orders
-        require(processMakerOrder(id, _makerOrder));
-        require(processTakerOrder(id, _takerOrder));
+        require(_processMakerOrder(id, _makerOrder));
+        require(_processTakerOrder(id, _takerOrder));
 
         // Notify oracles to start transfer checking
         Set.Address storage oracles = markets[trade.market].oracles;
@@ -186,9 +186,32 @@ contract Exchange is IExchange, SingletonHash {
         emit TradeStart(id);
     }
 
-    function confirmTakerTransfer(
+    function confirmTransfer(
+        uint256[] calldata _makers,
+        uint256[] calldata _takers
+    ) external returns (
+        bool success
+    ) {
+        for (uint256 i = 0; i < _makers.length; ++i)
+            _confirmMakerTransfer(_makers[i]);
+        for (uint256 i = 0; i < _takers.length; ++i)
+            _confirmTakerTransfer(_takers[i]);
+    }
+
+    function finishTrade(
         uint256 _id
     ) external
+      timedTransaction(_id)
+      stateOnly(_id, TradeState.Finish)
+      returns (
+        bool success
+    ) {
+        success = true;
+    }
+
+    function _confirmTakerTransfer(
+        uint256 _id
+    ) internal 
       oracleOnly(_id)
       timedTransaction(_id)
       stateOnly(_id, TradeState.Start)
@@ -208,9 +231,9 @@ contract Exchange is IExchange, SingletonHash {
         success = true;
     }
 
-    function confirmMakerTransfer(
+    function _confirmMakerTransfer(
         uint256 _id
-    ) external
+    ) internal 
       oracleOnly(_id)
       timedTransaction(_id)
       stateOnly(_id, TradeState.Partial)
@@ -230,16 +253,6 @@ contract Exchange is IExchange, SingletonHash {
         success = true;
     }
 
-    function finishTrade(
-        uint256 _id
-    ) external
-      timedTransaction(_id)
-      stateOnly(_id, TradeState.Finish)
-      returns (
-        bool success
-    ) {
-        success = true;
-    }
 
     function _penalty(
         uint256 _id
@@ -263,7 +276,7 @@ contract Exchange is IExchange, SingletonHash {
         emit TradeFinish(_id);
     }
 
-    function processMakerOrder(
+    function _processMakerOrder(
         uint256 _id,
         bytes memory _order
     ) internal returns (
@@ -288,7 +301,7 @@ contract Exchange is IExchange, SingletonHash {
         success = true;
     }
 
-    function processTakerOrder(
+    function _processTakerOrder(
         uint256 _id,
         bytes memory _order
     ) internal returns (

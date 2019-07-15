@@ -25,11 +25,21 @@ contract OraclizeOracle is IOracle, usingOraclize {
         uint256 id = tradeOf[myid];
         uint256 retCode = parseInt(result);
 
-        if (retCode & 1 > 0)
-            dex.confirmTakerTransfer(id);
+        uint256[] memory makers;
+        uint256[] memory takers;
 
-        if (retCode & 2 > 0)
-            dex.confirmMakerTransfer(id);
+        if (retCode & 1 > 0) {
+            takers = new uint256[](1);
+            takers[0] = id;
+        }
+
+        if (retCode & 2 > 0) {
+            makers = new uint256[](1);
+            makers[0] = id;
+        }
+        
+        if (makers.length > 0 || takers.length > 0)
+            dex.confirmTransfer(makers, takers);
 
         if (retCode & 4 > 0) {
             bytes32 qid = oraclize_query(30, "computation", [

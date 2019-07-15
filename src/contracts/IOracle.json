@@ -1,0 +1,354 @@
+{
+  "contractName": "IOracle",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_dex",
+          "type": "address"
+        },
+        {
+          "name": "_id",
+          "type": "uint256"
+        }
+      ],
+      "name": "checkTrade",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.10+commit.5a6ea5b1\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_dex\",\"type\":\"address\"},{\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"checkTrade\",\"outputs\":[{\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"checkTrade(address,uint256)\":{\"details\":\"Check trade transfers and make decision.\",\"params\":{\"_dex\":\"Exchange address\",\"_id\":\"Trade identifier\"}}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/akru/devel/enon-dex/contracts/interface/IOracle.sol\":\"IOracle\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/akru/devel/enon-dex/contracts/interface/IOracle.sol\":{\"keccak256\":\"0x9dd1250a292850902aadb1fc3ac0e356dbf0a9cdda1aa8599870e4821da99333\",\"urls\":[\"bzzr://04fc6a7b498eb1512ccb55ec6ade45a5a0520337067822894dde5aa68ecf54aa\",\"dweb:/ipfs/QmPZ56wcmvbz8QcQy2f2oXxbzU3ytBCvo4fGeGsbch8ryM\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/**\n * @title Interface of oracle contract.\n */\n\npragma solidity >= 0.5.0;\n\ninterface IOracle {\n    /**\n     * @dev Check trade transfers and make decision.\n     * @param _dex Exchange address\n     * @param _id Trade identifier\n     */\n    function checkTrade(\n        address _dex,\n        uint256 _id\n    ) external returns(\n        bool success\n    );\n}\n",
+  "sourcePath": "/home/akru/devel/enon-dex/contracts/interface/IOracle.sol",
+  "ast": {
+    "absolutePath": "/home/akru/devel/enon-dex/contracts/interface/IOracle.sol",
+    "exportedSymbols": {
+      "IOracle": [
+        1268
+      ]
+    },
+    "id": 1269,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1258,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "49:25:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1268,
+        "linearizedBaseContracts": [
+          1268
+        ],
+        "name": "IOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Check trade transfers and make decision.\n@param _dex Exchange address\n@param _id Trade identifier",
+            "id": 1267,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "checkTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1263,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1260,
+                  "name": "_dex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "269:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1259,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "269:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1262,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "291:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1261,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "291:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "259:49:4"
+            },
+            "returnParameters": {
+              "id": 1266,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1265,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "335:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1264,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "335:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "325:28:4"
+            },
+            "scope": 1268,
+            "src": "240:114:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1269,
+        "src": "76:280:4"
+      }
+    ],
+    "src": "49:308:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/akru/devel/enon-dex/contracts/interface/IOracle.sol",
+    "exportedSymbols": {
+      "IOracle": [
+        1268
+      ]
+    },
+    "id": 1269,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1258,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "49:25:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1268,
+        "linearizedBaseContracts": [
+          1268
+        ],
+        "name": "IOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Check trade transfers and make decision.\n@param _dex Exchange address\n@param _id Trade identifier",
+            "id": 1267,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "checkTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1263,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1260,
+                  "name": "_dex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "269:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1259,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "269:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1262,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "291:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1261,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "291:7:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "259:49:4"
+            },
+            "returnParameters": {
+              "id": 1266,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1265,
+                  "name": "success",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "335:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1264,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "335:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "325:28:4"
+            },
+            "scope": 1268,
+            "src": "240:114:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1269,
+        "src": "76:280:4"
+      }
+    ],
+    "src": "49:308:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.10+commit.5a6ea5b1.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.11",
+  "updatedAt": "2019-07-15T13:12:23.105Z",
+  "devdoc": {
+    "methods": {
+      "checkTrade(address,uint256)": {
+        "details": "Check trade transfers and make decision.",
+        "params": {
+          "_dex": "Exchange address",
+          "_id": "Trade identifier"
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
