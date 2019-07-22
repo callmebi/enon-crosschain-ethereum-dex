@@ -75,12 +75,14 @@ const ENOrderList = (props) => {
 	// 	if (props.onCurrencySelected)
 	// 		props.onCurrencySelected(currAbbr, props.ipfs, props.web3)
 	// }
+    
 	return (
 		<div className="ENOrderList_cntr">
 					<Col sm={9} xs={11} className="hPRightSection">
 						<Row className="hPRightTopSection justify-content-md-start">
 							<Col xs={11} >
-								<button id="buybu">BUY BITCOIN</button>
+								<button id="buybu">BUY</button>
+								<button id="sellbu">SELL</button>
 							</Col>
 						</Row>
 						<Table rowKey="uid" className={styles.table} dataSource={props.orders ? props.orders : data} pagination={false}>
@@ -127,7 +129,6 @@ const ENOrderList = (props) => {
 									<ButtonSelectOrder onClick={e => props.onOrderSelected(record)} />
 								)}
 								className="ENOrderList_column "
-								// onMouseOver={(event.target).classList.toggle("mouseO")}
 							/>
 						</Table>
 					</Col>

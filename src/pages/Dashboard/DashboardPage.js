@@ -11,7 +11,7 @@ import { ConnectedENFooter as ENFooter } from '../../components/ENFooter';
 // import BuyCurrency from '../../features/BuyCurrency/BuyCurrency';
 // import CLOEnterCurrAndAmount from '../../components/CLOEnterCurrAndAmount';
 import CreateLimitOrder from '../../features/CreateLimitOrder';
-import { Container, Row} from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
 /**
  * The TradeCurrency object describes how much and which cryptocurrency would be trading.

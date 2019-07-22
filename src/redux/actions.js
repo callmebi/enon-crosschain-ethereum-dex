@@ -1,6 +1,4 @@
 //import { mockLimitOrderList } from '../mockBackend/mockList';
-// import { getLimitOrderDetails as getLimitOrderById } from '../mockBackend/mockOrder';
-import { limitOrderList } from '../relayBackend/relayApi';
 // Meet our first thunk action creator!
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
@@ -35,6 +33,7 @@ export function getLimitOrders(currAbbr, ipfs, web3) {
 		// In this case, we return a promise to wait for.
 		// This is not required by thunk middleware, but it is convenient for us.
 
+        /*
 		return limitOrderList(ipfs, web3)
 			.then(limitOrders =>
 				// We can dispatch many times!
@@ -45,6 +44,7 @@ export function getLimitOrders(currAbbr, ipfs, web3) {
 					payload: limitOrders
 				})
 			)
+        */
 	}
 }
 

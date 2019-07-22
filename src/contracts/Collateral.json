@@ -1213,6 +1213,12 @@
       "links": {},
       "address": "0x517e9a3a77e3dacFD29424EfBd2b72a1baA602b3",
       "transactionHash": "0x1c8e7a98fc6edd4ab2be9ea76260ead2d3f2543f300908b389d0ef103956f182"
+    },
+    "42": {
+      "events": {},
+      "links": {},
+      "address": "0xe560141294D73FCFe12EAc5BA8dCbA4CEc922fc0",
+      "transactionHash": "0x8b8c346afe8daa581f6381d811fec0bcb061fa4c5547cb6839bdb5c77a1416b2"
     }
   },
   "schemaVersion": "3.0.11",

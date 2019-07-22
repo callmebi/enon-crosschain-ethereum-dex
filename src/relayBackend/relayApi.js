@@ -1,6 +1,4 @@
-function limitOrderList(ipfs, web3) {
-
-    async function decode(order) {
+async function decodeOrder(web3, ipfs, order) {
         const params = web3.eth.abi.decodeParameters(
             ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
             order.params
@@ -31,10 +29,6 @@ function limitOrderList(ipfs, web3) {
         // TODO: Collateral fetch
         order.collateral = order.receive.amount
         return order;
-    }
-    return fetch('http://192.99.56.237:8000')
-        .then(res => res.json())
-        .then(orders => Promise.all(orders.map(order => decode(order))))
 }
 
 async function signTakerOrder(ipfs, web3, account, recipient, maker) {
@@ -126,14 +120,7 @@ async function makeOrder(contracts, ipfs, web3, account, order) {
         order.collateral
     );
     
-    fetch('http://192.99.56.237:8000', {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(signed)
-    })
+    return signed;
 }
 
 async function startTrade(contracts, ipfs, web3, account, order) {
@@ -151,7 +138,7 @@ async function startTrade(contracts, ipfs, web3, account, order) {
 }
 
 export {
-    limitOrderList
-  , startTrade
+    startTrade
   , makeOrder
+  , decodeOrder
 };
