@@ -12,11 +12,13 @@ import { Drizzle, generateStore } from 'drizzle';
 import Collateral from './contracts/Collateral.json';
 import Exchange from './contracts/Exchange.json';
 
+/*
 function IpfsProvider({ children }) {
     const { ipfs, ipfsInitError } = useIpfsFactory({ commands: ['id'] })
     const id = useIpfs(ipfs, 'id')
     return children(ipfs)
 }
+*/
 
 
 class App extends Component {
@@ -27,11 +29,7 @@ class App extends Component {
 		return (
 			<div className="App">
                 <DrizzleContext.Provider drizzle={new Drizzle(options, store)}>
-                    <IpfsProvider>
-                        { ipfs => (
-                            <Dashboard />
-                        )}
-                    </IpfsProvider>
+                    <Dashboard />
                 </DrizzleContext.Provider>
 			</div>
 		);

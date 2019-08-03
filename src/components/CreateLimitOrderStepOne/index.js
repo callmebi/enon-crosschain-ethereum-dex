@@ -186,7 +186,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 					</div>
 					<div className={styles.priceCntr}>
 						{/* <span className={styles.priceCntrTitle}>{youGot.abbr} price</span> */}
-						<span className={styles.price}>1 {youGot.abbr} = {priceCalc(youGot.amount, youPay.amount).toFixed(4)} {youPay.abbr}  </span>
+						<span className={styles.price}>1 {youGot.abbr} = {priceCalc(youGot.amount, youPay.amount).toFixed(4)} {youPay.abbr}</span>
 						<span className={styles.priceChangerCntr}>
 							<ChangeAmount onAmountChange={(e, diff) => priceChangeHandle(diff)} />
 						</span>
@@ -207,8 +207,7 @@ export default ({ onContinue, send, receive, priceCalc, onPriceChange }) => {
 						/>
 					</div>
 				</div>
-			</div >
-
+			</div>
 		</div>
 	)
 }

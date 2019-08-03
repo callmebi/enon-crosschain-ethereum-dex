@@ -1,3 +1,5 @@
+const MARKET_ID = '0xf0eac308065dc9d05d7b7b217d88378878a9adfa9851eb6e2a053ebdbda32ff4'; 
+
 async function decodeOrder(web3, ipfs, order) {
         const params = web3.eth.abi.decodeParameters(
             ['bytes32', 'bytes32', 'uint256', 'uint256', 'bytes'],
@@ -60,7 +62,7 @@ async function signTakerOrder(ipfs, web3, account, recipient, maker) {
 
 async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collateral) {
     // BTC/ETH market id
-    const market = '0xf0eac308065dc9d05d7b7b217d88378878a9adfa9851eb6e2a053ebdbda32ff4'; 
+    const market = MARKET_ID; 
     const deal = web3.utils.soliditySha3(
         {t: 'uint256', v: sell},
         {t: 'uint256', v: buy}
@@ -92,37 +94,6 @@ async function signMakerOrder(ipfs, web3, account, recipient, buy, sell, collate
     return {params, signature};
 }
 
-async function makeOrder(contracts, ipfs, web3, account, order) {
-    const { Exchange, Collateral } = contracts;
-
-    const collateralBalance = await Collateral.methods.balanceOf(account).call();
-    console.log('Collateral balance = '+collateralBalance);
-    if (collateralBalance < order.collateral) {
-        console.log('Balance is low, request more');
-        await web3.eth.sendTransaction({from: account, to: Collateral.address, value: order.collateral});
-    }
-
-    const allowance = await Collateral.methods.allowance(account, Exchange.address).call();
-    console.log('Allowance = '+allowance);
-    if (allowance < order.collateral) {
-        console.log('Allowance is low, request more');
-        await Collateral.methods.approve.cacheSend(Exchange.address, order.collateral, {from: account});
-    }
-    
-    console.log("order.collateral is: ", order.collateral)
-    const signed = await signMakerOrder(
-        ipfs,
-        web3,
-        account,
-        order.address,
-        order.receive.abbr === 'BTC' ? order.receive.amount * 10**8 : undefined,
-        order.send.abbr === 'ETH' ? web3.utils.toWei(order.send.amount.toString(), 'ether') : undefined,
-        order.collateral
-    );
-    
-    return signed;
-}
-
 async function startTrade(contracts, ipfs, web3, account, order) {
     console.log('maker params: '+order.market+' '+order.deal);
 
@@ -138,7 +109,8 @@ async function startTrade(contracts, ipfs, web3, account, order) {
 }
 
 export {
-    startTrade
-  , makeOrder
+    MARKET_ID
+  , startTrade
   , decodeOrder
+  , signMakerOrder
 };
